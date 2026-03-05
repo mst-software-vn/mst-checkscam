@@ -440,6 +440,61 @@
 
         <!-- NEW FULL-WIDTH SECTIONS -->
         <div class="mt-16 sm:mt-20 space-y-12 sm:space-y-16">
+            <!-- Section Lịch Sử Bình Luận -->
+            <section aria-labelledby="comments-history-title">
+                <div class="max-w-4xl mx-auto text-center mb-8">
+                    <h2 id="comments-history-title"
+                        class="text-xl md:text-2xl font-black text-gray-800 uppercase tracking-tight">
+                        <i class="fa-solid fa-comments text-cs_blue mr-2"></i>Bình luận <span class="text-cs_blue">mới
+                            nhất</span>
+                    </h2>
+                    <p class="text-gray-500 text-[10px] md:text-xs mt-2 uppercase tracking-widest font-bold">Cập nhật
+                        hoạt động từ cộng đồng</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <?php
+                    $comments = [
+                        ['user' => 'Lê Văn Tám', 'time' => '2 phút trước', 'content' => 'Thằng này vừa lừa mình 500k tiền cọc mua acc, mọi người cẩn thận nhé.', 'target' => '0981.234.xxx', 'color' => '3b82f6'],
+                        ['user' => 'Nguyễn Bích', 'time' => '15 phút trước', 'content' => 'Cảm ơn CheckScam, nhờ tra cứu mà mình không bị mất tiền cho đứa này.', 'target' => 'Vietcombank - 102...', 'color' => '10b981'],
+                        ['user' => 'Trần Quang', 'time' => '1 giờ trước', 'content' => 'Thấy nó đăng bài uy tín lắm mà check ra đầy vết đen. Sợ thật!', 'target' => 'fb.com/quang_scam', 'color' => 'f59e0b'],
+                        ['user' => 'Minh Anh', 'time' => '3 giờ trước', 'content' => 'Mọi người lưu ý số tài khoản này nhá, chuyên đi lừa đảo thẻ cào.', 'target' => '0342.999.xxx', 'color' => 'ef4444'],
+                        ['user' => 'Hoàng Nam', 'time' => '5 giờ trước', 'content' => 'Web quá hữu ích, nên có thêm nhiều người chung tay tố cáo.', 'target' => 'Cộng đồng CS', 'color' => '6366f1'],
+                        ['user' => 'Thu Thảo', 'time' => '8 giờ trước', 'content' => 'Mình đã gửi bằng chứng lên rồi, mong admin sớm duyệt để cảnh báo.', 'target' => 'Đang chờ duyệt', 'color' => 'ec4899'],
+                        ['user' => 'Thanh Ngân', 'time' => '12 giờ trước', 'content' => 'Mọi người cẩn thận với số tài khoản này nhé, chuyên đi lừa đảo thẻ cào.', 'target' => '0772.345.xxx', 'color' => '8b5cf6'],
+                        ['user' => 'Duy Mạnh', 'time' => '1 ngày trước', 'content' => 'Vừa check xong, xém tí thì chuyển khoản cho nó. May quá!', 'target' => 'Momo - 0941...', 'color' => '06b6d4'],
+                    ];
+                    foreach($comments as $cmt): ?>
+                    <div class="bg-white border border-gray-100 p-5 rounded-2xl shadow-xs">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($cmt['user']); ?>&background=<?php echo $cmt['color']; ?>&color=fff&size=40"
+                                class="w-10 h-10 rounded-full border-2 border-gray-50" alt="User">
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm"><?php echo $cmt['user']; ?></h4>
+                                <span class="text-[10px] text-gray-400 font-medium"><?php echo $cmt['time']; ?></span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-2 italic">
+                            "<?php echo $cmt['content']; ?>"
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-50">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Đối
+                                tượng:</span>
+                            <span
+                                class="text-[10px] font-black text-cs_red bg-red-50 px-2 py-0.5 rounded"><?php echo $cmt['target']; ?></span>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <a href="#"
+                        class="text-xs font-black text-cs_blue hover:underline uppercase tracking-widest">
+                        Xem tất cả bình luận <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </section>
+
             <!-- Section Bí Quyết Giao Dịch -->
             <section aria-labelledby="safety-tips-title"
                 class="bg-gradient-to-br from-white to-blue-50/50 border border-blue-100/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xs">
