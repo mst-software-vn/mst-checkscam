@@ -17,8 +17,8 @@
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="#" class="text-cs_red font-bold text-sm border-b-2 border-cs_red py-5">Trang Chủ</a>
-                    <a href="#"
+                    <a href="/" class="text-cs_red font-bold text-sm border-b-2 border-cs_red py-5">Trang Chủ</a>
+                    <a href="/to-cao-lua-dao/"
                         class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-sm py-5 transition-colors">Tố
                         Cáo</a>
                     <a href="#"

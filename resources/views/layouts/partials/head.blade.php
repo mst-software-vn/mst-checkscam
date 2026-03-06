@@ -3,7 +3,12 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <!-- SEO Optimization -->
-    <title>[ CHECKSCAM ] - Hệ thống kiểm tra và tố giác scam uy tín nhất Việt Nam</title>
+    {{-- <title>[ CHECKSCAM ] - Hệ thống kiểm tra và tố giác scam uy tín nhất Việt Nam</title> --}}
+    @hasSection('title')
+        <title>@yield('title')</title>
+    @else
+        <title>[ CHECKSCAM ] - Hệ thống kiểm tra và tố giác scam uy tín nhất Việt Nam</title>
+    @endif
     <meta name="description"
         content="CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Tra cứu số điện thoại, số tài khoản, link Facebook lừa đảo để bảo vệ túi tiền của bạn.">
     <meta name="keywords" content="check scam, tố cáo lừa đảo, kiểm tra stk lừa đảo, kiểm tra sdt lừa đảo, quỹ bảo đảm">
@@ -18,6 +23,7 @@
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
