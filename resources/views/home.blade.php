@@ -279,7 +279,7 @@
 
         <!-- Top Full Width Banner -->
         {{-- <article class="text-center overflow-hidden h-24 relative group cursor-pointer mb-8 w-full">
-            <img src="https://i.ibb.co/TM2FQxWD/qcdesktop11022.gif" class="absolute inset-0 w-full h-full"
+            <img src="https://i.ibb.co/TM2FQxWD/qcdesktop11022.gif" class="absolute inset-0 w-full h-18 md:h-full"
                 alt="Quảng cáo banner">
         </article> --}}
 
@@ -325,8 +325,8 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 1 -->
-                <article class="overflow-hidden rounded-lg h-20 relative group cursor-pointer">
-                    <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="absolute inset-0 w-full h-full"
+                <article class="max-w-[950px]">
+                    <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
                         alt="Ads">
                 </article>
 
@@ -364,9 +364,8 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 2 -->
-                <article class="overflow-hidden rounded-lg h-20 relative group cursor-pointer">
-                    <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="absolute inset-0 w-full h-full"
-                        alt="Ads">
+                <article class="max-w-[950px]">
+                    <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full" alt="Ads">
                 </article>
 
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
@@ -409,17 +408,19 @@
             <!-- Khu Vực Phải: Sidebar Widget -->
             <aside class="w-full lg:w-3/12 space-y-4">
                 <!-- Right Sidebar Banner -->
-                <div
-                    class="relative group cursor-pointer aspect-square overflow-hidden border border-gray-200 shadow-sm rounded-lg">
-                    <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="absolute inset-0 w-full h-full "
-                        alt="Fpayment Ads">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
+                    <a href="#">
+                        <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-18 md:h-full"
+                            alt="Fpayment Ads">
+                    </a>
                 </div>
 
 
-                <div
-                    class="relative group cursor-pointer aspect-square overflow-hidden border border-gray-200 shadow-sm rounded-lg">
-                    <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
-                        class="absolute inset-0 w-full h-full " alt="Fpayment Ads">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
+                    <a href="#">
+                        <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
+                            class="w-full h-18 md:h-full" alt="Fpayment Ads">
+                    </a>
                 </div>
                 <!-- Action Button -->
                 <div class="bg-red-50 border border-red-200 p-6 rounded-xl text-center shadow-sm">
