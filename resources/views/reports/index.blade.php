@@ -126,7 +126,7 @@
                     <!-- Tab Switcher: Integrated Style -->
                     <div class="flex gap-1 mb-2 overflow-x-auto no-scrollbar whitespace-nowrap">
                         <button onclick="switchTab('bank')" id="tab-bank"
-                            class="px-5 md:px-8 py-3.5 text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md border-b transition-all tab-active-red bg-white dark:bg-slate-900flex-1 md:flex-none text-center">
+                            class="px-5 md:px-8 py-3.5 text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md border-b transition-all tab-active-red dark:bg-slate-900flex-1 md:flex-none text-center">
                             Số tài khoản
                         </button>
                         <button onclick="switchTab('website')" id="tab-website"
@@ -287,7 +287,7 @@
                                     <input type="checkbox"
                                         class="w-5 h-5 rounded border border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
                                     <span
-                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 transition-colors">Website
+                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 group-hover:dark:text-white transition-colors">Website
                                         vẫn đang hoạt động</span>
                                 </label>
                                 <label
@@ -295,7 +295,7 @@
                                     <input type="checkbox"
                                         class="w-5 h-5 rounded border border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
                                     <span
-                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 transition-colors">Có
+                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 group-hover:dark:text-white transition-colors">Có
                                         dấu
                                         hiệu chiếm đoạt OTP</span>
                                 </label>
