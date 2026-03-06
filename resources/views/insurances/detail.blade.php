@@ -132,7 +132,7 @@
 
                 <!-- Large Card: Services & Accounts -->
                 <div
-                    class="lg:col-span-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-6 md:p-8 rounded-[35px] shadow-lg shadow-blue-900/5 relative">
+                    class="lg:col-span-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-6 md:p-8 rounded-[35px] shadow-sm shadow-blue-900/5 relative">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <!-- Services -->

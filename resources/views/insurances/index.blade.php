@@ -74,7 +74,7 @@
                                 class="fa-solid fa-magnifying-glass text-gray-300 group-focus-within:text-cs_blue transition-colors text-xs"></i>
                         </div>
                         <input type="text" placeholder="Tìm kiếm nhanh..."
-                            class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-xl text-xs font-bold text-gray-700 dark:text-white shadow-sm focus:border-cs_blue outline-none transition-all">
+                            class="w-full pl-10 pr-4 py-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-xl text-sm font-bold text-gray-700 dark:text-white shadow-sm focus:border-cs_blue outline-none transition-all">
                     </div>
                 </div>
             </header>
@@ -96,7 +96,7 @@
 
                 @foreach ($members as $member)
                     <a href="/bao-hiem-cs/{{ $member['id'] }}"
-                        class="group relative bg-white dark:bg-slate-900 border border-gray-50 dark:border-gray-800 p-3 md:p-4 rounded-2xl transition-all hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 hover:border-cs_blue overflow-hidden text-center">
+                        class="group relative bg-white dark:bg-slate-900 border border-gray-50 dark:border-gray-800 p-3 md:p-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-blue-500/10 hover:border-cs_blue overflow-hidden text-center">
                         <!-- Rank Indicator with stylish stroke -->
                         <div
                             class="absolute top-0 right-0 p-2 text-xl font-black text-gray-100/50 dark:text-gray-800/30 group-hover:text-cs_blue/10 transition-colors pointer-events-none">
@@ -111,11 +111,7 @@
                             <img src="https://ui-avatars.com/api/?name={{ urlencode($member['name']) }}&background=random&color=fff&size=128"
                                 class="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
                                 alt="{{ $member['name'] }}">
-                            <!-- Status Badge -->
-                            <div
-                                class="absolute bottom-0.5 right-0.5 w-4 h-4 md:w-5 md:h-5 bg-cs_green text-white rounded-full border-2 border-white dark:border-slate-910 flex items-center justify-center text-[6px] md:text-[8px] shadow-sm">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
+
                         </div>
 
                         <!-- Name & Info -->
