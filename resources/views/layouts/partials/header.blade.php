@@ -10,18 +10,19 @@
 
             <!-- Desktop Menu -->
             <nav class="hidden md:flex gap-x-6 lg:gap-x-8">
-                <a href="/" class="text-cs_red font-bold text-md border-b-2 border-cs_red py-5">Trang Chủ</a>
-                <a href="/to-cao-lua-dao/"
-                    class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-md py-5 transition-colors">Tố
+                <a href="/"
+                    class="{{ request()->is('/') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Trang
+                    Chủ</a>
+                <a href="/to-cao-lua-dao"
+                    class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Tố
                     Cáo</a>
                 <a href="/bao-hiem-cs"
-                    class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-md py-5 transition-colors">Quỹ
+                    class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Quỹ
                     Bảo
                     Hiểm</a>
-                <a href="#"
-                    class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-md py-5 transition-colors">Chợ
-                    Buôn
-                    Bán</a>
+                <a href="/bai-viet"
+                    class="{{ request()->is('bai-viet*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Bài
+                    viết</a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -37,18 +38,18 @@
     <div id="mobile-menu"
         class="hidden md:hidden bg-white dark:bg-dark_card border-t border-gray-100 dark:border-gray-800 shadow-xl animate-fade-in-down">
         <div class="px-4 pt-2 pb-6 space-y-1">
-            <a href="#"
-                class="block px-4 py-3 text-sm font-bold text-cs_red bg-red-50 dark:bg-red-900/20 rounded-lg">Trang
+            <a href="/"
+                class="block px-4 py-3 text-sm font-bold {{ request()->is('/') ? 'text-cs_red bg-red-50 dark:bg-red-900/20' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800' }} rounded-lg">Trang
                 Chủ</a>
-            <a href="#"
-                class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Tố
+            <a href="/to-cao-lua-dao"
+                class="block px-4 py-3 text-sm font-bold {{ request()->is('to-cao-lua-dao*') ? 'text-cs_red bg-red-50 dark:bg-red-900/20' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800' }} rounded-lg">Tố
                 Cáo</a>
-            <a href="#"
-                class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Quỹ
+            <a href="/bao-hiem-cs"
+                class="block px-4 py-3 text-sm font-bold {{ request()->is('bao-hiem-cs*') ? 'text-cs_red bg-red-50 dark:bg-red-900/20' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800' }} rounded-lg">Quỹ
                 Bảo Hiểm</a>
-            <a href="#"
-                class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Chợ
-                Buôn Bán</a>
+            <a href="/bai-viet"
+                class="block px-4 py-3 text-sm font-bold {{ request()->is('bai-viet*') ? 'text-cs_red bg-red-50 dark:bg-red-900/20' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800' }} rounded-lg">Bài
+                viết</a>
         </div>
     </div>
 </header>
