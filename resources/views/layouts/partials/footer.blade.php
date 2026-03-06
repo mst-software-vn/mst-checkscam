@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
             <div class="col-span-1 sm:col-span-2">
                 <div class="flex items-center gap-2 mb-4">
-                    <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="w-auto h-8 md:h-12" />
+                    <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="w-auto h-14 md:h-18" />
 
                 </div>
                 <p class="text-gray-400 leading-relaxed max-w-sm text-xs md:text-sm">

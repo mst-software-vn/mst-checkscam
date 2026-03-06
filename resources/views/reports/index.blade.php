@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- SEO: Breadcrumbs -->
-            <nav class="flex mb-6 md:mb-10 text-[9px] sm:text-xs md:text-sm font-semibold uppercase tracking-widest text-gray-400"
+            <nav class="flex mb-6 text-[9px] sm:text-xs md:text-sm font-semibold uppercase tracking-widest text-gray-400"
                 aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3 overflow-x-auto whitespace-nowrap pb-1">
                     <li class="inline-flex items-center">
@@ -223,7 +223,7 @@
 
                             <div class="flex justify-center pt-2">
                                 <button type="submit"
-                                    class="w-full sm:w-auto px-12 py-4 bg-cs_red hover:bg-black text-white rounded-md font-semibold text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95">
+                                    class="w-full sm:w-auto px-12 py-3 md:py-4 bg-cs_red hover:bg-black text-white rounded-md font-semibold text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95">
                                     Gửi Duyệt Bài Viết
                                 </button>
                             </div>
