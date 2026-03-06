@@ -312,7 +312,7 @@
                 alt="Quảng cáo banner">
         </article> --}}
 
-        <h2 class="text-xs md:text-xl text-center uppercase font-black text-cs_blue mb-6 mt-6 tracking-widest">
+        <h2 class="text-xs md:text-xl text-center uppercase text-cs_blue mb-6 mt-6 tracking-widest">
             <?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
 
         <!-- 2 Column Layout -->
@@ -375,25 +375,30 @@
                     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=7; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors">
-                            <div class="w-full sm:w-5/12 mb-3 sm:mb-0">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-cs_red text-xs"><i
-                                            class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <h3 class="text-gray-900 text-sm">Nguyễn Văn A - <?php echo $i; ?>
-                                    </h3>
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            <div class="w-full sm:w-5/12 flex items-center gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
-                                <div class="text-[10px] text-gray-500 pl-5">
-                                    <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                <div>
+                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                        <?php echo $i; ?></h3>
+                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                        <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="w-full sm:w-5/12 mb-3 sm:mb-0 pl-5 sm:pl-0 sm:border-l border-gray-100 sm:px-4">
-                                <div class="text-xs">Ngân hàng: <span class="font-medium">MB Bank</span></div>
-                                <div class="text-xs font-bold text-cs_red">0987654321***</div>
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-xs font-black text-cs_red">0987654321***</span>
+                                </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#" class="text-cs_blue hover:underline text-xs font-bold">Chi tiết</a>
+                                <a href="#"
+                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    tiết</a>
                             </div>
                         </div>
                         <?php endfor; ?>
@@ -417,25 +422,30 @@
                     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors">
-                            <div class="w-full sm:w-5/12 mb-3 sm:mb-0">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-cs_red text-xs"><i
-                                            class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <h3 class="text-gray-900 text-sm">Nguyễn Văn A - <?php echo $i; ?>
-                                    </h3>
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            <div class="w-full sm:w-5/12 flex items-center gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
-                                <div class="text-[10px] text-gray-500 pl-5">
-                                    <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                <div>
+                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                        <?php echo $i; ?></h3>
+                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                        <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="w-full sm:w-5/12 mb-3 sm:mb-0 pl-5 sm:pl-0 sm:border-l border-gray-100 sm:px-4">
-                                <div class="text-xs">Ngân hàng: <span class="font-medium">MB Bank</span></div>
-                                <div class="text-xs font-bold text-cs_red">0987654321***</div>
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-xs font-black text-cs_red">0987654321***</span>
+                                </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#" class="text-cs_blue hover:underline text-xs font-bold">Chi tiết</a>
+                                <a href="#"
+                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    tiết</a>
                             </div>
                         </div>
                         <?php endfor; ?>
@@ -446,16 +456,16 @@
             </div>
 
             <!-- Khu Vực Phải: Sidebar Widget -->
-            <aside class="w-full lg:w-3/12 space-y-4">
+            <aside class="w-full lg:w-3/12 space-y-3">
                 <!-- Right Sidebar Banner -->
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden">
                     <a href="#" target="_blank" class="w-full h-full block">
                         <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-full" alt="Fpayment Ads">
                     </a>
                 </div>
 
 
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden">
                     <a href="#" target="_blank" class="w-full h-full block">
                         <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
                             class="w-full h-full" alt="Fpayment Ads">
@@ -467,13 +477,13 @@
                         class="w-12 h-12 bg-red-100 text-cs_red rounded-full flex items-center justify-center mx-auto mb-3">
                         <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-md mb-2 text-gray-800">BẠN ĐANG GẶP RỦI RO?</h3>
+                    <h3 class="font-bold text-md mb-2 text-gray-800">BẠN ĐANG BỊ SCAM?</h3>
                     <p class="text-gray-600 text-[13px] mb-5 leading-relaxed">
                         Chặn đứng kẻ gian bằng cách báo cáo ngay lên hệ thống. Đóng góp của bạn giúp cộng đồng MMO
                         an toàn hơn.
                     </p>
                     <button
-                        class="w-full bg-cs_red shadow-sm text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors">
+                        class="w-full bg-cs_red shadow-sm text-white font-bold py-3 px-4 text-sm rounded-lg hover:bg-red-700 transition-colors">
                         <i class="fa-regular fa-paper-plane mr-1"></i> GỬI ĐƠN TỐ CÁO
                     </button>
                 </div>
@@ -548,7 +558,7 @@
                         hoạt động từ cộng đồng</p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                     <?php
                     $comments = [
                         ['user' => 'Lê Văn Tám', 'time' => '2 phút trước', 'content' => 'Thằng này vừa lừa mình 500k tiền cọc mua acc, mọi người cẩn thận nhé.', 'target' => '0981.234.xxx', 'color' => '3b82f6'],
