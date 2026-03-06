@@ -102,3 +102,5 @@
         setTheme('light');
     }
 </script>
+@yield('scripts')
+@stack('scripts')
