@@ -307,12 +307,12 @@
     <main class="grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
 
         <!-- Top Full Width Banner -->
-        {{-- <article class="text-center overflow-hidden h-24 relative group cursor-pointer mb-8 w-full">
-            <img src="https://i.ibb.co/TM2FQxWD/qcdesktop11022.gif" class="absolute inset-0 w-full h-18 md:h-full"
-                alt="Quảng cáo banner">
-        </article> --}}
 
-        <h2 class="text-xs md:text-xl text-center uppercase text-cs_blue mb-6 mt-6 tracking-widest">
+        <article class="max-w-[950px] mx-auto mb-8">
+            <img src="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
+                class="w-full h-18 md:h-full" alt="Quảng cáo banner">
+        </article>
+        <h2 class="text-xs md:text-xl text-center uppercase text-cs_blue mb-6 mt-6">
             <?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
 
         <!-- 2 Column Layout -->
@@ -489,7 +489,7 @@
                 </div>
 
                 <!-- Box Quỹ Bảo Hiểm -->
-                <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-5">
+                <div class="bg-white border border-gray-200 rounded-lg shadow-xs p-5">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="font-bold text-[13px] md:text-sm text-gray-800 uppercase flex items-center gap-2">
                             <i class="fa-solid fa-shield text-cs_green"></i> QUỸ BẢO HIỂM CS
@@ -618,7 +618,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-50">
+                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
                         <div
                             class="w-12 h-12 md:w-14 md:h-14 bg-blue-50 text-cs_blue rounded-xl flex items-center justify-center mb-6 border border-blue-100">
                             <i class="fa-solid fa-magnifying-glass-chart text-lg md:text-xl"></i>
@@ -630,7 +630,7 @@
                         </p>
                     </article>
 
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-50">
+                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
                         <div
                             class="w-12 h-12 md:w-14 md:h-14 bg-green-50 text-cs_green rounded-xl flex items-center justify-center mb-6 border border-green-100">
                             <i class="fa-solid fa-user-shield text-lg md:text-xl"></i>
@@ -642,7 +642,7 @@
                         </p>
                     </article>
 
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-50">
+                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
                         <div
                             class="w-12 h-12 md:w-14 md:h-14 bg-red-50 text-cs_red rounded-xl flex items-center justify-center mb-6 border border-red-100">
                             <i class="fa-solid fa-bolt-lightning text-lg md:text-xl"></i>
