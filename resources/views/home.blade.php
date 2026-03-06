@@ -398,23 +398,27 @@
                         ['user' => 'Duy Mạnh', 'time' => '1 ngày trước', 'content' => 'Vừa check xong, xém tí thì chuyển khoản cho nó. May quá!', 'target' => 'Momo - 0941...', 'color' => '06b6d4'],
                     ];
                     foreach($comments as $cmt): ?>
-                    <div class="bg-white border border-gray-100 p-5 rounded-2xl shadow-xs">
+                    <div
+                        class="bg-white dark:bg-dark_card border border-gray-100 dark:border-gray-800 p-5 rounded-2xl shadow-xs">
                         <div class="flex items-center gap-3 mb-4">
                             <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($cmt['user']); ?>&background=<?php echo $cmt['color']; ?>&color=fff&size=40"
-                                class="w-10 h-10 rounded-full border-2 border-gray-50" alt="User">
+                                class="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-gray-800"
+                                alt="User">
                             <div>
-                                <h4 class="font-bold text-gray-800 text-sm"><?php echo $cmt['user']; ?></h4>
-                                <span class="text-[10px] text-gray-400 font-medium"><?php echo $cmt['time']; ?></span>
+                                <h4 class="font-bold text-gray-800 dark:text-gray-100 text-sm"><?php echo $cmt['user']; ?></h4>
+                                <span
+                                    class="text-[10px] text-gray-400 dark:text-gray-500 font-medium"><?php echo $cmt['time']; ?></span>
                             </div>
                         </div>
-                        <p class="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-2 italic">
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2 italic">
                             "<?php echo $cmt['content']; ?>"
                         </p>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-50">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Đối
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-50 dark:border-gray-800">
+                            <span
+                                class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-tighter">Đối
                                 tượng:</span>
                             <span
-                                class="text-[10px] font-black text-cs_red bg-red-50 px-2 py-0.5 rounded"><?php echo $cmt['target']; ?></span>
+                                class="text-[10px] font-black text-cs_red bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded"><?php echo $cmt['target']; ?></span>
                         </div>
                     </div>
                     <?php endforeach; ?>
