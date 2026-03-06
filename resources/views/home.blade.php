@@ -33,9 +33,13 @@
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
+
         } else {
             document.documentElement.classList.remove('dark')
+
         }
+
+
 
         tailwind.config = {
             darkMode: 'class',
@@ -155,7 +159,8 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-2">
-                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto" />
+                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto"
+                        id="logo_header" />
                 </a>
 
                 <!-- Desktop Menu -->
@@ -334,7 +339,7 @@
 
         <!-- Top Full Width Banner -->
 
-        <article class="max-w-[950px] mx-auto mb-8">
+        <article class="max-w-[950px] mx-auto mb-8 dark:bg-white rounded-lg overflow-hidden">
             <img src="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
                 class="w-full h-18 md:h-full" alt="Quảng cáo banner">
         </article>
@@ -389,7 +394,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 1 -->
-                <article class="max-w-[950px]">
+                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
                     <a href="#" target="_blank">
                         <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
                             alt="Ads">
@@ -399,7 +404,8 @@
                 <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
                 <section>
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_blue pl-3">
-                        <h2 class="text-lg font-bold text-gray-800 uppercase">Lừa đảo phổ biến 7 ngày gần đây</h2>
+                        <h2 class="text-lg font-bold dark:text-white text-gray-800 uppercase">Lừa đảo phổ biến 7 ngày
+                            gần đây</h2>
                     </div>
                     <div
                         class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
@@ -438,7 +444,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 2 -->
-                <article class="max-w-[950px]">
+                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
                     <a href="#" target="_blank">
                         <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full"
                             alt="Ads">
@@ -448,7 +454,7 @@
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
                 <section>
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_orange pl-3">
-                        <h2 class="text-lg font-bold text-gray-800 uppercase">Top 3 tìm kiếm ngày</h2>
+                        <h2 class="text-lg font-bold dark:text-white text-gray-800 uppercase">Top 3 tìm kiếm ngày</h2>
                         <i class="fa-solid fa-fire text-cs_orange animate-pulse"></i>
                     </div>
                     <div
@@ -493,14 +499,14 @@
             <!-- Khu Vực Phải: Sidebar Widget -->
             <aside class="w-full lg:w-3/12 space-y-3">
                 <!-- Right Sidebar Banner -->
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
                     <a href="#" target="_blank" class="w-full h-full block">
                         <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-full" alt="Fpayment Ads">
                     </a>
                 </div>
 
 
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
                     <a href="#" target="_blank" class="w-full h-full block">
                         <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
                             class="w-full h-full" alt="Fpayment Ads">
@@ -588,7 +594,7 @@
             <section aria-labelledby="comments-history-title">
                 <div class="max-w-4xl mx-auto text-center mb-8">
                     <h2 id="comments-history-title"
-                        class="text-xl md:text-2xl font-black text-gray-800 uppercase tracking-tight">
+                        class="text-xl md:text-2xl font-black dark:text-white text-gray-800 uppercase tracking-tight">
                         <i class="fa-solid fa-comments text-cs_blue mr-2"></i>Bình luận <span class="text-cs_blue">mới
                             nhất</span>
                     </h2>
@@ -738,7 +744,8 @@
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
                                     class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">02</span>
-                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tại sao bài phốt chưa được
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tại sao bài
+                                    phốt chưa được
                                     duyệt?</h3>
                             </div>
                             <i
@@ -757,7 +764,8 @@
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
                                     class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">03</span>
-                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Quỹ Bảo Đảm hoạt động thế nào?
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Quỹ Bảo Đảm
+                                    hoạt động thế nào?
                                 </h3>
                             </div>
                             <i
@@ -776,7 +784,8 @@
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
                                     class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">04</span>
-                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tôi có thể xin gỡ bài viết
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tôi có thể
+                                    xin gỡ bài viết
                                     không?</h3>
                             </div>
                             <i
@@ -870,14 +879,32 @@
     </div>
 
     <script>
+        const logoHeader = document.getElementById("logo_header");
+
         function setTheme(theme) {
-            if (theme === 'dark') {
+            const isDark = theme === 'dark';
+
+            if (isDark) {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+                localStorage.setItem('theme', 'dark');
             } else {
                 document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
+                localStorage.setItem('theme', 'light');
             }
+
+            if (logoHeader) {
+                logoHeader.src = isDark ?
+                    "https://i.ibb.co/0L23FkR/black.png" :
+                    "https://i.ibb.co/fGp2Q415/white.png";
+            }
+        }
+
+        // Initialize theme on page load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
         }
     </script>
 </body>
