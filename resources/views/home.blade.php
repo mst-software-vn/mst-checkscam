@@ -47,6 +47,12 @@
     </script>
 
     <style>
+        :root {
+            --text-color: #ff0000;
+            --light-color: #f3eded;
+            --speed: 3s;
+        }
+
         body {
             color: #333;
             overflow-x: hidden;
@@ -76,6 +82,53 @@
                 line-height: 2rem;
             }
         }
+
+
+
+        .scanner-title {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to bottom, #ff0000 0%, #cc0000 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 15px 0;
+            margin: -15px 0;
+            overflow: hidden;
+        }
+
+        /* Thanh Laser quét kiểu QR */
+        .scanner-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff0000;
+            box-shadow: 0 0 15px 2px rgba(255, 0, 0, 0.7);
+            z-index: 10;
+            animation: qr-scan 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes qr-scan {
+            0% {
+                top: 5%;
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 90%;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -87,8 +140,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-2">
-                    <img src="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png" alt="Logo Check Scam"
-                        class="w-auto h-10 sm:h-14" />
+                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-12 w-auto" />
                 </a>
 
                 <!-- Desktop Menu -->
@@ -120,8 +172,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
                 <h1
-                    class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6 uppercase leading-tight hero-title">
-                    <span class="text-cs_red">KIỂM TRA & TỐ CÁO SCAM.</span>
+                    class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 uppercase leading-[1.4] hero-title scanner-title">
+                    KIỂM TRA & TỐ CÁO SCAM.
                 </h1>
                 <p class="text-gray-600 mb-10 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-medium">
                     Hệ thống dữ liệu lớn nhất Việt Nam giúp bạn kiểm tra độ tín nhiệm của đối tác thông qua SĐT, Số TK
@@ -148,9 +200,13 @@
 
                     <!-- Stats -->
 
-                    <div class="mt-6 flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-600">
-                        <span><i class="fa-solid fa-circle text-[6px] text-cs_red mr-1.5"></i> 62.472 STK Lừa đảo</span>
-                        <span><i class="fa-solid fa-circle text-[6px] text-cs_blue mr-1.5"></i> 8.605 Bình luận
+                    <div class="mt-6 flex flex-wrap justify-center gap-3 md:gap-6 text-sm font-medium text-gray-600">
+                        <span class="text-xs md:text-sm flex items-center"><i
+                                class="fa-solid fa-circle text-[6px] text-cs_red mr-1.5"></i>
+                            62.472 STK Lừa đảo</span>
+                        <span class="text-xs md:text-sm flex items-center"><i
+                                class="fa-solid fa-circle text-[6px] text-cs_blue mr-1.5"></i>
+                            8.605 Bình luận
                             mới</span>
                     </div>
 
@@ -646,8 +702,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
                 <div class="col-span-1 sm:col-span-2">
                     <div class="flex items-center gap-2 mb-4">
-                        <img src="https://i.ibb.co/wF5s49FF/blob.png" alt="Footer Logo"
-                            class="w-auto h-10 sm:h-14" />
+                        <img src="https://i.ibb.co/0L23FkR/black.png" alt="Footer Logo" class="w-auto h-12" />
+
                     </div>
                     <p class="text-gray-400 leading-relaxed max-w-sm text-xs md:text-sm">
                         Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Cung cấp thông tin tham khảo giúp bạn
@@ -680,8 +736,9 @@
 
             <div
                 class="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 gap-4">
-                <p class="text-center md:text-left">&copy; <?php echo date('Y'); ?> Bản quyền thuộc về CheckScam. Hệ thống
-                    dữ liệu cộng đồng.</p>
+                <p class="text-center md:text-left">&copy; {{ date('Y') }} Bản quyền thuộc về CheckScam. Nền tảng
+                    dữ liệu cộng đồng. | Phát triển bởi <a href="https://mst.vn"
+                        class="hover:text-white font-medium">MST Software</a></p>
                 <div class="flex gap-4">
                     <a href="#" class="hover:text-white" aria-label="Facebook"><i
                             class="fa-brands fa-facebook text-lg"></i></a>
