@@ -21,7 +21,10 @@
         content="Tra cứu thông tin kẻ lừa đảo ngay lập tức. Cùng cộng đồng xây dựng môi trường MMO sạch sẽ.">
     <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png">
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+    {{-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -66,10 +69,12 @@
         }
     </script>
 
+
     <style>
         * {
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.1s ease;
         }
+
 
         :root {
             --text-color: #ff0000;
@@ -154,4 +159,7 @@
             }
         }
     </style>
+
+
+
 </head>
