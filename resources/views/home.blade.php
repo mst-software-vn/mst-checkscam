@@ -140,7 +140,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-2">
-                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-12 w-auto" />
+                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto" />
                 </a>
 
                 <!-- Desktop Menu -->
@@ -156,10 +156,41 @@
                         Bán</a>
                 </nav>
 
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-black focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
+        <!-- Mobile Menu Drawer (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-xl animate-fade-in-down">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#" class="block px-4 py-3 text-sm font-bold text-cs_red bg-red-50 rounded-lg">Trang
+                    Chủ</a>
+                <a href="#"
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Tố
+                    Cáo</a>
+                <a href="#"
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Quỹ
+                    Bảo Hiểm</a>
+                <a href="#"
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Chợ
+                    Buôn Bán</a>
             </div>
         </div>
     </header>
+
+    <script>
+        // Simple Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
     <!-- Hero Section -->
     <section class="bg-white py-12 md:py-20 md:pb-2 overflow-hidden relative">
@@ -183,89 +214,87 @@
                 <!-- Search Box Centered -->
                 <div class="max-w-3xl mx-auto mb-6">
                     <div
-                        class="relative bg-white border-2 border-gray-200 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 transition-all p-1.5 md:p-2">
-                        <div class="flex items-center">
-                            <div class="pl-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg md:text-xl"></i>
+                        class="relative bg-white border-2 border-gray-200 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 transition-all p-1 md:p-2">
+                        <div class="flex flex-col sm:flex-row items-center gap-2">
+                            <div class="flex-1 flex items-center w-full min-w-0">
+                                <div class="pl-4 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
+                                </div>
+                                <input type="text"
+                                    class="w-full pl-3 pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 text-sm md:text-base font-bold placeholder-gray-400"
+                                    placeholder="Nhập Số tài khoản, SĐT hoặc Link..." />
                             </div>
-                            <input type="text"
-                                class="w-full pl-4 pr-4 py-2  bg-transparent border-none focus:ring-0 text-gray-800 text-base font-bold placeholder-gray-400"
-                                placeholder="Nhập Số tài khoản, SĐT hoặc Link cần check..." />
                             <button
-                                class="bg-cs_blue hover:bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-sm tracking-widest transition-all shadow-lg shadow-blue-200 active:scale-95">
+                                class="w-full sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap">
                                 TRA CỨU
                             </button>
                         </div>
                     </div>
 
                     <!-- Stats -->
-
-                    <div class="mt-6 flex flex-wrap justify-center gap-3 md:gap-6 text-sm font-medium text-gray-600">
-                        <span class="text-xs md:text-sm flex items-center"><i
-                                class="fa-solid fa-circle text-[6px] text-cs_red mr-1.5"></i>
-                            62.472 STK Lừa đảo</span>
-                        <span class="text-xs md:text-sm flex items-center"><i
-                                class="fa-solid fa-circle text-[6px] text-cs_blue mr-1.5"></i>
-                            8.605 Bình luận
-                            mới</span>
+                    <div
+                        class="mt-6 flex flex-wrap justify-center gap-3 md:gap-8 text-[11px] md:text-sm font-bold text-gray-500">
+                        <span class="flex items-center"><i
+                                class="fa-solid fa-circle text-[6px] text-cs_red mr-2 animate-pulse"></i> 62.472 STK Lừa
+                            đảo</span>
+                        <span class="flex items-center"><i class="fa-solid fa-circle text-[6px] text-cs_blue mr-2"></i>
+                            8.605 Bình luận mới</span>
                     </div>
-
                 </div>
 
-                <!-- Shortcuts Section Moved Below and Redesigned -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-12">
                     <a href="#"
-                        class="bg-white hover:bg-red-50 border border-gray-100 hover:border-red-200 p-4 rounded-2xl flex items-center gap-4 transition-all group shadow-xs hover:shadow-md">
+                        class="bg-white hover:bg-red-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-12 h-12 rounded-xl bg-red-100 text-cs_red flex items-center justify-center text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Report</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Report</p>
                             <p
-                                class="font-black text-xs text-gray-800 uppercase group-hover:text-cs_red transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_red transition-colors">
                                 Tố Cáo Scam</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-blue-50 border border-gray-100 hover:border-blue-200 p-4 rounded-2xl flex items-center gap-4 transition-all group shadow-xs hover:shadow-md">
+                        class="bg-white hover:bg-blue-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-12 h-12 rounded-xl bg-blue-100 text-cs_blue flex items-center justify-center text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-shield-cat"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Insurance</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Insurance</p>
                             <p
-                                class="font-black text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
                                 Bảo Hiểm CS</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-green-50 border border-gray-100 hover:border-green-200 p-4 rounded-2xl flex items-center gap-4 transition-all group shadow-xs hover:shadow-md">
+                        class="bg-white hover:bg-green-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-12 h-12 rounded-xl bg-green-100 text-cs_green flex items-center justify-center text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 text-cs_green flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-store"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Trading</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Trading</p>
                             <p
-                                class="font-black text-xs text-gray-800 uppercase group-hover:text-cs_green transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_green transition-colors">
                                 Chợ Buôn Bán</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-gray-50 border border-gray-100 hover:border-gray-200 p-4 rounded-2xl flex items-center gap-4 transition-all group shadow-xs hover:shadow-md">
+                        class="bg-white hover:bg-gray-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-12 h-12 rounded-xl bg-gray-100 text-cs_blue flex items-center justify-center text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-brands fa-telegram"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Automation</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Automation</p>
                             <p
-                                class="font-black text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
                                 Bot Check</p>
                         </div>
                     </a>
@@ -283,7 +312,8 @@
                 alt="Quảng cáo banner">
         </article> --}}
 
-        <h2 class="text-xl text-center uppercase text-cs_blue mb-6 mt-6"><?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
+        <h2 class="text-xs md:text-xl text-center uppercase font-black text-cs_blue mb-6 mt-6 tracking-widest">
+            <?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
 
         <!-- 2 Column Layout -->
         <div class="flex flex-col lg:flex-row gap-4 mb-10">
@@ -299,25 +329,30 @@
                     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors">
-                            <div class="w-full sm:w-5/12 mb-3 sm:mb-0">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-cs_red text-xs"><i
-                                            class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <h3 class="text-gray-900 text-sm">Nguyễn Văn A - <?php echo $i; ?>
-                                    </h3>
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            <div class="w-full sm:w-5/12 flex items-center gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
-                                <div class="text-[10px] text-gray-500 pl-5">
-                                    <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                <div>
+                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                        <?php echo $i; ?></h3>
+                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                        <i class="fa-regular fa-clock mr-1"></i>Vừa xong
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="w-full sm:w-5/12 mb-3 sm:mb-0 pl-5 sm:pl-0 sm:border-l border-gray-100 sm:px-4">
-                                <div class="text-xs">Ngân hàng: <span class="font-medium">MB Bank</span></div>
-                                <div class="text-xs font-bold text-cs_red">0987654321***</div>
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-xs font-black text-cs_red">0987654321***</span>
+                                </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#" class="text-cs_blue hover:underline text-xs font-bold">Chi tiết</a>
+                                <a href="#"
+                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    tiết</a>
                             </div>
                         </div>
                         <?php endfor; ?>
@@ -326,8 +361,10 @@
 
                 <!-- BANNER QUẢNG CÁO 1 -->
                 <article class="max-w-[950px]">
-                    <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
-                        alt="Ads">
+                    <a href="#" target="_blank">
+                        <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
+                            alt="Ads">
+                    </a>
                 </article>
 
                 <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
@@ -365,7 +402,10 @@
 
                 <!-- BANNER QUẢNG CÁO 2 -->
                 <article class="max-w-[950px]">
-                    <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full" alt="Ads">
+                    <a href="#" target="_blank">
+                        <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full"
+                            alt="Ads">
+                    </a>
                 </article>
 
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
@@ -409,17 +449,16 @@
             <aside class="w-full lg:w-3/12 space-y-4">
                 <!-- Right Sidebar Banner -->
                 <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
-                    <a href="#">
-                        <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-18 md:h-full"
-                            alt="Fpayment Ads">
+                    <a href="#" target="_blank" class="w-full h-full block">
+                        <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-full" alt="Fpayment Ads">
                     </a>
                 </div>
 
 
                 <div class="aspect-square border border-gray-200 shadow-sm rounded-lg">
-                    <a href="#">
+                    <a href="#" target="_blank" class="w-full h-full block">
                         <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
-                            class="w-full h-18 md:h-full" alt="Fpayment Ads">
+                            class="w-full h-full" alt="Fpayment Ads">
                     </a>
                 </div>
                 <!-- Action Button -->
@@ -509,7 +548,7 @@
                         hoạt động từ cộng đồng</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     <?php
                     $comments = [
                         ['user' => 'Lê Văn Tám', 'time' => '2 phút trước', 'content' => 'Thằng này vừa lừa mình 500k tiền cọc mua acc, mọi người cẩn thận nhé.', 'target' => '0981.234.xxx', 'color' => '3b82f6'],
@@ -703,7 +742,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
                 <div class="col-span-1 sm:col-span-2">
                     <div class="flex items-center gap-2 mb-4">
-                        <img src="https://i.ibb.co/0L23FkR/black.png" alt="Footer Logo" class="w-auto h-12" />
+                        <img src="https://i.ibb.co/0L23FkR/black.png" alt="Footer Logo" class="w-auto h-8 md:h-12" />
 
                     </div>
                     <p class="text-gray-400 leading-relaxed max-w-sm text-xs md:text-sm">
