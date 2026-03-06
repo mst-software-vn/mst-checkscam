@@ -20,6 +20,8 @@
     <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png">
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,7 +161,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-2">
-                    <img src="https://i.ibb.co/fGp2Q415/white.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto"
+                    <img src="https://i.ibb.co/7xfz0v3K/black.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto"
                         id="logo_header" />
                 </a>
 
@@ -808,7 +810,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
                 <div class="col-span-1 sm:col-span-2">
                     <div class="flex items-center gap-2 mb-4">
-                        <img src="https://i.ibb.co/0L23FkR/black.png" alt="Footer Logo" class="w-auto h-8 md:h-12" />
+                        <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo"
+                            class="w-auto h-8 md:h-12" />
 
                     </div>
                     <p class="text-gray-400 leading-relaxed max-w-sm text-xs md:text-sm">
@@ -894,8 +897,8 @@
 
             if (logoHeader) {
                 logoHeader.src = isDark ?
-                    "https://i.ibb.co/0L23FkR/black.png" :
-                    "https://i.ibb.co/fGp2Q415/white.png";
+                    "https://i.ibb.co/wFZsnJBR/white.png" :
+                    "https://i.ibb.co/7xfz0v3K/black.png";
             }
         }
 
