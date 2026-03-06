@@ -172,11 +172,11 @@
                         class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-sm py-5 transition-colors">Tố
                         Cáo</a>
                     <a href="#"
-                        class="text-gray-600 dark:text-gray-400 hover:text-cs_blue dark:hover:text-cs_blue font-medium text-sm py-5 transition-colors">Quỹ
+                        class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-sm py-5 transition-colors">Quỹ
                         Bảo
                         Hiểm</a>
                     <a href="#"
-                        class="text-gray-600 dark:text-gray-400 hover:text-cs_green dark:hover:text-cs_green font-medium text-sm py-5 transition-colors">Chợ
+                        class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-sm py-5 transition-colors">Chợ
                         Buôn
                         Bán</a>
                 </nav>
