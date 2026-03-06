@@ -29,7 +29,16 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <script>
+        // Check theme initially
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -37,6 +46,8 @@
                         cs_blue: "#3399ff",
                         cs_green: "#2eb85c",
                         cs_orange: "#fdb813",
+                        dark_bg: "#0f172a",
+                        dark_card: "#1e293b",
                     },
                     fontFamily: {
                         sans: ['Be Vietnam Pro', 'sans-serif'],
@@ -47,6 +58,10 @@
     </script>
 
     <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.1s ease;
+        }
+
         :root {
             --text-color: #ff0000;
             --light-color: #f3eded;
@@ -132,10 +147,10 @@
     </style>
 </head>
 
-<body class="antialiased min-h-screen flex flex-col">
+<body class="antialiased min-h-screen flex flex-col transition-colors duration-300 dark:bg-dark_bg dark:text-gray-100">
 
     <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header class="bg-white dark:bg-dark_bg border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
@@ -147,12 +162,15 @@
                 <nav class="hidden md:flex space-x-6 lg:space-x-8">
                     <a href="#" class="text-cs_red font-bold text-sm border-b-2 border-cs_red py-5">Trang Chủ</a>
                     <a href="#"
-                        class="text-gray-600 hover:text-cs_red font-medium text-sm py-5 transition-colors">Tố Cáo</a>
+                        class="text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium text-sm py-5 transition-colors">Tố
+                        Cáo</a>
                     <a href="#"
-                        class="text-gray-600 hover:text-cs_blue font-medium text-sm py-5 transition-colors">Quỹ Bảo
+                        class="text-gray-600 dark:text-gray-400 hover:text-cs_blue dark:hover:text-cs_blue font-medium text-sm py-5 transition-colors">Quỹ
+                        Bảo
                         Hiểm</a>
                     <a href="#"
-                        class="text-gray-600 hover:text-cs_green font-medium text-sm py-5 transition-colors">Chợ Buôn
+                        class="text-gray-600 dark:text-gray-400 hover:text-cs_green dark:hover:text-cs_green font-medium text-sm py-5 transition-colors">Chợ
+                        Buôn
                         Bán</a>
                 </nav>
 
@@ -166,18 +184,20 @@
         </div>
 
         <!-- Mobile Menu Drawer (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-xl animate-fade-in-down">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-dark_card border-t border-gray-100 dark:border-gray-800 shadow-xl animate-fade-in-down">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#" class="block px-4 py-3 text-sm font-bold text-cs_red bg-red-50 rounded-lg">Trang
+                <a href="#"
+                    class="block px-4 py-3 text-sm font-bold text-cs_red bg-red-50 dark:bg-red-900/20 rounded-lg">Trang
                     Chủ</a>
                 <a href="#"
-                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Tố
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Tố
                     Cáo</a>
                 <a href="#"
-                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Quỹ
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Quỹ
                     Bảo Hiểm</a>
                 <a href="#"
-                    class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Chợ
+                    class="block px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">Chợ
                     Buôn Bán</a>
             </div>
         </div>
@@ -193,11 +213,12 @@
     </script>
 
     <!-- Hero Section -->
-    <section class="bg-white py-12 md:py-20 md:pb-2 overflow-hidden relative">
+    <section class="bg-white dark:bg-dark_bg py-12 md:py-20 md:pb-2 overflow-hidden relative">
         <!-- Trang trí nền nhẹ -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl">
+            </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -206,7 +227,8 @@
                     class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 uppercase leading-[1.4] hero-title scanner-title">
                     KIỂM TRA & TỐ CÁO SCAM.
                 </h1>
-                <p class="text-gray-600 mb-10 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-medium">
+                <p
+                    class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-medium">
                     Hệ thống dữ liệu lớn nhất Việt Nam giúp bạn kiểm tra độ tín nhiệm của đối tác thông qua SĐT, Số TK
                     hoặc Link mạng xã hội.
                 </p>
@@ -214,14 +236,14 @@
                 <!-- Search Box Centered -->
                 <div class="max-w-3xl mx-auto mb-6">
                     <div
-                        class="relative bg-white border-2 border-gray-200 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 transition-all p-1 md:p-2">
+                        class="relative bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-1 md:p-2">
                         <div class="flex flex-col sm:flex-row items-center gap-2">
                             <div class="flex-1 flex items-center w-full min-w-0">
                                 <div class="pl-4 flex items-center pointer-events-none">
                                     <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
                                 </div>
                                 <input type="text"
-                                    class="w-full pl-3 pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 text-sm md:text-base font-bold placeholder-gray-400"
+                                    class="w-full pl-3 pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
                                     placeholder="Nhập Số tài khoản, SĐT hoặc Link..." />
                             </div>
                             <button
@@ -233,7 +255,7 @@
 
                     <!-- Stats -->
                     <div
-                        class="mt-6 flex flex-wrap justify-center gap-3 md:gap-8 text-[11px] md:text-sm font-bold text-gray-500">
+                        class="mt-6 flex flex-wrap justify-center gap-3 md:gap-8 text-[11px] md:text-sm font-bold text-gray-500 dark:text-gray-400">
                         <span class="flex items-center"><i
                                 class="fa-solid fa-circle text-[6px] text-cs_red mr-2 animate-pulse"></i> 62.472 STK Lừa
                             đảo</span>
@@ -244,57 +266,61 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-12">
                     <a href="#"
-                        class="bg-white hover:bg-red-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
+                        class="bg-white dark:bg-dark_card hover:bg-red-50 dark:hover:bg-red-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 dark:bg-red-900/30 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Report</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                                Report</p>
                             <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_red transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_red transition-colors">
                                 Tố Cáo Scam</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-blue-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
+                        class="bg-white dark:bg-dark_card hover:bg-blue-50 dark:hover:bg-blue-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-shield-cat"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Insurance</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                                Insurance</p>
                             <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors">
                                 Bảo Hiểm CS</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-green-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
+                        class="bg-white dark:bg-dark_card hover:bg-green-50 dark:hover:bg-green-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 text-cs_green flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 dark:bg-green-900/30 text-cs_green flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-solid fa-store"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Trading</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                                Trading</p>
                             <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_green transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_green transition-colors">
                                 Chợ Buôn Bán</p>
                         </div>
                     </a>
 
                     <a href="#"
-                        class="bg-white hover:bg-gray-50 border border-gray-100 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
+                        class="bg-white dark:bg-dark_card hover:bg-gray-50 dark:hover:bg-slate-800 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 dark:bg-slate-800 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
                             <i class="fa-brands fa-telegram"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 uppercase">Automation</p>
+                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                                Automation</p>
                             <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 uppercase group-hover:text-cs_blue transition-colors">
+                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors">
                                 Bot Check</p>
                         </div>
                     </a>
@@ -326,32 +352,35 @@
                         <h2 class="text-lg font-bold text-gray-800 uppercase"><?php echo date('d/m/Y'); ?> CÓ CẢNH BÁO</h2>
                         <span class="bg-red-100 text-cs_red text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
                     </div> --}}
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                    <div
+                        class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100 dark:border-gray-800' : ''; ?> hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors gap-3 sm:gap-0">
                             <div class="w-full sm:w-5/12 flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 text-cs_red flex items-center justify-center text-xs shrink-0">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                        Văn A -
                                         <?php echo $i; ?></h3>
-                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                    <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-clock mr-1"></i>Vừa xong
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 dark:border-gray-800 sm:px-6">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-bold">Tài
+                                        khoản</span>
                                     <span class="text-xs font-black text-cs_red">0987654321***</span>
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
                                 <a href="#"
-                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
                         </div>
@@ -372,32 +401,35 @@
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_blue pl-3">
                         <h2 class="text-lg font-bold text-gray-800 uppercase">Lừa đảo phổ biến 7 ngày gần đây</h2>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                    <div
+                        class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=7; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100 dark:border-gray-800' : ''; ?> hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors gap-3 sm:gap-0">
                             <div class="w-full sm:w-5/12 flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 text-cs_red flex items-center justify-center text-xs shrink-0">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                        Văn A -
                                         <?php echo $i; ?></h3>
-                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                    <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-clock mr-1"></i>Vừa xong
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 dark:border-gray-800 sm:px-6">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-bold">Tài
+                                        khoản</span>
                                     <span class="text-xs font-black text-cs_red">0987654321***</span>
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
                                 <a href="#"
-                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
                         </div>
@@ -419,32 +451,35 @@
                         <h2 class="text-lg font-bold text-gray-800 uppercase">Top 3 tìm kiếm ngày</h2>
                         <i class="fa-solid fa-fire text-cs_orange animate-pulse"></i>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                    <div
+                        class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
                         <div
-                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100' : ''; ?> hover:bg-gray-50 transition-colors gap-3 sm:gap-0">
+                            class="flex flex-col sm:flex-row items-center p-4 <?php echo $i < 3 ? 'border-b border-gray-100 dark:border-gray-800' : ''; ?> hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors gap-3 sm:gap-0">
                             <div class="w-full sm:w-5/12 flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-red-50 text-cs_red flex items-center justify-center text-xs shrink-0">
+                                    class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 text-cs_red flex items-center justify-center text-xs shrink-0">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 text-xs md:text-sm font-bold">Nguyễn Văn A -
+                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                        Văn A -
                                         <?php echo $i; ?></h3>
-                                    <div class="text-[9px] md:text-[10px] text-gray-400">
+                                    <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-clock mr-1"></i>Vừa xong
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 sm:px-6">
+                            <div class="w-full sm:w-5/12 sm:border-l border-gray-100 dark:border-gray-800 sm:px-6">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Tài khoản</span>
+                                    <span class="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-bold">Tài
+                                        khoản</span>
                                     <span class="text-xs font-black text-cs_red">0987654321***</span>
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
                                 <a href="#"
-                                    class="inline-block bg-blue-50 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
+                                    class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
                         </div>
@@ -472,13 +507,14 @@
                     </a>
                 </div>
                 <!-- Action Button -->
-                <div class="bg-red-50 border border-red-200 p-6 rounded-xl text-center shadow-sm">
+                <div
+                    class="bg-red-50 dark:bg-slate-900/50 border border-red-200 dark:border-red-900/30 p-6 rounded-xl text-center shadow-sm">
                     <div
-                        class="w-12 h-12 bg-red-100 text-cs_red rounded-full flex items-center justify-center mx-auto mb-3">
+                        class="w-12 h-12 bg-red-100 dark:bg-red-900/30 text-cs_red rounded-full flex items-center justify-center mx-auto mb-3">
                         <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-md mb-2 text-gray-800">BẠN ĐANG BỊ SCAM?</h3>
-                    <p class="text-gray-600 text-[13px] mb-5 leading-relaxed">
+                    <h3 class="font-bold text-md mb-2 text-gray-800 dark:text-gray-100">BẠN ĐANG BỊ SCAM?</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-[13px] mb-5 leading-relaxed">
                         Chặn đứng kẻ gian bằng cách báo cáo ngay lên hệ thống. Đóng góp của bạn giúp cộng đồng MMO
                         an toàn hơn.
                     </p>
@@ -489,9 +525,11 @@
                 </div>
 
                 <!-- Box Quỹ Bảo Hiểm -->
-                <div class="bg-white border border-gray-200 rounded-lg shadow-xs p-5">
+                <div
+                    class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm p-5">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="font-bold text-[13px] md:text-sm text-gray-800 uppercase flex items-center gap-2">
+                        <h2
+                            class="font-bold text-[13px] md:text-sm text-gray-800 dark:text-gray-200 uppercase flex items-center gap-2">
                             <i class="fa-solid fa-shield text-cs_green"></i> QUỸ BẢO HIỂM CS
                         </h2>
                         <a href="#" class="text-[10px] md:text-xs text-cs_blue hover:underline">Xem Quỹ</a>
@@ -514,14 +552,14 @@
                             <div class="relative mb-1">
                                 <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($av['name']); ?>&background=<?php echo $av['color']; ?>&color=fff&size=48"
                                     alt="<?php echo $av['name']; ?>"
-                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 border-2 border-gray-100 object-cover shadow-sm">
+                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 border-2 border-gray-100 dark:border-gray-800 object-cover shadow-sm">
                                 <div
-                                    class="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-cs_blue rounded-full border-2 border-white flex items-center justify-center">
+                                    class="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-cs_blue rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
                                     <i class="fa-solid fa-check text-white text-[6px] md:text-[8px]"></i>
                                 </div>
                             </div>
                             <span
-                                class="text-[8px] md:text-[10px] text-gray-600 font-medium text-center truncate w-full">
+                                class="text-[8px] md:text-[10px] text-gray-600 dark:text-gray-400 font-medium text-center truncate w-full">
                                 <?php echo $av['name']; ?>
                             </span>
                         </a>
@@ -530,12 +568,12 @@
                         <a href="#" class="flex flex-col items-center relative" title="Xem tất cả">
                             <div class="relative mb-1">
                                 <div
-                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 bg-gray-100 border-2 border-gray-200 flex items-center justify-center text-gray-500 shadow-sm">
+                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 bg-gray-100 dark:bg-slate-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 shadow-sm">
                                     <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </div>
                             </div>
                             <span
-                                class="text-[8px] md:text-[10px] text-gray-600 font-medium text-center truncate w-full">Tất
+                                class="text-[8px] md:text-[10px] text-gray-600 dark:text-gray-400 font-medium text-center truncate w-full">Tất
                                 cả +50</span>
                         </a>
                     </div>
@@ -603,52 +641,58 @@
 
             <!-- Section Bí Quyết Giao Dịch -->
             <section aria-labelledby="safety-tips-title"
-                class="bg-gradient-to-br from-white to-blue-50/50 border border-blue-100/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xs">
+                class="bg-gradient-to-br from-white to-blue-50/50 dark:from-slate-900/50 dark:to-slate-800/30 border border-blue-100/50 dark:border-gray-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xs">
                 <div class="max-w-4xl mx-auto text-center mb-8 md:mb-12">
                     <span
                         class="inline-block px-3 py-1 bg-cs_blue/10 text-cs_blue text-[10px] font-bold uppercase tracking-widest rounded-full mb-4">Cẩm
                         nang an toàn</span>
                     <h2 id="safety-tips-title"
-                        class="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 uppercase tracking-tight">
+                        class="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tight">
                         Cách giao dịch <span class="text-cs_blue">không lừa đảo</span>
                     </h2>
-                    <p class="text-gray-500 text-xs md:text-sm mt-3 leading-relaxed">
+                    <p class="text-gray-500 dark:text-gray-400 text-xs md:text-sm mt-3 leading-relaxed">
                         Thế giới MMO đầy rẫy rủi ro, nắm vững 3 nguyên tắc "vàng" túi tiền sẽ được bảo vệ tuyệt đối.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
+                    <article
+                        class="group bg-white dark:bg-dark_card p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200 dark:border-gray-800">
                         <div
-                            class="w-12 h-12 md:w-14 md:h-14 bg-blue-50 text-cs_blue rounded-xl flex items-center justify-center mb-6 border border-blue-100">
+                            class="w-12 h-12 md:w-14 md:h-14 bg-blue-50 dark:bg-blue-900/30 text-cs_blue rounded-xl flex items-center justify-center mb-6 border border-blue-100 dark:border-blue-900/50">
                             <i class="fa-solid fa-magnifying-glass-chart text-lg md:text-xl"></i>
                         </div>
-                        <h4 class="font-bold text-gray-800 text-base md:text-lg mb-3">Luôn luôn kiểm tra</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg mb-3">Luôn luôn kiểm
+                            tra</h4>
+                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                             Hãy <span class="font-bold text-cs_blue">copy SĐT/STK</span> dán vào CheckScam để xem họ có
                             "vết đen" nào không.
                         </p>
                     </article>
 
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
+                    <article
+                        class="group bg-white dark:bg-dark_card p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200 dark:border-gray-800">
                         <div
-                            class="w-12 h-12 md:w-14 md:h-14 bg-green-50 text-cs_green rounded-xl flex items-center justify-center mb-6 border border-green-100">
+                            class="w-12 h-12 md:w-14 md:h-14 bg-green-50 dark:bg-green-900/30 text-cs_green rounded-xl flex items-center justify-center mb-6 border border-green-100 dark:border-green-900/50">
                             <i class="fa-solid fa-user-shield text-lg md:text-xl"></i>
                         </div>
-                        <h4 class="font-bold text-gray-800 text-base md:text-lg mb-3">Sử dụng trung gian</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg mb-3">Sử dụng trung
+                            gian</h4>
+                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                             Với giao dịch lạ, hãy mời một <span class="font-bold text-cs_green">Trung Gian Uy
                                 Tín</span> có đóng quỹ bảo hiểm.
                         </p>
                     </article>
 
-                    <article class="group bg-white p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200">
+                    <article
+                        class="group bg-white dark:bg-dark_card p-6 sm:p-8 rounded-lg shadow-xs border border-gray-200 dark:border-gray-800">
                         <div
-                            class="w-12 h-12 md:w-14 md:h-14 bg-red-50 text-cs_red rounded-xl flex items-center justify-center mb-6 border border-red-100">
+                            class="w-12 h-12 md:w-14 md:h-14 bg-red-50 dark:bg-red-900/30 text-cs_red rounded-xl flex items-center justify-center mb-6 border border-red-100 dark:border-red-900/50">
                             <i class="fa-solid fa-bolt-lightning text-lg md:text-xl"></i>
                         </div>
-                        <h4 class="font-bold text-gray-800 text-base md:text-lg mb-3">Cảnh giác link lạ</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg mb-3">Cảnh giác link
+                            lạ</h4>
+                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                             Link "xác nhận tiền" hay "nhập OTP" đều là bẫy. Ngân hàng <span
                                 class="font-bold text-cs_red">không bao giờ</span> yêu cầu.
                         </p>
@@ -660,83 +704,86 @@
             <section aria-labelledby="faq-title" class="max-w-5xl mx-auto px-4">
                 <div class="flex flex-col items-center mb-8 md:mb-10 text-center">
                     <div class="w-12 h-1 bg-cs_blue rounded-full mb-6"></div>
-                    <h2 id="faq-title" class="text-xl md:text-2xl font-black text-gray-800 uppercase tracking-tight">
+                    <h2 id="faq-title"
+                        class="text-xl md:text-2xl font-black text-gray-800 dark:text-white uppercase tracking-tight">
                         Trợ giúp & Giải đáp</h2>
-                    <p class="text-gray-500 text-xs md:text-sm mt-2">Mọi thắc mắc về hệ thống CheckScam đều có tại đây.
+                    <p class="text-gray-500 dark:text-gray-400 text-xs md:text-sm mt-2">Mọi thắc mắc về hệ thống
+                        CheckScam đều có tại đây.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 gap-3 items-start">
                     <details
-                        class="group bg-white border border-gray-200 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
+                        class="group bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 list-none">
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-blue-50 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">01</span>
-                                <h3 class="font-bold text-gray-700 text-xs md:text-sm">Làm sao để tố cáo lừa đảo?</h3>
+                                    class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">01</span>
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Làm sao để tố
+                                    cáo lừa đảo?</h3>
                             </div>
                             <i
                                 class="fa-solid fa-chevron-down text-gray-300 group-open:rotate-180 transition-transform text-[10px] md:text-xs"></i>
                         </summary>
                         <div
-                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 border-t border-gray-50 pt-3">
+                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 dark:text-gray-400 border-t border-gray-50 dark:border-gray-800 pt-3">
                             Bấm vào nút <span class="text-cs_red font-bold uppercase">Gửi đơn tố cáo</span>, điền thông
                             tin kẻ lừa đảo kèm hình ảnh bằng chứng rõ ràng. Admin sẽ duyệt trong 24h.
                         </div>
                     </details>
 
                     <details
-                        class="group bg-white border border-gray-200 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
+                        class="group bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 list-none">
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-blue-50 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">02</span>
-                                <h3 class="font-bold text-gray-700 text-xs md:text-sm">Tại sao bài phốt chưa được
+                                    class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">02</span>
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tại sao bài phốt chưa được
                                     duyệt?</h3>
                             </div>
                             <i
                                 class="fa-solid fa-chevron-down text-gray-300 group-open:rotate-180 transition-transform text-[10px] md:text-xs"></i>
                         </summary>
                         <div
-                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 border-t border-gray-50 pt-3">
+                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 dark:text-gray-400 border-t border-gray-50 dark:border-gray-800 pt-3">
                             Hệ thống kiểm tra thủ công để tránh tình trạng tố cáo ảo. Nếu sau 24h chưa duyệt, hãy kiểm
                             tra lại tính minh bạch của bằng chứng bạn gửi.
                         </div>
                     </details>
 
                     <details
-                        class="group bg-white border border-gray-200 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
+                        class="group bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xs hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 list-none">
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-blue-50 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">03</span>
-                                <h3 class="font-bold text-gray-700 text-xs md:text-sm">Quỹ Bảo Đảm hoạt động thế nào?
+                                    class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">03</span>
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Quỹ Bảo Đảm hoạt động thế nào?
                                 </h3>
                             </div>
                             <i
                                 class="fa-solid fa-chevron-down text-gray-300 group-open:rotate-180 transition-transform text-[10px] md:text-xs"></i>
                         </summary>
                         <div
-                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 border-t border-gray-50 pt-3">
+                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 dark:text-gray-400 border-t border-gray-50 dark:border-gray-800 pt-3">
                             Trung gian uy tín đóng quỹ (tiền ký quỹ) cho Admin. Nếu họ lừa đảo, Admin dùng tiền đó đền
                             bù cho bạn 100%.
                         </div>
                     </details>
 
                     <details
-                        class="group bg-white border border-gray-200 rounded-2xl shadow-sm hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
+                        class="group bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm hover:border-cs_blue/30 transition-all [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 list-none">
                             <div class="flex items-center gap-3 md:gap-4">
                                 <span
-                                    class="w-8 h-8 rounded-lg bg-blue-50 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">04</span>
-                                <h3 class="font-bold text-gray-700 text-xs md:text-sm">Tôi có thể xin gỡ bài viết
+                                    class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center text-[10px] md:text-xs font-bold">04</span>
+                                <h3 class="font-bold text-gray-700 dark:text-gray-200 text-xs md:text-sm">Tôi có thể xin gỡ bài viết
                                     không?</h3>
                             </div>
                             <i
                                 class="fa-solid fa-chevron-down text-gray-300 group-open:rotate-180 transition-transform text-[10px] md:text-xs"></i>
                         </summary>
                         <div
-                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 border-t border-gray-50 pt-3">
+                            class="px-5 pb-5 pl-12 md:pl-[68px] text-[11px] md:text-[13px] leading-relaxed text-gray-500 dark:text-gray-400 border-t border-gray-50 dark:border-gray-800 pt-3">
                             Chỉ gỡ khi người tố cáo xác nhận đã giải quyết xong. Chúng tôi KHÔNG gỡ vì hối lộ hay áp lực
                             từ kẻ lừa đảo.
                         </div>
@@ -747,7 +794,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t-4 border-cs_red text-gray-300 pt-10 pb-6 mt-10 text-sm">
+    <footer class="bg-gray-900 dark:bg-slate-950 border-t-4 border-cs_red text-gray-300 pt-10 pb-6 mt-10 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
                 <div class="col-span-1 sm:col-span-2">
@@ -799,6 +846,40 @@
         </div>
     </footer>
 
+    <!-- Theme Toggle Floating Button -->
+    <div class="fixed bottom-6 right-6 z-100 group">
+        <div id="theme-options"
+            class="flex flex-col gap-3 mb-3 opacity-0 translate-y-10 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+            <button onclick="setTheme('light')"
+                class="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-cs_orange border border-orange-100 hover:scale-110 active:scale-95 transition-all"
+                title="Giao diện sáng">
+                <i class="fa-solid fa-sun text-xl"></i>
+            </button>
+            <button onclick="setTheme('dark')"
+                class="w-12 h-12 rounded-full bg-slate-800 shadow-lg flex items-center justify-center text-blue-400 border border-slate-700 hover:scale-110 active:scale-95 transition-all"
+                title="Giao diện tối">
+                <i class="fa-solid fa-moon text-xl"></i>
+            </button>
+        </div>
+        <button
+            class="w-14 h-14 rounded-full bg-cs_blue text-white shadow-2xl flex items-center justify-center hover:rotate-45 active:scale-90 transition-all border-4 border-white dark:border-slate-800 relative shadow-blue-500/20">
+            <i class="fa-solid fa-palette text-xl"></i>
+            <span
+                class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
+        </button>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            }
+        }
+    </script>
 </body>
 
 </html>
