@@ -32,7 +32,7 @@
                                     <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
                                 </div>
                                 <input type="text"
-                                    class="w-full pl-3 pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
+                                    class="w-full pl-3 outline-none pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
                                     placeholder="Nhập Số tài khoản, SĐT hoặc Link..." />
                             </div>
                             <button
