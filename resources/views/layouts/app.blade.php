@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-@include('layouts.partials.head')
+<x-head />
 
 <body class="antialiased min-h-screen flex flex-col transition-colors duration-300 dark:bg-dark_bg dark:text-gray-100">
 
-    @include('layouts.partials.header')
+    <x-header />
 
     <script>
         // Simple Mobile Menu Toggle
@@ -18,7 +18,7 @@
 
     @yield('content')
 
-    @include('layouts.partials.footer')
+    <x-footer />
 </body>
 
 </html>

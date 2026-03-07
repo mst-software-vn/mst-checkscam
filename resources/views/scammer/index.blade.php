@@ -332,13 +332,8 @@
                                 <textarea rows="2"
                                     class="w-full bg-gray-50/50 dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-4 text-sm text-gray-600 dark:text-gray-300 focus:ring-1 focus:ring-cs_blue focus:border-cs_blue outline-none transition-all resize-none"
                                     placeholder="Chia sẻ thêm thông tin hoặc bằng chứng của bạn..."></textarea>
-                                <div class="mt-4 flex justify-between items-center">
-                                    <div class="flex gap-3">
-                                        <button class="text-gray-400 hover:text-cs_blue transition-colors"><i
-                                                class="fa-solid fa-image text-base"></i></button>
-                                        <button class="text-gray-400 hover:text-cs_blue transition-colors"><i
-                                                class="fa-solid fa-paperclip text-base"></i></button>
-                                    </div>
+                                <div class="mt-4 flex justify-end items-center">
+
                                     <button
                                         class="bg-cs_blue text-white text-xs font-black uppercase px-8 py-2.5 rounded-xl hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-blue-500/20">Gửi
                                         bình luận</button>
@@ -375,14 +370,7 @@
                                         gà. Tôi cũng vừa bị nó hụt 200k tiền cọc. May mà search được web này kịp.
                                     </p>
                                 </div>
-                                <div class="flex items-center gap-5 mt-3 ml-2">
-                                    <button
-                                        class="text-[10px] font-black text-gray-400 hover:text-cs_blue uppercase tracking-widest transition-colors flex items-center gap-1.5"><i
-                                            class="fa-solid fa-thumbs-up text-xs"></i> Hữu ích (4)</button>
-                                    <button
-                                        class="text-[10px] font-black text-gray-400 hover:text-cs_blue uppercase tracking-widest transition-colors flex items-center gap-1.5"><i
-                                            class="fa-solid fa-reply text-xs"></i> Phản hồi</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -409,14 +397,7 @@
                                         tin kịp thời.
                                     </p>
                                 </div>
-                                <div class="flex items-center gap-5 mt-3 ml-2">
-                                    <button
-                                        class="text-[10px] font-black text-gray-400 hover:text-cs_blue uppercase tracking-widest transition-colors flex items-center gap-1.5"><i
-                                            class="fa-solid fa-thumbs-up text-xs"></i> Hữu ích</button>
-                                    <button
-                                        class="text-[10px] font-black text-gray-400 hover:text-cs_blue uppercase tracking-widest transition-colors flex items-center gap-1.5"><i
-                                            class="fa-solid fa-reply text-xs"></i> Phản hồi</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
