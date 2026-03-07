@@ -1,85 +1,185 @@
 <!-- Footer -->
-<footer class="bg-gray-900 dark:bg-slate-950 border-t-4 border-cs_red text-gray-300 pt-10 pb-6 mt-10 text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-800">
-            <div class="col-span-1 sm:col-span-2">
-                <div class="flex items-center gap-2 mb-4">
-                    <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="w-auto h-14 md:h-18" />
+<footer class="relative bg-[#0F172A] dark:bg-slate-950 text-gray-300 pt-16 pb-20 md:pb-12 mt-20 overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-cs_blue via-cs_red to-cs_green"></div>
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-cs_red/10 rounded-full blur-3xl opacity-50"></div>
 
-                </div>
-                <p class="text-gray-400 leading-relaxed max-w-sm text-xs md:text-sm">
-                    Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Cung cấp thông tin tham khảo giúp bạn
-                    an tâm hơn trước các giao dịch online.
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+            <!-- Brand Column -->
+            <div class="md:col-span-5 space-y-6">
+                <a href="/" class="inline-block transform hover:scale-105 transition-transform">
+                    <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="h-16 w-auto" />
+                </a>
+                <p class="text-gray-400 leading-relaxed text-sm md:text-base max-w-md ">
+                    Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Chúng tôi xây dựng một môi trường internet
+                    an toàn hơn thông qua sức mạnh cộng đồng và dữ liệu minh bạch.
                 </p>
+                <div class="flex gap-4">
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cs_blue hover:border-cs_blue transition-all group">
+                        <i class="fa-brands fa-facebook text-lg group-hover:scale-110"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-400 hover:border-blue-400 transition-all group">
+                        <i class="fa-brands fa-telegram text-lg group-hover:scale-110"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cs_red hover:border-cs_red transition-all group">
+                        <i class="fa-brands fa-youtube text-lg group-hover:scale-110"></i>
+                    </a>
+                </div>
             </div>
 
-            <div>
-                <h4 class="text-white font-bold mb-4 uppercase text-[10px] md:text-xs tracking-wider">Hệ Thống</h4>
-                <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
-                    <li><a href="#" class="hover:text-white transition-colors">Quy trình duyệt phốt</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Danh sách quỹ bảo hiểm</a>
+            <!-- Links Column 1 -->
+            <div class="md:col-span-2 space-y-6">
+                <h4 class="text-white font-black uppercase text-xs tracking-widest border-l-4 border-cs_blue pl-3">Hệ
+                    Thống</h4>
+                <ul class="space-y-3">
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Kiểm tra
+                            Scam</a></li>
+                    <li><a href="/bao-hiem-cs"
+                            class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Quỹ bảo
+                            hiểm</a></li>
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">API Check
+                            Scam</a>
                     </li>
-                    <li><a href="#" class="hover:text-white transition-colors">Bot Telegram thông minh</a>
-                    </li>
-                    <li><a href="#" class="hover:text-white transition-colors">Đăng ký đối tác</a></li>
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Đối tác uy
+                            tín</a></li>
                 </ul>
             </div>
 
-            <div>
-                <h4 class="text-white font-bold mb-4 uppercase text-[10px] md:text-xs tracking-wider">Hỗ Trợ</h4>
-                <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
-                    <li><a href="#" class="hover:text-white transition-colors">Liên hệ Admin</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Điều khoản dịch vụ</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Chính sách bảo mật</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Giải quyết sai sót</a></li>
+            <!-- Links Column 2 -->
+            <div class="md:col-span-2 space-y-6">
+                <h4 class="text-white font-black uppercase text-xs tracking-widest border-l-4 border-cs_red pl-3">Trợ
+                    Giúp
+                </h4>
+                <ul class="space-y-3">
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Hướng dẫn tố
+                            cáo</a></li>
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Liên hệ
+                            Admin</a></li>
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Điều
+                            khoản</a></li>
+                    <li><a href="#"
+                            class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Giải
+                            quyết khiếu nại</a></li>
                 </ul>
+            </div>
+
+            <!-- Newsletter/Status Column -->
+            <div class="md:col-span-3 space-y-6">
+                <h4 class="text-white font-black uppercase text-xs tracking-widest border-l-4 border-cs_green pl-3">
+                    Bảo mật</h4>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-400 uppercase">Trạng thái dữ liệu</span>
+                        <span class="flex items-center gap-1.5 text-[10px] font-black text-cs_green uppercase">
+                            <span class="w-2 h-2 bg-cs_green rounded-full animate-pulse"></span>
+                            An toàn
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-400 uppercase">Cơ sở dữ liệu</span>
+                        <span class="text-xs font-black text-white">45,820+ Scam</span>
+                    </div>
+                    <div class="pt-2">
+                        <a href="/to-cao-lua-dao"
+                            class="block w-full py-3 bg-cs_red hover:bg-red-600 text-white text-center rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-red-500/20 active:scale-95">
+                            Gửi tố cáo ngay
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 gap-4">
-            <p class="text-center md:text-left">&copy; {{ date('Y') }} Bản quyền thuộc về CheckScam. Nền tảng
-                dữ liệu cộng đồng. | Phát triển bởi <a href="https://www.facebook.com/mstsoftware.vn/"
-                    class="hover:text-white font-medium">MST
-                    Software</a></p>
-            <div class="flex gap-4">
-                <a href="#" class="hover:text-white" aria-label="Facebook"><i
-                        class="fa-brands fa-facebook text-lg"></i></a>
-                <a href="#" class="hover:text-white" aria-label="Telegram"><i
-                        class="fa-brands fa-telegram text-lg"></i></a>
-            </div>
+        <div
+            class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold text-gray-500 tracking-wide uppercase">
+            <p class="text-center md:text-left">
+                &copy; {{ date('Y') }} <span class="text-white">CheckScam Global</span>. All Rights
+                Reserved.
+            </p>
+            <p>
+                Development by <a href="https://www.facebook.com/mstsoftware.vn"
+                    class="text-cs_blue hover:underline">MST SOFTWARE</a>
+            </p>
         </div>
     </div>
 </footer>
 
-<!-- Theme Toggle Floating Button -->
-<div class="fixed bottom-6 right-6 z-100 group">
-    <div id="theme-options"
-        class="flex flex-col gap-3 mb-3 opacity-0 translate-y-10 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
-        <button onclick="setTheme('light')"
-            class="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-cs_orange border border-orange-100 hover:scale-110 active:scale-95 transition-all"
-            title="Giao diện sáng">
-            <i class="fa-solid fa-sun text-xl"></i>
-        </button>
-        <button onclick="setTheme('dark')"
-            class="w-12 h-12 rounded-full bg-slate-800 shadow-lg flex items-center justify-center text-blue-400 border border-slate-700 hover:scale-110 active:scale-95 transition-all"
-            title="Giao diện tối">
-            <i class="fa-solid fa-moon text-xl"></i>
-        </button>
-    </div>
-    <button
-        class="w-14 h-14 rounded-full bg-cs_blue text-white shadow-2xl flex items-center justify-center hover:rotate-45 active:scale-90 transition-all border-4 border-white dark:border-slate-800 relative shadow-blue-500/20">
-        <i class="fa-solid fa-palette text-xl"></i>
-        <span
-            class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
+<!-- Floating Actions (Desktop & Mobile) -->
+<div class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 flex justify-center items-center flex-col gap-3">
+    <!-- Back to top -->
+    <button id="back-to-top"
+        class="hidden w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-slate-700 hover:-translate-y-2 active:scale-90 transition-all duration-300">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- Theme Switcher (Improved) -->
+    <button id="theme-toggle"
+        class="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-cs_blue text-white shadow-2xl flex items-center justify-center border-4 border-white dark:border-slate-800 group transition-all duration-500 hover:rotate-360">
+        <i class="fa-solid fa-sun text-lg md:text-xl block dark:hidden"></i>
+        <i class="fa-solid fa-moon text-lg md:text-xl hidden dark:block"></i>
     </button>
 </div>
 
+<!-- Mobile Bottom Navigation -->
+<nav
+    class="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 px-6 py-2 z-50 flex justify-between items-center pb-safe">
+    <a href="/"
+        class="flex flex-col items-center gap-1 {{ request()->is('/') ? 'text-cs_blue' : 'text-gray-400' }}">
+        <i class="fa-solid fa-house-chimney text-lg"></i>
+        <span class="text-[9px] font-black uppercase tracking-tighter">Trang chủ</span>
+    </a>
+
+    <a href="/bao-hiem-cs"
+        class="flex flex-col items-center gap-1 {{ request()->is('bao-hiem-cs*') ? 'text-cs_blue' : 'text-gray-400' }}">
+        <i class="fa-solid fa-shield text-lg"></i>
+        <span class="text-[9px] font-black uppercase tracking-tighter">Bảo hiểm</span>
+    </a>
+
+    <!-- Center Action -->
+
+    <div class="flex flex-col items-center">
+        <a href="/to-cao-lua-dao"
+            class="w-14 h-14 bg-cs_red text-white rounded-full flex items-center justify-center shadow-2xl shadow-red-500/40 border-4 border-white dark:border-slate-900 transform active:scale-90 transition-transform -mt-9 mb-1">
+            <i class="fa-solid fa-plus text-xl"></i>
+        </a>
+        <span class="mt-2 text-[9px] font-black uppercase tracking-tighter">Tố cáo lừa đảo</span>
+    </div>
+
+    <a href="/bai-viet"
+        class="flex flex-col items-center gap-1 {{ request()->is('bai-viet*') ? 'text-cs_blue' : 'text-gray-400' }}">
+        <i class="fa-solid fa-newspaper text-lg"></i>
+        <span class="text-[9px] font-black uppercase tracking-tighter">Kiến thức</span>
+    </a>
+
+    <button id="mobile-more-menu" class="flex flex-col items-center gap-1 text-gray-400">
+        <i class="fa-solid fa-envelope text-lg"></i>
+        <span class="text-[9px] font-black uppercase tracking-tighter">Liên hệ</span>
+    </button>
+</nav>
+
 <script>
     const logoHeader = document.getElementById("logo_header");
+    const themeToggle = document.getElementById("theme-toggle");
+    const backToTop = document.getElementById("back-to-top");
+
+    // Theme Switch Management
+    function toggleTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+    }
 
     function setTheme(theme) {
         const isDark = theme === 'dark';
-
         if (isDark) {
             document.documentElement.classList.add('dark');
             localStorage.setItem('theme', 'dark');
@@ -95,13 +195,33 @@
         }
     }
 
-    // Initialize theme on page load
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme setup
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
             '(prefers-color-scheme: dark)').matches)) {
         setTheme('dark');
     } else {
         setTheme('light');
     }
+
+    // Scroll Management
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.remove('hidden');
+            backToTop.classList.add('flex');
+        } else {
+            backToTop.classList.add('hidden');
+            backToTop.classList.remove('flex');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 </script>
 @yield('scripts')
 @stack('scripts')
