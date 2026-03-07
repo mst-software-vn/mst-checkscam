@@ -57,21 +57,64 @@
 @endphp
 
 @section('content')
-    <main class="min-h-screen bg-white dark:bg-[#0B0F1A] py-12 md:py-24">
+    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+        <!-- Breadcrumb & Category Header -->
+        <div class="bg-white dark:bg-dark_card border-b border-gray-100 dark:border-gray-800/80 py-4 mb-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex items-center text-[11px] font-black uppercase tracking-widest text-gray-400">
+                    <ol class="inline-flex items-center space-x-2">
+                        <li><a href="/" class="hover:text-cs_blue transition-colors">CheckScam</a></li>
+
+                        <li><i class="fa-solid fa-chevron-right text-[7px] opacity-50"></i></li>
+                        <li class="text-cs_blue truncate max-w-[150px] md:max-w-none">Kiến thức MMO</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
         <div class="max-w-[1280px] mx-auto px-6">
 
-            <!-- Section Header -->
-            <div class="mb-16">
-                <div class="inline-flex items-center gap-2 mb-4">
-                    <span class="w-8 h-[2px] bg-cs_red"></span>
-                    <span class="text-cs_red font-bold text-xs uppercase tracking-widest">Security Blog</span>
+            <!-- Section Header & Filter -->
+            <div class="mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                <!-- Header Text -->
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 mb-4">
+                        <span class="w-8 h-[2px] bg-cs_red"></span>
+                        <span class="text-cs_red font-bold text-xs uppercase tracking-widest">Security Blog</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                        Cẩm nang <span class="text-gray-400">phòng chống lừa đảo</span>
+                    </h1>
+                    <p class="mt-4 text-gray-500 dark:text-gray-400 text-lg">
+                        Cập nhật kiến thức bảo mật và các thủ đoạn lừa đảo mới nhất năm 2026 từ chuyên gia của CheckScam.
+                    </p>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Cẩm nang <span class="text-gray-400">phòng chống lừa đảo</span>
-                </h1>
-                <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl text-lg">
-                    Cập nhật kiến thức bảo mật và các thủ đoạn lừa đảo mới nhất năm 2026 từ chuyên gia của CheckScam.
-                </p>
+
+                <!-- Filters -->
+                <div class="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
+                    <!-- Category Select -->
+                    <div class="relative w-full sm:w-auto group">
+                        <select
+                            class="w-full min-w-[200px] appearance-none pl-5 pr-10 py-3.5 bg-white dark:bg-[#0B0F1A] border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-bold text-gray-700 dark:text-gray-300 focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all cursor-pointer shadow-sm">
+                            <option value="">Tất cả chủ đề</option>
+                            <option value="canh-bao">Cảnh báo Scam</option>
+                            <option value="bao-mat">Bảo mật tài khoản</option>
+                            <option value="kinh-nghiem">Kinh nghiệm giao dịch</option>
+                            <option value="tin-tuc">Tin tức MMO</option>
+                        </select>
+                        <i
+                            class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-[10px] pointer-events-none group-hover:text-cs_red transition-colors"></i>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="relative w-full sm:w-auto group">
+                        <input type="text" placeholder="Tìm kiếm kiến thức..."
+                            class="w-full sm:w-[280px] pl-5 pr-12 py-3.5 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-medium focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all dark:text-white dark:placeholder-gray-500 shadow-sm">
+                        <button class="absolute right-4 top-1/4 text-gray-400 group-hover:text-cs_red transition-colors">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Posts Grid -->
@@ -85,7 +128,7 @@
                                 class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 overflow-hidden rounded-3xl">
                                     <img src="{{ $post['image'] }}"
-                                        class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+                                        class="w-full h-[400px] object-cover group-hover:scale-[1.03] transition-transform duration-500"
                                         alt="{{ $post['title'] }}">
                                 </div>
                                 <div class="lg:col-span-5">
@@ -97,7 +140,7 @@
                                         <span class="text-gray-400 text-xs font-medium">{{ $post['date'] }}</span>
                                     </div>
                                     <h2
-                                        class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-cs_red transition-colors duration-300">
+                                        class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-cs_red transition-colors duration-3000">
                                         {{ $post['title'] }}
                                     </h2>
                                     <p class="mt-4 text-gray-500 dark:text-gray-400 line-clamp-3 text-lg leading-relaxed">
@@ -119,7 +162,7 @@
                             <a href="/bai-viet/{{ $post['id'] }}" class="flex flex-col h-full">
                                 <div class="relative overflow-hidden rounded-2xl aspect-16/10 mb-6">
                                     <img src="{{ $post['image'] }}"
-                                        class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition-transform duration-700"
+                                        class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-3000"
                                         alt="{{ $post['title'] }}">
                                     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors">
                                     </div>
