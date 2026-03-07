@@ -1,9 +1,9 @@
 <!-- Footer -->
 <footer class="relative bg-[#0F172A] dark:bg-slate-950 text-gray-300 pt-16 pb-20 md:pb-12 mt-20 overflow-hidden">
     <!-- Decorative Elements -->
-    <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-cs_blue via-cs_red to-cs_green"></div>
+    <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-cs_blue via-cs_blue to-cs_green"></div>
     <div class="absolute -top-24 -left-24 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
-    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-cs_red/10 rounded-full blur-3xl opacity-50"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
