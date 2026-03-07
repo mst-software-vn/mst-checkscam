@@ -168,58 +168,51 @@
 </nav>
 
 <script>
-    const logoHeader = document.getElementById("logo_header");
-    const themeToggle = document.getElementById("theme-toggle");
-    const backToTop = document.getElementById("back-to-top");
+    $(document).ready(function() {
+        const $logoHeader = $("#logo_header");
+        const $backToTop = $("#back-to-top");
 
-    // Theme Switch Management
-    function toggleTheme() {
-        const isDark = document.documentElement.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-    }
+        // Theme Switch Management
+        function setTheme(theme) {
+            const isDark = (theme === 'dark');
+            $('html').toggleClass('dark', isDark);
+            localStorage.setItem('theme', theme);
 
-    function setTheme(theme) {
-        const isDark = theme === 'dark';
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            if ($logoHeader.length) {
+                $logoHeader.attr('src', isDark ?
+                    "https://i.ibb.co/wFZsnJBR/white.png" :
+                    "https://i.ibb.co/7xfz0v3K/black.png"
+                );
+            }
+        }
+
+        $('#theme-toggle').on('click', function() {
+            const newTheme = $('html').hasClass('dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Initial theme setup
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            setTheme('dark');
         } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
+            setTheme('light');
         }
 
-        if (logoHeader) {
-            logoHeader.src = isDark ?
-                "https://i.ibb.co/wFZsnJBR/white.png" :
-                "https://i.ibb.co/7xfz0v3K/black.png";
-        }
-    }
+        // Scroll Management
+        $(window).on('scroll', function() {
+            if ($(this).scrollTop() > 300) {
+                $backToTop.removeClass('hidden').addClass('flex');
+            } else {
+                $backToTop.addClass('hidden').removeClass('flex');
+            }
+        });
 
-    themeToggle.addEventListener('click', toggleTheme);
-
-    // Initial theme setup
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
-            '(prefers-color-scheme: dark)').matches)) {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
-
-    // Scroll Management
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.remove('hidden');
-            backToTop.classList.add('flex');
-        } else {
-            backToTop.classList.add('hidden');
-            backToTop.classList.remove('flex');
-        }
-    });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+        $backToTop.on('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 </script>

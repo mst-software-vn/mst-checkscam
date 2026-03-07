@@ -375,17 +375,20 @@
     </style>
 
     <script>
-        // Reading Progress Bar
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
+        $(document).ready(function() {
+            // Reading Progress Bar
+            $(window).on('scroll', function() {
+                const winScroll = $(window).scrollTop();
+                const height = $(document).height() - $(window).height();
+                const scrolled = (winScroll / height) * 100;
+                $('#progress-bar').css('width', scrolled + '%');
+            });
+        });
 
         function copyToClipboard() {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Đã sao chép liên kết vào bộ nhớ tạm!");
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("Đã sao chép liên kết vào bộ nhớ tạm!");
+            });
         }
     </script>
 @endsection

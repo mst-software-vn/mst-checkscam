@@ -21,10 +21,20 @@
         content="Tra cứu thông tin kẻ lừa đảo ngay lập tức. Cùng cộng đồng xây dựng môi trường MMO sạch sẽ.">
     <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png">
 
+    <!-- Preconnect để tăng tốc kết nối CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://www.google.com">
 
-    {{-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+    <link href="/css/tailwind.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -46,27 +56,6 @@
             document.documentElement.classList.remove('dark')
 
         }
-
-
-
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        cs_red: "#ff0000",
-                        cs_blue: "#3399ff",
-                        cs_green: "#2eb85c",
-                        cs_orange: "#fdb813",
-                        dark_bg: "#0f172a",
-                        dark_card: "#1e293b",
-                    },
-                    fontFamily: {
-                        sans: ['Be Vietnam Pro', 'sans-serif'],
-                    },
-                },
-            },
-        }
     </script>
 
 
@@ -80,6 +69,7 @@
             --text-color: #ff0000;
             --light-color: #f3eded;
             --speed: 3s;
+
         }
 
         body {
