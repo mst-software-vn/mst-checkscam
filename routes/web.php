@@ -23,3 +23,6 @@ Route::get("/bai-viet", function () {
 Route::get("/bai-viet/{id}", function ($id) {
     return view("posts.detail", ["id" => $id]);
 });
+Route::get("/{name}", function ($name) {
+    return view("scammer.index", ["name" => $name]);
+});
