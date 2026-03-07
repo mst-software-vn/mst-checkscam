@@ -22,7 +22,7 @@
                 </ol>
             </nav>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
                 <!-- Left Column: Guidance & Stats (SEO Content) -->
                 <aside class="lg:col-span-4 space-y-4 md:space-y-6 order-2 lg:order-1 md:mt-15">

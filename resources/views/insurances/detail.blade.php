@@ -62,7 +62,7 @@
 
                 <!-- Card 1: Information -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-5 md:p-6 rounded-[30px] shadow-xl shadow-blue-900/5 relative overflow-hidden group">
+                    class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-5 md:p-6 rounded-[30px] shadow-lg shadow-blue-900/5 relative overflow-hidden group">
                     <div
                         class="absolute top-0 right-0 p-6 text-cs_blue opacity-10 group-hover:rotate-12 group-hover:scale-110 transition-transform pointer-events-none">
                         <i class="fa-solid fa-address-card text-5xl"></i>
