@@ -29,12 +29,12 @@
                                 <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
                             </div>
                             <input type="text"
-                                class="w-full pl-3 outline-none pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
+                                class="w-full pl-3 outline-none pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-gray-300 text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
                                 placeholder="Nhập Số tài khoản, SĐT hoặc Link..." />
                         </div>
                         <button
-                            class="w-full sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap">
-                            TRA CỨU
+                            class="w-full uppercase cursor-pointer sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap">
+                            Tra cứu
                         </button>
                     </div>
                 </div>

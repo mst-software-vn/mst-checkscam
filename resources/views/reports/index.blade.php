@@ -134,14 +134,14 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Chủ
                                         tài khoản <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_owner" required placeholder="NGUYEN VAN A"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white uppercase outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 uppercase outline-none">
                                 </div>
                                 <div class="space-y-2">
                                     <label
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Số
                                         tài khoản / SĐT <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_number" required placeholder="Nhập dãy số..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                                 <div class="space-y-2 md:col-span-2">
                                     <label
@@ -149,7 +149,7 @@
                                         hàng / Ví điện tử <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_name" required
                                         placeholder="Vietcombank, MB, Momo, Zalopay..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                             </div>
 
@@ -225,14 +225,14 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Địa
                                         chỉ (URL) Website <span class="text-cs_red">*</span></label>
                                     <input type="url" name="web_url" required placeholder="https://domain-lua-dao.vn"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                                 <div class="space-y-2">
                                     <label
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Phân
                                         loại <span class="text-cs_red">*</span></label>
                                     <select name="category" required
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none cursor-pointer">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none cursor-pointer">
                                         <option value="">Chọn loại hình</option>
                                         <option value="fake">Giả mạo ngân hàng/app</option>
                                         <option value="bet">Cá cược, lô đề</option>
@@ -245,7 +245,7 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Nơi
                                         phát hiện</label>
                                     <input type="text" placeholder="FB Ads, Telegram, SMS..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                             </div>
 

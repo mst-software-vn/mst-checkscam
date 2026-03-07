@@ -118,15 +118,15 @@
 <div class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 flex justify-center items-center flex-col gap-3">
     <!-- Back to top -->
     <button id="back-to-top"
-        class="hidden w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-slate-700 hover:-translate-y-2 active:scale-90 transition-all duration-300">
+        class="hidden w-11 cursor-pointer h-11 md:w-12 md:h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-slate-700 hover:-translate-y-2 active:scale-90 transition-all duration-300">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
 
     <!-- Theme Switcher (Improved) -->
     <button id="theme-toggle"
-        class="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-cs_blue text-white shadow-2xl flex items-center justify-center border-4 border-white dark:border-slate-800 group transition-all duration-500 hover:rotate-360">
-        <i class="fa-solid fa-sun text-lg md:text-xl block dark:hidden"></i>
-        <i class="fa-solid fa-moon text-lg md:text-xl hidden dark:block"></i>
+        class="w-11 h-11 cursor-pointer md:w-14 md:h-14 rounded-2xl bg-cs_blue text-white shadow-2xl flex items-center justify-center border-4 dark:border-white border-slate-800 group transition-all duration-500 hover:rotate-360">
+        <i class="fa-solid fa-lightbulb text-lg md:text-xl hidden! dark:block!"></i>
+        <i class="fa-regular fa-lightbulb text-lg md:text-xl dark:hidden!"></i>
     </button>
 </div>
 
@@ -189,6 +189,7 @@
         $('#theme-toggle').on('click', function() {
             const newTheme = $('html').hasClass('dark') ? 'light' : 'dark';
             setTheme(newTheme);
+
         });
 
         // Initial theme setup

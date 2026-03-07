@@ -13,7 +13,7 @@
                 <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                     <div class="space-y-2">
                         <h1
-                            class="text-2xl md:text-3xl lg:text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tight">
+                            class="text-2xl md:text-3xl lg:text-4xl font-black text-gray-800 dark:text-gray-300 uppercase tracking-tight">
                             Hệ thống <span class="text-cs_blue">Trung gian uy tín</span>
                         </h1>
                         <p class="text-gray-500 dark:text-gray-400 font-semibold text-sm max-w-2xl leading-relaxed">
@@ -60,7 +60,7 @@
                                 class="fa-solid fa-magnifying-glass text-gray-300 group-focus-within:text-cs_blue transition-colors text-xs"></i>
                         </div>
                         <input type="text" placeholder="Tìm kiếm nhanh..."
-                            class="w-full pl-10 pr-4 py-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-xl text-sm font-bold text-gray-700 dark:text-white shadow-sm focus:border-cs_blue outline-none transition-all">
+                            class="w-full pl-10 pr-4 py-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-300 shadow-sm focus:border-cs_blue outline-none transition-all">
                     </div>
                 </div>
             </header>
