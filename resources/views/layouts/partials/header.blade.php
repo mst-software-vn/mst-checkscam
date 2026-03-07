@@ -11,17 +11,17 @@
             <!-- Desktop Menu -->
             <nav class="hidden md:flex gap-x-6 lg:gap-x-8">
                 <a href="/"
-                    class="{{ request()->is('/') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Trang
+                    class="{{ request()->is('/') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Trang
                     Chủ</a>
                 <a href="/to-cao-lua-dao"
-                    class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Tố
+                    class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Tố
                     Cáo</a>
                 <a href="/bao-hiem-cs"
-                    class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Quỹ
+                    class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Quỹ
                     Bảo
                     Hiểm</a>
                 <a href="/bai-viet"
-                    class="{{ request()->is('bai-viet*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-md py-5 transition-colors">Bài
+                    class="{{ request()->is('bai-viet*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Bài
                     viết</a>
             </nav>
 
