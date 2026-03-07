@@ -198,6 +198,7 @@
                                 </div>
                             </div>
 
+
                             <div class="flex items-center gap-3">
                                 <input id="confirm_bank" type="checkbox" required
                                     class="w-5 h-5 md:w-4 md:h-4 rounded border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
@@ -263,28 +264,21 @@
                                     <input id="web_evidence" type="file" multiple class="hidden">
                                 </label>
                             </div>
-
-                            <!-- Extra Checks for SEO/Clarity -->
-                            <div
-                                class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-100 dark:border-gray-800 pt-6">
+                            <div class="space-y-2">
                                 <label
-                                    class="flex items-center gap-3 cursor-pointer p-4 bg-gray-50/50 dark:bg-slate-800/30 rounded-md border border-transparent hover:border-cs_red/10 group transition-all">
-                                    <input type="checkbox"
-                                        class="w-5 h-5 rounded border border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
-                                    <span
-                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 group-hover:dark:text-white transition-colors">Website
-                                        vẫn đang hoạt động</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 cursor-pointer p-4 bg-gray-50/50 dark:bg-slate-800/30 rounded-md border border-transparent hover:border-cs_red/10 group transition-all">
-                                    <input type="checkbox"
-                                        class="w-5 h-5 rounded border border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
-                                    <span
-                                        class="text-[10px] font-semibold text-gray-600 dark:text-gray-400 uppercase group-hover:text-gray-900 group-hover:dark:text-white transition-colors">Có
-                                        dấu
-                                        hiệu chiếm đoạt OTP</span>
-                                </label>
+                                    class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Mô
+                                    tả <span class="text-cs_red">*</span></label>
+                                <textarea rows="5" placeholder="Họ đã lừa đảo bạn bằng cách nào? số tiền bao nhiêu?..."
+                                    class="w-full px-4 py-4 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-300 transition-all outline-none resize-none leading-relaxed"></textarea>
                             </div>
+                            <div class="flex items-center gap-3">
+                                <input id="confirm_bank" type="checkbox" required
+                                    class="w-5 h-5 md:w-4 md:h-4 rounded border-gray-300 text-cs_red focus:ring-0 cursor-pointer">
+                                <label for="confirm_bank"
+                                    class="text-[10px] md:text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase leading-relaxed cursor-pointer select-none">Tôi
+                                    cam kết nội dung trên là sự thật.</label>
+                            </div>
+
 
                             <div class="flex justify-center pt-2">
                                 <button type="submit"
