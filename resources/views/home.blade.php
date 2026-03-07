@@ -8,12 +8,11 @@
 
         <!-- Top Full Width Banner -->
 
-        <article class="max-w-[950px] mx-auto mb-8 dark:bg-white rounded-lg overflow-hidden">
-            <img src="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
-                class="w-full h-18 md:h-full" alt="Quảng cáo banner">
-        </article>
+        <x-ads-horizontal image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
+            url="#" alt="Ads" />
+
         <h2 class="text-xs md:text-xl text-center uppercase text-cs_blue mb-6 mt-6">
-            <?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
+            {{ date('d/m/Y') }} CÓ 26 CẢNH BÁO</h2>
 
         <!-- 2 Column Layout -->
         <div class="flex flex-col lg:flex-row gap-4 mb-10">
@@ -22,10 +21,10 @@
 
                 <!-- PHẦN 1: CẢNH BÁO NGÀY HÔM NAY -->
                 <section>
-                    {{-- <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
+                    <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
                         <h2 class="text-lg font-bold text-gray-800 uppercase"><?php echo date('d/m/Y'); ?> CÓ CẢNH BÁO</h2>
                         <span class="bg-red-100 text-cs_red text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
-                    </div> --}}
+                    </div>
                     <div
                         class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
@@ -63,12 +62,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 1 -->
-                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
-                    <a href="#" target="_blank">
-                        <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
-                            alt="Ads">
-                    </a>
-                </article>
+                <x-ads-horizontal image="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" url="#" alt="Ads" />
 
                 <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
                 <section>
@@ -113,11 +107,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 2 -->
-                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
-                    <a href="#" target="_blank">
-                        <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full" alt="Ads">
-                    </a>
-                </article>
+                <x-ads-horizontal image="https://i.ibb.co/BV9hbrP2/banner3.gif" url="#" alt="Ads" />
 
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
                 <section>
@@ -167,19 +157,13 @@
             <!-- Khu Vực Phải: Sidebar Widget -->
             <aside class="w-full lg:w-3/12 space-y-3">
                 <!-- Right Sidebar Banner -->
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
-                    <a href="#" target="_blank" class="w-full h-full block">
-                        <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-full" alt="Fpayment Ads">
-                    </a>
-                </div>
 
+                <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads"
+                    class="mt-10" />
+                <x-ads-square
+                    image="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
+                    url="#" alt="Fpayment Ads" />
 
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
-                    <a href="#" target="_blank" class="w-full h-full block">
-                        <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
-                            class="w-full h-full" alt="Fpayment Ads">
-                    </a>
-                </div>
                 <!-- Action Button -->
                 <div
                     class="bg-red-50 dark:bg-slate-900/50 border border-red-200 dark:border-red-900/30 p-6 rounded-xl text-center shadow-sm">
