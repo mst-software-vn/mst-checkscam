@@ -8,21 +8,13 @@
         style="width: 0%"></div>
 
     <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
-        <!-- Breadcrumb & Category Header -->
-        <div class="bg-white dark:bg-dark_card border-b border-gray-100 dark:border-gray-800/80 py-4 mb-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <nav class="flex items-center text-[11px] font-black uppercase tracking-widest text-gray-400">
-                    <ol class="inline-flex items-center space-x-2">
-                        <li><a href="/" class="hover:text-cs_blue transition-colors">CheckScam</a></li>
-                        <li><i class="fa-solid fa-chevron-right text-[7px] opacity-50"></i></li>
-                        <li><a href="/bai-viet" class="hover:text-cs_blue transition-colors">Kiến thức MMO</a></li>
-                        <li><i class="fa-solid fa-chevron-right text-[7px] opacity-50"></i></li>
-                        <li class="text-cs_blue truncate max-w-[150px] md:max-w-none">Bảo mật tài khoản</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-
+        <x-breadcrumb :links="[
+            ['name' => 'Kiến thức MMO', 'url' => '/bai-viet'],
+            [
+                'name' => 'Lật tẩy chiêu trò lừa đảo qua tin nhắn iMessage và SMS giả mạo ngân hàng 2026',
+                'url' => '/bai-viet/lat-tay-chieu-to-lua-dao-qua-tin-nhanh-imessage-va-sms-gia-mao-ngan-hang-2026',
+            ],
+        ]" />
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row gap-6">
 

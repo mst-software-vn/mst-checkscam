@@ -3,24 +3,10 @@
 @section('title', 'Danh sách Trung Gian Uy Tín - Quỹ Bảo Hiểm CheckScam')
 
 @section('content')
-    <main class="min-h-screen dark:bg-dark_bg py-6 md:py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+        <x-breadcrumb :links="[['name' => 'Quỹ bảo hiểm CS', 'url' => '/bao-hiem-cs']]" />
 
-            <!-- Breadcrumbs -->
-            <nav class="flex mb-8 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest text-gray-400"
-                aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-3 overflow-x-auto whitespace-nowrap pb-1">
-                    <li class="inline-flex items-center">
-                        <a href="/" class="hover:text-cs_blue transition-colors">Trang chủ</a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right mx-1.5 md:mx-2 text-[7px] md:text-[8px]"></i>
-                            <span class="text-gray-900 dark:text-gray-200">Quỹ bảo hiểm CS</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Header Section -->
             <header class="mb-10 text-center lg:text-left">
@@ -54,7 +40,7 @@
                             class="bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 px-4 py-2 rounded-xl flex items-center gap-2">
                             <div
                                 class="w-8 h-8 bg-cs_green text-white rounded-lg flex items-center justify-center text-md shadow-lg shadow-green-500/20">
-                                <i class="fa-solid fa-users-check"></i>
+                                <i class="fa-solid fa-users"></i>
                             </div>
                             <div>
                                 <p
@@ -79,80 +65,74 @@
                 </div>
             </header>
 
-            <!-- Main Listing Grid -->
-            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 md:gap-4">
+            <!-- Main Listing Grid - SMALLER ITEMS FOR BETTER SEARCHABILITY -->
+            <div
+                class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-10 gap-x-2 gap-y-6 border border-gray-300 dark:border-gray-800 p-4 rounded-xl">
                 <?php
-                $names = ['Nguyễn Hoàng Dương', 'Tống Hoàng Phương Dương', 'Nguyễn Hồng Dương', 'Trần Ngọc Thu', 'Phạm Văn Huy', 'Nguyễn Văn Phúc', 'Zolo', 'Huỳnh Công Sang', 'Huỳnh Lê Minh Hiếu', 'Hoàng Văn Mạnh', 'Bùi Đức Long', 'Đỗ Văn Mạnh', 'Dương Thị Vân', 'Duy Nguyễn', 'Lò Văn Thực', 'Hoàng Mai Thuận', 'Phan Anh Quân', 'Phạm Phúc Thịnh', 'Nguyễn Hồng Ân', 'Lê Văn Việt', 'XBOXTECH', 'Khang Khang', 'Đào Xuân Mạnh', 'NguyễN ThiệN', 'Trần Văn Vinh', 'Anh Mon Vũ', 'Võ Xuân Sang', 'Nguyễn Văn Khôi', 'Huỳnh Trung Tín', 'Nguyễn Hoà'];
+                $names = ['Nguyễn Hoàng Dương', 'Tống Hoàng Phương Dương', 'Nguyễn Hồng Dương', 'Trần Ngọc Thu', 'Phạm Văn Huy', 'Nguyễn Văn Phúc', 'Zolo', 'Huỳnh Công Sang', 'Huỳnh Lê Minh Hiếu', 'Hoàng Văn Mạnh', 'Bùi Đức Long', 'Đỗ Văn Mạnh', 'Dương Thị Vân', 'Duy Nguyễn', 'Lò Văn Thực', 'Hoàng Mai Thuận', 'Phan Anh Quân', 'Phạm Phúc Thịnh', 'Nguyễn Hồng Ân', 'Lê Văn Việt', 'XBOXTECH', 'Khang Khang', 'Đào Xuân Mạnh', 'NguyễN ThiệN', 'Trần Văn Vinh', 'Anh Mon Vũ', 'Võ Xuân Sang', 'Nguyễn Văn Khôi', 'Huỳnh Trung Tín', 'Nguyễn Hoà', 'Quốc Bảo', 'Tuấn Lê', 'Công Lực', 'Trần Phạm Gia Huy', 'Phạm Thủy Tiên', 'Hoàng Xuân', 'Nguyễn Tiến Đại', 'Nguyễn Văn Điệu', 'Phan Thị Kim Quyên', 'Hoàng Văn Tùng', 'Vương Xuân Giáp', 'Đinh Duy Khánh', 'Nguyễn Hồ Thiện Bảo', 'Nguyễn Bằng', 'Dương Hiếu', 'Đặng Đức Bình', 'Nguyễn Duy Phước', 'Nguyễn Văn Mạnh', 'Phạm Ngọc Đình Khiêm', 'Đỗ Đình Khải'];
+                // Duplicate and add more to reach 90+ like image
                 $members = [];
-                for ($i = 0; $i < count($names); $i++) {
+                for ($i = 1; $i <= 100; $i++) {
+                    $nameIndex = ($i - 1) % count($names);
                     $members[] = [
-                        'id' => $i + 1,
-                        'name' => $names[$i],
+                        'id' => $i,
+                        'name' => $names[$nameIndex],
                         'amount' => rand(10, 200) . '.000.000đ',
-                        'color' => sprintf('#%06X', mt_rand(0, 0xffffff)),
+                        'avatar' => 'https://i.pravatar.cc/150?u=cs_user_' . $i,
                     ];
                 }
                 ?>
 
                 @foreach ($members as $member)
-                    <a href="/bao-hiem-cs/{{ $member['id'] }}"
-                        class="group relative bg-white dark:bg-slate-900 border border-gray-50 dark:border-gray-800 p-3 md:p-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-blue-500/10 hover:border-cs_blue overflow-hidden text-center">
-                        <!-- Rank Indicator with stylish stroke -->
-                        <div
-                            class="absolute top-0 right-0 p-2 text-xl font-black text-gray-100/50 dark:text-gray-800/30 group-hover:text-cs_blue/10 transition-colors pointer-events-none">
-                            {{ $member['id'] }}
-                        </div>
-
-                        <!-- Avatar with double ring -->
-                        <div class="relative w-14 h-14 md:w-16 md:h-16 mx-auto mb-3">
+                    <a href="/bao-hiem-cs/{{ $member['id'] }}" class="group flex flex-col items-center">
+                        <div class="relative mb-2">
+                            <!-- Smaller Circular Avatar -->
                             <div
-                                class="absolute inset-0 rounded-full border border-cs_blue/10 dark:border-cs_blue/20 group-hover:rotate-180 transition-transform duration-700">
+                                class="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-white dark:border-slate-800 shadow-lg group-hover:shadow-cs_blue/20 transition-all duration-300 group-hover:scale-110 active:scale-95">
+                                <img src="{{ $member['avatar'] }}"
+                                    class="w-full h-full object-cover group-hover:rotate-3 transition-transform duration-500"
+                                    alt="{{ $member['name'] }}" loading="lazy">
                             </div>
-                            <img src="https://ui-avatars.com/api/?name={{ urlencode($member['name']) }}&background=random&color=fff&size=128"
-                                class="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
-                                alt="{{ $member['name'] }}">
-
                         </div>
 
-                        <!-- Name & Info -->
-                        <h3
-                            class="font-black text-gray-800 dark:text-gray-200 text-[10px] md:text-xs uppercase tracking-tighter line-clamp-2 min-h-8 mb-1.5 group-hover:text-cs_blue transition-colors">
-                            {{ $member['name'] }}
-                        </h3>
-
-                        <div
-                            class="inline-flex items-center gap-1 px-2 py-1 bg-green-50 dark:bg-green-900/20 text-cs_green text-[8px] font-black rounded-md uppercase">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            {{ $member['amount'] }}
+                        <!-- Compact Info Label -->
+                        <div class="text-center px-1">
+                            <h3
+                                class="text-[10px] md:text-[11px] font-bold text-gray-700 dark:text-gray-300 group-hover:text-cs_blue transition-colors leading-tight line-clamp-2">
+                                {{ $member['id'] }}. {{ $member['name'] }}
+                            </h3>
+                            <span
+                                class="text-[9px] font-black text-cs_green uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all duration-300 block transform translate-y-1 group-hover:translate-y-0">
+                                {{ $member['amount'] }}
+                            </span>
                         </div>
                     </a>
                 @endforeach
             </div>
-
             <!-- SEO Content Section (Similar to Report Index) -->
-            <article class="mt-24 max-w-4xl mx-auto">
-                <div class="p-8 md:p-12 rounded-3xl bg-gray-900 text-white relative overflow-hidden shadow-2xl">
+            <article class="mt-16 max-w-3xl mx-auto">
+                <div class="p-6 md:p-8 rounded-2xl bg-gray-900 text-white relative overflow-hidden shadow-xl">
                     <div
-                        class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-cs_blue/20 rounded-full blur-3xl">
+                        class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-48 h-48 bg-cs_blue/20 rounded-full blur-3xl">
                     </div>
-                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
                         <div
-                            class="shrink-0 w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-3xl flex items-center justify-center">
-                            <i class="fa-solid fa-handshake-angle text-5xl text-cs_blue"></i>
+                            class="shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white/10 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-handshake-angle text-3xl text-cs_blue"></i>
                         </div>
-                        <div class="space-y-4">
-                            <h2 class="text-xl md:text-2xl font-black uppercase">Quy định về Quỹ Bảo Hiểm</h2>
-                            <p class="text-gray-400 text-sm md:text-base leading-relaxed font-semibold italic">
+                        <div class="space-y-3">
+                            <h2 class="text-lg md:text-xl font-black uppercase">Quy định về Quỹ Bảo Hiểm</h2>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed font-semibold italic">
                                 CheckScam chỉ bảo lãnh các giao dịch có sự tham gia của các thành viên trong danh sách trên.
                                 Tiền ký quỹ của thành viên được Admin giữ để bồi thường 100% trong trường hợp có rủi ro từ
                                 phía thành viên đó.
                             </p>
-                            <div class="flex flex-wrap gap-4 pt-2">
+                            <div class="flex flex-wrap gap-3 pt-1">
                                 <a href="#"
-                                    class="bg-cs_blue hover:bg-blue-600 text-white px-6 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all">Liên
+                                    class="bg-cs_blue hover:bg-blue-600 text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all">Liên
                                     hệ Admin để đóng quỹ</a>
                                 <a href="#"
-                                    class="border border-white/20 hover:bg-white/10 text-white px-6 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all">Xem
+                                    class="border border-white/20 hover:bg-white/10 text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all">Xem
                                     điều khoản</a>
                             </div>
                         </div>
