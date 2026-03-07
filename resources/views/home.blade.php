@@ -1,134 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="bg-white dark:bg-dark_bg py-12 md:py-20 md:pb-2 overflow-hidden relative">
-        <!-- Trang trí nền nhẹ -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl">
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1
-                    class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 uppercase leading-[1.4] hero-title scanner-title">
-                    KIỂM TRA & TỐ CÁO SCAM.
-                </h1>
-                <p
-                    class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-medium">
-                    Hệ thống dữ liệu lớn nhất Việt Nam giúp bạn kiểm tra độ tín nhiệm của đối tác thông qua SĐT, Số TK
-                    hoặc Link mạng xã hội.
-                </p>
-
-                <!-- Search Box Centered -->
-                <div class="max-w-3xl mx-auto mb-6">
-                    <div
-                        class="relative bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-1 md:p-2">
-                        <div class="flex flex-col sm:flex-row items-center gap-2">
-                            <div class="flex-1 flex items-center w-full min-w-0">
-                                <div class="pl-4 flex items-center pointer-events-none">
-                                    <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
-                                </div>
-                                <input type="text"
-                                    class="w-full pl-3 outline-none pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
-                                    placeholder="Nhập Số tài khoản, SĐT hoặc Link..." />
-                            </div>
-                            <button
-                                class="w-full sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap">
-                                TRA CỨU
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Stats -->
-                    <div
-                        class="mt-6 flex flex-wrap justify-center gap-3 md:gap-8 text-[11px] md:text-sm font-bold text-gray-500 dark:text-gray-400">
-                        <span class="flex items-center"><i
-                                class="fa-solid fa-circle text-[6px] text-cs_red mr-2 animate-pulse"></i> 62.472 STK Lừa
-                            đảo</span>
-                        <span class="flex items-center"><i class="fa-solid fa-circle text-[6px] text-cs_blue mr-2"></i>
-                            8.605 Bình luận mới</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-12">
-                    <a href="/to-cao-lua-dao/"
-                        class="bg-white dark:bg-dark_card hover:bg-red-50 dark:hover:bg-red-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
-                        <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 dark:bg-red-900/30 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
-                                Report</p>
-                            <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_red transition-colors">
-                                Tố Cáo Scam</p>
-                        </div>
-                    </a>
-
-                    <a href="/bao-hiem-cs/"
-                        class="bg-white dark:bg-dark_card hover:bg-blue-50 dark:hover:bg-blue-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
-                        <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
-                            <i class="fa-solid fa-shield-cat"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
-                                Insurance</p>
-                            <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors">
-                                Bảo Hiểm CS</p>
-                        </div>
-                    </a>
-
-                    <a href="#"
-                        class="bg-white dark:bg-dark_card hover:bg-green-50 dark:hover:bg-green-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
-                        <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 dark:bg-green-900/30 text-cs_green flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
-                            <i class="fa-solid fa-store"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
-                                Trading</p>
-                            <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_green transition-colors">
-                                Chợ Buôn Bán</p>
-                        </div>
-                    </a>
-
-                    <a href="#"
-                        class="bg-white dark:bg-dark_card hover:bg-gray-50 dark:hover:bg-slate-800 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
-                        <div
-                            class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 dark:bg-slate-800 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
-                            <i class="fa-brands fa-telegram"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
-                                Automation</p>
-                            <p
-                                class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors">
-                                Bot Check</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-hero />
 
     <!-- Main Content -->
     <main class="grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
 
         <!-- Top Full Width Banner -->
 
-        <article class="max-w-[950px] mx-auto mb-8 dark:bg-white rounded-lg overflow-hidden">
-            <img src="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
-                class="w-full h-18 md:h-full" alt="Quảng cáo banner">
-        </article>
+        <x-ads-horizontal image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
+            url="#" alt="Ads" />
+
         <h2 class="text-xs md:text-xl text-center uppercase text-cs_blue mb-6 mt-6">
-            <?php echo date('d/m/Y'); ?> CÓ 26 CẢNH BÁO</h2>
+            {{ date('d/m/Y') }} CÓ 26 CẢNH BÁO</h2>
 
         <!-- 2 Column Layout -->
         <div class="flex flex-col lg:flex-row gap-4 mb-10">
@@ -137,10 +21,10 @@
 
                 <!-- PHẦN 1: CẢNH BÁO NGÀY HÔM NAY -->
                 <section>
-                    {{-- <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
+                    <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
                         <h2 class="text-lg font-bold text-gray-800 uppercase"><?php echo date('d/m/Y'); ?> CÓ CẢNH BÁO</h2>
                         <span class="bg-red-100 text-cs_red text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
-                    </div> --}}
+                    </div>
                     <div
                         class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-xs">
                         <?php for($i=1; $i<=3; $i++): ?>
@@ -178,12 +62,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 1 -->
-                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
-                    <a href="#" target="_blank">
-                        <img src="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" class="w-full h-18 md:h-full"
-                            alt="Ads">
-                    </a>
-                </article>
+                <x-ads-horizontal image="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" url="#" alt="Ads" />
 
                 <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
                 <section>
@@ -228,11 +107,7 @@
                 </section>
 
                 <!-- BANNER QUẢNG CÁO 2 -->
-                <article class="max-w-[950px] dark:bg-white rounded-lg overflow-hidden">
-                    <a href="#" target="_blank">
-                        <img src="https://i.ibb.co/BV9hbrP2/banner3.gif" class="w-full h-18 md:h-full" alt="Ads">
-                    </a>
-                </article>
+                <x-ads-horizontal image="https://i.ibb.co/BV9hbrP2/banner3.gif" url="#" alt="Ads" />
 
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
                 <section>
@@ -282,19 +157,13 @@
             <!-- Khu Vực Phải: Sidebar Widget -->
             <aside class="w-full lg:w-3/12 space-y-3">
                 <!-- Right Sidebar Banner -->
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
-                    <a href="#" target="_blank" class="w-full h-full block">
-                        <img src="https://i.ibb.co/kgwtn4vF/fpayment.jpg" class="w-full h-full" alt="Fpayment Ads">
-                    </a>
-                </div>
 
+                <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads"
+                    class="mt-10" />
+                <x-ads-square
+                    image="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
+                    url="#" alt="Fpayment Ads" />
 
-                <div class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white">
-                    <a href="#" target="_blank" class="w-full h-full block">
-                        <img src="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
-                            class="w-full h-full" alt="Fpayment Ads">
-                    </a>
-                </div>
                 <!-- Action Button -->
                 <div
                     class="bg-red-50 dark:bg-slate-900/50 border border-red-200 dark:border-red-900/30 p-6 rounded-xl text-center shadow-sm">
