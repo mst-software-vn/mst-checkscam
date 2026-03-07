@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+    <section class="dark:bg-dark_bg pb-12 md:pd-24">
         <!-- Breadcrumb & Category Header -->
         <div class="bg-white dark:bg-dark_card border-b border-gray-100 dark:border-gray-800/80 py-4 mb-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
