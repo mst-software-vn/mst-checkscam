@@ -3,31 +3,12 @@
 @section('title', 'Hồ sơ Bảo Hiểm - Võ Xuân Sang')
 
 @section('content')
-    <main class="min-h-screen dark:bg-dark_bg py-6 md:py-12">
+    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+        <x-breadcrumb :links="[
+            ['name' => 'Quỹ bảo hiểm', 'url' => '/bao-hiem-cs'],
+            ['name' => 'Võ Xuân Sang', 'url' => '/vo-xuan-sang'],
+        ]" />
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- Breadcrumbs -->
-            <nav class="flex mb-10 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest text-gray-400"
-                aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-3 overflow-x-auto whitespace-nowrap pb-1">
-                    <li class="inline-flex items-center">
-                        <a href="/" class="hover:text-cs_blue transition-colors">Trang chủ</a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right mx-1.5 md:mx-2 text-[7px] md:text-[8px]"></i>
-                            <a href="/bao-hiem-cs" class="hover:text-cs_blue transition-colors">Quỹ bảo hiểm</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right mx-1.5 md:mx-2 text-[7px] md:text-[8px]"></i>
-                            <span class="text-gray-900 dark:text-gray-200">Võ Xuân Sang</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-
             <!-- Hero Section: Profile Header -->
             <section class="mb-12 text-center relative z-10">
                 <div class="relative inline-block mb-8">
@@ -62,7 +43,7 @@
 
                 <!-- Card 1: Information -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-5 md:p-6 rounded-[30px] shadow-lg shadow-blue-900/5 relative overflow-hidden group">
+                    class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 p-5 md:p-6 rounded-[30px] shadow-sm shadow-blue-900/5 relative overflow-hidden group">
                     <div
                         class="absolute top-0 right-0 p-6 text-cs_blue opacity-10 group-hover:rotate-12 group-hover:scale-110 transition-transform pointer-events-none">
                         <i class="fa-solid fa-address-card text-5xl"></i>

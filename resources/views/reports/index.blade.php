@@ -3,24 +3,9 @@
 @section('title', '[ Tố Cáo kẻ lừa đảo ] Cập nhật thêm data vào hệ thống')
 
 @section('content')
-    <main class="min-h-screen  dark:bg-dark_bg py-6 md:py-12">
+    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+        <x-breadcrumb :links="[['name' => 'Tố cáo lừa đảo', 'url' => '/to-cao-lua-dao']]" />
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- SEO: Breadcrumbs -->
-            <nav class="flex mb-6 text-[9px] sm:text-xs md:text-sm font-semibold uppercase tracking-widest text-gray-400"
-                aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-3 overflow-x-auto whitespace-nowrap pb-1">
-                    <li class="inline-flex items-center">
-                        <a href="/" class="hover:text-cs_red transition-colors">Trang chủ</a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right mx-1.5 md:mx-2 text-[7px] md:text-[8px]"></i>
-                            <span class="text-gray-900 dark:text-gray-200">Gửi tố cáo</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 

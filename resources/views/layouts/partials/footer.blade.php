@@ -38,7 +38,8 @@
 
         <div class="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 gap-4">
             <p class="text-center md:text-left">&copy; {{ date('Y') }} Bản quyền thuộc về CheckScam. Nền tảng
-                dữ liệu cộng đồng. | Phát triển bởi <a href="https://mst.vn" class="hover:text-white font-medium">MST
+                dữ liệu cộng đồng. | Phát triển bởi <a href="https://www.facebook.com/mstsoftware.vn/"
+                    class="hover:text-white font-medium">MST
                     Software</a></p>
             <div class="flex gap-4">
                 <a href="#" class="hover:text-white" aria-label="Facebook"><i

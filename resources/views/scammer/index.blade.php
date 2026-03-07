@@ -3,28 +3,9 @@
 @section('content')
     <!-- Hero Section -->
     <section class="dark:bg-dark_bg pb-12 md:pd-24">
-        <!-- Breadcrumb & Category Header -->
-        <div class="bg-white dark:bg-dark_card border-b border-gray-100 dark:border-gray-800/80 py-4 mb-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <nav class="flex items-center text-[11px] font-black uppercase tracking-widest text-gray-400">
-                    <ol class="inline-flex items-center space-x-2">
-                        <li><a href="/" class="hover:text-cs_blue transition-colors">CheckScam</a></li>
+        <x-breadcrumb :links="[['name' => 'Lừa đảo Nguyễn Văn Sáng']]" />
 
-                        <li><i class="fa-solid fa-chevron-right text-[7px] opacity-50"></i></li>
-                        <li class="text-cs_blue truncate max-w-[150px] md:max-w-none">Phan Thị Thúy V. lừa đảo</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-
-        <!-- Trang trí nền nhẹ -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl">
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-4xl mx-auto">
                 <h1
                     class="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 uppercase leading-tight md:leading-[1.4] hero-title scanner-title">
