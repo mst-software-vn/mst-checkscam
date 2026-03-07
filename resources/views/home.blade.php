@@ -168,7 +168,7 @@
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#"
+                                <a href="/pham-hoang-tuan-1/"
                                     class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#"
+                                <a href="/pham-hoang-tuan-1/"
                                     class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
@@ -267,7 +267,7 @@
                                 </div>
                             </div>
                             <div class="w-full sm:w-2/12 text-right">
-                                <a href="#"
+                                <a href="/pham-hoang-tuan-1/"
                                     class="inline-block bg-blue-50 dark:bg-blue-900/20 text-cs_blue px-3 py-1 rounded text-[10px] font-black hover:bg-cs_blue hover:text-white transition-all uppercase">Chi
                                     tiết</a>
                             </div>
