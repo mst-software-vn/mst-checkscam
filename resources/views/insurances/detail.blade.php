@@ -22,7 +22,7 @@
 
                 </div>
 
-                <h1 class="text-2xl md:text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tight mb-4">
+                <h1 class="text-2xl md:text-3xl font-black text-gray-800 dark:text-gray-300 uppercase tracking-tight mb-4">
                     Võ Xuân Sang
                 </h1>
 
@@ -51,7 +51,7 @@
                     <div class="flex items-start justify-between">
                         <div class="space-y-4 flex-1">
                             <h2
-                                class="text-md md:text-lg font-black text-gray-800 dark:text-white uppercase tracking-tight border-l-4 border-cs_blue pl-3 mb-4">
+                                class="text-md md:text-lg font-black text-gray-800 dark:text-gray-300 uppercase tracking-tight border-l-4 border-cs_blue pl-3 mb-4">
                                 Thông Tin Bảo Hiểm</h2>
                             <ul class="space-y-3 font-bold text-gray-500 dark:text-gray-400 text-[11px] md:text-xs">
                                 <li class="flex items-center gap-3 hover:text-cs_blue transition-colors">
@@ -119,7 +119,7 @@
                         <!-- Services -->
                         <div>
                             <h2
-                                class="text-md md:text-lg font-black text-gray-800 dark:text-white uppercase tracking-tight border-l-4 border-cs_blue pl-3 mb-6">
+                                class="text-md md:text-lg font-black text-gray-800 dark:text-gray-300 uppercase tracking-tight border-l-4 border-cs_blue pl-3 mb-6">
                                 Dịch vụ cung cấp</h2>
                             <ul class="space-y-4">
                                 <li class="flex items-start gap-3 group/item">
@@ -176,7 +176,7 @@
                         <!-- Bank Accounts -->
                         <div>
                             <h2
-                                class="text-md md:text-lg font-black text-gray-800 dark:text-white uppercase tracking-tight border-l-4 border-cs_red pl-3 mb-6">
+                                class="text-md md:text-lg font-black text-gray-800 dark:text-gray-300 uppercase tracking-tight border-l-4 border-cs_red pl-3 mb-6">
                                 Hệ thống thanh toán</h2>
                             <div class="space-y-3">
                                 <?php

@@ -1,0 +1,5 @@
+Dark:
+Tiêu đề (Heading): dark:text-slate-50
+Nội dung (Body): text-gray-300.
+Ghi chú (Muted): dark:text-slate-500.
+Chạy:  npx @tailwindcss/cli -i ./public/css/input.css -o ./public/css/tailwind.css --watch

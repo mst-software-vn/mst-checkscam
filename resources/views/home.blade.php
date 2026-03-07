@@ -22,7 +22,9 @@
                 <!-- PHẦN 1: CẢNH BÁO NGÀY HÔM NAY -->
                 <section>
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
-                        <h2 class="text-lg font-bold text-gray-800 uppercase"><?php echo date('d/m/Y'); ?> CÓ CẢNH BÁO</h2>
+                        <h2 class="text-lg font-bold dark:text-gray-300 text-gray-800 uppercase"><?php echo date('d/m/Y'); ?> CÓ CẢNH
+                            BÁO
+                        </h2>
                         <span class="bg-red-100 text-cs_red text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
                     </div>
                     <div
@@ -36,7 +38,7 @@
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                    <h3 class="text-gray-900 dark:text-gray-300 text-xs md:text-sm font-bold">Nguyễn
                                         Văn A -
                                         <?php echo $i; ?></h3>
                                     <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
@@ -67,7 +69,7 @@
                 <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
                 <section>
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_blue pl-3">
-                        <h2 class="text-lg font-bold dark:text-white text-gray-800 uppercase">Lừa đảo phổ biến 7 ngày
+                        <h2 class="text-lg font-bold dark:text-gray-300 text-gray-800 uppercase">Lừa đảo phổ biến 7 ngày
                             gần đây</h2>
                     </div>
                     <div
@@ -81,7 +83,7 @@
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                    <h3 class="text-gray-900 dark:text-gray-300 text-xs md:text-sm font-bold">Nguyễn
                                         Văn A -
                                         <?php echo $i; ?></h3>
                                     <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
@@ -112,7 +114,7 @@
                 <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
                 <section>
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_orange pl-3">
-                        <h2 class="text-lg font-bold dark:text-white text-gray-800 uppercase">Top 3 tìm kiếm ngày</h2>
+                        <h2 class="text-lg font-bold dark:text-gray-300 text-gray-800 uppercase">Top 3 tìm kiếm ngày</h2>
                         <i class="fa-solid fa-fire text-cs_orange animate-pulse"></i>
                     </div>
                     <div
@@ -126,7 +128,7 @@
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-gray-900 dark:text-gray-100 text-xs md:text-sm font-bold">Nguyễn
+                                    <h3 class="text-gray-900 dark:text-gray-300 text-xs md:text-sm font-bold">Nguyễn
                                         Văn A -
                                         <?php echo $i; ?></h3>
                                     <div class="text-[9px] md:text-[10px] text-gray-400 dark:text-gray-500">
@@ -177,7 +179,7 @@
                         an toàn hơn.
                     </p>
                     <button
-                        class="w-full bg-cs_red shadow-sm text-white font-bold py-3 px-4 text-sm rounded-lg hover:bg-red-700 transition-colors">
+                        class="w-full cursor-pointer bg-cs_red shadow-sm text-white font-bold py-3 px-4 text-sm rounded-lg hover:bg-red-700 transition-colors">
                         <i class="fa-regular fa-paper-plane mr-1"></i> GỬI ĐƠN TỐ CÁO
                     </button>
                 </div>
@@ -246,7 +248,7 @@
             <section aria-labelledby="comments-history-title">
                 <div class="max-w-4xl mx-auto text-center mb-8">
                     <h2 id="comments-history-title"
-                        class="text-xl md:text-2xl font-black dark:text-white text-gray-800 uppercase tracking-tight">
+                        class="text-xl md:text-2xl font-black dark:text-gray-300 text-gray-800 uppercase tracking-tight">
                         <i class="fa-solid fa-comments text-cs_blue mr-2"></i>Bình luận <span class="text-cs_blue">mới
                             nhất</span>
                     </h2>
@@ -308,10 +310,10 @@
                         class="inline-block px-3 py-1 bg-cs_blue/10 text-cs_blue text-[10px] font-bold uppercase tracking-widest rounded-full mb-4">Cẩm
                         nang an toàn</span>
                     <h2 id="safety-tips-title"
-                        class="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tight">
+                        class="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 dark:text-slate-50 uppercase tracking-tight">
                         Cách giao dịch <span class="text-cs_blue">không lừa đảo</span>
                     </h2>
-                    <p class="text-gray-500 dark:text-gray-400 text-xs md:text-sm mt-3 leading-relaxed">
+                    <p class="text-gray-500 dark:text-slate-500 text-xs md:text-sm mt-3 leading-relaxed">
                         Thế giới MMO đầy rẫy rủi ro, nắm vững 3 nguyên tắc "vàng" túi tiền sẽ được bảo vệ tuyệt đối.
                     </p>
                 </div>
@@ -366,9 +368,9 @@
                 <div class="flex flex-col items-center mb-8 md:mb-10 text-center">
                     <div class="w-12 h-1 bg-cs_blue rounded-full mb-6"></div>
                     <h2 id="faq-title"
-                        class="text-xl md:text-2xl font-black text-gray-800 dark:text-white uppercase tracking-tight">
+                        class="text-xl md:text-2xl font-black dark:text-slate-50 text-gray-800 uppercase tracking-tight">
                         Trợ giúp & Giải đáp</h2>
-                    <p class="text-gray-500 dark:text-gray-400 text-xs md:text-sm mt-2">Mọi thắc mắc về hệ thống
+                    <p class="text-gray-500 dark:text-slate-500 text-xs md:text-sm mt-2">Mọi thắc mắc về hệ thống
                         CheckScam đều có tại đây.
                     </p>
                 </div>

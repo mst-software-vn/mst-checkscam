@@ -5,42 +5,7 @@
     <section class="dark:bg-dark_bg pb-12 md:pd-24">
         <x-breadcrumb :links="[['name' => 'Lừa đảo Nguyễn Văn Sáng']]" />
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1
-                    class="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 uppercase leading-tight md:leading-[1.4] hero-title scanner-title">
-                    KIỂM TRA & TỐ CÁO SCAM.
-                </h1>
-                <p
-                    class="text-gray-600 dark:text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto text-[13px] md:text-lg leading-relaxed font-medium px-4">
-                    Hệ thống dữ liệu lớn nhất Việt Nam giúp bạn kiểm tra độ tín nhiệm của đối tác thông qua SĐT, Số TK
-                    hoặc Link mạng xã hội.
-                </p>
-
-                <!-- Search Box Centered -->
-                <div class="max-w-2xl mx-auto mb-6">
-                    <div
-                        class="relative bg-white dark:bg-slate-900 border-2 border-gray-100 dark:border-gray-800 rounded-2xl shadow-xl shadow-blue-500/5 focus-within:border-cs_blue transition-all p-1.5 md:p-2">
-                        <div class="flex flex-col sm:flex-row items-center gap-1 md:gap-2">
-                            <div class="flex-1 flex items-center w-full min-w-0">
-                                <div class="pl-3 md:pl-4 flex items-center pointer-events-none">
-                                    <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm md:text-lg"></i>
-                                </div>
-                                <input type="text"
-                                    class="w-full pl-2 md:pl-3 outline-none pr-3 py-2.5 md:py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-white text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
-                                    placeholder="Số tài khoản, SĐT..." />
-                            </div>
-                            <button
-                                class="w-full sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap">
-                                TRA CỨU
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
+        <x-hero />
     </section>
     <main class="grow pb-16 w-full max-w-6xl mx-auto px-4 sm:px-6 relative z-30 -mt-4 md:mt-0">
         <div class="flex flex-col lg:flex-row gap-6">
@@ -107,7 +72,7 @@
                                         Số tài khoản / SĐT lừa đảo</p>
                                     <div class="flex items-center gap-2">
                                         <h3
-                                            class="text-base md:text-xl font-black text-gray-900 dark:text-white tracking-widest">
+                                            class="text-base md:text-xl font-black text-gray-900 dark:text-gray-300 tracking-widest">
                                             105****446</h3>
                                         <span
                                             class="bg-gray-100 dark:bg-slate-800 text-gray-400 text-[8px] font-black px-1 py-0.5 rounded border border-gray-200 dark:border-gray-700 uppercase">Vietcombank</span>
@@ -380,7 +345,7 @@
                                     placeholder="Chia sẻ thêm thông tin..."></textarea>
                                 <div class="mt-3 flex justify-end">
                                     <button
-                                        class="bg-cs_blue text-white text-[10px] md:text-xs font-black uppercase px-6 md:px-8 py-2 md:py-2.5 rounded-xl hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-blue-500/10">
+                                        class="cursor-pointer bg-cs_blue text-white text-[10px] md:text-xs font-black uppercase px-6 md:px-8 py-2 md:py-2.5 rounded-xl hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-blue-500/10">
                                         Gửi bình luận
                                     </button>
                                 </div>
@@ -486,7 +451,7 @@
                                         <span class="text-xs font-bold text-gray-500 dark:text-gray-400">Tài liệu bằng
                                             chứng</span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-white">03 Bản</span>
+                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">03 Bản</span>
                                 </div>
 
                                 <div
@@ -499,7 +464,7 @@
                                         <span class="text-xs font-bold text-gray-500 dark:text-gray-400">Số lần bị tố
                                             cao</span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-white">02 Lần</span>
+                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">02 Lần</span>
                                 </div>
 
                                 <div
@@ -512,7 +477,7 @@
                                         <span class="text-xs font-bold text-gray-500 dark:text-gray-400">Độ phổ biến tra
                                             cứu</span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-white">Rất cao</span>
+                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">Rất cao</span>
                                 </div>
                             </div>
 
@@ -576,7 +541,8 @@
                 <div class="px-2">
                     <span class="text-xs font-black text-cs_red uppercase tracking-[5px] mb-3 block animate-pulse">Hot
                         Blacklist</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white uppercase tracking-tighter">
+                    <h2
+                        class="text-2xl md:text-3xl font-black text-gray-900 dark:text-gray-300 uppercase tracking-tighter">
                         Các
                         vụ lừa đảo mới nhất</h2>
                     <p class="text-sm text-gray-400 mt-2 font-medium">Hệ thống cập nhật danh sách đen tự động mỗi khi có

@@ -43,7 +43,7 @@
                         <div class="w-[1px] h-12 bg-gray-300 dark:bg-gray-800 mt-4"></div>
 
                         <div class="flex flex-col items-center gap-1">
-                            <span class="text-[14px] font-black text-gray-900 dark:text-white">1.2k</span>
+                            <span class="text-[14px] font-black text-gray-900 dark:text-gray-300">1.2k</span>
                             <span class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">Views</span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <h1
-                                class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white leading-[1.2] tracking-tight mb-8">
+                                class="text-3xl md:text-5xl font-black text-gray-900 dark:text-gray-300 leading-[1.2] tracking-tight mb-8">
                                 Lật tẩy chiêu trò lừa đảo qua tin nhắn iMessage và SMS ngân hàng 2026
                             </h1>
 
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                     <div class="text-left">
-                                        <p class="text-gray-900 dark:text-white font-black text-sm md:text-base">Võ Xuân
+                                        <p class="text-gray-900 dark:text-gray-300 font-black text-sm md:text-base">Võ Xuân
                                             Sang</p>
                                         <div
                                             class="flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-tighter">
@@ -182,7 +182,8 @@
                                             01
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-white font-black text-lg mb-2">KHÔNG nhấp vào
+                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">KHÔNG nhấp
+                                                vào
                                                 đường link lạ</h4>
                                             <p class="text-sm leading-relaxed">Tuyệt đối không truy cập các trang web được
                                                 gửi qua tin nhắn. Ngân hàng sẽ không bao giờ yêu cầu bạn đăng nhập qua link
@@ -196,7 +197,8 @@
                                             02
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-white font-black text-lg mb-2">KHÔNG cung cấp
+                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">KHÔNG cung
+                                                cấp
                                                 mã OTP cho bất kỳ ai</h4>
                                             <p class="text-sm leading-relaxed">Mã OTP là chìa khóa cuối cùng. Nhân viên ngân
                                                 hàng thật sự sẽ không bao giờ hỏi mã này của bạn.</p>
@@ -209,7 +211,7 @@
                                             03
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-white font-black text-lg mb-2">KHÔNG hoảng
+                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">KHÔNG hoảng
                                                 sợ, hãy xác minh lại</h4>
                                             <p class="text-sm leading-relaxed">Kẻ lừa đảo luôn dùng đòn tâm lý hối thúc. Hãy
                                                 tắt điện thoại, hít thật sâu và gọi lên số tổng đài chính thức của ngân
@@ -280,7 +282,8 @@
                         <div class="flex items-center justify-between mb-8">
                             <div class="flex items-center gap-3">
                                 <div class="w-1.5 h-6 bg-cs_blue rounded-full"></div>
-                                <h2 class="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">Cẩm
+                                <h2 class="text-xl font-black text-gray-900 dark:text-gray-300 uppercase tracking-tight">
+                                    Cẩm
                                     nang liên quan</h2>
                             </div>
                             <a href="/bai-viet"
@@ -331,7 +334,7 @@
                         class="bg-white dark:bg-dark_card  dark:border-gray-800 border  rounded-lg border-gray-200 shadow-sm overflow-hidden">
                         <div class="p-6 border-b border-gray-50 dark:border-gray-800 bg-gray-50/50 dark:bg-slate-800/30">
                             <h4
-                                class="font-black text-gray-900 dark:text-white text-[12px] uppercase tracking-[0.2em] flex items-center gap-2">
+                                class="font-black text-gray-900 dark:text-gray-300 text-[12px] uppercase tracking-[0.2em] flex items-center gap-2">
                                 <i class="fa-solid fa-fire text-cs_orange animate-pulse"></i> Đọc nhiều nhất
                             </h4>
                         </div>
@@ -375,17 +378,20 @@
     </style>
 
     <script>
-        // Reading Progress Bar
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
+        $(document).ready(function() {
+            // Reading Progress Bar
+            $(window).on('scroll', function() {
+                const winScroll = $(window).scrollTop();
+                const height = $(document).height() - $(window).height();
+                const scrolled = (winScroll / height) * 100;
+                $('#progress-bar').css('width', scrolled + '%');
+            });
+        });
 
         function copyToClipboard() {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Đã sao chép liên kết vào bộ nhớ tạm!");
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("Đã sao chép liên kết vào bộ nhớ tạm!");
+            });
         }
     </script>
 @endsection

@@ -109,13 +109,13 @@
                 <!-- Right Column: The Main Form -->
                 <section class="lg:col-span-8 order-1 lg:order-2">
                     <!-- Tab Switcher: Integrated Style -->
-                    <div class="flex gap-1 mb-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+                    <div class="flex gap-1 overflow-x-auto no-scrollbar whitespace-nowrap">
                         <button onclick="switchTab('bank')" id="tab-bank"
-                            class="px-5 md:px-8 py-3.5 text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md border-b transition-all tab-active-red dark:bg-slate-900flex-1 md:flex-none text-center">
+                            class="px-5 md:px-8 py-3.5 cursor-pointer text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md border-b transition-all tab-active-red dark:bg-slate-900flex-1 md:flex-none text-center">
                             Số tài khoản
                         </button>
                         <button onclick="switchTab('website')" id="tab-website"
-                            class="px-5 md:px-8 py-3.5 text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 transition-all border-b border-transparent flex-1 md:flex-none text-center">
+                            class="px-5 md:px-8 py-3.5 text-[11px] cursor-pointer md:text-sm font-semibold uppercase tracking-wider rounded-t-md text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 transition-all border-b border-transparent flex-1 md:flex-none text-center">
                             Trang web lừa đảo
                         </button>
                     </div>
@@ -124,7 +124,7 @@
                         class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-md p-5 sm:p-8 md:p-10 shadow-xs relative overflow-hidden">
 
                         <!-- Form Bank Search Style -->
-                        <h4 class="text-cs_red font-semibold text-center uppercase">Khai báo</h4>
+                        <h4 class="text-cs_red mb-8 font-semibold text-center uppercase">Khai báo</h4>
                         <form id="form-bank" action="#" method="POST" enctype="multipart/form-data"
                             class="space-y-6 md:space-y-8">
                             @csrf
@@ -134,14 +134,14 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Chủ
                                         tài khoản <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_owner" required placeholder="NGUYEN VAN A"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white uppercase outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 uppercase outline-none">
                                 </div>
                                 <div class="space-y-2">
                                     <label
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Số
                                         tài khoản / SĐT <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_number" required placeholder="Nhập dãy số..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                                 <div class="space-y-2 md:col-span-2">
                                     <label
@@ -149,7 +149,7 @@
                                         hàng / Ví điện tử <span class="text-cs_red">*</span></label>
                                     <input type="text" name="bank_name" required
                                         placeholder="Vietcombank, MB, Momo, Zalopay..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                             </div>
 
@@ -225,14 +225,14 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Địa
                                         chỉ (URL) Website <span class="text-cs_red">*</span></label>
                                     <input type="url" name="web_url" required placeholder="https://domain-lua-dao.vn"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                                 <div class="space-y-2">
                                     <label
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Phân
                                         loại <span class="text-cs_red">*</span></label>
                                     <select name="category" required
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none cursor-pointer">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none cursor-pointer">
                                         <option value="">Chọn loại hình</option>
                                         <option value="fake">Giả mạo ngân hàng/app</option>
                                         <option value="bet">Cá cược, lô đề</option>
@@ -245,7 +245,7 @@
                                         class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1">Nơi
                                         phát hiện</label>
                                     <input type="text" placeholder="FB Ads, Telegram, SMS..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-white outline-none">
+                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none">
                                 </div>
                             </div>
 
@@ -381,37 +381,17 @@
 @push('scripts')
     <script>
         function switchTab(type) {
-            const formBank = document.getElementById('form-bank');
-            const formWebsite = document.getElementById('form-website');
-            const tabBank = document.getElementById('tab-bank');
-            const tabWebsite = document.getElementById('tab-website');
+            const isBank = (type === 'bank');
+            const inactiveClasses =
+                'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 border-transparent';
+            const activeClasses =
+                'bg-white dark:bg-slate-900 border-gray-200 dark:border-gray-800 border-b-white dark:border-b-slate-900 tab-active-red';
 
-            const inactiveClasses = ['text-gray-400', 'dark:text-gray-600', 'hover:text-gray-600',
-                'dark:hover:text-gray-300', 'border-transparent'
-            ];
-            const activeBaseClasses = ['bg-white', 'dark:bg-slate-900', 'border-gray-200', 'dark:border-gray-800',
-                'border-b-white', 'dark:border-b-slate-900'
-            ];
+            $('#form-bank').toggleClass('hidden', !isBank);
+            $('#form-website').toggleClass('hidden', isBank);
 
-            if (type === 'bank') {
-                formBank.classList.remove('hidden');
-                formWebsite.classList.add('hidden');
-
-                tabBank.classList.add(...activeBaseClasses, 'tab-active-red');
-                tabBank.classList.remove(...inactiveClasses);
-
-                tabWebsite.classList.remove(...activeBaseClasses, 'tab-active-red');
-                tabWebsite.classList.add(...inactiveClasses);
-            } else {
-                formBank.classList.add('hidden');
-                formWebsite.classList.remove('hidden');
-
-                tabWebsite.classList.add(...activeBaseClasses, 'tab-active-red');
-                tabWebsite.classList.remove(...inactiveClasses);
-
-                tabBank.classList.remove(...activeBaseClasses, 'tab-active-red');
-                tabBank.classList.add(...inactiveClasses);
-            }
+            $('#tab-bank').toggleClass(activeClasses, isBank).toggleClass(inactiveClasses, !isBank);
+            $('#tab-website').toggleClass(activeClasses, !isBank).toggleClass(inactiveClasses, isBank);
         }
     </script>
 @endpush

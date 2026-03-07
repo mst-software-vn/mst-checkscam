@@ -69,7 +69,7 @@
                         <span class="w-8 h-[2px] bg-cs_red"></span>
                         <span class="text-cs_red font-bold text-xs uppercase tracking-widest">Kiến thức MMO</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-gray-300 tracking-tight">
                         Học viện <span class="text-gray-400">Bảo mật & MMO</span>
                     </h1>
                     <p class="mt-4 text-gray-500 dark:text-gray-400 text-base md:text-lg">
@@ -97,7 +97,7 @@
                     <!-- Search Box -->
                     <div class="relative w-full sm:w-auto group">
                         <input type="text" placeholder="Tìm thủ thuật, cảnh báo..."
-                            class="w-full sm:w-[280px] pl-5 pr-12 py-3.5 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-medium focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all dark:text-white dark:placeholder-gray-500 shadow-sm">
+                            class="w-full sm:w-[280px] pl-5 pr-12 py-3.5 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-medium focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all dark:text-gray-300 dark:placeholder-gray-500 shadow-sm">
                         <button class="absolute right-4 top-1/4 text-gray-400 group-hover:text-cs_red transition-colors">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -128,7 +128,7 @@
                                         <span class="text-gray-400 text-xs font-medium">{{ $post['date'] }}</span>
                                     </div>
                                     <h2
-                                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-cs_red transition-colors duration-300">
+                                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-gray-300 leading-tight group-hover:text-cs_red transition-colors duration-300">
                                         {{ $post['title'] }}
                                     </h2>
                                     <p class="mt-4 text-gray-500 dark:text-gray-400 line-clamp-3 text-base leading-relaxed">
@@ -161,7 +161,7 @@
                                             class="text-gray-400 text-[10px] font-bold uppercase">{{ $post['date'] }}</span>
                                     </div>
                                     <h3
-                                        class="text-xl font-bold text-slate-900 dark:text-white leading-snug group-hover:text-cs_red transition-colors duration-500">
+                                        class="text-xl font-bold text-slate-900 dark:text-gray-300 leading-snug group-hover:text-cs_red transition-colors duration-500">
                                         {{ $post['title'] }}
                                     </h3>
                                     <p class="mt-3 text-gray-500 dark:text-gray-400 line-clamp-2 text-sm leading-relaxed">

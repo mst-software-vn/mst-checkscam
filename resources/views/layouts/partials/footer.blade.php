@@ -118,15 +118,15 @@
 <div class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 flex justify-center items-center flex-col gap-3">
     <!-- Back to top -->
     <button id="back-to-top"
-        class="hidden w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-slate-700 hover:-translate-y-2 active:scale-90 transition-all duration-300">
+        class="hidden w-11 cursor-pointer h-11 md:w-12 md:h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-slate-700 hover:-translate-y-2 active:scale-90 transition-all duration-300">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
 
     <!-- Theme Switcher (Improved) -->
     <button id="theme-toggle"
-        class="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-cs_blue text-white shadow-2xl flex items-center justify-center border-4 border-white dark:border-slate-800 group transition-all duration-500 hover:rotate-360">
-        <i class="fa-solid fa-sun text-lg md:text-xl block dark:hidden"></i>
-        <i class="fa-solid fa-moon text-lg md:text-xl hidden dark:block"></i>
+        class="w-11 h-11 cursor-pointer md:w-14 md:h-14 rounded-2xl bg-cs_blue text-white shadow-2xl flex items-center justify-center border-4 dark:border-white border-slate-800 group transition-all duration-500 hover:rotate-360">
+        <i class="fa-solid fa-lightbulb text-lg md:text-xl hidden! dark:block!"></i>
+        <i class="fa-regular fa-lightbulb text-lg md:text-xl dark:hidden!"></i>
     </button>
 </div>
 
@@ -168,58 +168,52 @@
 </nav>
 
 <script>
-    const logoHeader = document.getElementById("logo_header");
-    const themeToggle = document.getElementById("theme-toggle");
-    const backToTop = document.getElementById("back-to-top");
+    $(document).ready(function() {
+        const $logoHeader = $("#logo_header");
+        const $backToTop = $("#back-to-top");
 
-    // Theme Switch Management
-    function toggleTheme() {
-        const isDark = document.documentElement.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-    }
+        // Theme Switch Management
+        function setTheme(theme) {
+            const isDark = (theme === 'dark');
+            $('html').toggleClass('dark', isDark);
+            localStorage.setItem('theme', theme);
 
-    function setTheme(theme) {
-        const isDark = theme === 'dark';
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            if ($logoHeader.length) {
+                $logoHeader.attr('src', isDark ?
+                    "https://i.ibb.co/wFZsnJBR/white.png" :
+                    "https://i.ibb.co/7xfz0v3K/black.png"
+                );
+            }
+        }
+
+        $('#theme-toggle').on('click', function() {
+            const newTheme = $('html').hasClass('dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+
+        });
+
+        // Initial theme setup
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            setTheme('dark');
         } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
+            setTheme('light');
         }
 
-        if (logoHeader) {
-            logoHeader.src = isDark ?
-                "https://i.ibb.co/wFZsnJBR/white.png" :
-                "https://i.ibb.co/7xfz0v3K/black.png";
-        }
-    }
+        // Scroll Management
+        $(window).on('scroll', function() {
+            if ($(this).scrollTop() > 300) {
+                $backToTop.removeClass('hidden').addClass('flex');
+            } else {
+                $backToTop.addClass('hidden').removeClass('flex');
+            }
+        });
 
-    themeToggle.addEventListener('click', toggleTheme);
-
-    // Initial theme setup
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
-            '(prefers-color-scheme: dark)').matches)) {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
-
-    // Scroll Management
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.remove('hidden');
-            backToTop.classList.add('flex');
-        } else {
-            backToTop.classList.add('hidden');
-            backToTop.classList.remove('flex');
-        }
-    });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+        $backToTop.on('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 </script>
