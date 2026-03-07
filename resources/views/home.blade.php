@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-12">
-                    <a href="#"
+                    <a href="/to-cao-lua-dao/"
                         class="bg-white dark:bg-dark_card hover:bg-red-50 dark:hover:bg-red-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
                             class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 dark:bg-red-900/30 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
@@ -69,7 +69,7 @@
                         </div>
                     </a>
 
-                    <a href="#"
+                    <a href="/bao-hiem-cs/"
                         class="bg-white dark:bg-dark_card hover:bg-blue-50 dark:hover:bg-blue-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs">
                         <div
                             class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform">
