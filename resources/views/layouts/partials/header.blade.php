@@ -4,28 +4,41 @@
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
             <a href="/" class="flex items-center gap-2">
-                <img src="https://i.ibb.co/7xfz0v3K/black.png" alt="Logo Check Scam" class="h-10 md:h-12 w-auto"
-                    id="logo_header" />
+                <img
+                    src="https://i.ibb.co/7xfz0v3K/black.png"
+                    alt="Logo Check Scam"
+                    class="h-10 md:h-12 w-auto"
+                    id="logo_header"
+                />
             </a>
 
             <!-- Desktop Menu -->
             <nav class="hidden md:flex gap-x-6 lg:gap-x-8">
-                <a href="/"
-                    class="{{ request()->is('/') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Trang
-                    Chủ</a>
-                <a href="/to-cao-lua-dao"
-                    class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Tố
-                    Cáo Scam</a>
-                <a href="/bao-hiem-cs"
-                    class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Quỹ
-                    Bảo
-                    Hiểm</a>
-                <a href="/bai-viet"
-                    class="{{ request()->is('bai-viet*') ? 'text-cs_red font-bold border-b-2 border-cs_red' : 'text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium' }} text-sm py-5 transition-colors">Bài
-                    viết</a>
+                <a
+                    href="/"
+                    class="{{ request()->is("/") ? "text-cs_red font-bold border-b-2 border-cs_red" : "text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium" }} text-sm py-5 transition-colors"
+                >
+                    Trang Chủ
+                </a>
+                <a
+                    href="/to-cao-lua-dao"
+                    class="{{ request()->is("to-cao-lua-dao*") ? "text-cs_red font-bold border-b-2 border-cs_red" : "text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium" }} text-sm py-5 transition-colors"
+                >
+                    Tố Cáo Scam
+                </a>
+                <a
+                    href="/bao-hiem-cs"
+                    class="{{ request()->is("bao-hiem-cs*") ? "text-cs_red font-bold border-b-2 border-cs_red" : "text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium" }} text-sm py-5 transition-colors"
+                >
+                    Quỹ Bảo Hiểm
+                </a>
+                <a
+                    href="/bai-viet"
+                    class="{{ request()->is("bai-viet*") ? "text-cs_red font-bold border-b-2 border-cs_red" : "text-gray-600 dark:text-gray-400 hover:text-cs_red dark:hover:text-cs_red font-medium" }} text-sm py-5 transition-colors"
+                >
+                    Bài viết
+                </a>
             </nav>
-
-
         </div>
     </div>
 </header>
