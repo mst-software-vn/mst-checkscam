@@ -6,6 +6,14 @@
         "build": "vite build",
         "dev": "vite"
     },
+    "lint-staged": {
+        "**/*.php": [
+            "./vendor/bin/pint"
+        ],
+        "**/*.blade.php": [
+            "npx prettier --write"
+        ]
+    },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.11.0",
