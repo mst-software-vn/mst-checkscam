@@ -207,7 +207,7 @@
                         Settings
                     </a>
                     <hr class="m-0" />
-                    <a class="dropdown-item logout pb-0" href="signin.html">
+                    <a class="dropdown-item logout pb-0" href="{{ route("admin.auth.logout") }}">
                         <img src="/assets/img/icons/log-out.svg" class="me-2" alt="img" />
                         Logout
                     </a>
