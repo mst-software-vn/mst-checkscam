@@ -23,6 +23,30 @@ Route::get("/bai-viet", function () {
 Route::get("/bai-viet/{id}", function ($id) {
     return view("posts.detail", ["id" => $id]);
 });
+
+// Các trang hệ thống (System)
+Route::get("/api-checkscam", function () {
+    return view("system.api");
+});
+Route::get("/doi-tac-uy-tin", function () {
+    return view("system.partners");
+});
+
+// Các trang hỗ trợ (Support)
+Route::get("/huong-dan-to-cao", function () {
+    return view("support.guide");
+});
+Route::get("/lien-he-admin", function () {
+    return view("support.contact");
+});
+
+// Các trang pháp lý (Legal)
+Route::get("/dieu-khoan", function () {
+    return view("legal.terms");
+});
+Route::get("/giai-quyet-khieu-nai", function () {
+    return view("legal.dispute");
+});
 Route::get("/{name}", function ($name) {
     return view("scammer.index", ["name" => $name]);
 });

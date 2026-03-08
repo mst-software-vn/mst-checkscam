@@ -186,18 +186,27 @@
 
                 <!-- Box Quỹ Bảo Hiểm -->
                 <div
-                    class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm p-5">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2
-                            class="font-bold text-[13px] md:text-sm text-gray-800 dark:text-gray-200 uppercase flex items-center gap-2">
-                            <i class="fa-solid fa-shield text-cs_green"></i> QUỸ BẢO HIỂM CS
-                        </h2>
-                        <a href="#" class="text-[10px] md:text-xs text-cs_blue hover:underline">Xem Quỹ</a>
+                    class="bg-white dark:bg-dark_card border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xs overflow-hidden">
+                    <div class="p-5 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-slate-800/20">
+                        <div class="flex justify-between items-center mb-1">
+                            <h2
+                                class="font-black text-xs md:text-sm text-gray-800 dark:text-gray-200 uppercase flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-cs_blue text-lg"></i> QUỸ BẢO HIỂM
+                            </h2>
+                            <a href="/bao-hiem-cs" class="text-[10px] font-bold text-cs_blue hover:underline uppercase">Xem
+                                tất
+                                cả</a>
+                        </div>
+                        <p class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-tighter">
+                            Tổng quỹ: <span class="text-cs_green">~5.8 Tỷ</span> • <span
+                                class="text-gray-300 dark:text-gray-700">|</span> 128+ TV
+                        </p>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3">
-                        <!-- Avatar items -->
-                        <?php
+                    <div class="p-5">
+                        <div class="grid grid-cols-3 gap-x-2 gap-y-5">
+                            <!-- Avatar items -->
+                            <?php
                             $avatars = [
                                 ['name' => 'Lê Vũ', 'color' => '2eb85c', 'title' => 'Lê Tuấn Vũ - 50 Triệu'],
                                 ['name' => 'Hải Phạm', 'color' => '3399ff', 'title' => 'Hải Phạm - 30 Triệu'],
@@ -206,36 +215,42 @@
                                 ['name' => 'Kiều Oanh', 'color' => 'ec4899', 'title' => 'Kiều Oanh - 40 Triệu'],
                                 ['name' => 'Minh Tiến', 'color' => '0f766e', 'title' => 'Minh Tiến - 10 Triệu'],
                                 ['name' => 'Gia Bảo', 'color' => 'c2410c', 'title' => 'Gia Bảo - 60 Triệu'],
+                                ['name' => 'Thanh Tuyền', 'color' => 'd24frr', 'title' => 'Thanh Tuyền - 60 Triệu'],
                             ];
                             foreach($avatars as $av): ?>
-                        <a href="#" class="flex flex-col items-center relative" title="<?php echo $av['title']; ?>">
-                            <div class="relative mb-1">
-                                <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($av['name']); ?>&background=<?php echo $av['color']; ?>&color=fff&size=48"
-                                    alt="<?php echo $av['name']; ?>"
-                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 border-2 border-gray-100 dark:border-gray-800 object-cover shadow-sm">
-                                <div
-                                    class="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-cs_blue rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
-                                    <i class="fa-solid fa-check text-white text-[6px] md:text-[8px]"></i>
+                            <a href="#" class="group flex flex-col items-center relative"
+                                title="<?php echo $av['title']; ?>">
+                                <div class="relative mb-2">
+                                    <div
+                                        class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white dark:border-slate-800 shadow-sm group-hover:shadow-cs_blue/20 transition-all duration-300 group-hover:scale-110 active:scale-95 overflow-hidden">
+                                        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($av['name']); ?>&background=<?php echo $av['color']; ?>&color=fff&size=56"
+                                            alt="<?php echo $av['name']; ?>"
+                                            class="w-full h-full object-cover group-hover:rotate-3 transition-transform duration-500">
+                                    </div>
+                                    <div
+                                        class="absolute bottom-0 right-0 w-4 h-4 bg-cs_blue rounded-full border-2 border-white dark:border-slate-800 flex items-center justify-center shadow-sm">
+                                        <i class="fa-solid fa-check text-white text-[8px]"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <span
-                                class="text-[8px] md:text-[10px] text-gray-600 dark:text-gray-400 font-medium text-center truncate w-full">
-                                <?php echo $av['name']; ?>
-                            </span>
-                        </a>
-                        <?php endforeach; ?>
+                                <span
+                                    class="text-[10px] text-gray-700 dark:text-gray-300 font-bold text-center truncate w-full group-hover:text-cs_blue transition-colors">
+                                    <?php echo $av['name']; ?>
+                                </span>
+                            </a>
+                            <?php endforeach; ?>
 
-                        <a href="#" class="flex flex-col items-center relative" title="Xem tất cả">
-                            <div class="relative mb-1">
-                                <div
-                                    class="rounded-full w-10 h-10 md:w-12 md:h-12 bg-gray-100 dark:bg-slate-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 shadow-sm">
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                            <a href="/bao-hiem-cs" class="group flex flex-col items-center relative" title="Xem tất cả">
+                                <div class="relative mb-2">
+                                    <div
+                                        class="rounded-full w-12 h-12 md:w-14 md:h-14 bg-gray-50 dark:bg-slate-800/50 border-2 border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-400 group-hover:text-cs_blue group-hover:border-cs_blue transition-all duration-300 group-hover:scale-110">
+                                        <i class="fa-solid fa-eye text-lg"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <span
-                                class="text-[8px] md:text-[10px] text-gray-600 dark:text-gray-400 font-medium text-center truncate w-full">Tất
-                                cả +50</span>
-                        </a>
+                                <span
+                                    class="text-[10px] text-gray-500 dark:text-gray-400 font-bold text-center uppercase tracking-tighter w-full">Tất
+                                    cả</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -364,7 +379,7 @@
             </section>
 
             <!-- Box FAQ -->
-            <section aria-labelledby="faq-title" class="max-w-5xl mx-auto px-4">
+            <section aria-labelledby="faq-title" class="max-w-5xl mx-auto lg:px-4">
                 <div class="flex flex-col items-center mb-8 md:mb-10 text-center">
                     <div class="w-12 h-1 bg-cs_blue rounded-full mb-6"></div>
                     <h2 id="faq-title"
