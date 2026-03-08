@@ -34,6 +34,27 @@ Lưu trữ thông tin người có quyền đăng nhập vào CMS để duyệt 
 | `updated_at` | Timestamp       | Yes      |                                 |
 
 ---
+### 1. Moderator — Xử lý nội dung
+
+Chỉ có quyền trên content do user tạo ra
+
+- Duyệt report (approve / reject)
+- Khóa / mở khóa đối tượng bị report
+- Xử lý dispute
+
+
+Moderator không động vào cấu hình hệ thống hay tài khoản người khác.
+
+
+### 2. Admin — Vận hành hệ thống
+
+Có toàn quyền, bao gồm mọi thứ Moderator làm cộng thêm:
+
+- Quản lý user (ban, phân quyền, promote lên moderator)
+- Quản lý danh mục loại scam (thêm/sửa/xóa category)
+- Xem dashboard thống kê
+- Cấu hình hệ thống
+---
 
 ## 3. Bảng `reports` (Danh sách tố cáo)
 
