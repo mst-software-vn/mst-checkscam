@@ -72,7 +72,7 @@
                         <input
                             type="text"
                             placeholder="Tìm kiếm nhanh..."
-                            class="focus:border-cs_blue w-full rounded-xl border border-gray-100 bg-white py-4 pr-4 pl-10 text-sm font-bold text-gray-700 shadow-sm transition-all outline-none dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
+                            class="focus:border-cs_blue w-full rounded-xl border-2 border-gray-100 bg-white py-4 pr-4 pl-10 text-sm font-bold text-gray-700 shadow-sm transition-all outline-none dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
                         />
                     </div>
                 </div>

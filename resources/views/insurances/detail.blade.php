@@ -327,23 +327,42 @@
                 </div>
             </div>
 
-            <!-- Footer Warning Section -->
-            <div class="mx-auto mt-20 max-w-3xl text-center">
-                <div class="bg-cs_red mx-auto mb-8 h-1 w-16 rounded-full"></div>
-                <h4
-                    class="mb-4 text-xs font-black tracking-widest text-gray-800 uppercase md:text-sm dark:text-gray-200"
-                >
-                    Cảnh báo quan trọng
-                </h4>
-                <p class="text-[11px] leading-relaxed font-semibold text-gray-500 md:text-xs dark:text-gray-400">
-                    Lưu ý: Chỉ chuyển khoản vào các số tài khoản được niêm yết tại đây.
-                    <br />
-                    Mọi yêu cầu chuyển tiền từ các tài khoản khác, dù có thông tin trùng khớp tên, đều là lừa đảo.
-                    <br />
-                    Hãy kiểm tra kỹ con dấu (Watermark) và link web
-                    <span class="text-cs_red underline">MSTSoftware.VN</span>
-                    chính chủ.
-                </p>
+            <!-- Warning Section with more impact -->
+            <div class="from-cs_red mt-10 overflow-hidden rounded-3xl bg-linear-to-r to-red-600 p-0.5 shadow-2xl">
+                <div class="rounded-[22px] bg-white p-8 dark:bg-slate-900">
+                    <div class="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:text-left">
+                        <div
+                            class="bg-cs_red/10 text-cs_red flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-3xl"
+                        >
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <h4
+                                class="mb-4 text-sm font-black tracking-[0.2em] text-gray-800 uppercase dark:text-gray-200"
+                            >
+                                Cảnh báo an toàn quan trọng
+                            </h4>
+                            <div class="space-y-4 text-[13px] font-bold text-gray-500 dark:text-gray-400">
+                                <p>
+                                    1. Chỉ thực hiện giao dịch qua các số tài khoản và ID liên hệ
+                                    <span class="text-cs_red">được liệt kê duy nhất tại trang này</span>
+                                    .
+                                </p>
+                                <p>
+                                    2. Mọi yêu cầu chuyển tiền từ các tài khoản khác, dù có thông tin trùng tên "Võ Xuân
+                                    Sang", đều là hành vi
+                                    <span class="text-cs_red font-black">LỪA ĐẢO</span>
+                                    .
+                                </p>
+                                <p>
+                                    3. Luôn kiểm tra con dấu chứng nhận và địa chỉ website
+                                    <span class="bg-cs_red rounded px-2 py-0.5 text-white">MSTSoftware.VN</span>
+                                    trước khi bắt đầu giao dịch.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

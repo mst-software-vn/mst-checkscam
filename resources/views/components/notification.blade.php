@@ -19,9 +19,9 @@
                 <!-- Icon Variant: Shield + Bell -->
                 <div class="relative mb-4">
                     <div
-                        class="flex h-20 w-20 items-center justify-center rounded-3xl bg-red-50 shadow-inner dark:bg-red-900/10"
+                        class="flex h-20 w-20 items-center justify-center rounded-3xl bg-red-50 shadow-inner dark:bg-red-900/50"
                     >
-                        <i class="fa-solid fa-shield-halved text-4xl text-red-500/30"></i>
+                        <i class="fa-solid fa-shield-halved text-4xl text-red-500 dark:text-red-500/70"></i>
                     </div>
                     <div
                         class="absolute -top-2 -right-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-red-500 shadow-lg dark:bg-slate-800"
@@ -38,15 +38,13 @@
 
             <!-- Content Body -->
             <div class="space-y-5 text-center">
-                <div class="rounded-2xl bg-gray-50/50 p-4 sm:p-6 dark:bg-slate-800/50">
-                    <p class="text-sm leading-relaxed font-medium text-gray-700 sm:text-base dark:text-gray-300">
-                        Hiện nay có rất nhiều tài khoản FB, TK ngân hàng, website, group và bot giả mạo
-                        <span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase italic">
-                            Admin/Gdv CS
-                        </span>
-                        nhằm lừa đảo người dùng.
-                    </p>
-                </div>
+                <p class="text-sm leading-relaxed font-medium text-gray-700 sm:text-base dark:text-gray-300">
+                    Hiện nay có rất nhiều tài khoản FB, TK ngân hàng, website, group và bot giả mạo
+                    <span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase italic">
+                        Admin/Gdv CS
+                    </span>
+                    nhằm lừa đảo người dùng.
+                </p>
             </div>
         </div>
 
