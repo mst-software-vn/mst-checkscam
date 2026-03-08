@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
+class Auth extends \Illuminate\Support\Facades\Auth {}
 class AppServiceProvider extends ServiceProvider
 {
     /**

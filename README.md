@@ -28,15 +28,15 @@ Người dùng vào trang chủ → nhập thông tin → hệ thống tìm tron
 
 **Trường hợp 1 — Tìm thấy (có phốt đã duyệt):**
 
-- Hiện banner đỏ: *"⚠️ CẢNH BÁO: Đối tượng này đã bị tố cáo lừa đảo"*
+- Hiện banner đỏ: _"⚠️ CẢNH BÁO: Đối tượng này đã bị tố cáo lừa đảo"_
 - Hiện số lượt tố cáo + tổng tiền thiệt hại (nếu có)
 - Hiện danh sách các bài phốt công khai bên dưới
 - Nút: "Tôi cũng bị lừa bởi đối tượng này" → dẫn sang trang gửi tố cáo với giá trị đã điền sẵn
 
 **Trường hợp 2 — Không tìm thấy:**
 
-- Hiện banner xanh/xám: *"Không tìm thấy thông tin tố cáo nào về đối tượng này"*
-- Ghi chú nhỏ: *"Không có nghĩa là an toàn tuyệt đối. Hãy cẩn thận khi giao dịch."*
+- Hiện banner xanh/xám: _"Không tìm thấy thông tin tố cáo nào về đối tượng này"_
+- Ghi chú nhỏ: _"Không có nghĩa là an toàn tuyệt đối. Hãy cẩn thận khi giao dịch."_
 - Nút: "Tố cáo đối tượng này"
 
 ---
@@ -69,7 +69,7 @@ Ai cũng có thể gửi tố cáo, không cần đăng ký tài khoản.
 
 - Bài phốt vào trạng thái `Chờ duyệt`
 - Không hiện công khai cho đến khi Admin duyệt
-- Người gửi thấy màn hình: *"Cảm ơn! Báo cáo của bạn đang chờ Admin xét duyệt."*
+- Người gửi thấy màn hình: _"Cảm ơn! Báo cáo của bạn đang chờ Admin xét duyệt."_
 
 ### 2. Trạng thái bài phốt
 
@@ -127,9 +127,9 @@ Tính năng cốt lõi giúp người dùng MMO check nhanh mà không cần và
 ### Lệnh người dùng thường dùng
 
 - `/check [STK hoặc SĐT hoặc link FB]`
-    
+
     Bot trả về: Trạng thái (Scam / Không có dữ liệu) + số lượt tố cáo + link xem chi tiết trên web
-    
+
 - `/report` — Bot gửi link trang tố cáo trên web
 
 ### Tự động push thông báo
@@ -146,7 +146,6 @@ Khi Admin duyệt 1 bài phốt mới → Bot tự động đăng lên Telegram 
 ## V. MODULE QUỸ BẢO HIỂM (TÙY CHỌN)
 
 > Module này **không bắt buộc** trong bản cơ bản. Chủ web có thể bật/tắt trong cài đặt. Nếu tắt, toàn bộ UI liên quan tự ẩn đi.
-> 
 
 ### Ý nghĩa
 
@@ -161,8 +160,7 @@ Người dùng nộp tiền vào quỹ của web → được gắn badge **"Đ�
 
 **Hiển thị khi search thấy người có bảo hiểm:**
 
-> ✅ *"Người dùng này đã đóng quỹ bảo hiểm [số tiền]. Liên hệ Admin để được hỗ trợ nếu xảy ra tranh chấp."*
-> 
+> ✅ _"Người dùng này đã đóng quỹ bảo hiểm [số tiền]. Liên hệ Admin để được hỗ trợ nếu xảy ra tranh chấp."_
 
 **Không cần tự động hóa thanh toán trong v1** — Admin xác nhận thủ công là đủ.
 

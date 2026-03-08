@@ -1,10 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function () {
     return view('home');
 });
@@ -49,4 +47,8 @@ Route::get('/giai-quyet-khieu-nai', function () {
 });
 Route::get('/{name}', function ($name) {
     return view('scammer.index', ['name' => $name]);
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 });
