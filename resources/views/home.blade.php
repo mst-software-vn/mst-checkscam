@@ -26,6 +26,7 @@
                     <div class="flex items-center gap-2 mb-4 border-l-4 border-cs_red pl-3">
                         <h2 class="text-lg font-bold dark:text-gray-300 text-gray-800 uppercase">
                             <?php echo date("d/m/Y"); ?>
+
                             CÓ CẢNH BÁO
                         </h2>
                         <span class="bg-red-100 text-cs_red text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
