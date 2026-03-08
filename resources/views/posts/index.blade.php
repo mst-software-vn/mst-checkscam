@@ -52,29 +52,29 @@
 @endphp
 
 @section("content")
-    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
         <x-breadcrumb :links="[['name' => 'Kiến thức MMO', 'url' => '/bai-viet']]" />
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Section Header & Filter -->
-            <div class="mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+            <div class="mb-14 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
                 <!-- Header Text -->
                 <div class="max-w-2xl">
-                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-gray-300 tracking-tight">
+                    <h1 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-gray-300">
                         Học viện
                         <span class="text-gray-600 dark:text-slate-50">Bảo mật & MMO</span>
                     </h1>
-                    <p class="mt-4 text-gray-500 dark:text-gray-400 text-base md:text-lg">
+                    <p class="mt-4 text-base text-gray-500 md:text-lg dark:text-gray-400">
                         Chia sẻ kinh nghiệm kiếm tiền online an toàn, thủ thuật bảo vệ tài sản và cập nhật các hành vi
                         lừa đảo mới nhất.
                     </p>
                 </div>
 
                 <!-- Filters -->
-                <div class="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
+                <div class="flex w-full shrink-0 flex-col gap-4 sm:flex-row lg:w-auto">
                     <!-- Category Select -->
-                    <div class="relative w-full sm:w-auto group">
+                    <div class="group relative w-full sm:w-auto">
                         <select
-                            class="w-full min-w-[200px] appearance-none pl-5 pr-10 py-3.5 bg-white dark:bg-[#0B0F1A] border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-bold text-gray-700 dark:text-gray-300 focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all cursor-pointer shadow-sm"
+                            class="focus:border-cs_red focus:ring-cs_red w-full min-w-[200px] cursor-pointer appearance-none rounded-2xl border border-gray-200 bg-white py-3.5 pr-10 pl-5 text-sm font-bold text-gray-700 shadow-sm transition-all focus:ring-1 focus:outline-none dark:border-gray-800 dark:bg-[#0B0F1A] dark:text-gray-300"
                         >
                             <option value="">Tất cả chủ đề</option>
                             <option value="canh-bao">Cảnh báo Scam</option>
@@ -83,19 +83,19 @@
                             <option value="tin-tuc">Tin tức MMO</option>
                         </select>
                         <i
-                            class="fa-solid fa-chevron-down absolute right-4 top-1/3 text-gray-400 text-sm group-hover:text-cs_red transition-colors"
+                            class="fa-solid fa-chevron-down group-hover:text-cs_red absolute top-1/3 right-4 text-sm text-gray-400 transition-colors"
                         ></i>
                     </div>
 
                     <!-- Search Box -->
-                    <div class="relative w-full sm:w-auto group">
+                    <div class="group relative w-full sm:w-auto">
                         <input
                             type="text"
                             placeholder="Tìm thủ thuật, cảnh báo..."
-                            class="w-full sm:w-[280px] pl-5 pr-12 py-3.5 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-800 rounded-2xl text-sm font-medium focus:outline-none focus:border-cs_red focus:ring-1 focus:ring-cs_red transition-all dark:text-gray-300 dark:placeholder-gray-500 shadow-sm"
+                            class="focus:border-cs_red focus:ring-cs_red w-full rounded-2xl border border-gray-200 bg-gray-50 py-3.5 pr-12 pl-5 text-sm font-medium shadow-sm transition-all focus:ring-1 focus:outline-none sm:w-[280px] dark:border-gray-800 dark:bg-slate-900/50 dark:text-gray-300 dark:placeholder-gray-500"
                         />
                         <button
-                            class="absolute right-4 top-1/4 text-gray-400 group-hover:text-cs_red transition-colors"
+                            class="group-hover:text-cs_red absolute top-1/4 right-4 text-gray-400 transition-colors"
                         >
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -104,92 +104,92 @@
             </div>
 
             <!-- Posts Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
                 @foreach ($posts as $index => $post)
                     @if ($index == 0)
                         <!-- Hero Featured Post -->
-                        <article class="md:col-span-2 lg:col-span-3 group">
+                        <article class="group md:col-span-2 lg:col-span-3">
                             <a
                                 href="/bai-viet/{{ $post["id"] }}"
-                                class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                                class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12"
                             >
-                                <div class="lg:col-span-7 overflow-hidden rounded-3xl">
+                                <div class="overflow-hidden rounded-3xl lg:col-span-7">
                                     <img
                                         src="{{ $post["image"] }}"
-                                        class="w-full h-[400px] object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                                        class="h-[400px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                                         alt="{{ $post["title"] }}"
                                     />
                                 </div>
                                 <div class="lg:col-span-5">
-                                    <div class="flex items-center gap-3 mb-4">
+                                    <div class="mb-4 flex items-center gap-3">
                                         <span
-                                            class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-wider rounded-md"
+                                            class="rounded-md bg-gray-100 px-3 py-1 text-[10px] font-bold tracking-wider text-gray-500 uppercase dark:bg-slate-800 dark:text-gray-400"
                                         >
                                             {{ $post["category"] }}
                                         </span>
-                                        <span class="text-gray-400 text-xs font-medium">{{ $post["date"] }}</span>
+                                        <span class="text-xs font-medium text-gray-400">{{ $post["date"] }}</span>
                                     </div>
                                     <h2
-                                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-gray-300 leading-tight group-hover:text-cs_red transition-colors duration-300"
+                                        class="group-hover:text-cs_red text-2xl leading-tight font-bold text-slate-900 transition-colors duration-300 md:text-3xl dark:text-gray-300"
                                     >
                                         {{ $post["title"] }}
                                     </h2>
                                     <p
-                                        class="mt-4 text-gray-500 dark:text-gray-400 line-clamp-3 text-base leading-relaxed"
+                                        class="mt-4 line-clamp-3 text-base leading-relaxed text-gray-500 dark:text-gray-400"
                                     >
                                         {{ $post["excerpt"] }}
                                     </p>
                                     <div
-                                        class="mt-6 flex items-center gap-2 text-gray-400 group-hover:text-cs_red font-bold text-sm uppercase tracking-wider transition-colors"
+                                        class="group-hover:text-cs_red mt-6 flex items-center gap-2 text-sm font-bold tracking-wider text-gray-400 uppercase transition-colors"
                                     >
                                         Đọc tiếp
                                         <i
-                                            class="fa-solid fa-arrow-right-long mt-0.5 group-hover:translate-x-1 transition-transform"
+                                            class="fa-solid fa-arrow-right-long mt-0.5 transition-transform group-hover:translate-x-1"
                                         ></i>
                                     </div>
                                 </div>
                             </a>
                         </article>
                         <div
-                            class="md:col-span-2 lg:col-span-3 border-b border-gray-100 dark:border-gray-800 my-4"
+                            class="my-4 border-b border-gray-100 md:col-span-2 lg:col-span-3 dark:border-gray-800"
                         ></div>
                     @else
                         <!-- Regular Post -->
                         <article class="group">
-                            <a href="/bai-viet/{{ $post["id"] }}" class="flex flex-col h-full">
-                                <div class="relative overflow-hidden rounded-2xl aspect-16/10 mb-6">
+                            <a href="/bai-viet/{{ $post["id"] }}" class="flex h-full flex-col">
+                                <div class="relative mb-6 aspect-16/10 overflow-hidden rounded-2xl">
                                     <img
                                         src="{{ $post["image"] }}"
-                                        class="w-full h-full object-cover transition-transform duration-500"
+                                        class="h-full w-full object-cover transition-transform duration-500"
                                         alt="{{ $post["title"] }}"
                                     />
                                 </div>
-                                <div class="flex flex-col grow">
-                                    <div class="flex items-center gap-3 mb-3">
+                                <div class="flex grow flex-col">
+                                    <div class="mb-3 flex items-center gap-3">
                                         <span
-                                            class="text-gray-400 group-hover:text-cs_red text-[10px] font-bold uppercase tracking-widest transition-colors duration-300"
+                                            class="group-hover:text-cs_red text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors duration-300"
                                         >
                                             {{ $post["category"] }}
                                         </span>
-                                        <span class="text-gray-400 text-[10px] font-bold uppercase">
+                                        <span class="text-[10px] font-bold text-gray-400 uppercase">
                                             {{ $post["date"] }}
                                         </span>
                                     </div>
                                     <h3
-                                        class="text-xl font-bold text-slate-900 dark:text-gray-300 leading-snug group-hover:text-cs_red transition-colors duration-500"
+                                        class="group-hover:text-cs_red text-xl leading-snug font-bold text-slate-900 transition-colors duration-500 dark:text-gray-300"
                                     >
                                         {{ $post["title"] }}
                                     </h3>
                                     <p
-                                        class="mt-3 text-gray-500 dark:text-gray-400 line-clamp-2 text-sm leading-relaxed"
+                                        class="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400"
                                     >
                                         {{ $post["excerpt"] }}
                                     </p>
                                     <div
-                                        class="mt-auto pt-6 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 group-hover:text-cs_red transition-colors"
+                                        class="group-hover:text-cs_red mt-auto flex items-center gap-2 pt-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition-colors"
                                     >
                                         Xem chi tiết
-                                        <i class="fa-solid fa-chevron-right text-[10px] translate-y-[0.5px]"></i>
+                                        <i class="fa-solid fa-chevron-right translate-y-[0.5px] text-[10px]"></i>
                                     </div>
                                 </div>
                             </a>
@@ -199,33 +199,33 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-24 pt-12 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center">
-                <p class="text-sm text-gray-400 font-medium italic">Hiển thị 5 của 24 bài viết</p>
+            <div class="mt-24 flex items-center justify-between border-t border-gray-100 pt-12 dark:border-gray-800">
+                <p class="text-sm font-medium text-gray-400 italic">Hiển thị 5 của 24 bài viết</p>
                 <div class="flex items-center gap-2">
                     <button
-                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 text-gray-400 hover:border-cs_red hover:text-cs_red transition-all"
+                        class="hover:border-cs_red hover:text-cs_red flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all dark:border-gray-800"
                     >
                         <i class="fa-solid fa-chevron-left text-xs"></i>
                     </button>
                     <div class="flex gap-1">
                         <span
-                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-cs_red text-white font-bold text-sm"
+                            class="bg-cs_red flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white"
                         >
                             1
                         </span>
                         <span
-                            class="w-10 h-10 flex items-center justify-center rounded-xl text-gray-500 font-bold text-sm hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer"
+                            class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800"
                         >
                             2
                         </span>
                         <span
-                            class="w-10 h-10 flex items-center justify-center rounded-xl text-gray-500 font-bold text-sm hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer"
+                            class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800"
                         >
                             3
                         </span>
                     </div>
                     <button
-                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 text-gray-400 hover:border-cs_red hover:text-cs_red transition-all"
+                        class="hover:border-cs_red hover:text-cs_red flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all dark:border-gray-800"
                     >
                         <i class="fa-solid fa-chevron-right text-xs"></i>
                     </button>

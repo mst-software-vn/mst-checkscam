@@ -3,42 +3,42 @@
 @section("title", "[ Tố Cáo kẻ lừa đảo ] Cập nhật thêm data vào hệ thống")
 
 @section("content")
-    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
         <x-breadcrumb :links="[['name' => 'Tố cáo lừa đảo', 'url' => '/to-cao-lua-dao']]" />
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
                 <!-- Left Column: Guidance & Stats (SEO Content) -->
-                <aside class="lg:col-span-4 space-y-4 md:space-y-6 order-2 lg:order-1 md:mt-15">
+                <aside class="order-2 space-y-4 md:mt-15 md:space-y-6 lg:order-1 lg:col-span-4">
                     <div
-                        class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-md p-5 md:p-6 shadow-xs"
+                        class="rounded-md border border-gray-200 bg-white p-5 shadow-xs md:p-6 dark:border-gray-800 dark:bg-slate-900"
                     >
                         <h2
-                            class="text-[13px] md:text-md font-semibold text-gray-800 dark:text-gray-100 uppercase tracking-widest mb-4 flex items-center gap-2"
+                            class="md:text-md mb-4 flex items-center gap-2 text-[13px] font-semibold tracking-widest text-gray-800 uppercase dark:text-gray-100"
                         >
-                            <span class="w-1 h-4 bg-cs_red rounded-full"></span>
+                            <span class="bg-cs_red h-4 w-1 rounded-full"></span>
                             Tại sao nên báo cáo?
                         </h2>
                         <ul class="space-y-4">
                             <li class="flex gap-3">
-                                <i class="fa-solid fa-check-double text-cs_blue text-xs md:text-sm mt-1"></i>
+                                <i class="fa-solid fa-check-double text-cs_blue mt-1 text-xs md:text-sm"></i>
                                 <p
-                                    class="text-[12px] md:text-sm font-semibold text-gray-500 dark:text-gray-400 leading-relaxed"
+                                    class="text-[12px] leading-relaxed font-semibold text-gray-500 md:text-sm dark:text-gray-400"
                                 >
                                     Giúp cộng đồng nhận diện kẻ lừa đảo ngay lập tức qua công cụ tra cứu.
                                 </p>
                             </li>
                             <li class="flex gap-3">
-                                <i class="fa-solid fa-check-double text-cs_blue text-xs md:text-sm mt-1"></i>
+                                <i class="fa-solid fa-check-double text-cs_blue mt-1 text-xs md:text-sm"></i>
                                 <p
-                                    class="text-[12px] md:text-sm font-semibold text-gray-500 dark:text-gray-400 leading-relaxed"
+                                    class="text-[12px] leading-relaxed font-semibold text-gray-500 md:text-sm dark:text-gray-400"
                                 >
                                     Tạo áp lực lên các tài khoản ngân hàng "đen", hạn chế khả năng nhận tiền lừa đảo.
                                 </p>
                             </li>
                             <li class="flex gap-3">
-                                <i class="fa-solid fa-check-double text-cs_blue text-xs md:text-sm mt-1"></i>
+                                <i class="fa-solid fa-check-double text-cs_blue mt-1 text-xs md:text-sm"></i>
                                 <p
-                                    class="text-[12px] md:text-sm font-semibold text-gray-500 dark:text-gray-400 leading-relaxed"
+                                    class="text-[12px] leading-relaxed font-semibold text-gray-500 md:text-sm dark:text-gray-400"
                                 >
                                     Xây dựng tệp dữ liệu sạch để phối hợp với các đơn vị bảo mật/pháp luật.
                                 </p>
@@ -47,30 +47,30 @@
                     </div>
 
                     <div
-                        class="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/30 rounded-md p-5 md:p-6"
+                        class="rounded-md border border-blue-100 bg-blue-50/50 p-5 md:p-6 dark:border-blue-900/30 dark:bg-blue-900/10"
                     >
                         <h3
-                            class="text-[13px] md:text-sm font-semibold text-cs_blue uppercase tracking-widest mb-4 flex items-center gap-2"
+                            class="text-cs_blue mb-4 flex items-center gap-2 text-[13px] font-semibold tracking-widest uppercase md:text-sm"
                         >
                             <i class="fa-solid fa-shield-halved"></i>
                             Quy trình xét duyệt
                         </h3>
-                        <div class="space-y-5 relative">
-                            <div class="absolute left-1.5 top-2 bottom-2 w-[1px] bg-blue-200 dark:bg-blue-800/50"></div>
+                        <div class="relative space-y-5">
+                            <div class="absolute top-2 bottom-2 left-1.5 w-[1px] bg-blue-200 dark:bg-blue-800/50"></div>
                             <div class="relative pl-6">
                                 <div
-                                    class="absolute left-0 top-1.5 w-3 h-3 bg-white dark:bg-slate-900 border-2 border-cs_blue rounded-full"
+                                    class="border-cs_blue absolute top-1.5 left-0 h-3 w-3 rounded-full border-2 bg-white dark:bg-slate-900"
                                 ></div>
-                                <p class="text-[12px] md:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                <p class="text-[12px] font-semibold text-gray-700 md:text-sm dark:text-gray-300">
                                     Gửi thông tin:
                                     <span class="font-normal">Bạn điền form bên cạnh và đính kèm bằng chứng.</span>
                                 </p>
                             </div>
                             <div class="relative pl-6">
                                 <div
-                                    class="absolute left-0 top-1.5 w-3 h-3 bg-white dark:bg-slate-900 border-2 border-blue-300 rounded-full"
+                                    class="absolute top-1.5 left-0 h-3 w-3 rounded-full border-2 border-blue-300 bg-white dark:bg-slate-900"
                                 ></div>
-                                <p class="text-[12px] md:text-sm font-semibold text-gray-500 dark:text-gray-400 italic">
+                                <p class="text-[12px] font-semibold text-gray-500 italic md:text-sm dark:text-gray-400">
                                     Xác minh:
                                     <span class="font-normal not-italic">
                                         Đội ngũ Admin kiểm tra tính xác thực (30p - 12h).
@@ -79,9 +79,9 @@
                             </div>
                             <div class="relative pl-6">
                                 <div
-                                    class="absolute left-0 top-1.5 w-3 h-3 bg-white dark:bg-slate-900 border-2 border-blue-100 rounded-full"
+                                    class="absolute top-1.5 left-0 h-3 w-3 rounded-full border-2 border-blue-100 bg-white dark:bg-slate-900"
                                 ></div>
-                                <p class="text-[12px] md:text-sm font-semibold text-gray-400 dark:text-gray-500">
+                                <p class="text-[12px] font-semibold text-gray-400 md:text-sm dark:text-gray-500">
                                     Công khai:
                                     <span class="font-normal">Bài viết hiển thị trên hệ thống CheckScam.</span>
                                 </p>
@@ -90,28 +90,28 @@
                     </div>
 
                     <!-- SEO Section: Common Keywords/Types -->
-                    <div class="p-2 border-t border-gray-100 dark:border-gray-800">
-                        <p class="text-[11px] md:text-md font-semibold text-gray-400 uppercase tracking-tighter mb-3">
+                    <div class="border-t border-gray-100 p-2 dark:border-gray-800">
+                        <p class="md:text-md mb-3 text-[11px] font-semibold tracking-tighter text-gray-400 uppercase">
                             Các hình thức phổ biến:
                         </p>
                         <div class="flex flex-wrap gap-1.5 md:gap-2">
                             <span
-                                class="text-[10px] md:text-xs px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-sm text-gray-500 border border-gray-200/50 dark:border-gray-700/50"
+                                class="rounded-sm border border-gray-200/50 bg-gray-100 px-2.5 py-1 text-[10px] text-gray-500 md:text-xs dark:border-gray-700/50 dark:bg-gray-800"
                             >
                                 Giả mạo Telegram
                             </span>
                             <span
-                                class="text-[10px] md:text-xs px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-sm text-gray-500 border border-gray-200/50 dark:border-gray-700/50"
+                                class="rounded-sm border border-gray-200/50 bg-gray-100 px-2.5 py-1 text-[10px] text-gray-500 md:text-xs dark:border-gray-700/50 dark:bg-gray-800"
                             >
                                 Lừa đảo CTV
                             </span>
                             <span
-                                class="text-[10px] md:text-xs px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-sm text-gray-500 border border-gray-200/50 dark:border-gray-700/50"
+                                class="rounded-sm border border-gray-200/50 bg-gray-100 px-2.5 py-1 text-[10px] text-gray-500 md:text-xs dark:border-gray-700/50 dark:bg-gray-800"
                             >
                                 Scam Trading
                             </span>
                             <span
-                                class="text-[10px] md:text-xs px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-sm text-gray-500 border border-gray-200/50 dark:border-gray-700/50"
+                                class="rounded-sm border border-gray-200/50 bg-gray-100 px-2.5 py-1 text-[10px] text-gray-500 md:text-xs dark:border-gray-700/50 dark:bg-gray-800"
                             >
                                 Fake Bank App
                             </span>
@@ -120,30 +120,30 @@
                 </aside>
 
                 <!-- Right Column: The Main Form -->
-                <section class="lg:col-span-8 order-1 lg:order-2">
+                <section class="order-1 lg:order-2 lg:col-span-8">
                     <!-- Tab Switcher: Integrated Style -->
-                    <div class="flex gap-1 overflow-x-auto no-scrollbar whitespace-nowrap">
+                    <div class="no-scrollbar flex gap-1 overflow-x-auto whitespace-nowrap">
                         <button
                             onclick="switchTab('bank')"
                             id="tab-bank"
-                            class="px-5 md:px-8 py-3.5 cursor-pointer text-[11px] md:text-sm font-semibold uppercase tracking-wider rounded-t-md border-b transition-all tab-active-red dark:bg-slate-900flex-1 md:flex-none text-center"
+                            class="tab-active-red dark:bg-slate-900flex-1 cursor-pointer rounded-t-md border-b px-5 py-3.5 text-center text-[11px] font-semibold tracking-wider uppercase transition-all md:flex-none md:px-8 md:text-sm"
                         >
                             Số tài khoản
                         </button>
                         <button
                             onclick="switchTab('website')"
                             id="tab-website"
-                            class="px-5 md:px-8 py-3.5 text-[11px] cursor-pointer md:text-sm font-semibold uppercase tracking-wider rounded-t-md text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 transition-all border-b border-transparent flex-1 md:flex-none text-center"
+                            class="flex-1 cursor-pointer rounded-t-md border-b border-transparent px-5 py-3.5 text-center text-[11px] font-semibold tracking-wider text-gray-400 uppercase transition-all hover:text-gray-600 md:flex-none md:px-8 md:text-sm dark:text-gray-600 dark:hover:text-gray-300"
                         >
                             Trang web lừa đảo
                         </button>
                     </div>
 
                     <div
-                        class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-md p-5 sm:p-8 md:p-10 shadow-xs relative overflow-hidden"
+                        class="relative overflow-hidden rounded-md border border-gray-200 bg-white p-5 shadow-xs sm:p-8 md:p-10 dark:border-gray-800 dark:bg-slate-900"
                     >
                         <!-- Form Bank Search Style -->
-                        <h4 class="text-cs_red mb-8 font-semibold text-center uppercase">Khai báo</h4>
+                        <h4 class="text-cs_red mb-8 text-center font-semibold uppercase">Khai báo</h4>
                         <form
                             id="form-bank"
                             action="#"
@@ -152,10 +152,10 @@
                             class="space-y-6 md:space-y-8"
                         >
                             @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                            <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                                 <div class="space-y-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Chủ tài khoản
                                         <span class="text-cs_red">*</span>
@@ -165,12 +165,12 @@
                                         name="bank_owner"
                                         required
                                         placeholder="NGUYEN VAN A"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 uppercase outline-none"
+                                        class="focus:border-cs_red w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 uppercase outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     />
                                 </div>
                                 <div class="space-y-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Số tài khoản / SĐT
                                         <span class="text-cs_red">*</span>
@@ -180,12 +180,12 @@
                                         name="bank_number"
                                         required
                                         placeholder="Nhập dãy số..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none"
+                                        class="focus:border-cs_red w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     />
                                 </div>
                                 <div class="space-y-2 md:col-span-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Ngân hàng / Ví điện tử
                                         <span class="text-cs_red">*</span>
@@ -195,27 +195,27 @@
                                         name="bank_name"
                                         required
                                         placeholder="Vietcombank, MB, Momo, Zalopay..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none"
+                                        class="focus:border-cs_red w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     />
                                 </div>
                             </div>
 
                             <div class="space-y-3">
                                 <label
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                    class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                 >
                                     Ảnh bằng chứng
                                     <span class="text-cs_red">*</span>
                                 </label>
                                 <label
                                     for="bank_evidence"
-                                    class="flex flex-col items-center justify-center py-10 md:py-14 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-md bg-gray-50/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-all cursor-pointer group"
+                                    class="group flex cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-200 bg-gray-50/50 py-10 transition-all hover:bg-white md:py-14 dark:border-gray-800 dark:bg-slate-800/50 dark:hover:bg-slate-800"
                                 >
                                     <i
-                                        class="fa-solid fa-camera-retro text-2xl md:text-3xl text-gray-300 group-hover:text-cs_red mb-3 transition-colors"
+                                        class="fa-solid fa-camera-retro group-hover:text-cs_red mb-3 text-2xl text-gray-300 transition-colors md:text-3xl"
                                     ></i>
                                     <span
-                                        class="text-[9px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-widest group-hover:text-cs_red transition-colors"
+                                        class="group-hover:text-cs_red text-[9px] font-semibold tracking-widest text-gray-400 uppercase transition-colors md:text-[11px]"
                                     >
                                         Tải bill & đoạn chat (JPG, PNG)
                                     </span>
@@ -225,7 +225,7 @@
 
                             <div class="space-y-2">
                                 <label
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                    class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                 >
                                     Chi tiết sự việc
                                     <span class="text-cs_red">*</span>
@@ -233,18 +233,18 @@
                                 <textarea
                                     rows="5"
                                     placeholder="Họ đã lừa đảo bạn bằng cách nào? số tiền bao nhiêu?..."
-                                    class="w-full px-4 py-4 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-300 transition-all outline-none resize-none leading-relaxed"
+                                    class="focus:border-cs_red w-full resize-none rounded-md border border-gray-200 bg-gray-50 px-4 py-4 text-sm leading-relaxed font-medium text-gray-700 transition-all outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                 ></textarea>
                             </div>
 
-                            <h4 class="text-cs_blue font-semibold text-center uppercase">Người xác thực</h4>
+                            <h4 class="text-cs_blue text-center font-semibold uppercase">Người xác thực</h4>
                             <!-- Integrated Identity Verification -->
                             <div
-                                class="p-5 md:p-6 rounded-md border border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row gap-5 md:gap-6"
+                                class="flex flex-col gap-5 rounded-md border border-gray-100 p-5 sm:flex-row md:gap-6 md:p-6 dark:border-gray-800"
                             >
                                 <div class="flex-1 space-y-2">
                                     <label
-                                        class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest"
+                                        class="text-[10px] font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         Tên thật
                                         <span class="text-cs_red">*</span>
@@ -252,12 +252,12 @@
                                     <input
                                         type="text"
                                         placeholder="Họ và tên..."
-                                        class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-md text-sm font-semibold outline-none focus:border-cs_blue shadow-sm"
+                                        class="focus:border-cs_blue w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-sm font-semibold shadow-sm outline-none dark:border-gray-800 dark:bg-slate-900"
                                     />
                                 </div>
                                 <div class="flex-1 space-y-2">
                                     <label
-                                        class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest"
+                                        class="text-[10px] font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         Số Zalo / Liên hệ
                                         <span class="text-cs_red">*</span>
@@ -265,7 +265,7 @@
                                     <input
                                         type="text"
                                         placeholder="SĐT Zalo..."
-                                        class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-md text-sm font-semibold outline-none focus:border-cs_blue shadow-sm"
+                                        class="focus:border-cs_blue w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-sm font-semibold shadow-sm outline-none dark:border-gray-800 dark:bg-slate-900"
                                     />
                                 </div>
                             </div>
@@ -275,11 +275,11 @@
                                     id="confirm_bank"
                                     type="checkbox"
                                     required
-                                    class="w-5 h-5 md:w-4 md:h-4 rounded border-gray-300 text-cs_red focus:ring-0 cursor-pointer"
+                                    class="text-cs_red h-5 w-5 cursor-pointer rounded border-gray-300 focus:ring-0 md:h-4 md:w-4"
                                 />
                                 <label
                                     for="confirm_bank"
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase leading-relaxed cursor-pointer select-none"
+                                    class="cursor-pointer text-[10px] leading-relaxed font-semibold text-gray-500 uppercase select-none md:text-[11px] dark:text-gray-400"
                                 >
                                     Tôi cam kết nội dung trên là sự thật.
                                 </label>
@@ -288,7 +288,7 @@
                             <div class="flex justify-center pt-2">
                                 <button
                                     type="submit"
-                                    class="w-full sm:w-auto px-12 py-3 md:py-4 bg-cs_red hover:bg-black text-white rounded-md font-semibold text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                                    class="bg-cs_red w-full rounded-md px-12 py-3 text-xs font-semibold tracking-widest text-white uppercase shadow-lg transition-all hover:bg-black active:scale-95 sm:w-auto md:py-4 md:text-sm"
                                 >
                                     Gửi Duyệt Bài Viết
                                 </button>
@@ -304,10 +304,10 @@
                             class="hidden space-y-6 md:space-y-8"
                         >
                             @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                            <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                                 <div class="space-y-2 md:col-span-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Địa chỉ (URL) Website
                                         <span class="text-cs_red">*</span>
@@ -317,12 +317,12 @@
                                         name="web_url"
                                         required
                                         placeholder="https://domain-lua-dao.vn"
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none"
+                                        class="focus:border-cs_blue w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     />
                                 </div>
                                 <div class="space-y-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Phân loại
                                         <span class="text-cs_red">*</span>
@@ -330,7 +330,7 @@
                                     <select
                                         name="category"
                                         required
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none cursor-pointer"
+                                        class="focus:border-cs_blue w-full cursor-pointer rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     >
                                         <option value="">Chọn loại hình</option>
                                         <option value="fake">Giả mạo ngân hàng/app</option>
@@ -341,34 +341,34 @@
                                 </div>
                                 <div class="space-y-2">
                                     <label
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                     >
                                         Nơi phát hiện
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="FB Ads, Telegram, SMS..."
-                                        class="w-full px-4 py-3.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_blue focus:ring-0 text-sm font-semibold text-gray-900 dark:text-gray-300 outline-none"
+                                        class="focus:border-cs_blue w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     />
                                 </div>
                             </div>
 
                             <div class="space-y-3">
                                 <label
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                    class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                 >
                                     Ảnh chụp website
                                     <span class="text-cs_red">*</span>
                                 </label>
                                 <label
                                     for="web_evidence"
-                                    class="flex flex-col items-center justify-center py-10 md:py-12 border-2 border-dashed border-gray-100 dark:border-gray-800 rounded-md hover:bg-gray-50 dark:hover:bg-slate-800 transition-all cursor-pointer group"
+                                    class="group flex cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-100 py-10 transition-all hover:bg-gray-50 md:py-12 dark:border-gray-800 dark:hover:bg-slate-800"
                                 >
                                     <i
-                                        class="fa-solid fa-desktop text-2xl text-gray-300 group-hover:text-cs_blue mb-2 transition-colors"
+                                        class="fa-solid fa-desktop group-hover:text-cs_blue mb-2 text-2xl text-gray-300 transition-colors"
                                     ></i>
                                     <span
-                                        class="text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-widest group-hover:text-cs_blue transition-colors"
+                                        class="group-hover:text-cs_blue text-[10px] font-semibold tracking-widest text-gray-400 uppercase transition-colors md:text-[11px]"
                                     >
                                         Tải ảnh chụp màn hình
                                     </span>
@@ -377,7 +377,7 @@
                             </div>
                             <div class="space-y-2">
                                 <label
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-800 dark:text-gray-200 uppercase tracking-widest ml-1"
+                                    class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
                                 >
                                     Mô tả
                                     <span class="text-cs_red">*</span>
@@ -385,7 +385,7 @@
                                 <textarea
                                     rows="5"
                                     placeholder="Họ đã lừa đảo bạn bằng cách nào? số tiền bao nhiêu?..."
-                                    class="w-full px-4 py-4 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md focus:border-cs_red focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-300 transition-all outline-none resize-none leading-relaxed"
+                                    class="focus:border-cs_red w-full resize-none rounded-md border border-gray-200 bg-gray-50 px-4 py-4 text-sm leading-relaxed font-medium text-gray-700 transition-all outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                 ></textarea>
                             </div>
                             <div class="flex items-center gap-3">
@@ -393,11 +393,11 @@
                                     id="confirm_bank"
                                     type="checkbox"
                                     required
-                                    class="w-5 h-5 md:w-4 md:h-4 rounded border-gray-300 text-cs_red focus:ring-0 cursor-pointer"
+                                    class="text-cs_red h-5 w-5 cursor-pointer rounded border-gray-300 focus:ring-0 md:h-4 md:w-4"
                                 />
                                 <label
                                     for="confirm_bank"
-                                    class="text-[10px] md:text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase leading-relaxed cursor-pointer select-none"
+                                    class="cursor-pointer text-[10px] leading-relaxed font-semibold text-gray-500 uppercase select-none md:text-[11px] dark:text-gray-400"
                                 >
                                     Tôi cam kết nội dung trên là sự thật.
                                 </label>
@@ -406,7 +406,7 @@
                             <div class="flex justify-center pt-2">
                                 <button
                                     type="submit"
-                                    class="w-full sm:w-auto px-12 py-4 bg-cs_red hover:bg-black text-white rounded-md font-semibold text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                                    class="bg-cs_red w-full rounded-md px-12 py-4 text-sm font-semibold tracking-widest text-white uppercase shadow-lg transition-all hover:bg-black active:scale-95 sm:w-auto"
                                 >
                                     Báo cáo Website
                                 </button>
@@ -417,37 +417,37 @@
             </div>
 
             <!-- SEO: Informational Footer Section -->
-            <article class="mt-16 md:mt-24 max-w-4xl mx-auto space-y-10 md:space-y-14">
+            <article class="mx-auto mt-16 max-w-4xl space-y-10 md:mt-24 md:space-y-14">
                 <div class="text-center">
                     <h2
-                        class="text-md md:text-lg font-semibold text-gray-800 dark:text-gray-100 uppercase tracking-[0.2em] mb-4"
+                        class="text-md mb-4 font-semibold tracking-[0.2em] text-gray-800 uppercase md:text-lg dark:text-gray-100"
                     >
                         Các câu hỏi liên quan
                     </h2>
-                    <div class="w-12 h-1 bg-cs_red mx-auto rounded-full"></div>
+                    <div class="bg-cs_red mx-auto h-1 w-12 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
                     <section
-                        class="space-y-4 p-6 bg-white dark:bg-slate-900/50 rounded-md border border-gray-100 dark:border-gray-800/50"
+                        class="space-y-4 rounded-md border border-gray-100 bg-white p-6 dark:border-gray-800/50 dark:bg-slate-900/50"
                     >
-                        <h3 class="text-sm font-semibold text-cs_red uppercase tracking-wider flex items-center gap-3">
+                        <h3 class="text-cs_red flex items-center gap-3 text-sm font-semibold tracking-wider uppercase">
                             <i class="fa-solid fa-circle-question text-xs"></i>
                             Thông tin có được bảo mật?
                         </h3>
-                        <p class="text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed font-semibold italic">
+                        <p class="text-[13px] leading-relaxed font-semibold text-gray-500 italic dark:text-gray-400">
                             Dữ liệu người tố cáo chỉ được dùng để xác minh nội bộ và hoàn toàn không công khai để bảo vệ
                             danh tính cá nhân.
                         </p>
                     </section>
                     <section
-                        class="space-y-4 p-6 bg-white dark:bg-slate-900/50 rounded-md border border-gray-100 dark:border-gray-800/50"
+                        class="space-y-4 rounded-md border border-gray-100 bg-white p-6 dark:border-gray-800/50 dark:bg-slate-900/50"
                     >
-                        <h3 class="text-sm font-semibold text-cs_blue uppercase tracking-wider flex items-center gap-3">
+                        <h3 class="text-cs_blue flex items-center gap-3 text-sm font-semibold tracking-wider uppercase">
                             <i class="fa-solid fa-hand-holding-heart text-xs"></i>
                             CheckScam có thu phí không?
                         </h3>
-                        <p class="text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed font-semibold italic">
+                        <p class="text-[13px] leading-relaxed font-semibold text-gray-500 italic dark:text-gray-400">
                             CheckScam là dự án cộng đồng phi lợi nhuận. Mọi hoạt động tố cáo và tra cứu đều miễn phí
                             100%.
                         </p>

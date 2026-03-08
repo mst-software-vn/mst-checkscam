@@ -3,15 +3,15 @@
     <x-head />
 
     <body
-        class="antialiased min-h-screen flex flex-col transition-colors duration-300 dark:bg-dark_bg dark:text-gray-100"
+        class="dark:bg-dark_bg flex min-h-screen flex-col antialiased transition-colors duration-300 dark:text-gray-100"
     >
         <x-header />
 
         <!-- Trang trí nền nhẹ -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-40 -z-1000">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
+        <div class="pointer-events-none absolute top-0 left-1/2 -z-1000 h-full w-full -translate-x-1/2 opacity-40">
+            <div class="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-blue-50 blur-3xl dark:bg-blue-900/10"></div>
             <div
-                class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl"
+                class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-50 blur-3xl dark:bg-red-900/10"
             ></div>
         </div>
 
