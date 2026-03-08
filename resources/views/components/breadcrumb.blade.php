@@ -5,7 +5,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center text-[11px] font-black tracking-widest text-gray-400 uppercase">
             <ol class="inline-flex items-center space-x-2">
-                <li><a href="/" class="hover:text-cs_blue transition-colors">CheckScam</a></li>
+                <li><a href="/" class="hover:text-cs_blue transition-colors">Trang chủ</a></li>
                 <li><i class="fa-solid fa-chevron-right text-[7px] opacity-50"></i></li>
                 @for ($i = 0; $i < count($links) - 1; $i++)
                     <li>

@@ -205,13 +205,13 @@
                             </p>
                             <div class="flex flex-wrap gap-3 pt-1">
                                 <a
-                                    href="#"
+                                    href="/lien-he-admin"
                                     class="bg-cs_blue rounded-full px-5 py-2 text-[10px] font-bold tracking-wider text-white uppercase transition-all hover:bg-blue-600"
                                 >
                                     Liên hệ Admin để đóng quỹ
                                 </a>
                                 <a
-                                    href="#"
+                                    href="/dieu-khoan"
                                     class="rounded-full border border-gray-200 px-5 py-2 text-[10px] font-bold tracking-wider text-gray-700 uppercase transition-all hover:bg-gray-50 dark:border-slate-700 dark:text-gray-300 dark:hover:bg-slate-800"
                                 >
                                     Xem điều khoản
