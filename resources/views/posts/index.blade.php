@@ -65,12 +65,9 @@
             <div class="mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
                 <!-- Header Text -->
                 <div class="max-w-2xl">
-                    <div class="inline-flex items-center gap-2 mb-4">
-                        <span class="w-8 h-[2px] bg-cs_red"></span>
-                        <span class="text-cs_red font-bold text-xs uppercase tracking-widest">Kiến thức MMO</span>
-                    </div>
+
                     <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-gray-300 tracking-tight">
-                        Học viện <span class="text-gray-400">Bảo mật & MMO</span>
+                        Học viện <span class="text-gray-600 dark:text-slate-50">Bảo mật & MMO</span>
                     </h1>
                     <p class="mt-4 text-gray-500 dark:text-gray-400 text-base md:text-lg">
                         Chia sẻ kinh nghiệm kiếm tiền online an toàn, thủ thuật bảo vệ tài sản và cập nhật các hành vi lừa
@@ -91,7 +88,7 @@
                             <option value="tin-tuc">Tin tức MMO</option>
                         </select>
                         <i
-                            class="fa-solid fa-chevron-down absolute right-4 top-1/4 text-gray-400 text-sm group-hover:text-cs_red transition-colors"></i>
+                            class="fa-solid fa-chevron-down absolute right-4 top-1/3 text-gray-400 text-sm group-hover:text-cs_red transition-colors"></i>
                     </div>
 
                     <!-- Search Box -->

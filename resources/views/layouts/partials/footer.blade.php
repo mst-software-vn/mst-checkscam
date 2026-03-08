@@ -1,7 +1,7 @@
 <!-- Footer -->
 <footer class="relative bg-[#0F172A] dark:bg-slate-950 text-gray-300 pt-16 pb-20 md:pb-12 mt-20 overflow-hidden">
     <!-- Decorative Elements -->
-    <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-cs_blue via-cs_blue to-cs_green"></div>
+    <div class="absolute top-0 left-0 w-full h-1 bg-cs_blue"></div>
     <div class="absolute -top-24 -left-24 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
     <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
 
@@ -37,17 +37,17 @@
                 <h4 class="text-white font-black uppercase text-xs tracking-widest border-l-4 border-cs_blue pl-3">Hệ
                     Thống</h4>
                 <ul class="space-y-3">
-                    <li><a href="#"
+                    <li><a href="/"
                             class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Kiểm tra
                             Scam</a></li>
                     <li><a href="/bao-hiem-cs"
                             class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Quỹ bảo
                             hiểm</a></li>
-                    <li><a href="#"
+                    <li><a href="/api-checkscam"
                             class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">API Check
                             Scam</a>
                     </li>
-                    <li><a href="#"
+                    <li><a href="/doi-tac-uy-tin"
                             class="text-gray-400 hover:text-cs_blue transition-colors font-bold text-sm">Đối tác uy
                             tín</a></li>
                 </ul>
@@ -59,16 +59,16 @@
                     Giúp
                 </h4>
                 <ul class="space-y-3">
-                    <li><a href="#"
+                    <li><a href="/huong-dan-to-cao"
                             class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Hướng dẫn tố
                             cáo</a></li>
-                    <li><a href="#"
+                    <li><a href="/lien-he-admin"
                             class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Liên hệ
                             Admin</a></li>
-                    <li><a href="#"
+                    <li><a href="/dieu-khoan"
                             class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Điều
                             khoản</a></li>
-                    <li><a href="#"
+                    <li><a href="/giai-quyet-khieu-nai"
                             class="text-gray-400 hover:text-cs_red transition-colors font-bold text-sm">Giải
                             quyết khiếu nại</a></li>
                 </ul>
@@ -152,7 +152,7 @@
             class="w-14 h-14 bg-cs_red text-white rounded-full flex items-center justify-center shadow-2xl shadow-red-500/40 border-4 border-white dark:border-slate-900 transform active:scale-90 transition-transform -mt-9 mb-1">
             <i class="fa-solid fa-plus text-xl"></i>
         </a>
-        <span class="mt-2 text-[9px] font-black uppercase tracking-tighter">Tố cáo lừa đảo</span>
+        <span class="mt-2 text-[9px] text-gray-400 font-black uppercase tracking-tighter">Tố cáo scam</span>
     </div>
 
     <a href="/bai-viet"
