@@ -3,7 +3,7 @@
 @section("title", "Hướng dẫn tố cáo - Cách bảo vệ cộng đồng hiệu quả")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Hướng dẫn tố cáo', 'url' => '/huong-dan-to-cao']]" />
 
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

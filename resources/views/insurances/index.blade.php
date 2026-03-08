@@ -3,7 +3,7 @@
 @section("title", "Danh sách Trung Gian Uy Tín - Quỹ Bảo Hiểm CheckScam")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Quỹ bảo hiểm CS', 'url' => '/bao-hiem-cs']]" />
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

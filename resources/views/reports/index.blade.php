@@ -3,7 +3,7 @@
 @section("title", "[ Tố Cáo kẻ lừa đảo ] Cập nhật thêm data vào hệ thống")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Tố cáo lừa đảo', 'url' => '/to-cao-lua-dao']]" />
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">

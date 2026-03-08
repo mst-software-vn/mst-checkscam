@@ -3,7 +3,7 @@
 @section("title", "Hồ sơ Bảo Hiểm - Võ Xuân Sang")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb
             :links="[
                 ['name' => 'Quỹ bảo hiểm', 'url' => '/bao-hiem-cs'],

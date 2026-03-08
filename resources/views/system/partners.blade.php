@@ -3,7 +3,7 @@
 @section("title", "Đối tác uy tín - Cộng đồng MMO minh bạch")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Đối tác uy tín', 'url' => '/doi-tac-uy-tin']]" />
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
