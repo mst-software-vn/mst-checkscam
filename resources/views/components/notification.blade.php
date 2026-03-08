@@ -13,7 +13,7 @@
             <i class="fa-solid fa-xmark text-lg md:text-sm"></i>
         </button>
 
-        <div class="p-6 pt-10 sm:p-10">
+        <div class="p-6 pt-10 sm:p-10 sm:pb-5">
             <!-- Header Group -->
             <div class="relative mb-6 flex flex-col items-center">
                 <!-- Icon Variant: Shield + Bell -->
@@ -51,7 +51,7 @@
         </div>
 
         <!-- Action Footer -->
-        <div class="border-t border-gray-50 bg-gray-50/30 p-6 sm:px-10 dark:border-slate-800 dark:bg-slate-900/50">
+        <div class="border-t border-gray-50 bg-gray-50/30 p-6 pt-0 sm:px-10 dark:border-slate-800 dark:bg-slate-900/50">
             <button
                 id="suppress-btn"
                 class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-slate-900 py-3.5 text-[11px] font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-slate-800 active:scale-95 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
