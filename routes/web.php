@@ -47,7 +47,9 @@ Route::get('/giai-quyet-khieu-nai', function () {
     return view('legal.dispute');
 });
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
 
     Route::name('auth.')->group(function () {
         Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
