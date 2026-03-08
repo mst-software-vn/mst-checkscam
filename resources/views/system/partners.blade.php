@@ -23,14 +23,14 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
                 <?php
                 $partners = [
-                    ['name' => 'Vietcombank', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Logo_Vietcombank.svg/1200px-Logo_Vietcombank.svg.png'],
-                    ['name' => 'Momo', 'logo' => 'https://upload.wikimedia.org/wikipedia/vi/a/a2/Logo_MoMo_Tiếng_Việt.png'],
-                    ['name' => 'Telegram Global', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png'],
-                    ['name' => 'Facebook Safety', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png'],
+                    ['name' => 'Vietcombank', 'logo' => 'https://i.ibb.co/TMXxGRhw/vcb.webp'],
+                    ['name' => 'Momo', 'logo' => 'https://i.ibb.co/KjJmJqYL/momo.webp'],
+                    ['name' => 'Telegram Global', 'logo' => 'https://i.ibb.co/rGtr2pbZ/fb.webp'],
+                    ['name' => 'Facebook Safety', 'logo' => 'https://i.ibb.co/8n74BrYX/tele.webp'],
                 ];
                 foreach($partners as $p): ?>
                 <div
-                    class="bg-white dark:bg-dark_card p-8 rounded-3xl shadow-xs border border-gray-100 dark:border-gray-800 flex items-center justify-center grayscale hover:grayscale-0 transition-all group">
+                    class="bg-white dark:bg-dark_card p-8 cursor-pointer rounded-3xl shadow-xs border border-gray-100 dark:border-gray-800 flex items-center justify-center grayscale hover:grayscale-0 transition-all group">
                     <img src="<?php echo $p['logo']; ?>" alt="<?php echo $p['name']; ?>"
                         class="h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-transform">
                 </div>
