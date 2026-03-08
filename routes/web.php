@@ -49,7 +49,11 @@ Route::get('/giai-quyet-khieu-nai', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
+    Route::name('auth.')->group(function () {
+        Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
 });
 
 // Luôn nằm ở cuối

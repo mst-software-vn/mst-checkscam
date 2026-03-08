@@ -21,9 +21,10 @@ class AuthController extends Controller
     // POST Login
     public function login(Request $request)
     {
+
         $credentials = $request->validate([
-            'email' => ['require', 'string', 'email'],
-            'passwowrd' => ['required', 'min:6'],
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'min:6'],
         ]);
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $user = User::find(Auth::id());
@@ -31,17 +32,25 @@ class AuthController extends Controller
                 Auth::logout();
 
                 return back()->withErrors([
-                    'username' => 'Tài khoản của bạn đã bị vô hiệu hóa!',
+                    'email' => 'Tài khoản của bạn đã bị vô hiệu hóa!',
                 ]);
             }
             $request->session()->regenerate(); // Chống session fixation
 
-            // return redirect()->intended(route('admin.dashboard'));
-            return 'Login thành công nha bé!';
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return back()->withErrors([
-            'username' => 'Tên đăng nhập hoặc mật khẩu không đúng.',
-        ])->onlyInput('username');
+            'email' => 'Tên đăng nhập hoặc mật khẩu không đúng.',
+        ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.auth.login');
     }
 }

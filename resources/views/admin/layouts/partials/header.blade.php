@@ -1,9 +1,9 @@
 <div class="header">
     <div class="header-left active">
-        <a href="index.html" class="logo">
+        <a href="/admin" class="logo">
             <img src="https://i.ibb.co/7xfz0v3K/black.png" alt="" />
         </a>
-        <a href="index.html" class="logo-small">
+        <a href="/admin" class="logo-small">
             <img src="https://i.ibb.co/d4J0Z7MM/logo.png" alt="" />
         </a>
         <a id="toggle_btn" href="javascript:void(0);"></a>
