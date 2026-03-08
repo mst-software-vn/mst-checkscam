@@ -19,6 +19,5 @@
         @yield("content")
 
         <x-footer />
-        <x-notioncation />
     </body>
 </html>

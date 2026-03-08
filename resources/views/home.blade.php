@@ -633,7 +633,6 @@
                             </div>
 
                             <!-- Card: Community -->
-                            <!-- Card: Community -->
                             <div
                                 class="group hover:border-cs_green/40 hover:shadow-cs_green/10 relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-500 ease-in-out hover:scale-[1.015] hover:shadow-2xl dark:border-slate-800 dark:bg-slate-900"
                             >
@@ -791,4 +790,5 @@
             </section>
         </div>
     </main>
+    <x-notification />
 @endsection

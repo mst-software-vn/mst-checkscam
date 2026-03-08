@@ -182,19 +182,23 @@
             </div>
             <!-- SEO Content Section (Similar to Report Index) -->
             <article class="mx-auto mt-16 max-w-3xl">
-                <div class="relative overflow-hidden rounded-2xl bg-gray-900 p-6 text-white shadow-xl md:p-8">
+                <div
+                    class="relative overflow-hidden rounded-2xl bg-white p-6 text-gray-900 shadow-xl transition-all duration-300 md:p-8 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-white"
+                >
                     <div
-                        class="bg-cs_blue/20 absolute top-0 right-0 h-48 w-48 translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+                        class="bg-cs_blue/10 dark:bg-cs_blue/20 absolute top-0 right-0 h-48 w-48 translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
                     ></div>
                     <div class="relative z-10 flex flex-col items-center gap-6 md:flex-row">
                         <div
-                            class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 md:h-20 md:w-20"
+                            class="bg-cs_blue/10 dark:bg-cs_blue/20 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl md:h-20 md:w-20"
                         >
                             <i class="fa-solid fa-handshake-angle text-cs_blue text-3xl"></i>
                         </div>
                         <div class="space-y-3">
                             <h2 class="text-lg font-black uppercase md:text-xl">Quy định về Quỹ Bảo Hiểm</h2>
-                            <p class="text-xs leading-relaxed font-semibold text-gray-400 italic md:text-sm">
+                            <p
+                                class="text-xs leading-relaxed font-semibold text-gray-600 italic md:text-sm dark:text-gray-400"
+                            >
                                 CheckScam chỉ bảo lãnh các giao dịch có sự tham gia của các thành viên trong danh sách
                                 trên. Tiền ký quỹ của thành viên được Admin giữ để bồi thường 100% trong trường hợp có
                                 rủi ro từ phía thành viên đó.
@@ -208,7 +212,7 @@
                                 </a>
                                 <a
                                     href="#"
-                                    class="rounded-full border border-white/20 px-5 py-2 text-[10px] font-bold tracking-wider text-white uppercase transition-all hover:bg-white/10"
+                                    class="rounded-full border border-gray-200 px-5 py-2 text-[10px] font-bold tracking-wider text-gray-700 uppercase transition-all hover:bg-gray-50 dark:border-slate-700 dark:text-gray-300 dark:hover:bg-slate-800"
                                 >
                                     Xem điều khoản
                                 </a>

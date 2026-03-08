@@ -4,11 +4,8 @@
 
     <!-- Modal Content: Max-width xl, Responsive width -->
     <div
-        class="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+        class="relative w-full max-w-xl overflow-hidden rounded-xl border border-gray-100 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
     >
-        <!-- Header Ribbon/Variant: Red Warning Bar -->
-        <div class="h-1.5 w-full bg-linear-to-r from-red-500 via-orange-500 to-red-500"></div>
-
         <!-- Close button (X) - Larger touch area for mobile -->
         <button
             class="close-notif-btn absolute top-4 right-4 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-50 text-gray-400 transition-all hover:bg-red-50 hover:text-red-500 md:h-8 md:w-8 dark:bg-slate-800 dark:text-gray-500 dark:hover:bg-red-900/20"
@@ -16,7 +13,7 @@
             <i class="fa-solid fa-xmark text-lg md:text-sm"></i>
         </button>
 
-        <div class="p-6 pt-10 sm:p-10">
+        <div class="p-6 pt-10 sm:p-10 sm:pb-5">
             <!-- Header Group -->
             <div class="relative mb-6 flex flex-col items-center">
                 <!-- Icon Variant: Shield + Bell -->
@@ -50,32 +47,11 @@
                         nhằm lừa đảo người dùng.
                     </p>
                 </div>
-
-                <div class="space-y-4">
-                    <p class="text-xs font-black tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                        Checkscam đề nghị mọi người phải
-                    </p>
-
-                    <a
-                        href="https://t.me/CheckScamBot"
-                        target="_blank"
-                        class="group relative mx-auto flex w-fit items-center justify-center gap-3 overflow-hidden rounded-2xl bg-blue-50 px-6 py-3 transition-all hover:bg-blue-600 focus:ring-4 focus:ring-blue-500/20 dark:bg-blue-900/20 dark:hover:bg-blue-600"
-                    >
-                        <i class="fa-brands fa-telegram text-2xl text-blue-500 group-hover:text-white"></i>
-                        <span
-                            class="text-sm font-black tracking-tight text-blue-600 uppercase group-hover:text-white sm:text-base"
-                        >
-                            CHECK REAL – FAKE BẰNG BOT
-                        </span>
-                    </a>
-
-                    <p class="text-[10px] font-black tracking-[4px] text-gray-400 uppercase">TRƯỚC KHI GIAO DỊCH</p>
-                </div>
             </div>
         </div>
 
         <!-- Action Footer -->
-        <div class="border-t border-gray-50 bg-gray-50/30 p-6 sm:px-10 dark:border-slate-800 dark:bg-slate-900/50">
+        <div class="border-t border-gray-50 bg-gray-50/30 p-6 pt-0 sm:px-10 dark:border-slate-800 dark:bg-slate-900/50">
             <button
                 id="suppress-btn"
                 class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-slate-900 py-3.5 text-[11px] font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-slate-800 active:scale-95 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
