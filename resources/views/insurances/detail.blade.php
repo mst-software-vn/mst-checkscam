@@ -231,7 +231,7 @@
                             <h2
                                 class="text-md border-cs_red mb-6 border-l-4 pl-3 font-black tracking-tight text-gray-800 uppercase md:text-lg dark:text-gray-300"
                             >
-                                Hệ thống thanh toán
+                                Tài khoản thanh toán
                             </h2>
                             <div class="space-y-3">
                                 <?php

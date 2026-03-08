@@ -28,44 +28,79 @@
                     >
                         <?php for ($i = 1; $i <= 3; $i++) { ?>
 
-                        <div
-                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> flex flex-col items-center gap-3 p-4 transition-colors hover:bg-gray-50 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                        <a
+                            href="/pham-hoang-tuan-1"
+                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
                         >
-                            <div class="flex w-full items-center gap-3 sm:w-5/12">
+                            <!-- Đối tượng & Ngày -->
+                            <div class="flex w-full items-center gap-3 sm:w-4/12">
                                 <div
-                                    class="text-cs_red flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs dark:bg-red-900/20"
+                                    class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                                 >
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-xs font-bold text-gray-900 md:text-sm dark:text-gray-300">
-                                        Nguyễn Văn A -
-
-                                        <?php echo $i; ?>
+                                    <h3
+                                        class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                    >
+                                        Nguyễn Văn A - {{ $i }}
                                     </h3>
-                                    <div class="text-[9px] text-gray-400 md:text-[10px] dark:text-gray-500">
-                                        <i class="fa-regular fa-clock mr-1"></i>
-                                        Vừa xong
+                                    <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                        <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                        20/03/2026
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full border-gray-100 sm:w-5/12 sm:border-l sm:px-6 dark:border-gray-800">
+
+                            <!-- Thông tin định danh -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] font-bold text-gray-400 uppercase dark:text-gray-500">
-                                        Tài khoản
+                                    <span
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                    >
+                                        Tài khoản lừa đảo
                                     </span>
-                                    <span class="text-cs_red text-xs font-black">0987654321***</span>
+                                    <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                 </div>
                             </div>
+
+                            <!-- Chỉ số tín nhiệm (Stats) -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                <div class="flex items-center gap-6">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Lượt xem
+                                        </span>
+                                        <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                            {{ number_format(1200 + $i * 150) }}
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Bài cảnh báo
+                                        </span>
+                                        <span class="text-cs_red text-xs font-bold">
+                                            <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                            0{{ $i + 2 }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hành động -->
                             <div class="w-full text-right sm:w-2/12">
-                                <a
-                                    href="/pham-hoang-tuan-1/"
+                                <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                 >
                                     Chi tiết
-                                </a>
+                                </span>
                             </div>
-                        </div>
+                        </a>
 
                         <?php } ?>
                     </div>
@@ -86,44 +121,79 @@
                     >
                         <?php for ($i = 1; $i <= 7; $i++) { ?>
 
-                        <div
-                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> flex flex-col items-center gap-3 p-4 transition-colors hover:bg-gray-50 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                        <a
+                            href="/pham-hoang-tuan-1"
+                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
                         >
-                            <div class="flex w-full items-center gap-3 sm:w-5/12">
+                            <!-- Đối tượng & Ngày -->
+                            <div class="flex w-full items-center gap-3 sm:w-4/12">
                                 <div
-                                    class="text-cs_red flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs dark:bg-red-900/20"
+                                    class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                                 >
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-xs font-bold text-gray-900 md:text-sm dark:text-gray-300">
-                                        Nguyễn Văn A -
-
-                                        <?php echo $i; ?>
+                                    <h3
+                                        class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                    >
+                                        Nguyễn Văn A - {{ $i }}
                                     </h3>
-                                    <div class="text-[9px] text-gray-400 md:text-[10px] dark:text-gray-500">
-                                        <i class="fa-regular fa-clock mr-1"></i>
-                                        Vừa xong
+                                    <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                        <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                        20/03/2026
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full border-gray-100 sm:w-5/12 sm:border-l sm:px-6 dark:border-gray-800">
+
+                            <!-- Thông tin định danh -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] font-bold text-gray-400 uppercase dark:text-gray-500">
-                                        Tài khoản
+                                    <span
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                    >
+                                        Tài khoản lừa đảo
                                     </span>
-                                    <span class="text-cs_red text-xs font-black">0987654321***</span>
+                                    <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                 </div>
                             </div>
+
+                            <!-- Chỉ số tín nhiệm (Stats) -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                <div class="flex items-center gap-6">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Lượt xem
+                                        </span>
+                                        <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                            {{ number_format(1200 + $i * 150) }}
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Bài cảnh báo
+                                        </span>
+                                        <span class="text-cs_red text-xs font-bold">
+                                            <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                            0{{ $i + 2 }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hành động -->
                             <div class="w-full text-right sm:w-2/12">
-                                <a
-                                    href="/pham-hoang-tuan-1/"
+                                <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                 >
                                     Chi tiết
-                                </a>
+                                </span>
                             </div>
-                        </div>
+                        </a>
 
                         <?php } ?>
                     </div>
@@ -145,44 +215,79 @@
                     >
                         <?php for ($i = 1; $i <= 3; $i++) { ?>
 
-                        <div
-                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> flex flex-col items-center gap-3 p-4 transition-colors hover:bg-gray-50 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                        <a
+                            href="/pham-hoang-tuan-1"
+                            class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
                         >
-                            <div class="flex w-full items-center gap-3 sm:w-5/12">
+                            <!-- Đối tượng & Ngày -->
+                            <div class="flex w-full items-center gap-3 sm:w-4/12">
                                 <div
-                                    class="text-cs_red flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs dark:bg-red-900/20"
+                                    class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                                 >
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-xs font-bold text-gray-900 md:text-sm dark:text-gray-300">
-                                        Nguyễn Văn A -
-
-                                        <?php echo $i; ?>
+                                    <h3
+                                        class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                    >
+                                        Nguyễn Văn A - {{ $i }}
                                     </h3>
-                                    <div class="text-[9px] text-gray-400 md:text-[10px] dark:text-gray-500">
-                                        <i class="fa-regular fa-clock mr-1"></i>
-                                        Vừa xong
+                                    <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                        <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                        20/03/2026
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full border-gray-100 sm:w-5/12 sm:border-l sm:px-6 dark:border-gray-800">
+
+                            <!-- Thông tin định danh -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] font-bold text-gray-400 uppercase dark:text-gray-500">
-                                        Tài khoản
+                                    <span
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                    >
+                                        Tài khoản lừa đảo
                                     </span>
-                                    <span class="text-cs_red text-xs font-black">0987654321***</span>
+                                    <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                 </div>
                             </div>
+
+                            <!-- Chỉ số tín nhiệm (Stats) -->
+                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                <div class="flex items-center gap-6">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Lượt xem
+                                        </span>
+                                        <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                            {{ number_format(1200 + $i * 150) }}
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        >
+                                            Bài cảnh báo
+                                        </span>
+                                        <span class="text-cs_red text-xs font-bold">
+                                            <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                            0{{ $i + 2 }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hành động -->
                             <div class="w-full text-right sm:w-2/12">
-                                <a
-                                    href="/pham-hoang-tuan-1/"
+                                <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                 >
                                     Chi tiết
-                                </a>
+                                </span>
                             </div>
-                        </div>
+                        </a>
 
                         <?php } ?>
                     </div>
