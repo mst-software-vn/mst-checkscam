@@ -10,7 +10,7 @@ Lưu trữ các cấu hình chung của website (Title, Description, Hotline, Fa
 
 | Key          | Type        | Nullable | Mô tả                                          |
 | :----------- | :---------- | :------- | :--------------------------------------------- |
-| `key`        | String (PK) | No       | Khóa định danh của cấu hình (VD: `site_title`) |
+| `name`       | String (PK) | No       | Khóa định danh của cấu hình (VD: `site_title`) |
 | `value`      | Text        | Yes      | Giá trị của cấu hình                           |
 | `created_at` | Timestamp   | Yes      |                                                |
 | `updated_at` | Timestamp   | Yes      |                                                |
@@ -34,6 +34,7 @@ Lưu trữ thông tin người có quyền đăng nhập vào CMS để duyệt 
 | `updated_at` | Timestamp       | Yes      |                                 |
 
 ---
+
 ### 1. Moderator — Xử lý nội dung
 
 Chỉ có quyền trên content do user tạo ra
@@ -42,9 +43,7 @@ Chỉ có quyền trên content do user tạo ra
 - Khóa / mở khóa đối tượng bị report
 - Xử lý dispute
 
-
 Moderator không động vào cấu hình hệ thống hay tài khoản người khác.
-
 
 ### 2. Admin — Vận hành hệ thống
 
@@ -54,6 +53,7 @@ Có toàn quyền, bao gồm mọi thứ Moderator làm cộng thêm:
 - Quản lý danh mục loại scam (thêm/sửa/xóa category)
 - Xem dashboard thống kê
 - Cấu hình hệ thống
+
 ---
 
 ## 3. Bảng `reports` (Danh sách tố cáo)
