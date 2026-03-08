@@ -14,21 +14,7 @@
                                 <h3>Sign In</h3>
                                 <h4>Please login to your account</h4>
                             </div>
-                            @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="alert"
-                                        aria-label="Close"
-                                    ></button>
-                                </div>
-                            @endif
+                            <x-admin-error />
 
                             <form action="{{ route("admin.auth.login") }}" method="POST">
                                 @csrf
@@ -36,10 +22,11 @@
                                     <label>Email</label>
                                     <div class="form-addons">
                                         <input
-                                            type="text"
+                                            type="email"
                                             name="email"
                                             placeholder="Enter your email address"
                                             value="{{ old("email") }}"
+                                            required
                                         />
 
                                         <img src="/assets/img/icons/mail.svg" alt="img" />
@@ -53,6 +40,7 @@
                                             name="password"
                                             class="pass-input"
                                             placeholder="Enter your password"
+                                            required
                                         />
                                         <span class="fas toggle-password fa-eye-slash"></span>
                                     </div>

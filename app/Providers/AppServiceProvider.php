@@ -31,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('admin.layouts.partials.sidebar', 'admin-sidebar');
         Blade::component('admin.layouts.partials.header', 'admin-header');
         Blade::component('admin.layouts.partials.footer', 'admin-footer');
+        Blade::component('admin.layouts.includes.alert', 'admin-error');
     }
 }
