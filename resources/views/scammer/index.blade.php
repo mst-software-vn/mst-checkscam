@@ -691,7 +691,7 @@
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
 
                     <a
-                        href="/scammer/{{ $i }}"
+                        href="/pham-hoang-tuan-1"
                         class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
                     >
                         <!-- Đối tượng & Ngày -->
@@ -699,11 +699,11 @@
                             <div
                                 class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                             >
-                                <i class="fa-solid fa-user-slash"></i>
+                                <i class="fa-solid fa-triangle-exclamation"></i>
                             </div>
                             <div>
                                 <h3
-                                    class="group-hover:text-cs_red text-xs font-bold text-gray-900 transition-colors duration-300 md:text-sm dark:text-gray-100"
+                                    class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                                 >
                                     Nguyễn Văn A - {{ $i }}
                                 </h3>
@@ -757,7 +757,7 @@
                         <!-- Hành động -->
                         <div class="w-full text-right sm:w-2/12">
                             <span
-                                class="text-cs_blue group-hover:bg-cs_blue inline-block rounded-lg bg-blue-50 px-4 py-2 text-[10px] font-bold uppercase transition-all duration-300 group-hover:text-white dark:bg-blue-900/20"
+                                class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                             >
                                 Chi tiết
                             </span>

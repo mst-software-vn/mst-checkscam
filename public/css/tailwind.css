@@ -4512,6 +4512,11 @@
       font-size: 13px;
     }
   }
+  .md\:text-\[15px\] {
+    @media (width >= 48rem) {
+      font-size: 15px;
+    }
+  }
   .md\:tracking-\[12px\] {
     @media (width >= 48rem) {
       --tw-tracking: 12px;
