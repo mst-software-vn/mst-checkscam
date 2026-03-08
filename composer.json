@@ -73,6 +73,14 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "lint": "./vendor/bin/pint --test",
+        "format": [
+            "./vendor/bin/pint",
+            "npx prettier --write resources/views/**/*.blade.php"
         ]
     },
     "extra": {
