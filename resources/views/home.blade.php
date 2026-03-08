@@ -193,7 +193,7 @@
             <aside class="w-full space-y-3 lg:w-3/12">
                 <!-- Right Sidebar Banner -->
 
-                <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads" class="mt-10" />
+                <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads" />
                 <x-ads-square
                     image="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
                     url="#"
@@ -442,9 +442,11 @@
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:col-span-7">
                             <!-- Card: Ngân hàng -->
                             <div
-                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                                class="group hover:border-cs_blue/40 relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-500 ease-in-out hover:scale-[1.015] hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900"
                             >
-                                <div class="text-cs_blue mb-5 text-3xl">
+                                <div
+                                    class="text-cs_blue mb-5 text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
+                                >
                                     <i class="fa-solid fa-building-columns"></i>
                                 </div>
                                 <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
@@ -459,7 +461,7 @@
                                 >
                                     <span class="text-[10px] font-bold text-slate-400">STATUS: ACTIVE</span>
                                     <span
-                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase transition-all duration-300 group-hover:translate-x-1"
                                     >
                                         Chi tiết
                                         <i class="fa-solid fa-arrow-right-long ml-1"></i>
@@ -469,9 +471,11 @@
 
                             <!-- Card: Telegram -->
                             <div
-                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                                class="group hover:border-cs_blue/40 relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-500 ease-in-out hover:scale-[1.015] hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900"
                             >
-                                <div class="mb-5 text-3xl text-[#24A1DE]">
+                                <div
+                                    class="mb-5 text-3xl text-[#24A1DE] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                                >
                                     <i class="fa-brands fa-telegram"></i>
                                 </div>
                                 <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
@@ -486,7 +490,7 @@
                                 >
                                     <span class="text-[10px] font-bold text-slate-400">ID VERIFIED</span>
                                     <span
-                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase transition-all duration-300 group-hover:translate-x-1"
                                     >
                                         Chi tiết
                                         <i class="fa-solid fa-arrow-right-long ml-1"></i>
@@ -496,9 +500,11 @@
 
                             <!-- Card: Web Scan -->
                             <div
-                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                                class="group hover:border-cs_blue/40 relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-2000 ease-in-out hover:scale-[1.005] hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900"
                             >
-                                <div class="text-cs_red mb-5 text-3xl">
+                                <div
+                                    class="text-cs_red mb-5 text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                                >
                                     <i class="fa-solid fa-globe"></i>
                                 </div>
                                 <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
@@ -513,7 +519,7 @@
                                 >
                                     <span class="text-[10px] font-bold text-slate-400">DNS SECURE</span>
                                     <span
-                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase transition-all duration-300 group-hover:translate-x-1"
                                     >
                                         Chi tiết
                                         <i class="fa-solid fa-arrow-right-long ml-1"></i>
@@ -522,23 +528,34 @@
                             </div>
 
                             <!-- Card: Community -->
+                            <!-- Card: Community -->
                             <div
-                                class="group relative rounded-4xl border-none bg-slate-900 p-8 transition-all duration-300 hover:-translate-y-1 dark:bg-slate-800"
+                                class="group hover:border-cs_green/40 hover:shadow-cs_green/10 relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-500 ease-in-out hover:scale-[1.015] hover:shadow-2xl dark:border-slate-800 dark:bg-slate-900"
                             >
-                                <div class="text-cs_green mb-5 text-3xl">
+                                <div
+                                    class="text-cs_green mb-5 text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
+                                >
                                     <i class="fa-solid fa-people-group"></i>
                                 </div>
-                                <h3 class="mb-2 text-lg font-black text-white uppercase">Trí tuệ tập thể</h3>
-                                <p class="mb-6 text-xs leading-relaxed text-slate-400">
+                                <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
+                                    Trí tuệ tập thể
+                                </h3>
+                                <p class="mb-6 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                                     Mỗi báo cáo của cộng đồng là một viên gạch xây dựng nên lá chắn vững chắc cho MMO
                                     Việt.
                                 </p>
-                                <a
-                                    href="/to-cao-lua-dao"
-                                    class="bg-cs_green flex w-full items-center justify-center rounded-lg py-3 text-[10px] font-black text-white uppercase transition-all hover:scale-105"
+                                <div
+                                    class="flex items-center justify-between border-t border-slate-100 pt-4 dark:border-slate-800"
                                 >
-                                    Gửi báo cáo ngay
-                                </a>
+                                    <span class="text-[10px] font-bold text-slate-400">ACTIVE NODES: 100K+</span>
+                                    <a
+                                        href="/to-cao-lua-dao"
+                                        class="text-cs_green text-xs font-black uppercase transition-all duration-300 group-hover:translate-x-1"
+                                    >
+                                        Gửi báo cáo
+                                        <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
 @section("title", "Điều khoản sử dụng - CheckScam Global")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Điều khoản sử dụng', 'url' => '/dieu-khoan']]" />
 
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

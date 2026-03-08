@@ -3075,6 +3075,13 @@
       }
     }
   }
+  .group-hover\:-rotate-3 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        rotate: calc(3deg * -1);
+      }
+    }
+  }
   .group-hover\:-rotate-6 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -3320,6 +3327,20 @@
       }
     }
   }
+  .hover\:scale-\[1\.005\] {
+    &:hover {
+      @media (hover: hover) {
+        scale: 1.005;
+      }
+    }
+  }
+  .hover\:scale-\[1\.015\] {
+    &:hover {
+      @media (hover: hover) {
+        scale: 1.015;
+      }
+    }
+  }
   .hover\:rotate-360 {
     &:hover {
       @media (hover: hover) {
@@ -3412,6 +3433,16 @@
         border-color: color-mix(in srgb, #2eb85c 30%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
           border-color: color-mix(in oklab, var(--color-cs_green) 30%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:border-cs_green\/40 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: color-mix(in srgb, #2eb85c 40%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          border-color: color-mix(in oklab, var(--color-cs_green) 40%, transparent);
         }
       }
     }
@@ -3591,6 +3622,14 @@
       }
     }
   }
+  .hover\:tracking-wider {
+    &:hover {
+      @media (hover: hover) {
+        --tw-tracking: var(--tracking-wider);
+        letter-spacing: var(--tracking-wider);
+      }
+    }
+  }
   .hover\:text-\[\#1877F2\] {
     &:hover {
       @media (hover: hover) {
@@ -3691,6 +3730,24 @@
         @supports (color: color-mix(in lab, red, red)) {
           --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-blue-500) 10%, transparent) var(--tw-shadow-alpha), transparent);
         }
+      }
+    }
+  }
+  .hover\:shadow-cs_green\/10 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow-color: color-mix(in srgb, #2eb85c 10%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-cs_green) 10%, transparent) var(--tw-shadow-alpha), transparent);
+        }
+      }
+    }
+  }
+  .hover\:brightness-110 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-brightness: brightness(110%);
+        filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
       }
     }
   }
@@ -3960,6 +4017,11 @@
   .md\:h-16 {
     @media (width >= 48rem) {
       height: calc(var(--spacing) * 16);
+    }
+  }
+  .md\:h-18 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 18);
     }
   }
   .md\:h-20 {

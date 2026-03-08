@@ -3,7 +3,7 @@
 @section("title", "API Check Scam - Kết nối dữ liệu bảo vệ hệ thống")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'API Check Scam', 'url' => '/api-checkscam']]" />
 
         <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

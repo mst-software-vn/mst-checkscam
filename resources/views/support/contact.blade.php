@@ -3,7 +3,7 @@
 @section("title", "Liên hệ Admin - Hỗ trợ và Giải đáp thắc mắc")
 
 @section("content")
-    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
+    <main class="pb-24">
         <x-breadcrumb :links="[['name' => 'Liên hệ Admin', 'url' => '/lien-he-admin']]" />
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
