@@ -74,7 +74,7 @@
                     <!-- Category Select -->
                     <div class="group relative w-full sm:w-auto">
                         <select
-                            class="focus:border-cs_red focus:ring-cs_red w-full min-w-[200px] cursor-pointer appearance-none rounded-2xl border border-gray-200 bg-white py-3.5 pr-10 pl-5 text-sm font-bold text-gray-700 shadow-sm transition-all focus:ring-1 focus:outline-none dark:border-gray-800 dark:bg-[#0B0F1A] dark:text-gray-300"
+                            class="w-full min-w-[200px] cursor-pointer appearance-none rounded-2xl border border-gray-200 bg-white py-3.5 pr-10 pl-5 text-sm font-bold text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 focus:outline-none dark:border-gray-800 dark:bg-[#0B0F1A] dark:text-gray-300"
                         >
                             <option value="">Tất cả chủ đề</option>
                             <option value="canh-bao">Cảnh báo Scam</option>
@@ -83,7 +83,7 @@
                             <option value="tin-tuc">Tin tức MMO</option>
                         </select>
                         <i
-                            class="fa-solid fa-chevron-down group-hover:text-cs_red absolute top-1/3 right-4 text-sm text-gray-400 transition-colors"
+                            class="fa-solid fa-chevron-down absolute top-1/3 right-4 text-sm text-gray-400 transition-colors group-hover:text-blue-500"
                         ></i>
                     </div>
 
@@ -92,10 +92,10 @@
                         <input
                             type="text"
                             placeholder="Tìm thủ thuật, cảnh báo..."
-                            class="focus:border-cs_red focus:ring-cs_red w-full rounded-2xl border border-gray-200 bg-gray-50 py-3.5 pr-12 pl-5 text-sm font-medium shadow-sm transition-all focus:ring-1 focus:outline-none sm:w-[280px] dark:border-gray-800 dark:bg-slate-900/50 dark:text-gray-300 dark:placeholder-gray-500"
+                            class="w-full rounded-2xl border border-gray-200 bg-gray-50 py-3.5 pr-12 pl-5 text-sm font-medium shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 focus:outline-none sm:w-[280px] dark:border-gray-800 dark:bg-slate-900/50 dark:text-gray-300 dark:placeholder-gray-500"
                         />
                         <button
-                            class="group-hover:text-cs_red absolute top-1/4 right-4 text-gray-400 transition-colors"
+                            class="absolute top-1/4 right-4 text-gray-400 transition-colors group-hover:text-blue-500"
                         >
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -130,7 +130,7 @@
                                         <span class="text-xs font-medium text-gray-400">{{ $post["date"] }}</span>
                                     </div>
                                     <h2
-                                        class="group-hover:text-cs_red text-2xl leading-tight font-bold text-slate-900 transition-colors duration-300 md:text-3xl dark:text-gray-300"
+                                        class="text-2xl leading-tight font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-600 md:text-3xl dark:text-gray-300 dark:group-hover:text-white"
                                     >
                                         {{ $post["title"] }}
                                     </h2>
@@ -140,11 +140,11 @@
                                         {{ $post["excerpt"] }}
                                     </p>
                                     <div
-                                        class="group-hover:text-cs_red mt-6 flex items-center gap-2 text-sm font-bold tracking-wider text-gray-400 uppercase transition-colors"
+                                        class="mt-6 flex items-center gap-2 text-sm font-bold tracking-wider text-gray-400 uppercase transition-colors group-hover:text-blue-500 dark:group-hover:text-blue-400"
                                     >
                                         Đọc tiếp
                                         <i
-                                            class="fa-solid fa-arrow-right-long mt-0.5 transition-transform group-hover:translate-x-1"
+                                            class="fa-solid fa-arrow-right-long mt-0.5 transition-transform group-hover:translate-x-1.5"
                                         ></i>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                                 <div class="flex grow flex-col">
                                     <div class="mb-3 flex items-center gap-3">
                                         <span
-                                            class="group-hover:text-cs_red text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors duration-300"
+                                            class="text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors duration-300 group-hover:text-blue-500 dark:group-hover:text-blue-400"
                                         >
                                             {{ $post["category"] }}
                                         </span>
@@ -176,7 +176,7 @@
                                         </span>
                                     </div>
                                     <h3
-                                        class="group-hover:text-cs_red text-xl leading-snug font-bold text-slate-900 transition-colors duration-500 dark:text-gray-300"
+                                        class="text-xl leading-snug font-bold text-slate-900 transition-colors duration-500 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white"
                                     >
                                         {{ $post["title"] }}
                                     </h3>
@@ -186,10 +186,12 @@
                                         {{ $post["excerpt"] }}
                                     </p>
                                     <div
-                                        class="group-hover:text-cs_red mt-auto flex items-center gap-2 pt-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition-colors"
+                                        class="mt-auto flex items-center gap-2 pt-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition-colors group-hover:text-blue-500 dark:group-hover:text-blue-400"
                                     >
                                         Xem chi tiết
-                                        <i class="fa-solid fa-chevron-right translate-y-[0.5px] text-[10px]"></i>
+                                        <i
+                                            class="fa-solid fa-chevron-right text-[10px] transition-transform group-hover:translate-x-1"
+                                        ></i>
                                     </div>
                                 </div>
                             </a>
@@ -203,7 +205,7 @@
                 <p class="text-sm font-medium text-gray-400 italic">Hiển thị 5 của 24 bài viết</p>
                 <div class="flex items-center gap-2">
                     <button
-                        class="hover:border-cs_red hover:text-cs_red flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all dark:border-gray-800"
+                        class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-gray-800"
                     >
                         <i class="fa-solid fa-chevron-left text-xs"></i>
                     </button>
@@ -225,7 +227,7 @@
                         </span>
                     </div>
                     <button
-                        class="hover:border-cs_red hover:text-cs_red flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all dark:border-gray-800"
+                        class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-gray-800"
                     >
                         <i class="fa-solid fa-chevron-right text-xs"></i>
                     </button>
