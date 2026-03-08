@@ -326,82 +326,70 @@
                         GỬI ĐƠN TỐ CÁO
                     </button>
                 </div>
-
-                <!-- Box Quỹ Bảo Hiểm -->
+                <!-- Verification Log: Recent Searches (Professional & Neutral) -->
                 <div
                     class="dark:bg-dark_card overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"
                 >
-                    <div class="border-b border-gray-100 bg-gray-50/50 p-5 dark:border-gray-800 dark:bg-slate-800/20">
-                        <div class="mb-1 flex items-center justify-between">
+                    <div class="border-b border-gray-100 bg-gray-50/50 p-4 dark:border-gray-800 dark:bg-slate-800/20">
+                        <div class="flex items-center justify-between">
                             <h2
                                 class="flex items-center gap-2 text-xs font-black text-gray-800 uppercase md:text-sm dark:text-gray-200"
                             >
-                                <i class="fa-solid fa-shield-halved text-cs_blue text-lg"></i>
-                                QUỸ BẢO HIỂM
+                                <i class="fa-solid fa-receipt text-cs_blue text-lg"></i>
+                                NHẬT KÝ TRA CỨU
                             </h2>
-                            <a href="/bao-hiem-cs" class="text-cs_blue text-[10px] font-bold uppercase hover:underline">
-                                Xem tất cả
-                            </a>
+                            <div class="flex items-center gap-1.5">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="bg-cs_blue absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+                                    ></span>
+                                    <span class="bg-cs_blue relative inline-flex h-2 w-2 rounded-full"></span>
+                                </span>
+                                <span class="text-[9px] font-bold text-gray-400 uppercase">Live</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="p-5">
-                        <div class="grid grid-cols-3 gap-x-2 gap-y-5">
-                            <!-- Avatar items -->
+                    <div class="divide-y divide-gray-50 dark:divide-gray-800/50">
+                        <?php
+                        $recentSearches = [
+                            ['data' => '0981.234.567', 'time' => '12 giây trước'],
+                            ['data' => 'Vietcombank - 1023456789', 'time' => '1 phút trước'],
+                            ['data' => 'Nguyễn Văn Hải', 'time' => '3 phút trước'],
+                            ['data' => 'facebook.com/trunggiandoia...', 'time' => '5 phút trước'],
+                            ['data' => '0342.999.888', 'time' => '12 phút trước'],
+                        ];
+                        foreach ($recentSearches as $search) { ?>
 
-                            <?php
-                            $avatars = [
-                                ['name' => 'Lê Vũ', 'color' => '2eb85c', 'title' => 'Lê Tuấn Vũ - 50 Triệu'],
-                                ['name' => 'Hải Phạm', 'color' => '3399ff', 'title' => 'Hải Phạm - 30 Triệu'],
-                                ['name' => 'Nam Hoàng', 'color' => 'fdb813', 'title' => 'Nam Hoàng - 100 Triệu'],
-                                ['name' => 'Hữu Thắng', 'color' => '8b5cf6', 'title' => 'Hữu Thắng - 80 Triệu'],
-                                ['name' => 'Kiều Oanh', 'color' => 'ec4899', 'title' => 'Kiều Oanh - 40 Triệu'],
-                                ['name' => 'Minh Tiến', 'color' => '0f766e', 'title' => 'Minh Tiến - 10 Triệu'],
-                                ['name' => 'Gia Bảo', 'color' => 'c2410c', 'title' => 'Gia Bảo - 60 Triệu'],
-                                ['name' => 'Thanh Tuyền', 'color' => 'd24frr', 'title' => 'Thanh Tuyền - 60 Triệu'],
-                            ];
-                        foreach ($avatars as $av) { ?>
-
-                            <a
-                                href="#"
-                                class="group relative flex flex-col items-center"
-                                title="<?php echo $av["title"]; ?>"
-                            >
-                                <div class="relative mb-2">
-                                    <div
-                                        class="group-hover:shadow-cs_blue/20 h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-sm transition-all duration-300 group-hover:scale-110 active:scale-95 md:h-14 md:w-14 dark:border-slate-800"
-                                    >
-                                        <img
-                                            src="https://ui-avatars.com/api/?name=<?php echo urlencode($av["name"]); ?>&background=<?php echo $av["color"]; ?>&color=fff&size=56"
-                                            alt="<?php echo $av["name"]; ?>"
-                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3"
-                                        />
-                                    </div>
-                                </div>
-                                <span
-                                    class="group-hover:text-cs_blue w-full truncate text-center text-[10px] font-bold text-gray-700 transition-colors dark:text-gray-300"
+                        <div
+                            class="group flex items-center justify-between p-4 transition-colors hover:bg-blue-50/30 dark:hover:bg-slate-800/30"
+                        >
+                            <div class="flex min-w-0 items-center gap-3">
+                                <div
+                                    class="group-hover:text-cs_blue flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-400 transition-all group-hover:bg-blue-100 dark:bg-slate-800 dark:group-hover:bg-blue-900/40"
                                 >
-                                    <?php echo $av["name"]; ?>
-                                </span>
-                            </a>
-
-                            <?php } ?>
-
-                            <a href="/bao-hiem-cs" class="group relative flex flex-col items-center" title="Xem tất cả">
-                                <div class="relative mb-2">
-                                    <div
-                                        class="group-hover:text-cs_blue group-hover:border-cs_blue flex h-12 w-12 items-center justify-center rounded-full border-2 border-gray-100 bg-gray-50 text-gray-400 transition-all duration-300 group-hover:scale-110 md:h-14 md:w-14 dark:border-gray-800 dark:bg-slate-800/50"
-                                    >
-                                        <i class="fa-solid fa-eye text-lg"></i>
-                                    </div>
+                                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
                                 </div>
-                                <span
-                                    class="w-full text-center text-[10px] font-bold tracking-tighter text-gray-500 uppercase dark:text-gray-400"
-                                >
-                                    Tất cả
-                                </span>
-                            </a>
+                                <div class="min-w-0">
+                                    <p class="truncate text-[13px] font-bold text-gray-700 dark:text-gray-300">
+                                        <?php echo $search["data"]; ?>
+                                    </p>
+                                    <p class="mt-0.5 text-[10px] font-medium text-gray-400 dark:text-gray-500">
+                                        <i class="fa-regular fa-clock mr-1"></i>
+
+                                        <?php echo $search["time"]; ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+
+                        <?php } ?>
+                    </div>
+
+                    <div class="bg-gray-50/50 p-3 text-center dark:bg-slate-800/20">
+                        <p class="text-[9px] font-bold text-gray-400 italic">
+                            Dữ liệu dựa trên hoạt động tra cứu thực tế
+                        </p>
                     </div>
                 </div>
             </aside>
