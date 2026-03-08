@@ -25,7 +25,7 @@
                             </div>
                             <div>
                                 <h2
-                                    class="text-xs leading-none font-black tracking-tight text-gray-800 uppercase md:text-sm dark:text-gray-100"
+                                    class="text-xs leading-none font-bold tracking-tight text-gray-800 uppercase md:text-sm dark:text-gray-100"
                                 >
                                     Chi tiết đối tượng lừa đảo
                                 </h2>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span
-                                class="bg-cs_red rounded px-2 py-0.5 text-[9px] font-black tracking-tighter text-white uppercase"
+                                class="bg-cs_red rounded px-2 py-0.5 text-[9px] font-bold tracking-tighter text-white uppercase"
                             >
                                 Bị tố cáo
                             </span>
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="ml-3 flex-1 md:ml-4">
                                     <p
-                                        class="mb-1 text-[9px] leading-none font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        class="mb-1 text-[9px] leading-none font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         Chủ tài khoản
                                     </p>
@@ -83,18 +83,18 @@
                                 </div>
                                 <div class="ml-3 flex-1 md:ml-4">
                                     <p
-                                        class="text-cs_red/60 mb-1 text-[9px] leading-none font-black tracking-widest uppercase"
+                                        class="text-cs_red/60 mb-1 text-[9px] leading-none font-bold tracking-widest uppercase"
                                     >
                                         Số tài khoản / SĐT lừa đảo
                                     </p>
                                     <div class="flex items-center gap-2">
                                         <h3
-                                            class="text-base font-black tracking-widest text-gray-900 md:text-xl dark:text-gray-300"
+                                            class="text-base font-bold tracking-widest text-gray-900 md:text-xl dark:text-gray-300"
                                         >
                                             105****446
                                         </h3>
                                         <span
-                                            class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[8px] font-black text-gray-400 uppercase dark:border-gray-700 dark:bg-slate-800"
+                                            class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[8px] font-bold text-gray-400 uppercase dark:border-gray-700 dark:bg-slate-800"
                                         >
                                             Vietcombank
                                         </span>
@@ -118,12 +118,12 @@
                                 </div>
                                 <div class="ml-3 flex-1 md:ml-4">
                                     <p
-                                        class="mb-1 text-[9px] leading-none font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        class="mb-1 text-[9px] leading-none font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         Số tiền chiếm đoạt
                                     </p>
                                     <h3
-                                        class="text-sm font-black text-orange-600 uppercase md:text-lg dark:text-orange-400"
+                                        class="text-sm font-bold text-orange-600 uppercase md:text-lg dark:text-orange-400"
                                     >
                                         500.000 VNĐ
                                     </h3>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="ml-3 flex-1 md:ml-4">
                                     <p
-                                        class="mb-1 text-[9px] leading-none font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        class="mb-1 text-[9px] leading-none font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         Mạng xã hội liên quan
                                     </p>
@@ -178,7 +178,7 @@
                             </div>
                             <div>
                                 <h2
-                                    class="text-xs leading-none font-black tracking-tight text-gray-800 uppercase md:text-sm dark:text-gray-100"
+                                    class="text-xs leading-none font-bold tracking-tight text-gray-800 uppercase md:text-sm dark:text-gray-100"
                                 >
                                     Thông tin người tố cáo
                                 </h2>
@@ -197,7 +197,7 @@
                                     <i class="fa-solid fa-user-tag text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0.5 text-[10px] font-black tracking-widest text-gray-400 uppercase">
+                                    <p class="mb-0.5 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
                                         Họ tên
                                     </p>
                                     <p class="text-sm font-bold text-gray-700 dark:text-gray-200">Nguyễn Văn ******</p>
@@ -211,7 +211,7 @@
                                     <i class="fa-solid fa-phone-volume text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0.5 text-[10px] font-black tracking-widest text-gray-400 uppercase">
+                                    <p class="mb-0.5 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
                                         Số điện thoại
                                     </p>
                                     <p class="text-sm font-bold text-gray-700 dark:text-gray-200">0987******</p>
@@ -228,7 +228,7 @@
                     <div class="mb-6 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <div class="bg-cs_blue h-4 w-0.5 rounded-full"></div>
-                            <h2 class="text-xs font-black tracking-tight text-gray-800 uppercase dark:text-gray-100">
+                            <h2 class="text-xs font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
                                 Tài liệu & Bằng chứng
                             </h2>
                         </div>
@@ -258,7 +258,7 @@
                             <i
                                 class="fa-solid fa-file-pdf mb-2 text-2xl text-red-500 opacity-60 transition-opacity group-hover:opacity-100"
                             ></i>
-                            <span class="text-[10px] font-black tracking-tighter text-gray-500 uppercase">
+                            <span class="text-[10px] font-bold tracking-tighter text-gray-500 uppercase">
                                 BẰNG CHỨNG.pdf
                             </span>
                         </div>
@@ -280,7 +280,7 @@
                             class="pointer-events-none absolute top-1/2 left-1/2 z-10 flex w-full -translate-x-1/4 -translate-y-1/2 -rotate-12 justify-center opacity-10"
                         >
                             <div
-                                class="border-cs_red text-cs_red rounded-xl border-2 px-4 py-2 text-xl font-black tracking-[6px] uppercase md:rounded-2xl md:border-4 md:px-6 md:py-3 md:text-4xl md:tracking-[12px]"
+                                class="border-cs_red text-cs_red rounded-xl border-2 px-4 py-2 text-xl font-bold tracking-[6px] uppercase md:rounded-2xl md:border-4 md:px-6 md:py-3 md:text-4xl md:tracking-[12px]"
                             >
                                 SCAMMER
                             </div>
@@ -312,12 +312,12 @@
                     <div class="mb-8 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <div class="bg-cs_red h-5 w-1 rounded-full"></div>
-                            <h2 class="text-sm font-black tracking-tight text-gray-800 uppercase dark:text-gray-100">
+                            <h2 class="text-sm font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
                                 Cảnh báo liên quan mật thiết
                             </h2>
                         </div>
                         <span
-                            class="text-cs_red rounded-lg bg-red-100/50 px-3 py-1 text-xs font-black uppercase dark:bg-red-900/20"
+                            class="text-cs_red rounded-lg bg-red-100/50 px-3 py-1 text-xs font-bold uppercase dark:bg-red-900/20"
                         >
                             CÙNG HỆ SINH THÁI
                         </span>
@@ -336,14 +336,14 @@
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                     </div>
                                     <span
-                                        class="text-[10px] font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         #CS-2026-8841
                                     </span>
                                 </div>
                                 <div>
                                     <h4
-                                        class="group-hover:text-cs_red mb-1.5 text-xs font-black text-gray-800 uppercase transition-colors md:text-sm dark:text-gray-200"
+                                        class="group-hover:text-cs_red mb-1.5 text-xs font-bold text-gray-800 uppercase transition-colors md:text-sm dark:text-gray-200"
                                     >
                                         Lừa đảo mua bán Fanpage
                                     </h4>
@@ -357,7 +357,7 @@
                                     <span class="text-[10px] font-bold tracking-tighter text-gray-400 uppercase">
                                         01/02/2026
                                     </span>
-                                    <span class="text-cs_red text-xs font-black">2.000.000đ</span>
+                                    <span class="text-cs_red text-xs font-bold">2.000.000đ</span>
                                 </div>
                             </div>
                         </div>
@@ -374,14 +374,14 @@
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                     </div>
                                     <span
-                                        class="text-[10px] font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                        class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                     >
                                         #CS-2026-7722
                                     </span>
                                 </div>
                                 <div>
                                     <h4
-                                        class="group-hover:text-cs_red mb-1.5 text-xs font-black text-gray-800 uppercase transition-colors md:text-sm dark:text-gray-200"
+                                        class="group-hover:text-cs_red mb-1.5 text-xs font-bold text-gray-800 uppercase transition-colors md:text-sm dark:text-gray-200"
                                     >
                                         Scam tiền cọc thuê tool
                                     </h4>
@@ -395,14 +395,14 @@
                                     <span class="text-[10px] font-bold tracking-tighter text-gray-400 uppercase">
                                         15/01/2026
                                     </span>
-                                    <span class="text-cs_red text-xs font-black">800.000đ</span>
+                                    <span class="text-cs_red text-xs font-bold">800.000đ</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <button
-                        class="mt-8 w-full rounded-2xl border border-dashed border-gray-200 py-3.5 text-xs font-black tracking-widest text-gray-400 uppercase transition-colors hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-slate-800"
+                        class="mt-8 w-full rounded-2xl border border-dashed border-gray-200 py-3.5 text-xs font-bold tracking-widest text-gray-400 uppercase transition-colors hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-slate-800"
                     >
                         Xem tất cả vụ liên quan (5)
                     </button>
@@ -414,7 +414,7 @@
                 >
                     <div class="mb-10 flex items-center gap-2">
                         <div class="bg-cs_blue h-5 w-1 rounded-full"></div>
-                        <h2 class="text-sm font-black tracking-tight text-gray-800 uppercase dark:text-gray-100">
+                        <h2 class="text-sm font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
                             Cộng đồng bình luận (12)
                         </h2>
                     </div>
@@ -435,7 +435,7 @@
                                 ></textarea>
                                 <div class="mt-3 flex justify-end">
                                     <button
-                                        class="bg-cs_blue cursor-pointer rounded-xl px-6 py-2 text-[10px] font-black text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:px-8 md:py-2.5 md:text-xs"
+                                        class="bg-cs_blue cursor-pointer rounded-xl px-6 py-2 text-[10px] font-bold text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:px-8 md:py-2.5 md:text-xs"
                                     >
                                         Gửi bình luận
                                     </button>
@@ -449,7 +449,7 @@
                         <!-- Single Comment -->
                         <div class="group flex gap-3 md:gap-4">
                             <div
-                                class="from-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr to-blue-400 text-[10px] font-black text-white shadow-sm md:h-11 md:w-11 md:text-sm"
+                                class="from-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr to-blue-400 text-[10px] font-bold text-white shadow-sm md:h-11 md:w-11 md:text-sm"
                             >
                                 AN
                             </div>
@@ -460,7 +460,7 @@
                                     <div class="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                                         <div class="flex items-center gap-2">
                                             <span
-                                                class="text-xs font-black tracking-tight text-gray-800 uppercase dark:text-gray-100"
+                                                class="text-xs font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100"
                                             >
                                                 Người dùng ẩn danh
                                             </span>
@@ -482,7 +482,7 @@
                         <!-- Single Comment -->
                         <div class="group flex gap-3 md:gap-4">
                             <div
-                                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-black text-gray-500 md:h-11 md:w-11 md:text-sm dark:bg-slate-800 dark:text-gray-400"
+                                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-gray-500 md:h-11 md:w-11 md:text-sm dark:bg-slate-800 dark:text-gray-400"
                             >
                                 TV
                             </div>
@@ -493,7 +493,7 @@
                                     <div class="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                                         <div class="flex items-center gap-2">
                                             <span
-                                                class="text-xs font-black tracking-tight text-gray-800 uppercase dark:text-gray-100"
+                                                class="text-xs font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100"
                                             >
                                                 Trung Van 9x
                                             </span>
@@ -531,10 +531,10 @@
                                 <div
                                     class="bg-cs_red/5 absolute top-0 right-0 -mt-8 -mr-8 h-16 w-16 rounded-full"
                                 ></div>
-                                <span class="text-cs_red/60 mb-1 block text-[10px] font-black tracking-[2px] uppercase">
+                                <span class="text-cs_red/60 mb-1 block text-[10px] font-bold tracking-[2px] uppercase">
                                     Trạng thái xác minh
                                 </span>
-                                <h3 class="text-cs_red text-xl font-black tracking-tighter uppercase">
+                                <h3 class="text-cs_red text-xl font-bold tracking-tighter uppercase">
                                     CẢNH BÁO LỪA ĐẢO
                                 </h3>
                                 <div class="mt-2 flex items-center justify-center gap-1">
@@ -560,7 +560,7 @@
                                             Tài liệu bằng chứng
                                         </span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">03 Bản</span>
+                                    <span class="text-xs font-bold text-gray-800 dark:text-gray-300">03 Bản</span>
                                 </div>
 
                                 <div
@@ -576,7 +576,7 @@
                                             Số lần bị tố cao
                                         </span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">02 Lần</span>
+                                    <span class="text-xs font-bold text-gray-800 dark:text-gray-300">02 Lần</span>
                                 </div>
 
                                 <div
@@ -592,7 +592,7 @@
                                             Độ phổ biến tra cứu
                                         </span>
                                     </div>
-                                    <span class="text-xs font-black text-gray-800 dark:text-gray-300">Rất cao</span>
+                                    <span class="text-xs font-bold text-gray-800 dark:text-gray-300">Rất cao</span>
                                 </div>
                             </div>
 
@@ -616,7 +616,7 @@
                                     Tra cứu
                                 </span>
                                 <span
-                                    class="group-hover:text-cs_blue text-lg font-black text-gray-800 transition-colors dark:text-gray-100"
+                                    class="group-hover:text-cs_blue text-lg font-bold text-gray-800 transition-colors dark:text-gray-100"
                                 >
                                     162+
                                 </span>
@@ -628,7 +628,7 @@
                                     Báo cáo
                                 </span>
                                 <span
-                                    class="inline-block font-mono text-lg font-black transition-transform group-hover:scale-110"
+                                    class="inline-block font-mono text-lg font-bold transition-transform group-hover:scale-110"
                                 >
                                     03
                                 </span>
@@ -639,25 +639,27 @@
 
                 <!-- Action Buttons -->
                 <div class="grid grid-cols-1 gap-3">
-                    <button
-                        class="bg-cs_blue flex h-14 w-full items-center justify-center gap-3 rounded-2xl py-4 text-xs leading-none font-black tracking-widest text-white uppercase transition-all hover:bg-blue-600 hover:shadow-xl active:scale-95"
+                    <a
+                        href="/to-cao-lua-dao"
+                        class="bg-cs_blue overflow-hidden rounded-2xl py-4 text-center text-xs font-bold tracking-widest text-white uppercase transition-all duration-300"
                     >
                         <i class="fa-regular fa-paper-plane text-base"></i>
-                        GỬI THÊM BẰNG CHỨNG
-                    </button>
+                        NGƯỜI NÀY CŨNG SCAM TÔI
+                    </a>
                     <div class="flex gap-2.5">
                         <button
-                            class="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-100 bg-white py-3 text-xs font-black tracking-tighter text-gray-500 uppercase transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800 dark:hover:bg-slate-700"
+                            class="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-100 bg-white py-3 text-xs font-bold tracking-tighter text-gray-500 uppercase transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800 dark:hover:bg-slate-700"
                         >
                             <i class="fa-solid fa-share-nodes text-sm"></i>
                             Share
                         </button>
-                        <button
-                            class="text-cs_red flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-100 bg-white py-3 text-xs font-black tracking-widest uppercase transition-all hover:bg-red-50 dark:border-gray-700 dark:bg-slate-800 dark:hover:bg-red-900/20"
+                        <a
+                            href="/giai-quyet-khieu-nai"
+                            class="text-cs_red flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-100 bg-white py-3 text-xs font-bold tracking-widest uppercase transition-all hover:bg-red-50 dark:border-gray-700 dark:bg-slate-800 dark:hover:bg-red-900/20"
                         >
                             <i class="fa-solid fa-flag text-sm"></i>
                             Gỡ phốt
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -667,11 +669,11 @@
         <div class="mt-10 border-t border-gray-100 pt-16 dark:border-gray-800/60">
             <div class="mb-6 flex flex-col justify-between gap-6 md:flex-row md:items-end">
                 <div class="px-2">
-                    <span class="text-cs_red mb-3 block animate-pulse text-xs font-black tracking-[5px] uppercase">
+                    <span class="text-cs_red mb-3 block animate-pulse text-xs font-bold tracking-[5px] uppercase">
                         Hot Blacklist
                     </span>
                     <h2
-                        class="text-2xl font-black tracking-tighter text-gray-900 uppercase md:text-3xl dark:text-gray-300"
+                        class="text-2xl font-bold tracking-tighter text-gray-900 uppercase md:text-3xl dark:text-gray-300"
                     >
                         Các vụ lừa đảo mới nhất
                     </h2>
@@ -688,44 +690,79 @@
                 >
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
 
-                    <div
-                        class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> flex flex-col items-center gap-3 p-4 transition-colors hover:bg-gray-50 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                    <a
+                        href="/scammer/{{ $i }}"
+                        class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
                     >
-                        <div class="flex w-full items-center gap-3 sm:w-5/12">
+                        <!-- Đối tượng & Ngày -->
+                        <div class="flex w-full items-center gap-3 sm:w-4/12">
                             <div
-                                class="text-cs_red flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs dark:bg-red-900/20"
+                                class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                             >
-                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <i class="fa-solid fa-user-slash"></i>
                             </div>
                             <div>
-                                <h3 class="text-xs font-bold text-gray-900 md:text-sm dark:text-gray-100">
-                                    Nguyễn Văn A -
-
-                                    <?php echo $i; ?>
+                                <h3
+                                    class="group-hover:text-cs_red text-xs font-bold text-gray-900 transition-colors duration-300 md:text-sm dark:text-gray-100"
+                                >
+                                    Nguyễn Văn A - {{ $i }}
                                 </h3>
-                                <div class="text-[9px] text-gray-400 md:text-[10px] dark:text-gray-500">
-                                    <i class="fa-regular fa-clock mr-1"></i>
-                                    Vừa xong
+                                <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                    <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                    20/03/2026
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full border-gray-100 sm:w-5/12 sm:border-l sm:px-6 dark:border-gray-800">
+
+                        <!-- Thông tin định danh -->
+                        <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
                             <div class="flex flex-col">
-                                <span class="text-[10px] font-bold text-gray-400 uppercase dark:text-gray-500">
-                                    Tài khoản
+                                <span
+                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                >
+                                    Tài khoản lừa đảo
                                 </span>
-                                <span class="text-cs_red text-xs font-black">0987654321***</span>
+                                <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                             </div>
                         </div>
+
+                        <!-- Chỉ số tín nhiệm (Stats) -->
+                        <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                            <div class="flex items-center gap-6">
+                                <div class="flex flex-col">
+                                    <span
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                    >
+                                        Lượt xem
+                                    </span>
+                                    <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                        <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                        {{ number_format(1200 + $i * 150) }}
+                                    </span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                    >
+                                        Bài cảnh báo
+                                    </span>
+                                    <span class="text-cs_red text-xs font-bold">
+                                        <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                        0{{ $i + 2 }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hành động -->
                         <div class="w-full text-right sm:w-2/12">
-                            <a
-                                href="#"
-                                class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
+                            <span
+                                class="text-cs_blue group-hover:bg-cs_blue inline-block rounded-lg bg-blue-50 px-4 py-2 text-[10px] font-bold uppercase transition-all duration-300 group-hover:text-white dark:bg-blue-900/20"
                             >
                                 Chi tiết
-                            </a>
+                            </span>
                         </div>
-                    </div>
+                    </a>
 
                     <?php } ?>
                 </div>
