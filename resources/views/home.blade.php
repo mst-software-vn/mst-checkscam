@@ -13,7 +13,7 @@
             alt="Ads"
         />
 
-        <h2 class="text-cs_blue mt-6 mb-6 text-center text-xs uppercase md:text-xl">
+        <h2 class="text-cs_blue mt-12 mb-6 text-center text-lg uppercase md:text-xl">
             {{ date("d/m/Y") }} CÓ 26 CẢNH BÁO
         </h2>
 
@@ -23,14 +23,6 @@
             <div class="w-full space-y-8 lg:w-9/12">
                 <!-- PHẦN 1: CẢNH BÁO NGÀY HÔM NAY -->
                 <section>
-                    <div class="border-cs_red mb-4 flex items-center gap-2 border-l-4 pl-3">
-                        <h2 class="text-lg font-bold text-gray-800 uppercase dark:text-gray-300">
-                            <?php echo date("d/m/Y"); ?>
-
-                            CÓ CẢNH BÁO
-                        </h2>
-                        <span class="text-cs_red rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold">MỚI</span>
-                    </div>
                     <div
                         class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"
                     >
@@ -246,13 +238,6 @@
                                 Xem tất cả
                             </a>
                         </div>
-                        <p class="text-[10px] font-bold tracking-tighter text-gray-400 uppercase dark:text-gray-500">
-                            Tổng quỹ:
-                            <span class="text-cs_green">~5.8 Tỷ</span>
-                            •
-                            <span class="text-gray-300 dark:text-gray-700">|</span>
-                            128+ TV
-                        </p>
                     </div>
 
                     <div class="p-5">
@@ -270,7 +255,7 @@
                                 ['name' => 'Gia Bảo', 'color' => 'c2410c', 'title' => 'Gia Bảo - 60 Triệu'],
                                 ['name' => 'Thanh Tuyền', 'color' => 'd24frr', 'title' => 'Thanh Tuyền - 60 Triệu'],
                             ];
-                            foreach ($avatars as $av) { ?>
+                        foreach ($avatars as $av) { ?>
 
                             <a
                                 href="#"
@@ -286,11 +271,6 @@
                                             alt="<?php echo $av["name"]; ?>"
                                             class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3"
                                         />
-                                    </div>
-                                    <div
-                                        class="bg-cs_blue absolute right-0 bottom-0 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white shadow-sm dark:border-slate-800"
-                                    >
-                                        <i class="fa-solid fa-check text-[8px] text-white"></i>
                                     </div>
                                 </div>
                                 <span
@@ -352,7 +332,7 @@
                         ['user' => 'Thanh Ngân', 'time' => '12 giờ trước', 'content' => 'Mọi người cẩn thận với số tài khoản này nhé, chuyên đi lừa đảo thẻ cào.', 'target' => '0772.345.xxx', 'color' => '8b5cf6'],
                         ['user' => 'Duy Mạnh', 'time' => '1 ngày trước', 'content' => 'Vừa check xong, xém tí thì chuyển khoản cho nó. May quá!', 'target' => 'Momo - 0941...', 'color' => '06b6d4'],
                     ];
-                            foreach ($comments as $cmt) { ?>
+                        foreach ($comments as $cmt) { ?>
 
                     <div
                         class="dark:bg-dark_card rounded-2xl border border-gray-100 bg-white p-5 shadow-xs dark:border-gray-800"
@@ -402,83 +382,166 @@
                 </div>
             </section>
 
-            <!-- Section Bí Quyết Giao Dịch -->
-            <section
-                aria-labelledby="safety-tips-title"
-                class="rounded-2xl border border-blue-100/50 bg-gradient-to-br from-white to-blue-50/50 p-6 shadow-xs sm:rounded-3xl sm:p-8 md:p-12 dark:border-gray-800 dark:from-slate-900/50 dark:to-slate-800/30"
-            >
-                <div class="mx-auto mb-8 max-w-4xl text-center md:mb-12">
-                    <span
-                        class="bg-cs_blue/10 text-cs_blue mb-4 inline-block rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase"
-                    >
-                        Cẩm nang an toàn
-                    </span>
-                    <h2
-                        id="safety-tips-title"
-                        class="text-xl font-black tracking-tight text-gray-800 uppercase md:text-2xl lg:text-3xl dark:text-slate-50"
-                    >
-                        Cách giao dịch
-                        <span class="text-cs_blue">không lừa đảo</span>
-                    </h2>
-                    <p class="mt-3 text-xs leading-relaxed text-gray-500 md:text-sm dark:text-slate-500">
-                        Thế giới MMO đầy rẫy rủi ro, nắm vững 3 nguyên tắc "vàng" túi tiền sẽ được bảo vệ tuyệt đối.
-                    </p>
-                </div>
+            <!-- Section: Nghị Định Thư Tín Nhiệm Số (Digital Trust Protocol) -->
+            <section aria-labelledby="protocol-title" class="relative px-4 py-20">
+                <div class="relative z-10 mx-auto max-w-7xl">
+                    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+                        <!-- Cột Trái: Tiêu điểm & Triết lý -->
+                        <div class="lg:col-span-5">
+                            <div
+                                class="dark:bg-cs_blue mb-4 inline-flex items-center gap-2 rounded-md bg-slate-900 px-3 py-1"
+                            >
+                                <span class="text-[10px] font-black tracking-widest text-white uppercase">
+                                    Protocol v4.0
+                                </span>
+                            </div>
+                            <h2
+                                id="protocol-title"
+                                class="mb-6 text-4xl leading-tight font-black tracking-tighter text-slate-900 uppercase md:text-5xl dark:text-white"
+                            >
+                                MINH BẠCH HÓA
+                                <br />
+                                <span class="text-cs_blue">GIAO DỊCH MMO</span>
+                            </h2>
+                            <p class="mb-8 max-w-md text-slate-500 dark:text-slate-400">
+                                CheckScam thiết lập bộ tiêu chuẩn mới về tín nhiệm số, nơi mọi dữ liệu được đối soát
+                                chéo và công khai minh bạch để bảo vệ cộng đồng.
+                            </p>
 
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-                    <article
-                        class="group dark:bg-dark_card rounded-lg border border-gray-200 bg-white p-6 shadow-xs sm:p-8 dark:border-gray-800"
-                    >
-                        <div
-                            class="text-cs_blue mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 md:h-14 md:w-14 dark:border-blue-900/50 dark:bg-blue-900/30"
-                        >
-                            <i class="fa-solid fa-magnifying-glass-chart text-lg md:text-xl"></i>
+                            <div class="space-y-6">
+                                <div class="flex gap-4">
+                                    <div class="bg-cs_blue/20 h-12 w-1 flex-none overflow-hidden rounded-full">
+                                        <div class="bg-cs_blue h-1/2 animate-pulse"></div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-1 text-xs font-black text-slate-400 uppercase">
+                                            Cơ sở dữ liệu
+                                        </div>
+                                        <div class="text-xl font-bold text-slate-800 dark:text-slate-100">
+                                            Dữ liệu đen lớn nhất VN
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="bg-cs_green/20 h-12 w-1 flex-none overflow-hidden rounded-full">
+                                        <div class="bg-cs_green h-2/3 animate-pulse"></div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-1 text-xs font-black text-slate-400 uppercase">
+                                            Xác thực Telegram
+                                        </div>
+                                        <div class="text-xl font-bold text-slate-800 dark:text-slate-100">
+                                            Hệ mã định danh Reputation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="mb-3 text-base font-bold text-gray-800 md:text-lg dark:text-gray-100">
-                            Luôn luôn kiểm tra
-                        </h4>
-                        <p class="text-xs leading-relaxed text-gray-600 md:text-sm dark:text-gray-400">
-                            Hãy
-                            <span class="text-cs_blue font-bold">copy SĐT/STK</span>
-                            dán vào CheckScam để xem họ có "vết đen" nào không.
-                        </p>
-                    </article>
 
-                    <article
-                        class="group dark:bg-dark_card rounded-lg border border-gray-200 bg-white p-6 shadow-xs sm:p-8 dark:border-gray-800"
-                    >
-                        <div
-                            class="text-cs_green mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-green-100 bg-green-50 md:h-14 md:w-14 dark:border-green-900/50 dark:bg-green-900/30"
-                        >
-                            <i class="fa-solid fa-user-shield text-lg md:text-xl"></i>
-                        </div>
-                        <h4 class="mb-3 text-base font-bold text-gray-800 md:text-lg dark:text-gray-100">
-                            Sử dụng trung gian
-                        </h4>
-                        <p class="text-xs leading-relaxed text-gray-600 md:text-sm dark:text-gray-400">
-                            Với giao dịch lạ, hãy mời một
-                            <span class="text-cs_green font-bold">Trung Gian Uy Tín</span>
-                            có đóng quỹ bảo hiểm.
-                        </p>
-                    </article>
+                        <!-- Cột Phải: Registry Dashboard -->
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:col-span-7">
+                            <!-- Card: Ngân hàng -->
+                            <div
+                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                            >
+                                <div class="text-cs_blue mb-5 text-3xl">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </div>
+                                <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
+                                    Truy soát ngân hàng
+                                </h3>
+                                <p class="mb-6 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                                    Đối soát trực tiếp với danh sách "Blacklist" liên ngân hàng để phát hiện STK rác
+                                    ngay lập tức.
+                                </p>
+                                <div
+                                    class="flex items-center justify-between border-t border-slate-100 pt-4 dark:border-slate-800"
+                                >
+                                    <span class="text-[10px] font-bold text-slate-400">STATUS: ACTIVE</span>
+                                    <span
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                    >
+                                        Chi tiết
+                                        <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                                    </span>
+                                </div>
+                            </div>
 
-                    <article
-                        class="group dark:bg-dark_card rounded-lg border border-gray-200 bg-white p-6 shadow-xs sm:p-8 dark:border-gray-800"
-                    >
-                        <div
-                            class="text-cs_red mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-red-100 bg-red-50 md:h-14 md:w-14 dark:border-red-900/50 dark:bg-red-900/30"
-                        >
-                            <i class="fa-solid fa-bolt-lightning text-lg md:text-xl"></i>
+                            <!-- Card: Telegram -->
+                            <div
+                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                            >
+                                <div class="mb-5 text-3xl text-[#24A1DE]">
+                                    <i class="fa-brands fa-telegram"></i>
+                                </div>
+                                <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
+                                    Uy tín Telegram
+                                </h3>
+                                <p class="mb-6 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                                    Định danh User ID và Username để loại bỏ các trường hợp mạo danh Admin hoặc trung
+                                    gian uy tín.
+                                </p>
+                                <div
+                                    class="flex items-center justify-between border-t border-slate-100 pt-4 dark:border-slate-800"
+                                >
+                                    <span class="text-[10px] font-bold text-slate-400">ID VERIFIED</span>
+                                    <span
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                    >
+                                        Chi tiết
+                                        <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card: Web Scan -->
+                            <div
+                                class="group hover:border-cs_blue relative rounded-4xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900"
+                            >
+                                <div class="text-cs_red mb-5 text-3xl">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <h3 class="mb-2 text-lg font-black text-slate-900 uppercase dark:text-white">
+                                    Quét mã độc Web
+                                </h3>
+                                <p class="mb-6 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                                    Phân tích chuyên sâu link giao dịch để phát hiện các trang web Phishing đánh cắp
+                                    thông tin.
+                                </p>
+                                <div
+                                    class="flex items-center justify-between border-t border-slate-100 pt-4 dark:border-slate-800"
+                                >
+                                    <span class="text-[10px] font-bold text-slate-400">DNS SECURE</span>
+                                    <span
+                                        class="text-cs_blue cursor-pointer text-xs font-black uppercase hover:underline"
+                                    >
+                                        Chi tiết
+                                        <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card: Community -->
+                            <div
+                                class="group relative rounded-4xl border-none bg-slate-900 p-8 transition-all duration-300 hover:-translate-y-1 dark:bg-slate-800"
+                            >
+                                <div class="text-cs_green mb-5 text-3xl">
+                                    <i class="fa-solid fa-people-group"></i>
+                                </div>
+                                <h3 class="mb-2 text-lg font-black text-white uppercase">Trí tuệ tập thể</h3>
+                                <p class="mb-6 text-xs leading-relaxed text-slate-400">
+                                    Mỗi báo cáo của cộng đồng là một viên gạch xây dựng nên lá chắn vững chắc cho MMO
+                                    Việt.
+                                </p>
+                                <a
+                                    href="/to-cao-lua-dao"
+                                    class="bg-cs_green flex w-full items-center justify-center rounded-lg py-3 text-[10px] font-black text-white uppercase transition-all hover:scale-105"
+                                >
+                                    Gửi báo cáo ngay
+                                </a>
+                            </div>
                         </div>
-                        <h4 class="mb-3 text-base font-bold text-gray-800 md:text-lg dark:text-gray-100">
-                            Cảnh giác link lạ
-                        </h4>
-                        <p class="text-xs leading-relaxed text-gray-600 md:text-sm dark:text-gray-400">
-                            Link "xác nhận tiền" hay "nhập OTP" đều là bẫy. Ngân hàng
-                            <span class="text-cs_red font-bold">không bao giờ</span>
-                            yêu cầu.
-                        </p>
-                    </article>
+                    </div>
                 </div>
             </section>
 
