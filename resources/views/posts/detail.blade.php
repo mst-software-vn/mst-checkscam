@@ -6,11 +6,11 @@
     <!-- Reading Progress Bar -->
     <div
         id="progress-bar"
-        class="fixed top-0 left-0 h-1 bg-cs_blue z-[9999] transition-all duration-300 ease-out"
+        class="bg-cs_blue fixed top-0 left-0 z-[9999] h-1 transition-all duration-300 ease-out"
         style="width: 0%"
     ></div>
 
-    <main class="bg-gray-50/40 dark:bg-dark_bg pb-24">
+    <main class="dark:bg-dark_bg bg-gray-50/40 pb-24">
         <x-breadcrumb
             :links="[
                 ['name' => 'Kiến thức MMO', 'url' => '/bai-viet'],
@@ -20,71 +20,71 @@
                 ],
             ]"
         />
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-6">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-6 lg:flex-row">
                 <!-- 1. LEFT: Floating Sticky Share (Hidden on Mobile) -->
-                <aside class="hidden xl:block w-[60px] shrink-0">
+                <aside class="hidden w-[60px] shrink-0 xl:block">
                     <div class="sticky top-32 flex flex-col items-center gap-3">
                         <p
-                            class="text-[9px] font-black text-gray-300 dark:text-gray-600 uppercase vertical-text tracking-[0.3em] mb-4"
+                            class="vertical-text mb-4 text-[9px] font-black tracking-[0.3em] text-gray-300 uppercase dark:text-gray-600"
                         >
                             Sharing
                         </p>
 
                         <a
                             href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 dark:bg-dark_card border border-gray-100 dark:border-gray-800 text-gray-400 hover:text-[#1877F2] hover:border-[#1877F2]/30 hover:shadow-lg hover:shadow-[#1877F2]/10 transition-all group"
+                            class="dark:bg-dark_card group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 bg-white/90 text-gray-400 transition-all hover:border-[#1877F2]/30 hover:text-[#1877F2] hover:shadow-lg hover:shadow-[#1877F2]/10 dark:border-gray-800"
                         >
-                            <i class="fa-brands fa-facebook-f text-sm group-hover:scale-110 transition-transform"></i>
+                            <i class="fa-brands fa-facebook-f text-sm transition-transform group-hover:scale-110"></i>
                         </a>
 
                         <a
                             href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 dark:bg-dark_card border border-gray-100 dark:border-gray-800 text-gray-400 hover:text-cs_blue hover:border-cs_blue/30 hover:shadow-lg hover:shadow-blue-500/10 transition-all group"
+                            class="dark:bg-dark_card hover:text-cs_blue hover:border-cs_blue/30 group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 bg-white/90 text-gray-400 transition-all hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-800"
                         >
-                            <i class="fa-brands fa-telegram text-sm group-hover:scale-110 transition-transform"></i>
+                            <i class="fa-brands fa-telegram text-sm transition-transform group-hover:scale-110"></i>
                         </a>
 
                         <button
                             onclick="copyToClipboard()"
-                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 dark:bg-dark_card border border-gray-100 dark:border-gray-800 text-gray-400 hover:text-cs_blue hover:border-cs_blue/30 hover:shadow-lg hover:shadow-blue-500/10 transition-all group"
+                            class="dark:bg-dark_card hover:text-cs_blue hover:border-cs_blue/30 group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 bg-white/90 text-gray-400 transition-all hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-800"
                         >
-                            <i class="fa-solid fa-link text-sm group-hover:scale-110 transition-transform"></i>
+                            <i class="fa-solid fa-link text-sm transition-transform group-hover:scale-110"></i>
                         </button>
 
-                        <div class="w-[1px] h-12 bg-gray-300 dark:bg-gray-800 mt-4"></div>
+                        <div class="mt-4 h-12 w-[1px] bg-gray-300 dark:bg-gray-800"></div>
 
                         <div class="flex flex-col items-center gap-1">
                             <span class="text-[14px] font-black text-gray-900 dark:text-gray-300">1.2k</span>
-                            <span class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">Views</span>
+                            <span class="text-[8px] font-bold tracking-tighter text-gray-400 uppercase">Views</span>
                         </div>
                     </div>
                 </aside>
 
                 <!-- 2. CENTER: Main Content -->
-                <article class="flex-1 min-w-0">
+                <article class="min-w-0 flex-1">
                     <div
-                        class="bg-white dark:bg-dark_card rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800/80 shadow-xs"
+                        class="dark:bg-dark_card overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xs dark:border-gray-800/80"
                     >
                         <!-- Post Header -->
-                        <header class="p-8 md:p-8 border-b border-gray-50 dark:border-gray-800/40">
-                            <div class="flex items-center gap-3 mb-6">
+                        <header class="border-b border-gray-50 p-8 md:p-8 dark:border-gray-800/40">
+                            <div class="mb-6 flex items-center gap-3">
                                 <span
-                                    class="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-cs_blue text-[10px] font-black uppercase tracking-widest rounded-lg border border-blue-100/50 dark:border-blue-900/30"
+                                    class="text-cs_blue rounded-lg border border-blue-100/50 bg-blue-50 px-3 py-1 text-[10px] font-black tracking-widest uppercase dark:border-blue-900/30 dark:bg-blue-900/20"
                                 >
                                     <i class="fa-solid fa-shield-halved mr-1"></i>
                                     Security Alert
                                 </span>
-                                <span class="w-1 h-1 bg-gray-200 dark:bg-gray-700 rounded-full"></span>
+                                <span class="h-1 w-1 rounded-full bg-gray-200 dark:bg-gray-700"></span>
                                 <span
-                                    class="text-gray-400 dark:text-gray-500 text-[10px] font-bold uppercase tracking-widest"
+                                    class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
                                 >
                                     7 Min Read
                                 </span>
                             </div>
 
                             <h1
-                                class="text-3xl md:text-5xl font-black text-gray-900 dark:text-gray-300 leading-[1.2] tracking-tight mb-8"
+                                class="mb-8 text-3xl leading-[1.2] font-black tracking-tight text-gray-900 md:text-5xl dark:text-gray-300"
                             >
                                 Lật tẩy chiêu trò lừa đảo qua tin nhắn iMessage và SMS ngân hàng 2026
                             </h1>
@@ -94,32 +94,32 @@
                                     <div class="relative">
                                         <img
                                             src="https://ui-avatars.com/api/?name=Admin&background=0068FF&color=fff"
-                                            class="w-12 h-12 rounded-2xl border-2 border-white dark:border-gray-800 shadow-sm"
+                                            class="h-12 w-12 rounded-2xl border-2 border-white shadow-sm dark:border-gray-800"
                                             alt="Author"
                                         />
                                         <div
-                                            class="absolute -bottom-1 -right-1 w-4 h-4 bg-cs_blue rounded-full border-2 border-white dark:border-gray-900 flex items-center justify-center"
+                                            class="bg-cs_blue absolute -right-1 -bottom-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white dark:border-gray-900"
                                         >
-                                            <i class="fa-solid fa-check text-white text-[6px]"></i>
+                                            <i class="fa-solid fa-check text-[6px] text-white"></i>
                                         </div>
                                     </div>
                                     <div class="text-left">
-                                        <p class="text-gray-900 dark:text-gray-300 font-black text-sm md:text-base">
+                                        <p class="text-sm font-black text-gray-900 md:text-base dark:text-gray-300">
                                             Võ Xuân Sang
                                         </p>
                                         <div
-                                            class="flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-tighter"
+                                            class="flex items-center gap-2 text-[10px] font-bold tracking-tighter text-gray-400 uppercase"
                                         >
                                             <span>Security Researcher</span>
-                                            <span class="w-1 h-1 bg-gray-200 dark:bg-gray-700 rounded-full"></span>
+                                            <span class="h-1 w-1 rounded-full bg-gray-200 dark:bg-gray-700"></span>
                                             <span>March 07, 2026</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hidden sm:flex items-center gap-2">
-                                    <div class="text-right mr-3">
-                                        <p class="text-[10px] text-gray-400 font-bold uppercase">Đánh giá bài viết</p>
-                                        <div class="flex text-cs_orange text-[10px] gap-0.5">
+                                <div class="hidden items-center gap-2 sm:flex">
+                                    <div class="mr-3 text-right">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase">Đánh giá bài viết</p>
+                                        <div class="text-cs_orange flex gap-0.5 text-[10px]">
                                             <i class="fa-solid fa-star"></i>
                                             <i class="fa-solid fa-star"></i>
                                             <i class="fa-solid fa-star"></i>
@@ -132,10 +132,10 @@
                         </header>
 
                         <!-- Featured Image -->
-                        <div class="relative group overflow-hidden">
+                        <div class="group relative overflow-hidden">
                             <img
                                 src="https://i.ibb.co/680L9399/post1.jpg"
-                                class="w-full aspect-[21/9] object-cover"
+                                class="aspect-[21/9] w-full object-cover"
                                 alt="Featured Image"
                             />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -144,10 +144,10 @@
                         <!-- Post Body -->
                         <div class="p-8 md:p-14">
                             <section
-                                class="prose prose-blue max-w-none dark:prose-invert prose-headings:font-black prose-headings:text-gray-900 dark:prose-headings:text-white prose-headings:tracking-tight prose-p:text-gray-600 dark:prose-p:text-gray-400 prose-p:leading-[1.9] prose-p:text-[16px] md:prose-p:text-[17px] prose-strong:text-gray-800 dark:prose-strong:text-white prose-strong:font-black prose-img:rounded-2xl prose-img:shadow-sm prose-img:border prose-img:border-gray-100 dark:prose-img:border-gray-800"
+                                class="prose prose-blue dark:prose-invert prose-headings:font-black prose-headings:text-gray-900 dark:prose-headings:text-white prose-headings:tracking-tight prose-p:text-gray-600 dark:prose-p:text-gray-400 prose-p:leading-[1.9] prose-p:text-[16px] md:prose-p:text-[17px] prose-strong:text-gray-800 dark:prose-strong:text-white prose-strong:font-black prose-img:rounded-2xl prose-img:shadow-sm prose-img:border prose-img:border-gray-100 dark:prose-img:border-gray-800 max-w-none"
                             >
                                 <p
-                                    class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 leading-relaxed italic mb-12 border-l-4 border-cs_blue pl-8 bg-blue-50/30 dark:bg-blue-900/5 py-4 rounded-r-2xl"
+                                    class="border-cs_blue mb-12 rounded-r-2xl border-l-4 bg-blue-50/30 py-4 pl-8 text-xl leading-relaxed font-bold text-gray-800 italic md:text-2xl dark:bg-blue-900/5 dark:text-gray-200"
                                 >
                                     "Chiến dịch tấn công giả mạo ngân hàng đang bùng nổ trong quý đầu năm 2026 thông qua
                                     các trạm BTS giả, đánh vào sự tin tưởng của người dùng MMO."
@@ -159,7 +159,7 @@
                                     này giúp chúng vượt qua được các bộ lọc tin nhắn rác của nhà mạng một cách dễ dàng.
                                 </p>
 
-                                <h2 class="text-2xl mt-12 mb-6">Thủ đoạn: Ghi đè sóng Brandname</h2>
+                                <h2 class="mt-12 mb-6 text-2xl">Thủ đoạn: Ghi đè sóng Brandname</h2>
                                 <p>
                                     Thay vì dùng SIM rác như trước đây, kẻ xấu dùng thiết bị công nghệ cao để chèn tin
                                     nhắn vào luồng tin nhắn thật của ngân hàng. Khi bạn mở ứng dụng tin nhắn, bạn sẽ
@@ -168,21 +168,21 @@
                                 </p>
 
                                 <div
-                                    class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 p-8 my-10 rounded-3xl relative overflow-hidden"
+                                    class="relative my-10 overflow-hidden rounded-3xl border border-red-100 bg-red-50 p-8 dark:border-red-900/30 dark:bg-red-900/10"
                                 >
                                     <div
-                                        class="absolute -top-4 -right-4 text-red-100 dark:text-red-900/20 text-6xl opacity-50"
+                                        class="absolute -top-4 -right-4 text-6xl text-red-100 opacity-50 dark:text-red-900/20"
                                     >
                                         <i class="fa-solid fa-quote-right"></i>
                                     </div>
                                     <p
-                                        class="text-cs_red font-black text-xs mb-4 uppercase tracking-[0.2em] flex items-center gap-2"
+                                        class="text-cs_red mb-4 flex items-center gap-2 text-xs font-black tracking-[0.2em] uppercase"
                                     >
-                                        <span class="w-1.5 h-1.5 bg-cs_red rounded-full animate-pulse"></span>
+                                        <span class="bg-cs_red h-1.5 w-1.5 animate-pulse rounded-full"></span>
                                         Ví dụ tin nhắn lừa đảo
                                     </p>
                                     <p
-                                        class="text-gray-700 dark:text-gray-300 italic font-medium text-lg leading-relaxed"
+                                        class="text-lg leading-relaxed font-medium text-gray-700 italic dark:text-gray-300"
                                     >
                                         "Cảnh báo: Tài khoản của quý khách đã bị tạm khóa do vi phạm điều khoản. Vui
                                         lòng truy cập https://vietcombank.verify-banking.com để xác thực và tránh mất
@@ -194,32 +194,32 @@
                                     <img
                                         src="https://i.ibb.co/3mbm8X9P/post2.jpg"
                                         alt="Trạm BTS giả mạo"
-                                        class="w-full h-auto"
+                                        class="h-auto w-full"
                                     />
                                     <p
-                                        class="text-center text-[11px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-6 italic"
+                                        class="mt-6 text-center text-[11px] font-bold tracking-[0.2em] text-gray-400 uppercase italic"
                                     >
                                         Hình ảnh: Tang vật trạm BTS giả mạo bị cơ quan chức năng thu giữ
                                     </p>
                                 </div>
 
-                                <h2 class="text-2xl mt-12 mb-6">Quy tắc vàng "3 KHÔNG" dành cho dân MMO</h2>
+                                <h2 class="mt-12 mb-6 text-2xl">Quy tắc vàng "3 KHÔNG" dành cho dân MMO</h2>
                                 <p>
                                     Để bảo vệ túi tiền và thông tin cá nhân, cộng đồng MMO cần nắm lòng 3 nguyên tắc
                                     sống còn sau:
                                 </p>
 
-                                <div class="grid grid-cols-1 gap-5 mt-8">
+                                <div class="mt-8 grid grid-cols-1 gap-5">
                                     <div
-                                        class="flex items-start gap-5 p-6 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-3xl hover:border-cs_blue/30 transition-all shadow-xs"
+                                        class="hover:border-cs_blue/30 flex items-start gap-5 rounded-3xl border border-gray-100 bg-white p-6 shadow-xs transition-all dark:border-gray-800 dark:bg-slate-900"
                                     >
                                         <div
-                                            class="w-12 h-12 shrink-0 bg-blue-50 dark:bg-blue-900/30 text-cs_blue rounded-2xl flex items-center justify-center text-lg font-black italic shadow-sm"
+                                            class="text-cs_blue flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-lg font-black italic shadow-sm dark:bg-blue-900/30"
                                         >
                                             01
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">
+                                            <h4 class="mb-2 text-lg font-black text-gray-900 dark:text-gray-300">
                                                 KHÔNG nhấp vào đường link lạ
                                             </h4>
                                             <p class="text-sm leading-relaxed">
@@ -229,15 +229,15 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="flex items-start gap-5 p-6 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-3xl hover:border-cs_blue/30 transition-all shadow-xs"
+                                        class="hover:border-cs_blue/30 flex items-start gap-5 rounded-3xl border border-gray-100 bg-white p-6 shadow-xs transition-all dark:border-gray-800 dark:bg-slate-900"
                                     >
                                         <div
-                                            class="w-12 h-12 shrink-0 bg-red-50 dark:bg-red-900/30 text-cs_red rounded-2xl flex items-center justify-center text-lg font-black italic shadow-sm"
+                                            class="text-cs_red flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-lg font-black italic shadow-sm dark:bg-red-900/30"
                                         >
                                             02
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">
+                                            <h4 class="mb-2 text-lg font-black text-gray-900 dark:text-gray-300">
                                                 KHÔNG cung cấp mã OTP cho bất kỳ ai
                                             </h4>
                                             <p class="text-sm leading-relaxed">
@@ -247,15 +247,15 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="flex items-start gap-5 p-6 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-3xl hover:border-cs_blue/30 transition-all shadow-xs"
+                                        class="hover:border-cs_blue/30 flex items-start gap-5 rounded-3xl border border-gray-100 bg-white p-6 shadow-xs transition-all dark:border-gray-800 dark:bg-slate-900"
                                     >
                                         <div
-                                            class="w-12 h-12 shrink-0 bg-green-50 dark:bg-green-900/30 text-cs_green rounded-2xl flex items-center justify-center text-lg font-black italic shadow-sm"
+                                            class="text-cs_green flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-green-50 text-lg font-black italic shadow-sm dark:bg-green-900/30"
                                         >
                                             03
                                         </div>
                                         <div>
-                                            <h4 class="text-gray-900 dark:text-gray-300 font-black text-lg mb-2">
+                                            <h4 class="mb-2 text-lg font-black text-gray-900 dark:text-gray-300">
                                                 KHÔNG hoảng sợ, hãy xác minh lại
                                             </h4>
                                             <p class="text-sm leading-relaxed">
@@ -267,27 +267,27 @@
                                 </div>
 
                                 <div
-                                    class="mt-16 p-10 bg-gradient-to-br from-slate-900 to-slate-950 dark:from-dark_card dark:to-slate-900 rounded-[2.5rem] text-center relative overflow-hidden shadow-2xl shadow-blue-900/20"
+                                    class="dark:from-dark_card relative mt-16 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 to-slate-950 p-10 text-center shadow-2xl shadow-blue-900/20 dark:to-slate-900"
                                 >
-                                    <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
+                                    <div class="pointer-events-none absolute top-0 left-0 h-full w-full opacity-20">
                                         <div
-                                            class="absolute top-0 right-0 w-64 h-64 bg-cs_blue rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"
+                                            class="bg-cs_blue absolute top-0 right-0 h-64 w-64 translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
                                         ></div>
                                     </div>
                                     <h3
-                                        class="text-white text-2xl md:text-3xl font-black mb-6 uppercase tracking-tight relative z-10"
+                                        class="relative z-10 mb-6 text-2xl font-black tracking-tight text-white uppercase md:text-3xl"
                                     >
                                         Bạn phát hiện đối tượng lừa đảo?
                                     </h3>
                                     <p
-                                        class="text-slate-400 text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed relative z-10"
+                                        class="relative z-10 mx-auto mb-10 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base"
                                     >
                                         Mỗi báo cáo của bạn là một bước giúp cộng đồng MMO Việt Nam an toàn hơn. Đừng im
                                         lặng trước cái xấu!
                                     </p>
                                     <a
                                         href="/to-cao-lua-dao"
-                                        class="inline-flex items-center gap-4 px-10 py-4 bg-cs_blue text-white font-black uppercase text-xs tracking-widest rounded-2xl hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-blue-500/20 relative z-10 active:scale-95"
+                                        class="bg-cs_blue relative z-10 inline-flex items-center gap-4 rounded-2xl px-10 py-4 text-xs font-black tracking-widest text-white uppercase shadow-xl shadow-blue-500/20 transition-all hover:bg-white hover:text-slate-900 active:scale-95"
                                     >
                                         Gửi đơn tố cáo ngay
                                         <i class="fa-solid fa-paper-plane"></i>
@@ -297,27 +297,27 @@
 
                             <!-- Social Counter & Tags -->
                             <div
-                                class="mt-16 pt-10 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6"
+                                class="mt-16 flex flex-col items-center justify-between gap-6 border-t border-gray-100 pt-10 md:flex-row dark:border-gray-800"
                             >
                                 <div class="flex flex-wrap items-center gap-2">
-                                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mr-2">
+                                    <span class="mr-2 text-[10px] font-black tracking-[0.2em] text-gray-400 uppercase">
                                         Cốt lõi:
                                     </span>
                                     <a
                                         href="#"
-                                        class="px-3 py-1 bg-gray-50 dark:bg-slate-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold rounded-lg hover:text-cs_blue transition-colors uppercase"
+                                        class="hover:text-cs_blue rounded-lg bg-gray-50 px-3 py-1 text-[10px] font-bold text-gray-500 uppercase transition-colors dark:bg-slate-800 dark:text-gray-400"
                                     >
                                         Bảo mật MMO
                                     </a>
                                     <a
                                         href="#"
-                                        class="px-3 py-1 bg-gray-50 dark:bg-slate-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold rounded-lg hover:text-cs_blue transition-colors uppercase"
+                                        class="hover:text-cs_blue rounded-lg bg-gray-50 px-3 py-1 text-[10px] font-bold text-gray-500 uppercase transition-colors dark:bg-slate-800 dark:text-gray-400"
                                     >
                                         Fake BTS
                                     </a>
                                     <a
                                         href="#"
-                                        class="px-3 py-1 bg-gray-50 dark:bg-slate-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold rounded-lg hover:text-cs_blue transition-colors uppercase"
+                                        class="hover:text-cs_blue rounded-lg bg-gray-50 px-3 py-1 text-[10px] font-bold text-gray-500 uppercase transition-colors dark:bg-slate-800 dark:text-gray-400"
                                     >
                                         Scam Alert
                                     </a>
@@ -327,18 +327,18 @@
                                         @for ($i = 0; $i < 4; $i++)
                                             <img
                                                 src="https://ui-avatars.com/api/?background=random&name=User+{{ $i }}"
-                                                class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 shadow-sm"
+                                                class="h-8 w-8 rounded-full border-2 border-white shadow-sm dark:border-gray-900"
                                                 alt="U"
                                             />
                                         @endfor
 
                                         <div
-                                            class="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 border-2 border-white dark:border-gray-900 flex items-center justify-center text-[8px] font-bold text-gray-500"
+                                            class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-[8px] font-bold text-gray-500 dark:border-gray-900 dark:bg-slate-800"
                                         >
                                             +25
                                         </div>
                                     </div>
-                                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tight">
+                                    <p class="text-[10px] font-bold tracking-tight text-gray-400 uppercase">
                                         Đã chia sẻ bài viết này
                                     </p>
                                 </div>
@@ -348,39 +348,39 @@
 
                     <!-- Recommended Section -->
                     <div class="mt-16">
-                        <div class="flex items-center justify-between mb-8">
+                        <div class="mb-8 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <div class="w-1.5 h-6 bg-cs_blue rounded-full"></div>
+                                <div class="bg-cs_blue h-6 w-1.5 rounded-full"></div>
                                 <h2
-                                    class="text-xl font-black text-gray-900 dark:text-gray-300 uppercase tracking-tight"
+                                    class="text-xl font-black tracking-tight text-gray-900 uppercase dark:text-gray-300"
                                 >
                                     Cẩm nang liên quan
                                 </h2>
                             </div>
                             <a
                                 href="/bai-viet"
-                                class="text-[11px] font-black text-cs_blue uppercase tracking-widest hover:underline"
+                                class="text-cs_blue text-[11px] font-black tracking-widest uppercase hover:underline"
                             >
                                 Xem tất cả
                             </a>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                             @for ($i = 1; $i <= 2; $i++)
                                 <a
                                     href="#"
-                                    class="group bg-white dark:bg-dark_card border border-gray-100 dark:border-gray-800 rounded-[2rem] overflow-hidden hover:border-cs_blue/30 transition-all shadow-xs"
+                                    class="group dark:bg-dark_card hover:border-cs_blue/30 overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-xs transition-all dark:border-gray-800"
                                 >
                                     <div class="aspect-video overflow-hidden">
                                         <img
                                             src="https://i.ibb.co/680L9399/post1.jpg"
-                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                             alt="Related"
                                         />
                                     </div>
                                     <div class="p-6">
-                                        <div class="flex items-center gap-2 mb-3">
+                                        <div class="mb-3 flex items-center gap-2">
                                             <span
-                                                class="text-[9px] font-black text-cs_blue bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded leading-none uppercase"
+                                                class="text-cs_blue rounded bg-blue-50 px-2 py-0.5 text-[9px] leading-none font-black uppercase dark:bg-blue-900/20"
                                             >
                                                 Kinh nghiệm
                                             </span>
@@ -389,7 +389,7 @@
                                             </span>
                                         </div>
                                         <h3
-                                            class="font-black text-gray-800 dark:text-gray-100 text-base leading-snug group-hover:text-cs_blue transition-colors line-clamp-2 italic"
+                                            class="group-hover:text-cs_blue line-clamp-2 text-base leading-snug font-black text-gray-800 italic transition-colors dark:text-gray-100"
                                         >
                                             5 Cách để bảo vệ tài khoản quảng cáo Facebook không bị 'checkpoint' vô lý...
                                         </h3>
@@ -401,29 +401,19 @@
                 </article>
 
                 <!-- 3. RIGHT: Sidebar Widgets (Copied from Home) -->
-                <aside class="w-full lg:w-[350px] space-y-4 sticky top-32 h-fit">
+                <aside class="sticky top-32 h-fit w-full space-y-4 lg:w-[350px]">
                     <!-- Right Sidebar Banner -->
-                    <div
-                        class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white"
-                    >
-                        <a href="#" target="_blank" class="w-full h-full block">
-                            <img
-                                src="https://i.ibb.co/kgwtn4vF/fpayment.jpg"
-                                class="w-full h-full"
-                                alt="Fpayment Ads"
-                            />
-                        </a>
-                    </div>
+                    <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads" />
 
                     <!-- Top Readers Widget (New Attraction) -->
                     <div
-                        class="bg-white dark:bg-dark_card dark:border-gray-800 border rounded-lg border-gray-200 shadow-sm overflow-hidden"
+                        class="dark:bg-dark_card overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800"
                     >
                         <div
-                            class="p-6 border-b border-gray-50 dark:border-gray-800 bg-gray-50/50 dark:bg-slate-800/30"
+                            class="border-b border-gray-50 bg-gray-50/50 p-6 dark:border-gray-800 dark:bg-slate-800/30"
                         >
                             <h4
-                                class="font-black text-gray-900 dark:text-gray-300 text-[12px] uppercase tracking-[0.2em] flex items-center gap-2"
+                                class="flex items-center gap-2 text-[12px] font-black tracking-[0.2em] text-gray-900 uppercase dark:text-gray-300"
                             >
                                 <i class="fa-solid fa-fire text-cs_orange animate-pulse"></i>
                                 Đọc nhiều nhất
@@ -433,25 +423,25 @@
                             @for ($i = 1; $i <= 5; $i++)
                                 <a
                                     href="#"
-                                    class="flex items-start gap-4 p-5 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors group"
+                                    class="group flex items-start gap-4 p-5 transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/50"
                                 >
                                     <span
-                                        class="text-xl font-black text-gray-100 dark:text-gray-800 group-hover:text-cs_blue/20 transition-colors"
+                                        class="group-hover:text-cs_blue/20 text-xl font-black text-gray-100 transition-colors dark:text-gray-800"
                                     >
                                         0{{ $i }}
                                     </span>
-                                    <div class="flex-1 min-w-0">
+                                    <div class="min-w-0 flex-1">
                                         <h5
-                                            class="text-[12px] font-bold text-gray-800 dark:text-gray-200 group-hover:text-cs_blue transition-colors line-clamp-2 leading-snug italic"
+                                            class="group-hover:text-cs_blue line-clamp-2 text-[12px] leading-snug font-bold text-gray-800 italic transition-colors dark:text-gray-200"
                                         >
                                             Cách check độ uy tín của Broker trước khi xuống tiền...
                                         </h5>
-                                        <div class="flex items-center gap-3 mt-2">
-                                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">
+                                        <div class="mt-2 flex items-center gap-3">
+                                            <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">
                                                 <i class="fa-regular fa-eye mr-1"></i>
                                                 2.5k
                                             </span>
-                                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">
+                                            <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">
                                                 <i class="fa-regular fa-comment mr-1"></i>
                                                 12
                                             </span>

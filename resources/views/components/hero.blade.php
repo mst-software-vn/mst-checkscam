@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<section class="bg-white dark:bg-dark_bg py-12 md:py-20 md:pb-2 overflow-hidden relative">
+<section class="dark:bg-dark_bg relative overflow-hidden bg-white py-12 md:py-20 md:pb-2">
     <!-- Trang trí nền nhẹ -->
     {{--
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
@@ -9,38 +9,38 @@
         </div>
     --}}
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-4xl mx-auto">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
             <h1
-                class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 uppercase leading-[1.4] hero-title scanner-title"
+                class="hero-title scanner-title mb-6 text-3xl leading-[1.4] font-black uppercase md:text-4xl lg:text-5xl"
             >
                 KIỂM TRA & TỐ CÁO SCAM.
             </h1>
             <p
-                class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-medium"
+                class="mx-auto mb-10 max-w-2xl text-sm leading-relaxed font-medium text-gray-600 md:text-lg dark:text-gray-400"
             >
                 Hệ thống dữ liệu lớn nhất Việt Nam giúp bạn kiểm tra độ tín nhiệm của đối tác thông qua SĐT, Số TK hoặc
                 Link mạng xã hội.
             </p>
 
             <!-- Search Box Centered -->
-            <div class="max-w-3xl mx-auto mb-6">
+            <div class="mx-auto mb-6 max-w-3xl">
                 <div
-                    class="relative bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-xl shadow-blue-900/5 focus-within:border-cs_blue focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-1 md:p-2"
+                    class="focus-within:border-cs_blue relative rounded-2xl border-2 border-gray-200 bg-white p-1 shadow-xl shadow-blue-900/5 transition-all focus-within:ring-4 focus-within:ring-blue-100 md:p-2 dark:border-gray-800 dark:bg-slate-900 dark:focus-within:ring-blue-900/30"
                 >
-                    <div class="flex flex-col sm:flex-row items-center gap-2">
-                        <div class="flex-1 flex items-center w-full min-w-0">
-                            <div class="pl-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
+                    <div class="flex flex-col items-center gap-2 sm:flex-row">
+                        <div class="flex w-full min-w-0 flex-1 items-center">
+                            <div class="pointer-events-none flex items-center pl-4">
+                                <i class="fa-solid fa-magnifying-glass text-lg text-gray-400"></i>
                             </div>
                             <input
                                 type="text"
-                                class="w-full pl-3 outline-none pr-4 py-3 bg-transparent border-none focus:ring-0 text-gray-800 dark:text-gray-300 text-sm md:text-base font-bold placeholder-gray-400 dark:placeholder-gray-600"
+                                class="w-full border-none bg-transparent py-3 pr-4 pl-3 text-sm font-bold text-gray-800 placeholder-gray-400 outline-none focus:ring-0 md:text-base dark:text-gray-300 dark:placeholder-gray-600"
                                 placeholder="Nhập Số tài khoản, SĐT hoặc Link..."
                             />
                         </div>
                         <button
-                            class="w-full uppercase cursor-pointer sm:w-auto bg-cs_blue hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black text-xs md:text-sm tracking-widest transition-all shadow-lg active:scale-95 whitespace-nowrap"
+                            class="bg-cs_blue w-full cursor-pointer rounded-xl px-8 py-3 text-xs font-black tracking-widest whitespace-nowrap text-white uppercase shadow-lg transition-all hover:bg-blue-600 active:scale-95 sm:w-auto md:text-sm"
                         >
                             Tra cứu
                         </button>
@@ -49,35 +49,35 @@
 
                 <!-- Stats -->
                 <div
-                    class="mt-6 flex flex-wrap justify-center gap-3 md:gap-8 text-[11px] md:text-sm font-bold text-gray-500 dark:text-gray-400"
+                    class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400"
                 >
                     <span class="flex items-center">
-                        <i class="fa-solid fa-circle text-[6px] text-cs_red mr-2 animate-pulse"></i>
+                        <i class="fa-solid fa-circle text-cs_red mr-2 animate-pulse text-[6px]"></i>
                         62.472 STK Lừa đảo
                     </span>
                     <span class="flex items-center">
-                        <i class="fa-solid fa-circle text-[6px] text-cs_blue mr-2"></i>
+                        <i class="fa-solid fa-circle text-cs_blue mr-2 text-[6px]"></i>
                         8.605 Bình luận mới
                     </span>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-12">
+            <div class="mt-8 grid grid-cols-2 gap-3 md:mt-12 md:grid-cols-4 md:gap-4">
                 <a
                     href="/to-cao-lua-dao/"
-                    class="bg-white dark:bg-dark_card hover:bg-red-50 dark:hover:bg-red-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs"
+                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-red-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-red-900/10"
                 >
                     <div
-                        class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 dark:bg-red-900/30 text-cs_red flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform"
+                        class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-red-900/30"
                     >
                         <i class="fa-solid fa-bullhorn"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
                             Report
                         </p>
                         <p
-                            class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_red transition-colors"
+                            class="group-hover:text-cs_red text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
                         >
                             Tố Cáo Scam
                         </p>
@@ -86,19 +86,19 @@
 
                 <a
                     href="/bao-hiem-cs/"
-                    class="bg-white dark:bg-dark_card hover:bg-blue-50 dark:hover:bg-blue-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs"
+                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-blue-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-blue-900/10"
                 >
                     <div
-                        class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform"
+                        class="text-cs_blue flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-blue-900/30"
                     >
                         <i class="fa-solid fa-shield-cat"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
                             Insurance
                         </p>
                         <p
-                            class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors"
+                            class="group-hover:text-cs_blue text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
                         >
                             Bảo Hiểm CS
                         </p>
@@ -107,19 +107,19 @@
 
                 <a
                     href="#"
-                    class="bg-white dark:bg-dark_card hover:bg-green-50 dark:hover:bg-green-900/10 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs"
+                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-green-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-green-900/10"
                 >
                     <div
-                        class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 dark:bg-green-900/30 text-cs_green flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform"
+                        class="text-cs_green flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-green-900/30"
                     >
                         <i class="fa-solid fa-store"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
                             Trading
                         </p>
                         <p
-                            class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_green transition-colors"
+                            class="group-hover:text-cs_green text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
                         >
                             Chợ Buôn Bán
                         </p>
@@ -128,19 +128,19 @@
 
                 <a
                     href="#"
-                    class="bg-white dark:bg-dark_card hover:bg-gray-50 dark:hover:bg-slate-800 border border-gray-100 dark:border-gray-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 transition-all group shadow-xs"
+                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-gray-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-slate-800"
                 >
                     <div
-                        class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 dark:bg-slate-800 text-cs_blue flex items-center justify-center md:text-xl shrink-0 group-hover:rotate-12 transition-transform"
+                        class="text-cs_blue flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-slate-800"
                     >
                         <i class="fa-brands fa-telegram"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-[8px] md:text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase">
+                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
                             Automation
                         </p>
                         <p
-                            class="font-black text-[10px] md:text-xs text-gray-800 dark:text-gray-200 uppercase group-hover:text-cs_blue transition-colors"
+                            class="group-hover:text-cs_blue text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
                         >
                             Bot Check
                         </p>
