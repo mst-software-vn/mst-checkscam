@@ -403,17 +403,7 @@
                 <!-- 3. RIGHT: Sidebar Widgets (Copied from Home) -->
                 <aside class="w-full lg:w-[350px] space-y-4 sticky top-32 h-fit">
                     <!-- Right Sidebar Banner -->
-                    <div
-                        class="aspect-square border border-gray-200 shadow-sm rounded-lg overflow-hidden dark:bg-white"
-                    >
-                        <a href="#" target="_blank" class="w-full h-full block">
-                            <img
-                                src="https://i.ibb.co/kgwtn4vF/fpayment.jpg"
-                                class="w-full h-full"
-                                alt="Fpayment Ads"
-                            />
-                        </a>
-                    </div>
+                    <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads" />
 
                     <!-- Top Readers Widget (New Attraction) -->
                     <div
