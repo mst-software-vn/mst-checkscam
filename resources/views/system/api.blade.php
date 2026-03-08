@@ -44,22 +44,28 @@
                 </div>
             </div>
 
-            <article class="bg-gray-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+            <article
+                class="bg-slate-900 dark:bg-slate-900/50 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl border border-transparent dark:border-slate-800">
                 <div class="absolute top-0 right-0 w-96 h-96 bg-cs_blue/10 rounded-full blur-3xl opacity-50"></div>
 
                 <div class="relative z-10">
-                    <h2 class="text-2xl font-black uppercase mb-8 border-l-4 border-cs_blue pl-4">Tài liệu kỹ thuật</h2>
+                    <h2 class="text-2xl font-black uppercase mb-8 border-l-4 border-cs_blue pl-4">
+                        Tài liệu kỹ thuật</h2>
 
                     <div class="space-y-6">
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <div
+                            class="bg-white/5 border border-white/10 dark:bg-slate-800/20 dark:border-white/5 rounded-2xl p-6">
                             <p class="text-cs_blue font-black text-xs uppercase mb-2 tracking-widest">Endpoint</p>
-                            <code class="text-sm font-mono text-gray-300 block bg-black/30 p-3 rounded-lg">GET
+                            <code
+                                class="text-sm font-mono text-gray-300 block bg-black/30 p-3 rounded-lg border border-white/5">GET
                                 https://api.checkscam.vn/v1/check/{id}</code>
                         </div>
 
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <div
+                            class="bg-white/5 border border-white/10 dark:bg-slate-800/20 dark:border-white/5 rounded-2xl p-6">
                             <p class="text-cs_blue font-black text-xs uppercase mb-2 tracking-widest">Dữ liệu trả về</p>
-                            <pre class="text-[10px] md:text-sm font-mono text-gray-400 bg-black/30 p-4 rounded-lg overflow-x-auto">
+                            <pre
+                                class="text-[10px] md:text-sm font-mono text-gray-400 bg-black/30 p-4 rounded-lg overflow-x-auto border border-white/5">
 {
   "status": "danger",
   "message": "Đối tượng nằm trong danh sách đen",
@@ -76,7 +82,7 @@
 
                     <div class="mt-12 text-center">
                         <a href="#"
-                            class="inline-block bg-cs_blue hover:bg-blue-600 text-white font-black py-4 px-10 rounded-2xl transition-all active:scale-95 shadow-xl shadow-blue-500/20 uppercase text-xs tracking-widest">
+                            class="inline-block bg-cs_blue hover:bg-blue-600 text-white font-black py-4 px-10 rounded-2xl transition-all active:scale-95 shadow-xl shadow-blue-500/20 uppercase text-xs tracking-widest leading-none">
                             Đăng ký API Key ngay
                         </a>
                     </div>
