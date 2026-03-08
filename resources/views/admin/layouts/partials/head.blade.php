@@ -8,7 +8,11 @@
     />
     <meta name="author" content="Dreamguys - Bootstrap Admin Template" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Dreams Pos admin template</title>
+    @hasSection("title")
+        <title>@yield("title")</title>
+    @else
+        <title>Quản trị viên</title>
+    @endif
 
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.jpg" />
 

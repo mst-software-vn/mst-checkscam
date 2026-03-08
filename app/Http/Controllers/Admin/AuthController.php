@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function showFormLogin()
     {
         if (Auth::check()) {
-            return 'Login rồi, redirect thôi';
+            return redirect()->route('admin.dashboard');
         }
 
         return view('admin.auth.login');
@@ -35,7 +35,7 @@ class AuthController extends Controller
                     'email' => 'Tài khoản của bạn đã bị vô hiệu hóa!',
                 ]);
             }
-            $request->session()->regenerate(); // Chống session fixation
+            $request->session()->regenerate();
 
             return redirect()->intended(route('admin.dashboard'));
         }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <x-admin-head />
+
     <body class="account-page">
         <div class="main-wrapper">
             <div class="account-content">
