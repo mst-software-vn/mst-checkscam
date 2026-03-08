@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function () {
     return view('home');
 });
@@ -47,6 +46,17 @@ Route::get('/dieu-khoan', function () {
 Route::get('/giai-quyet-khieu-nai', function () {
     return view('legal.dispute');
 });
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::name('auth.')->group(function () {
+        Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+});
+
+// Luôn nằm ở cuối
 Route::get('/{name}', function ($name) {
     return view('scammer.index', ['name' => $name]);
 });
