@@ -1,14 +1,5 @@
 <!-- Hero Section -->
-<section class="dark:bg-dark_bg relative overflow-hidden bg-white py-12 md:py-20 md:pb-2">
-    <!-- Trang trí nền nhẹ -->
-    {{--
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
-        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl">
-        </div>
-        </div>
-    --}}
-
+<section class="relative overflow-hidden py-12 md:py-20 md:pb-2">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
             <h1

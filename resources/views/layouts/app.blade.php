@@ -3,17 +3,18 @@
     <x-head />
 
     <body
-        class="dark:bg-dark_bg flex min-h-screen flex-col antialiased transition-colors duration-300 dark:text-gray-100"
+        class="dark:bg-dark_bg relative flex min-h-screen flex-col antialiased transition-colors duration-300 dark:text-gray-100"
     >
         <x-header />
 
-        <!-- Trang trí nền nhẹ -->
-        <div class="pointer-events-none absolute top-0 left-1/2 -z-1000 h-full w-full -translate-x-1/2 opacity-40">
-            <div class="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-blue-50 blur-3xl dark:bg-blue-900/10"></div>
-            <div
-                class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-50 blur-3xl dark:bg-red-900/10"
-            ></div>
-        </div>
+        <!-- Nền kỹ thuật: Lưới Hexagon ẩn hiện -->
+        <div
+            class="absolute inset-0 -z-9999 opacity-[0.03] dark:opacity-[0.07]"
+            style="
+                background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45v-30z' fill-rule='evenodd' stroke='%233399ff' stroke-width='1' fill='none'/%3E%3C/svg%3E&quot;);
+                background-size: 60px 60px;
+            "
+        ></div>
 
         @yield("content")
 
