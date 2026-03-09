@@ -19,38 +19,44 @@
                 <div
                     class="focus-within:border-cs_blue relative rounded-2xl border-2 border-gray-200 bg-white p-1 shadow-xl shadow-blue-900/5 transition-all focus-within:ring-4 focus-within:ring-blue-100 md:p-2 dark:border-gray-800 dark:bg-slate-900 dark:focus-within:ring-blue-900/30"
                 >
-                    <div class="flex flex-col items-center gap-2 sm:flex-row">
-                        <div class="flex w-full min-w-0 flex-1 items-center">
-                            <div class="pointer-events-none flex items-center pl-4">
-                                <i class="fa-solid fa-magnifying-glass text-lg text-gray-400"></i>
+                    <form method="GET">
+                        <div class="flex flex-col items-center gap-2 sm:flex-row">
+                            <div class="flex w-full min-w-0 flex-1 items-center">
+                                <div class="pointer-events-none flex items-center pl-4">
+                                    <i class="fa-solid fa-magnifying-glass text-lg text-gray-400"></i>
+                                </div>
+                                <input
+                                    type="text"
+                                    name="q"
+                                    class="w-full border-none bg-transparent py-3 pr-4 pl-3 text-sm font-bold text-gray-800 placeholder-gray-400 outline-none focus:ring-0 md:text-base dark:text-gray-300 dark:placeholder-gray-600"
+                                    placeholder="Nhập Số tài khoản, SĐT hoặc Link..."
+                                    required
+                                />
                             </div>
-                            <input
-                                type="text"
-                                class="w-full border-none bg-transparent py-3 pr-4 pl-3 text-sm font-bold text-gray-800 placeholder-gray-400 outline-none focus:ring-0 md:text-base dark:text-gray-300 dark:placeholder-gray-600"
-                                placeholder="Nhập Số tài khoản, SĐT hoặc Link..."
-                            />
+                            <button
+                                type="submit"
+                                class="bg-cs_blue w-full cursor-pointer rounded-xl px-8 py-3 text-xs font-black tracking-widest whitespace-nowrap text-white uppercase shadow-lg transition-all hover:bg-blue-600 active:scale-95 sm:w-auto md:text-sm"
+                            >
+                                Tra cứu
+                            </button>
                         </div>
-                        <button
-                            class="bg-cs_blue w-full cursor-pointer rounded-xl px-8 py-3 text-xs font-black tracking-widest whitespace-nowrap text-white uppercase shadow-lg transition-all hover:bg-blue-600 active:scale-95 sm:w-auto md:text-sm"
-                        >
-                            Tra cứu
-                        </button>
+                    </form>
+                </div>
+                @if (! request()->query("q"))
+                    <!-- Stats -->
+                    <div
+                        class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400"
+                    >
+                        <span class="flex items-center">
+                            <i class="fa-solid fa-circle text-cs_red mr-2 animate-pulse text-[6px]"></i>
+                            62.472 STK Lừa đảo
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fa-solid fa-circle text-cs_blue mr-2 text-[6px]"></i>
+                            8.605 Bình luận mới
+                        </span>
                     </div>
-                </div>
-
-                <!-- Stats -->
-                <div
-                    class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400"
-                >
-                    <span class="flex items-center">
-                        <i class="fa-solid fa-circle text-cs_red mr-2 animate-pulse text-[6px]"></i>
-                        62.472 STK Lừa đảo
-                    </span>
-                    <span class="flex items-center">
-                        <i class="fa-solid fa-circle text-cs_blue mr-2 text-[6px]"></i>
-                        8.605 Bình luận mới
-                    </span>
-                </div>
+                @endif
             </div>
 
             <div class="mt-8 grid grid-cols-2 gap-3 md:mt-12 md:grid-cols-4 md:gap-4">
