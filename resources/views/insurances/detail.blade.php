@@ -328,7 +328,7 @@
             </div>
 
             <!-- Warning Section with more impact -->
-            <div class="from-cs_red mt-10 overflow-hidden rounded-3xl bg-linear-to-r to-red-600 p-0.5 shadow-2xl">
+            <div class="from-cs_red mt-15 overflow-hidden rounded-3xl bg-linear-to-r to-red-600 p-0.5 shadow-lg">
                 <div class="rounded-[22px] bg-white p-8 dark:bg-slate-900">
                     <div class="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:text-left">
                         <div

@@ -7,15 +7,22 @@
     <main class="mx-auto w-full max-w-7xl grow px-4 py-4 sm:px-6 lg:px-8">
         <!-- Top Full Width Banner -->
 
-        <x-ads-horizontal
-            image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
-            url="#"
-            alt="Ads"
-        />
-
-        <h2 class="text-cs_blue mt-12 mb-6 text-center text-lg uppercase md:text-xl">
-            {{ date("d/m/Y") }} CÓ 26 CẢNH BÁO
-        </h2>
+        @if (! request()->query("q"))
+            <x-ads-horizontal
+                image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
+                url="#"
+                alt="Ads"
+            />
+            <h2 class="text-cs_blue mt-12 mb-6 text-center text-lg uppercase md:text-xl">
+                {{ date("d/m/Y") }} CÓ 26 CẢNH BÁO
+            </h2>
+        @else
+            <h2 class="text-cs_blue mt-6 mb-6 text-center text-lg md:text-xl">
+                Có 0 vụ lừa đảo liên quan đến:
+                <br />
+                "{{ request()->query("q") }}"
+            </h2>
+        @endif
 
         <!-- 2 Column Layout -->
         <div class="mb-10 flex flex-col gap-4 lg:flex-row">
