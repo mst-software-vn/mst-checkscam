@@ -31,7 +31,9 @@ class SearchController extends Controller
                     $q->whereRaw("REGEXP_REPLACE(target_id, '[^0-9]', '') = ?", [$query]);
                 })
                 ->when($type === 'facebook', function ($q) use ($query) {
-                    $q->where('target_id', $query)->orWhere('slug', $query);
+                    $q->where(function ($sub) use ($query) {
+                        $sub->where('target_id', $query)->orWhere('slug', $query);
+                    });
                 })
                 ->when($type === 'uuid', function ($q) use ($query) {
                     $q->where('slug', $query);
@@ -80,15 +82,17 @@ class SearchController extends Controller
             ->values();
 
         // -----------------------------------------------
-        // thống kê nhanh cho trang search
+        // thống kê nhanh cho trang search (Cache 1 tiếng để tối ưu CSDL)
         // -----------------------------------------------
-        $stats = [
-            'total_reports' => Report::where('status', 'approved')->count(),
-            'total_account' => Report::where('status', 'approved')->where('type', 'account')->count(),
-            'total_website' => Report::where('status', 'approved')->where('type', 'website')->count(),
-        ];
+        $stats = \Illuminate\Support\Facades\Cache::remember('search_stats', 3600, function () {
+            return [
+                'total_reports' => Report::where('status', 'approved')->count(),
+                'total_account' => Report::where('status', 'approved')->where('type', 'account')->count(),
+                'total_website' => Report::where('status', 'approved')->where('type', 'website')->count(),
+            ];
+        });
 
-        return view('reports.index', compact(
+        return view('home', compact(
             'query',
             'results',
             'isFound',
@@ -147,6 +151,11 @@ class SearchController extends Controller
      */
     private function detectQueryType(&$query): string
     {
+        // 0. Xử lý UUID
+        if (Str::isUuid($query)) {
+            return 'uuid';
+        }
+
         // 1. Xử lý Facebook URL nâng cao
         if (Str::contains($query, ['facebook.com', 'fb.com'])) {
             if (preg_match('/(?:https?:\/\/)?(?:www\.)?(?:facebook|fb)\.com\/(?:profiles\/|profile\.php\?id=)?([^\/?&\s]+)/i', $query, $matches)) {
