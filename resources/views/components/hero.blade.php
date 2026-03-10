@@ -48,18 +48,18 @@
                         <ul id="searchResults" class="absolute left-0 right-0 top-full mt-2 rounded-xl bg-white shadow-xl border border-gray-100 dark:bg-slate-800 dark:border-gray-700 max-h-80 overflow-y-auto text-left z-50 divide-y divide-gray-50 dark:divide-gray-700/50" style="display: none;"></ul>
                     </form>
                 </div>
-                @if (! request()->query("q"))
+                @if (!request()->query("q"))
                     <!-- Stats -->
                     <div
                         class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400"
                     >
                         <span class="flex items-center">
                             <i class="fa-solid fa-circle text-cs_red mr-2 animate-pulse text-[6px]"></i>
-                            62.472 STK Lừa đảo
+                            {{ number_format($stats['total_scammers'] ?? 0) }} Kẻ Lừa đảo
                         </span>
                         <span class="flex items-center">
                             <i class="fa-solid fa-circle text-cs_blue mr-2 text-[6px]"></i>
-                            8.605 Bình luận mới
+                            {{ number_format($stats['total_comments'] ?? 0) }} Bình luận
                         </span>
                     </div>
                 @endif

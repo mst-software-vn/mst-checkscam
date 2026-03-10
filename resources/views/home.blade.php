@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <x-hero />
+    <x-hero :stats="$stats" />
 
     <!-- Main Content -->
     <main class="mx-auto w-full max-w-7xl grow px-4 py-4 sm:px-6 lg:px-8">
@@ -112,7 +112,7 @@
                 @endif
 
                 @if(!request()->query('q'))
-                <!-- PHẦN 1: CẢNH BÁO NGÀY HÔM NAY -->
+                <!-- PHẦN 1: 3 CẢNH BÁO NGÀY HÔM NAY -->
                 <section>
                     <div class="border-cs_blue mb-4 flex items-center gap-2 border-l-4 pl-3">
                         <h2 class="text-lg font-bold text-gray-800 uppercase dark:text-gray-300">
@@ -122,83 +122,87 @@
                     <div
                         class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"
                     >
-                            <?php for ($i = 1; $i <= 3; $i++) { ?>
-                            
-                            <a
-                                href="/pham-hoang-tuan-1"
-                                class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
-                            >
-                                <!-- Đối tượng & Ngày -->
-                                <div class="flex w-full items-center gap-3 sm:w-4/12">
-                                    <div
-                                        class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
-                                    >
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    </div>
-                                    <div>
-                                        <h3
-                                            class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                            @if(isset($latestReports) && $latestReports->count() > 0)
+                                @foreach($latestReports as $index => $item)
+                                <a
+                                    href="/{{ $item->slug }}"
+                                    class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                                >
+                                    <!-- Đối tượng & Ngày -->
+                                    <div class="flex w-full items-center gap-3 sm:w-4/12">
+                                        <div
+                                            class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                                         >
-                                            Nguyễn Văn A - {{ $i }}
-                                        </h3>
-                                        <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
-                                            <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
-                                            20/03/2026
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                        </div>
+                                        <div>
+                                            <h3
+                                                class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                            >
+                                                {{ $item->target_name ?? 'Không rõ tên' }}
+                                            </h3>
+                                            <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                                <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                                {{ now()->format('d/m/Y') }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Thông tin định danh -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex flex-col">
+                                    <!-- Thông tin định danh -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            >
+                                                {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
+                                            </span>
+                                            <span class="text-cs_red text-xs font-bold tracking-wider">{{ $item->target_id }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chỉ số tín nhiệm (Stats) -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex items-center gap-6">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                >
+                                                    Lượt xem
+                                                </span>
+                                                <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                                    <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                                    {{ number_format($item->views) }}
+                                                </span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                >
+                                                    Bài cảnh báo
+                                                </span>
+                                                <span class="text-cs_red text-xs font-bold">
+                                                    <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                                    {{ str_pad($item->report_count, 2, '0', STR_PAD_LEFT) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hành động -->
+                                    <div class="w-full text-right sm:w-2/12">
                                         <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                         >
-                                            Tài khoản lừa đảo
+                                            Chi tiết
                                         </span>
-                                        <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                     </div>
+                                </a>
+                                @endforeach
+                            @else
+                                <div class="p-8 text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    Chưa có dữ liệu cảnh báo trong 7 ngày qua.
                                 </div>
-
-                                <!-- Chỉ số tín nhiệm (Stats) -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex items-center gap-6">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Lượt xem
-                                            </span>
-                                            <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                                <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                                {{ number_format(1200 + $i * 150) }}
-                                            </span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Bài cảnh báo
-                                            </span>
-                                            <span class="text-cs_red text-xs font-bold">
-                                                <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                                0{{ $i + 2 }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hành động -->
-                                <div class="w-full text-right sm:w-2/12">
-                                    <span
-                                        class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
-                                    >
-                                        Chi tiết
-                                    </span>
-                                </div>
-                            </a>
-
-                            <?php } ?>
+                            @endif
                         </div>
                     </section>
 
@@ -215,83 +219,87 @@
                         <div
                             class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"
                         >
-                            <?php for ($i = 1; $i <= 7; $i++) { ?>
-
-                            <a
-                                href="/pham-hoang-tuan-1"
-                                class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
-                            >
-                                <!-- Đối tượng & Ngày -->
-                                <div class="flex w-full items-center gap-3 sm:w-4/12">
-                                    <div
-                                        class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
-                                    >
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    </div>
-                                    <div>
-                                        <h3
-                                            class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                            @if(isset($topWeeklyReports) && $topWeeklyReports->count() > 0)
+                                @foreach($topWeeklyReports as $index => $item)
+                                <a
+                                    href="/{{ $item->slug }}"
+                                    class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                                >
+                                    <!-- Đối tượng & Ngày -->
+                                    <div class="flex w-full items-center gap-3 sm:w-4/12">
+                                        <div
+                                            class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
                                         >
-                                            Nguyễn Văn A - {{ $i }}
-                                        </h3>
-                                        <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
-                                            <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
-                                            20/03/2026
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                        </div>
+                                        <div>
+                                            <h3
+                                                class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                            >
+                                                {{ $item->target_name ?? 'Không rõ tên' }}
+                                            </h3>
+                                            <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                                <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
+                                                {{ now()->format('d/m/Y') }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Thông tin định danh -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex flex-col">
+                                    <!-- Thông tin định danh -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            >
+                                                {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
+                                            </span>
+                                            <span class="text-cs_red text-xs font-bold tracking-wider">{{ $item->target_id }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chỉ số tín nhiệm (Stats) -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex items-center gap-6">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                >
+                                                    Lượt xem
+                                                </span>
+                                                <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                                    <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                                    {{ number_format($item->views) }}
+                                                </span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                >
+                                                    Bài cảnh báo
+                                                </span>
+                                                <span class="text-cs_red text-xs font-bold">
+                                                    <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
+                                                    {{ str_pad($item->report_count, 2, '0', STR_PAD_LEFT) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hành động -->
+                                    <div class="w-full text-right sm:w-2/12">
                                         <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                         >
-                                            Tài khoản lừa đảo
+                                            Chi tiết
                                         </span>
-                                        <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                     </div>
+                                </a>
+                                @endforeach
+                            @else
+                                <div class="p-8 text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    Chưa có dữ liệu cảnh báo trong 7 ngày qua.
                                 </div>
-
-                                <!-- Chỉ số tín nhiệm (Stats) -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex items-center gap-6">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Lượt xem
-                                            </span>
-                                            <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                                <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                                {{ number_format(1200 + $i * 150) }}
-                                            </span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Bài cảnh báo
-                                            </span>
-                                            <span class="text-cs_red text-xs font-bold">
-                                                <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                                0{{ $i + 2 }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hành động -->
-                                <div class="w-full text-right sm:w-2/12">
-                                    <span
-                                        class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
-                                    >
-                                        Chi tiết
-                                    </span>
-                                </div>
-                            </a>
-
-                            <?php } ?>
+                            @endif
                         </div>
                     </section>
 
@@ -309,83 +317,80 @@
                         <div
                             class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"
                         >
-                            <?php for ($i = 1; $i <= 3; $i++) { ?>
-
-                            <a
-                                href="/pham-hoang-tuan-1"
-                                class="<?php echo $i < 3 ? "border-b border-gray-100 dark:border-gray-800" : ""; ?> group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
-                            >
-                                <!-- Đối tượng & Ngày -->
-                                <div class="flex w-full items-center gap-3 sm:w-4/12">
-                                    <div
-                                        class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20"
-                                    >
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    </div>
-                                    <div>
-                                        <h3
-                                            class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                            @if(isset($topDailySearches) && $topDailySearches->count() > 0)
+                                @foreach($topDailySearches as $index => $item)
+                                <a
+                                    href="/{{ $item->slug }}"
+                                    class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50"
+                                >
+                                    <!-- Đối tượng & Ngày -->
+                                    <div class="flex w-full items-center gap-3 sm:w-4/12">
+                                        <div
+                                            class="{{ $item->is_scam ? 'text-cs_red bg-red-50 dark:bg-red-900/20' : 'text-gray-500 bg-gray-100 dark:bg-gray-800' }} flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-xs transition-transform duration-300"
                                         >
-                                            Nguyễn Văn A - {{ $i }}
-                                        </h3>
-                                        <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
-                                            <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
-                                            20/03/2026
+                                            @if($item->is_scam)
+                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                            @else
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <h3
+                                                class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
+                                            >
+                                                {{ $item->target_name }}
+                                            </h3>
+                                            <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
+                                                <i class="fa-regular fa-clock mr-1 opacity-70"></i>
+                                                Hôm nay
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Thông tin định danh -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex flex-col">
+                                    <!-- Thông tin định danh -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            >
+                                                {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : ($item->type === 'phone' ? 'SĐT lừa đảo' : 'Từ khoá hệ thống')) }}
+                                            </span>
+                                            <span class="{{ $item->is_scam ? 'text-cs_red' : 'text-gray-700' }} text-xs font-bold tracking-wider">{{ $item->target_id }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chỉ số tín nhiệm (Stats) -->
+                                    <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
+                                        <div class="flex items-center gap-6">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                >
+                                                    Lượt tra cứu
+                                                </span>
+                                                <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                                    <i class="fa-solid fa-fire mr-1 opacity-50 text-cs_orange"></i>
+                                                    {{ number_format($item->search_count) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hành động -->
+                                    <div class="w-full text-right sm:w-2/12">
                                         <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                            class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                                         >
-                                            Tài khoản lừa đảo
+                                            Tra cứu
                                         </span>
-                                        <span class="text-cs_red text-xs font-bold tracking-wider">0987.654.321***</span>
                                     </div>
+                                </a>
+                                @endforeach
+                            @else
+                                <div class="p-8 text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    Chưa có lượt tìm kiếm nào trong ngày hôm nay.
                                 </div>
-
-                                <!-- Chỉ số tín nhiệm (Stats) -->
-                                <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                    <div class="flex items-center gap-6">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Lượt xem
-                                            </span>
-                                            <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                                <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                                {{ number_format(1200 + $i * 150) }}
-                                            </span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                            >
-                                                Bài cảnh báo
-                                            </span>
-                                            <span class="text-cs_red text-xs font-bold">
-                                                <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                                0{{ $i + 2 }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hành động -->
-                                <div class="w-full text-right sm:w-2/12">
-                                    <span
-                                        class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
-                                    >
-                                        Chi tiết
-                                    </span>
-                                </div>
-                            </a>
-
-                            <?php } ?>
+                            @endif
                         </div>
                     </section>
                 @endif

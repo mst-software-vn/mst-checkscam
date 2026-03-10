@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/to-cao-lua-dao', function () {
     return view('reports.index');
 });
