@@ -49,7 +49,7 @@ class SearchController extends Controller
                 })
                 ->orderByDesc('created_at');
 
-            // increment search_count with target_id
+            // tăng search_count với target_id
             $matchedIds = (clone $dbQuery)->pluck('id');
             if ($matchedIds->isNotEmpty()) {
                 Report::whereIn('id', $matchedIds)->increment('search_count');
@@ -131,9 +131,11 @@ class SearchController extends Controller
             return response()->json($recentSearches);
         }
 
+        [$type, $formattedQuery] = $this->detectQueryType($query);
+
         $suggestions = Report::where('status', 'approved')
-            ->where(function ($q) use ($query) {
-                $q->where('target_id', 'LIKE', "{$query}%")
+            ->where(function ($q) use ($query, $formattedQuery) {
+                $q->where('target_id', 'LIKE', "%{$formattedQuery}%")
                     ->orWhere('target_name', 'LIKE', "%{$query}%");
             })
             ->select('target_id', 'target_name', 'type', 'slug')
@@ -184,20 +186,32 @@ class SearchController extends Controller
             return ['facebook', $formattedQuery];
         }
 
-        $clean = preg_replace('/\D/', '', $formattedQuery);
+        // 2 & 3. Số điện thoại / STK (Kiểm tra xem chuỗi có cấu trúc giống số không)
+        $isNumeric = preg_match('/^[\s\+\-\.()]*\d[\d\s\+\-\.()]*$/', $formattedQuery);
+        
+        if ($isNumeric) {
+            $numericRaw = preg_replace('/[^\d+]/', '', $formattedQuery);
+            
+            // Fix +84 or 84 prefix for Vietnamese phones
+            if (str_starts_with($numericRaw, '+84')) {
+                $numericRaw = '0' . substr($numericRaw, 3);
+            } elseif (preg_match('/^84(3|5|7|8|9)/', $numericRaw)) {
+                $numericRaw = '0' . substr($numericRaw, 2);
+            }
 
-        // 2. Số điện thoại (VN)
-        $phone = $clean;
-        if (str_starts_with($phone, '84')) $phone = '0' . substr($phone, 2);
-        if (preg_match('/^0(3|5|7|8|9)\d{8}$/', $phone)) {
-            $formattedQuery = $phone;
-            return ['phone', $formattedQuery];
-        }
+            $numericClean = preg_replace('/\D/', '', $numericRaw);
 
-        // 3. Số tài khoản ngân hàng (9-19 số)
-        if (preg_match('/^\d{9,19}$/', $clean)) {
-            $formattedQuery = $clean;
-            return ['bank', $formattedQuery];
+            // Cập nhật lại list type detection
+            if (preg_match('/^0\d{8,11}$/', $numericClean)) {
+                return ['phone', $numericClean];
+            }
+
+            if (preg_match('/^\d{5,19}$/', $numericClean)) {
+                return ['bank', $numericClean];
+            }
+
+            // Fallback cho autoComplete khi đang gõ dở 1 chuỗi số
+            return ['name', $numericClean];
         }
 
         return ['name', $formattedQuery];
