@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -17,23 +16,29 @@ class HomeController extends Controller
         $topWeeklyReports = $this->getTopWeeklyReports();
         $topDailySearches = $this->getTopDailySearches();
 
+        $recentSearches = SearchLog::where('ip_address', $request->ip())
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->pluck('search_query')
+            ->unique()
+            ->values();
+
         return view('home', compact(
             'stats', 
             'latestReports',
             'topWeeklyReports', 
-            'topDailySearches'
+            'topDailySearches',
+            'recentSearches'
         ));
     }
 
     private function getHomeStats()
     {
-        return Cache::remember('home_stats', 3600, function () {
-            return [
-                'total_reports' => Report::where('status', 'approved')->count(),
-                'total_scammers' => Report::where('status', 'approved')->count(DB::raw('DISTINCT target_id')),
-                'total_comments' => DB::table('comments')->count(),
-            ];
-        });
+        return [
+            'total_reports'  => Report::where('status', 'approved')->count(),
+            'total_scammers' => Report::where('status', 'approved')->count(DB::raw('DISTINCT target_id')),
+            'total_comments' => DB::table('comments')->count(),
+        ];
     }
 
     private function getLatestReports() {

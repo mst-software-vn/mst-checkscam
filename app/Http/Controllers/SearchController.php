@@ -85,15 +85,13 @@ class SearchController extends Controller
             ->values();
 
         // -----------------------------------------------
-        // thống kê nhanh cho trang search (Cache 1 tiếng để tối ưu CSDL)
+        // thống kê nhanh cho trang search (SAU NÀY CÓ THỂ ÁP DỤNG CACHE)
         // -----------------------------------------------
-        $stats = \Illuminate\Support\Facades\Cache::remember('search_stats', 3600, function () {
-            return [
-                'total_reports' => Report::where('status', 'approved')->count(),
-                'total_account' => Report::where('status', 'approved')->where('type', 'account')->count(),
-                'total_website' => Report::where('status', 'approved')->where('type', 'website')->count(),
-            ];
-        });
+        $stats = [
+            'total_reports' => Report::where('status', 'approved')->count(),
+            'total_account' => Report::where('status', 'approved')->where('type', 'account')->count(),
+            'total_website' => Report::where('status', 'approved')->where('type', 'website')->count(),
+        ];
 
         return view('home', compact(
             'query',
