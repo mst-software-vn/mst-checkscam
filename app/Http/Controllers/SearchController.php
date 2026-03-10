@@ -32,7 +32,10 @@ class SearchController extends Controller
                 })
                 ->when($type === 'facebook', function ($q) use ($query) {
                     $q->where(function ($sub) use ($query) {
-                        $sub->where('target_id', $query)->orWhere('slug', $query);
+                        $sub->where('target_id', $query)
+                            ->orWhere('slug', $query)
+                            ->orWhere('target_id', 'LIKE', "%facebook.com/{$query}")
+                            ->orWhere('target_id', 'LIKE', "%fb.com/{$query}");
                     });
                 })
                 ->when($type === 'uuid', function ($q) use ($query) {
@@ -149,7 +152,7 @@ class SearchController extends Controller
      * - bank: 
      * - name: 
      */
-    private function detectQueryType(&$query): string
+    private function detectQueryType(string $query): string
     {
         // 0. Xử lý UUID
         if (Str::isUuid($query)) {
