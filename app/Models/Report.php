@@ -44,10 +44,10 @@ class Report extends Model
         return $this->belongsTo(User::class, 'moderator_id');
     }
 
-    // public function comments(): HasMany
-    // {
-    //     return $this->hasMany(Comment::class, 'report_id');
-    // }
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'report_id')->latest();
+    }
 
     /**
      * ------------------------------------------------------
