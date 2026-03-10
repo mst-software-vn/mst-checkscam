@@ -162,26 +162,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!input || !resultsObj) return;
 
-    let timeoutId;
-    input.addEventListener('input', function() {
-        clearTimeout(timeoutId);
-        const query = this.value;
-
-        if (query.length < 3) {
-            resultsObj.style.display = 'none';
-            return;
-        }
-
-        timeoutId = setTimeout(() => {
-            fetch(`{{ route('search.autocomplete') }}?q=${encodeURIComponent(query)}`)
-                .then(res => res.json())
-                .then(data => {
-                    resultsObj.innerHTML = '';
-                    if (data.length > 0) {
-                        data.forEach(item => {
-                            const li = document.createElement('li');
-                            li.className = 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors';
-                            
+    function fetchSuggestions(query) {
+        fetch(`{{ route('search.autocomplete') }}?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                resultsObj.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors';
+                        
+                        if (item.type === 'history') {
+                            li.innerHTML = `
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-gray-400">
+                                            <i class="fa-solid fa-clock-rotate-left text-xs"></i>
+                                        </div>
+                                        <span class="font-medium text-sm text-gray-700 dark:text-gray-300">${item.value}</span>
+                                    </div>
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Lịch sử</span>
+                                </div>
+                            `;
+                        } else {
                             // Style type badge based on type
                             let typeColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
                             if (item.type === 'bank') typeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
@@ -199,15 +202,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                     ${targetNameHTML}
                                 </div>
                             `;
-                            
-                            li.addEventListener('click', () => {
-                                input.value = item.value;
-                                input.closest('form').submit();
-                            });
-                            resultsObj.appendChild(li);
+                        }
+                        
+                        li.addEventListener('click', () => {
+                            input.value = item.value;
+                            input.closest('form').submit();
                         });
-                        resultsObj.style.display = 'block';
-                    } else {
+                        resultsObj.appendChild(li);
+                    });
+                    resultsObj.style.display = 'block';
+                } else {
+                    if (query.length >= 3) {
                         resultsObj.innerHTML = `
                             <li class="p-4 text-center text-sm text-gray-500 dark:text-gray-400 font-medium">
                                 <i class="fa-regular fa-face-frown text-lg mb-2 block"></i>
@@ -215,12 +220,28 @@ document.addEventListener('DOMContentLoaded', function() {
                             </li>
                         `;
                         resultsObj.style.display = 'block';
+                    } else {
+                        resultsObj.style.display = 'none';
                     }
-                })
-                .catch(() => {
-                    resultsObj.style.display = 'none';
-                });
+                }
+            })
+            .catch(() => {
+                resultsObj.style.display = 'none';
+            });
+    }
+
+    let timeoutId;
+    input.addEventListener('input', function() {
+        clearTimeout(timeoutId);
+        const query = this.value;
+
+        timeoutId = setTimeout(() => {
+            fetchSuggestions(query);
         }, 300);
+    });
+
+    input.addEventListener('focus', function() {
+        fetchSuggestions(this.value);
     });
 
     document.addEventListener('click', function(e) {

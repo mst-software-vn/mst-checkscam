@@ -22,24 +22,24 @@ class SearchController extends Controller
         $type    = null;
 
         if ($query !== '') {
-            $type = $this->detectQueryType($query);
-            $normalizedQuery = $this->normalizeString($query);
+            [$type, $formattedQuery] = $this->detectQueryType($query);
+            $normalizedQuery = $this->normalizeString($formattedQuery);
 
             $dbQuery = Report::where('status', 'approved')
                 ->with('comments')
-                ->when(in_array($type, ['phone', 'bank']), function ($q) use ($query) {
-                    $q->whereRaw("REGEXP_REPLACE(target_id, '[^0-9]', '') = ?", [$query]);
+                ->when(in_array($type, ['phone', 'bank']), function ($q) use ($formattedQuery) {
+                    $q->whereRaw("REGEXP_REPLACE(target_id, '[^0-9]', '') = ?", [$formattedQuery]);
                 })
-                ->when($type === 'facebook', function ($q) use ($query) {
-                    $q->where(function ($sub) use ($query) {
-                        $sub->where('target_id', $query)
-                            ->orWhere('slug', $query)
-                            ->orWhere('target_id', 'LIKE', "%facebook.com/{$query}")
-                            ->orWhere('target_id', 'LIKE', "%fb.com/{$query}");
+                ->when($type === 'facebook', function ($q) use ($formattedQuery) {
+                    $q->where(function ($sub) use ($formattedQuery) {
+                        $sub->where('target_id', $formattedQuery)
+                            ->orWhere('slug', $formattedQuery)
+                            ->orWhere('target_id', 'LIKE', "%facebook.com/{$formattedQuery}")
+                            ->orWhere('target_id', 'LIKE', "%fb.com/{$formattedQuery}");
                     });
                 })
-                ->when($type === 'uuid', function ($q) use ($query) {
-                    $q->where('slug', $query);
+                ->when($type === 'uuid', function ($q) use ($formattedQuery) {
+                    $q->where('slug', $formattedQuery);
                 })
                 ->when($type === 'name', function ($q) use ($normalizedQuery) {
                     $q->whereRaw(
@@ -110,10 +110,25 @@ class SearchController extends Controller
      */
     public function autoComplete(Request $request)
     {
-        $query = trim($request->get('q', ''));
+        $query = trim((string) $request->get('q', ''));
 
         if (strlen($query) < 3) {
-            return response()->json([]);
+            $recentSearches = SearchLog::where('ip_address', $request->ip())
+                ->orderByDesc('created_at')
+                ->limit(50) 
+                ->pluck('search_query')
+                ->unique()
+                ->take(10)
+                ->values()
+                ->map(fn($q) => [
+                    'label'       => $q,
+                    'value'       => $q,
+                    'type'        => 'history',
+                    'target_name' => null,
+                    'slug'        => null,
+                ]);
+
+            return response()->json($recentSearches);
         }
 
         $suggestions = Report::where('status', 'approved')
@@ -152,38 +167,40 @@ class SearchController extends Controller
      * - bank: 
      * - name: 
      */
-    private function detectQueryType(string $query): string
+    private function detectQueryType(string $query): array
     {
+        $formattedQuery = $query;
+        
         // 0. Xử lý UUID
-        if (Str::isUuid($query)) {
-            return 'uuid';
+        if (Str::isUuid($formattedQuery)) {
+            return ['uuid', $formattedQuery];
         }
 
         // 1. Xử lý Facebook URL nâng cao
-        if (Str::contains($query, ['facebook.com', 'fb.com'])) {
-            if (preg_match('/(?:https?:\/\/)?(?:www\.)?(?:facebook|fb)\.com\/(?:profiles\/|profile\.php\?id=)?([^\/?&\s]+)/i', $query, $matches)) {
-                $query = $matches[1];
+        if (Str::contains($formattedQuery, ['facebook.com', 'fb.com'])) {
+            if (preg_match('/(?:https?:\/\/)?(?:www\.)?(?:facebook|fb)\.com\/(?:profiles\/|profile\.php\?id=)?([^\/?&\s]+)/i', $formattedQuery, $matches)) {
+                $formattedQuery = $matches[1];
             }
-            return 'facebook';
+            return ['facebook', $formattedQuery];
         }
 
-        $clean = preg_replace('/\D/', '', $query);
+        $clean = preg_replace('/\D/', '', $formattedQuery);
 
         // 2. Số điện thoại (VN)
         $phone = $clean;
         if (str_starts_with($phone, '84')) $phone = '0' . substr($phone, 2);
         if (preg_match('/^0(3|5|7|8|9)\d{8}$/', $phone)) {
-            $query = $phone;
-            return 'phone';
+            $formattedQuery = $phone;
+            return ['phone', $formattedQuery];
         }
 
         // 3. Số tài khoản ngân hàng (9-19 số)
         if (preg_match('/^\d{9,19}$/', $clean)) {
-            $query = $clean;
-            return 'bank';
+            $formattedQuery = $clean;
+            return ['bank', $formattedQuery];
         }
 
-        return 'name';
+        return ['name', $formattedQuery];
     }
 
     /**

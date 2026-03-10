@@ -31,12 +31,6 @@
                 @if(request()->query('q'))
                     <!-- KẾT QUẢ TÌM KIẾM -->
                     <section>
-                        <!-- <div class="border-cs_blue mb-4 flex items-center justify-center gap-2 border-t-4 pt-4 max-w-5" style="border-top-width: 4px; border-top-style: solid;">
-                            <h2 class="text-lg font-bold text-gray-800 uppercase dark:text-gray-300">
-                                Kết quả tra cứu
-                            </h2>
-                        </div> -->
-                        
                         @if(isset($results) && $results->count() > 0)
                             <div class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800 mb-6">
                                 @foreach($results as $index => $item)
