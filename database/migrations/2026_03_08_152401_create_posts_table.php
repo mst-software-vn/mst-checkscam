@@ -19,8 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('thumbnail')->nullable();
             $table->tinyInteger('is_featured')->default(0);
-            $table->integer('view_count')->default(0);
-            $table->string('hashtags')->nullable();
+            $table->unsignedInteger('view_count')->default(0);
             $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 

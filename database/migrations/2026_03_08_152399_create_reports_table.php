@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('target_bank')->nullable();
             $table->string('category')->nullable();
             $table->text('description');
-            $table->text('evidence_images')->nullable();
+            $table->json('evidence_images')->nullable();
             $table->string('status')->default('pending'); // pending, approved, rejected
             $table->string('rejection_reason')->nullable();
-            $table->integer('view_count')->default(0);
-            $table->integer('search_count')->default(0);
+            $table->unsignedInteger('view_count')->default(0);
+            $table->unsignedInteger('search_count')->default(0);
             $table->foreignId('moderator_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('slug')->unique()->nullable();
             $table->timestamps();
