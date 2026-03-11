@@ -156,23 +156,22 @@
 
 @push("scripts")
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const input = document.getElementById('searchInput');
-    const resultsObj = document.getElementById('searchResults');
+$(document).ready(function() {
+    const $input = $('#searchInput');
+    const $resultsObj = $('#searchResults');
 
-    if (!input || !resultsObj) return;
+    if (!$input.length || !$resultsObj.length) return;
 
     function fetchSuggestions(query) {
-        fetch(`{{ route('search.autocomplete') }}?q=${encodeURIComponent(query)}`)
-            .then(res => res.json())
-            .then(data => {
-                resultsObj.innerHTML = '';
+        $.ajax({
+            url: `{{ route('search.autocomplete') }}`,
+            method: 'GET',
+            data: { q: query },
+            dataType: 'json',
+            success: function(data) {
+                $resultsObj.empty();
                 if (data.length > 0) {
-                    data.forEach(item => {
-                        const li = document.createElement('li');
-                        li.className = 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors';
-                        
-                        // Style type badge based on type
+                    $.each(data, function(index, item) {
                         let typeColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
                         if (item.type === 'bank') typeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
                         if (item.type === 'phone') typeColor = 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
@@ -180,47 +179,53 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         const targetNameHTML = item.target_name ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-user mr-1"></i>${item.target_name}</div>` : '';
                         
-                        li.innerHTML = `
-                            <div class="flex flex-col">
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
-                                    <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
+                        const $li = $('<li>', {
+                            class: 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors',
+                            html: `
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
+                                        <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
+                                    </div>
+                                    ${targetNameHTML}
                                 </div>
-                                ${targetNameHTML}
-                            </div>
-                        `;
-                        
-                        li.addEventListener('click', () => {
-                            input.value = item.value;
-                            input.closest('form').submit();
+                            `
                         });
-                        resultsObj.appendChild(li);
+                        
+                        $li.on('click', function() {
+                            $input.val(item.value);
+                            $input.closest('form').submit();
+                        });
+                        
+                        $resultsObj.append($li);
                     });
-                    resultsObj.style.display = 'block';
+                    $resultsObj.show();
                 } 
-            })
-            .catch(() => {
-                resultsObj.style.display = 'none';
-            });
+            },
+            error: function() {
+                $resultsObj.hide();
+            }
+        });
     }
 
     let timeoutId;
-    input.addEventListener('input', function() {
+    $input.on('input', function() {
         clearTimeout(timeoutId);
-        const query = this.value;
+        const query = $(this).val();
 
         timeoutId = setTimeout(() => {
             fetchSuggestions(query);
         }, 300);
     });
 
-    input.addEventListener('focus', function() {
-        fetchSuggestions(this.value);
+    $input.on('focus', function() {
+        fetchSuggestions($(this).val());
     });
 
-    document.addEventListener('click', function(e) {
-        if (!input.contains(e.target) && !resultsObj.contains(e.target)) {
-            resultsObj.style.display = 'none';
+    $(document).on('click', function(e) {
+        if (!$input.is(e.target) && $input.has(e.target).length === 0 && 
+            !$resultsObj.is(e.target) && $resultsObj.has(e.target).length === 0) {
+            $resultsObj.hide();
         }
     });
 });
