@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('target_id'); // STK/SĐT or URL
             $table->string('target_name')->nullable();
             $table->string('target_bank')->nullable();
+            $table->decimal('damage_amount', 10, 2)->nullable();
             $table->string('category')->nullable();
             $table->text('description');
             $table->json('evidence_images')->nullable();

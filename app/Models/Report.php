@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Report extends Model
 {
@@ -21,6 +21,7 @@ class Report extends Model
         'target_name',
         'target_bank',
         'category',
+        'damage_amount',
         'description',
         'evidence_images',
         'status',
@@ -28,13 +29,13 @@ class Report extends Model
         'view_count',
         'search_count',
         'moderator_id',
-        'slug'
+        'slug',
     ];
 
     protected $casts = [
         'evidence_images' => 'array',
         'view_count' => 'integer',
-        'search_count' => 'integer'
+        'search_count' => 'integer',
     ];
 
     /**
@@ -56,8 +57,8 @@ class Report extends Model
      * ------------------------------------------------------
      * Helper Methods
      *
-     * @return boolean
-     * ------------------------------------------------------
+     * @return bool
+     *              ------------------------------------------------------
      */
     public function isPending(): bool
     {
