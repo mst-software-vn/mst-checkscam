@@ -31,7 +31,11 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/StringHelper.php",
+            "app/Helpers/StatsHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -73,9 +77,6 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "lint": "./vendor/bin/pint --test",
         "format": [

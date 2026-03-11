@@ -59,9 +59,9 @@
             localStorage.theme === 'dark' ||
             (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
         ) {
-            document.documentElement.classList.add('dark');
+            $('html').addClass('dark');
         } else {
-            document.documentElement.classList.remove('dark');
+            $('html').removeClass('dark');
         }
     </script>
 

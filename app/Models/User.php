@@ -19,9 +19,11 @@ class User extends Authenticatable
         'status',
     ];
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-    // Helper check role — dùng ở nhiều chỗ
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
@@ -32,7 +34,6 @@ class User extends Authenticatable
         return $this->role === 'moderator';
     }
 
-    // Quan trọng: check status trước khi cho login
     public function isActive(): bool
     {
         return $this->status === 1;

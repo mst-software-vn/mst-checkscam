@@ -19,15 +19,18 @@
                 <div
                     class="focus-within:border-cs_blue relative rounded-2xl border-2 border-gray-200 bg-white p-1 shadow-xl shadow-blue-900/5 transition-all focus-within:ring-4 focus-within:ring-blue-100 md:p-2 dark:border-gray-800 dark:bg-slate-900 dark:focus-within:ring-blue-900/30"
                 >
-                    <form method="GET">
+                    <form action="{{ route('search.index') }}" method="GET" class="relative">
                         <div class="flex flex-col items-center gap-2 sm:flex-row">
-                            <div class="flex w-full min-w-0 flex-1 items-center">
+                            <div class="flex w-full min-w-0 flex-1 items-center relative">
                                 <div class="pointer-events-none flex items-center pl-4">
                                     <i class="fa-solid fa-magnifying-glass text-lg text-gray-400"></i>
                                 </div>
                                 <input
                                     type="text"
                                     name="q"
+                                    id="searchInput"
+                                    value="{{ request()->query('q') }}"
+                                    autocomplete="off"
                                     class="w-full border-none bg-transparent py-3 pr-4 pl-3 text-sm font-bold text-gray-800 placeholder-gray-400 outline-none focus:ring-0 md:text-base dark:text-gray-300 dark:placeholder-gray-600"
                                     placeholder="Nhập Số tài khoản, SĐT hoặc Link..."
                                     required
@@ -40,20 +43,23 @@
                                 Tra cứu
                             </button>
                         </div>
+                        
+                        <!-- Div hiển thị gợi ý AutoComplete -->
+                        <ul id="searchResults" class="absolute left-0 right-0 top-full mt-2 rounded-xl bg-white shadow-xl border border-gray-100 dark:bg-slate-800 dark:border-gray-700 max-h-80 overflow-y-auto text-left z-50 divide-y divide-gray-50 dark:divide-gray-700/50" style="display: none;"></ul>
                     </form>
                 </div>
-                @if (! request()->query("q"))
+                @if (!request()->query("q"))
                     <!-- Stats -->
                     <div
                         class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400"
                     >
                         <span class="flex items-center">
                             <i class="fa-solid fa-circle text-cs_red mr-2 animate-pulse text-[6px]"></i>
-                            62.472 STK Lừa đảo
+                            {{ number_format($stats['total_scammers'] ?? 0) }} Kẻ Lừa đảo
                         </span>
                         <span class="flex items-center">
                             <i class="fa-solid fa-circle text-cs_blue mr-2 text-[6px]"></i>
-                            8.605 Bình luận mới
+                            {{ number_format($stats['total_comments'] ?? 0) }} Bình luận
                         </span>
                     </div>
                 @endif
@@ -147,3 +153,81 @@
         </div>
     </div>
 </section>
+
+@push("scripts")
+<script>
+$(document).ready(function() {
+    const $input = $('#searchInput');
+    const $resultsObj = $('#searchResults');
+
+    if (!$input.length || !$resultsObj.length) return;
+
+    function fetchSuggestions(query) {
+        $.ajax({
+            url: `{{ route('search.autocomplete') }}`,
+            method: 'GET',
+            data: { q: query },
+            dataType: 'json',
+            success: function(data) {
+                $resultsObj.empty();
+                if (data.length > 0) {
+                    $.each(data, function(index, item) {
+                        let typeColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
+                        if (item.type === 'bank') typeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
+                        if (item.type === 'phone') typeColor = 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
+                        if (item.type === 'facebook') typeColor = 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
+                        
+                        const targetNameHTML = item.target_name ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-user mr-1"></i>${item.target_name}</div>` : '';
+                        
+                        const $li = $('<li>', {
+                            class: 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors',
+                            html: `
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
+                                        <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
+                                    </div>
+                                    ${targetNameHTML}
+                                </div>
+                            `
+                        });
+                        
+                        $li.on('click', function() {
+                            $input.val(item.value);
+                            $input.closest('form').submit();
+                        });
+                        
+                        $resultsObj.append($li);
+                    });
+                    $resultsObj.show();
+                } 
+            },
+            error: function() {
+                $resultsObj.hide();
+            }
+        });
+    }
+
+    let timeoutId;
+    $input.on('input', function() {
+        clearTimeout(timeoutId);
+        const query = $(this).val();
+
+        timeoutId = setTimeout(() => {
+            fetchSuggestions(query);
+        }, 300);
+    });
+
+    $input.on('focus', function() {
+        fetchSuggestions($(this).val());
+    });
+
+    $(document).on('click', function(e) {
+        if (!$input.is(e.target) && $input.has(e.target).length === 0 && 
+            !$resultsObj.is(e.target) && $resultsObj.has(e.target).length === 0) {
+            $resultsObj.hide();
+        }
+    });
+});
+</script>
+@endpush

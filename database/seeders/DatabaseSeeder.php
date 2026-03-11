@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'status' => 1,
         ]);
+
+        // Generate 50 realistic clustered reports for the homepage statistics
+        \App\Models\Report::factory(50)->create();
     }
 }

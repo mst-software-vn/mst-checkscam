@@ -124,14 +124,12 @@
                     <!-- Tab Switcher: Integrated Style -->
                     <div class="no-scrollbar flex gap-1 overflow-x-auto whitespace-nowrap">
                         <button
-                            onclick="switchTab('bank')"
                             id="tab-bank"
                             class="tab-active-red dark:bg-slate-900flex-1 cursor-pointer rounded-t-md border-b px-5 py-3.5 text-center text-[11px] font-semibold tracking-wider uppercase transition-all md:flex-none md:px-8 md:text-sm"
                         >
                             Số tài khoản
                         </button>
                         <button
-                            onclick="switchTab('website')"
                             id="tab-website"
                             class="flex-1 cursor-pointer rounded-t-md border-b border-transparent px-5 py-3.5 text-center text-[11px] font-semibold tracking-wider text-gray-400 uppercase transition-all hover:text-gray-600 md:flex-none md:px-8 md:text-sm dark:text-gray-600 dark:hover:text-gray-300"
                         >
@@ -509,18 +507,28 @@
 
 @push("scripts")
     <script>
-        function switchTab(type) {
-            const isBank = type === 'bank';
-            const inactiveClasses =
-                'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 border-transparent';
-            const activeClasses =
-                'bg-white dark:bg-slate-900 border-gray-200 dark:border-gray-800 border-b-white dark:border-b-slate-900 tab-active-red';
+        $(document).ready(function() {
+            function switchTab(type) {
+                const isBank = type === 'bank';
+                const inactiveClasses =
+                    'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 border-transparent';
+                const activeClasses =
+                    'bg-white dark:bg-slate-900 border-gray-200 dark:border-gray-800 border-b-white dark:border-b-slate-900 tab-active-red';
 
-            $('#form-bank').toggleClass('hidden', !isBank);
-            $('#form-website').toggleClass('hidden', isBank);
+                $('#form-bank').toggleClass('hidden', !isBank);
+                $('#form-website').toggleClass('hidden', isBank);
 
-            $('#tab-bank').toggleClass(activeClasses, isBank).toggleClass(inactiveClasses, !isBank);
-            $('#tab-website').toggleClass(activeClasses, !isBank).toggleClass(inactiveClasses, isBank);
-        }
+                $('#tab-bank').toggleClass(activeClasses, isBank).toggleClass(inactiveClasses, !isBank);
+                $('#tab-website').toggleClass(activeClasses, !isBank).toggleClass(inactiveClasses, isBank);
+            }
+
+            $('#tab-bank').on('click', function() {
+                switchTab('bank');
+            });
+
+            $('#tab-website').on('click', function() {
+                switchTab('website');
+            });
+        });
     </script>
 @endpush

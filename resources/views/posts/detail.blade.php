@@ -46,7 +46,7 @@
                         </a>
 
                         <button
-                            onclick="copyToClipboard()"
+                            id="copy-link-btn"
                             class="dark:bg-dark_card hover:text-cs_blue hover:border-cs_blue/30 group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 bg-white/90 text-gray-400 transition-all hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-800"
                         >
                             <i class="fa-solid fa-link text-sm transition-transform group-hover:scale-110"></i>
@@ -472,12 +472,12 @@
                 const scrolled = (winScroll / height) * 100;
                 $('#progress-bar').css('width', scrolled + '%');
             });
-        });
 
-        function copyToClipboard() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                alert('Đã sao chép liên kết vào bộ nhớ tạm!');
+            $('#copy-link-btn').on('click', function() {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Đã sao chép liên kết vào bộ nhớ tạm!');
+                });
             });
-        }
+        });
     </script>
 @endsection

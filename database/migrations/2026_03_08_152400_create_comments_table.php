@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('full_name');
             $table->text('content');
             $table->timestamps();
-
-            $table->index('report_id');
         });
     }
 
