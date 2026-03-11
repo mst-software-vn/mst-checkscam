@@ -51,7 +51,7 @@ class ReportFactory extends Factory
             ],
             [
                 'type' => 'website',
-                'target_id' => 'le.hoang.anh2000',
+                'target_id' => 'facebook.com/le.hoang.anh2000',
                 'target_name' => 'Lê Hoàng Anh',
                 'target_bank' => null,
             ]
