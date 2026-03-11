@@ -31,12 +31,11 @@ class SearchController extends Controller
                 ->when(in_array($type, ['phone', 'bank']), function ($q) use ($formattedQuery) {
                     $q->whereRaw("REGEXP_REPLACE(target_id, '[^0-9]', '') = ?", [$formattedQuery]);
                 })
-                ->when($type === 'facebook', function ($q) use ($formattedQuery) {
-                    $q->where(function ($sub) use ($formattedQuery) {
-                        $sub->where('target_id', $formattedQuery)
-                            ->orWhere('slug', $formattedQuery)
-                            ->orWhere('target_id', 'LIKE', "%facebook.com/{$formattedQuery}")
-                            ->orWhere('target_id', 'LIKE', "%fb.com/{$formattedQuery}");
+                ->when($type === 'facebook', function ($q) use ($formattedQuery, $query) {
+                    $q->where(function ($sub) use ($formattedQuery, $query) {
+                        $sub->where('target_id', 'LIKE', "%{$formattedQuery}%")
+                            ->orWhere('slug', 'LIKE', "%{$formattedQuery}%")
+                            ->orWhere('target_name', 'LIKE', "%{$query}%");
                     });
                 })
                 ->when($type === 'uuid', function ($q) use ($formattedQuery) {
@@ -129,8 +128,11 @@ class SearchController extends Controller
                     ->orWhere('target_name', 'LIKE', "%{$query}%");
             })
             ->select('target_id', 'target_name', 'type', 'slug')
-            ->limit(8)
+            ->limit(30)
             ->get()
+            ->unique('target_id')
+            ->take(8)
+            ->values()
             ->map(fn($r) => [
                 'label'       => $r->target_id . ($r->target_name ? " — {$r->target_name}" : ''),
                 'value'       => $r->target_id,
