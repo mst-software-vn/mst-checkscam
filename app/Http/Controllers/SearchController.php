@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class SearchController extends Controller
@@ -93,13 +94,19 @@ class SearchController extends Controller
             'total_website' => Report::where('status', 'approved')->where('type', 'website')->count(),
         ];
 
+        // Hiển thị các báo cáo phổ biến (bất kể có kết quả tìm kiếm hay không)
+        $topWeeklyReports = $this->getTopWeeklyReports();
+        $topDailySearches = $this->getTopDailySearches();
+
         return view('home', compact(
             'query',
             'results',
             'isFound',
             'type',
             'recentSearches',
-            'stats'
+            'stats',
+            'topWeeklyReports',
+            'topDailySearches'
         ));
     }
 
@@ -110,23 +117,8 @@ class SearchController extends Controller
     {
         $query = trim((string) $request->get('q', ''));
 
-        if (strlen($query) < 3) {
-            $recentSearches = SearchLog::where('ip_address', $request->ip())
-                ->orderByDesc('created_at')
-                ->limit(50) 
-                ->pluck('search_query')
-                ->unique()
-                ->take(10)
-                ->values()
-                ->map(fn($q) => [
-                    'label'       => $q,
-                    'value'       => $q,
-                    'type'        => 'history',
-                    'target_name' => null,
-                    'slug'        => null,
-                ]);
-
-            return response()->json($recentSearches);
+        if (strlen($query) < 2) {
+            return response()->json([]);
         }
 
         [$type, $formattedQuery] = $this->detectQueryType($query);
@@ -227,5 +219,51 @@ class SearchController extends Controller
         $str = preg_replace('/\s+/', ' ', $str);
 
         return $str;
+    }
+
+    private function getTopWeeklyReports()
+    {
+        return Report::where('status', 'approved')
+            ->where('created_at', '>=', now()->subDays(7))
+            ->select('target_id', 
+                DB::raw('MAX(target_name) as target_name'),
+                DB::raw('MAX(type) as type'), 
+                DB::raw('SUM(view_count) as total_views'),
+                DB::raw('COUNT(*) as report_count')
+            )
+            ->groupBy('target_id')
+            ->orderByDesc('report_count')
+            ->limit(7)
+            ->get();
+    }
+    
+    private function getTopDailySearches()
+    {
+        $topSearches = SearchLog::whereDate('created_at', today())
+            ->select('search_query', DB::raw('COUNT(*) as count'))
+            ->groupBy('search_query')
+            ->orderByDesc('count')
+            ->limit(3)
+            ->get();
+
+        if ($topSearches->isEmpty()) return collect();
+
+        $reports = Report::whereIn('target_id', $topSearches->pluck('search_query'))
+            ->where('status', 'approved')
+            ->get()
+            ->keyBy('target_id');
+
+        return $topSearches->map(function ($search) use ($reports) {
+            $scamInfo = $reports->get($search->search_query);
+
+            return (object)[
+                'is_scam' => (bool)$scamInfo,
+                'target_id' => $search->search_query,
+                'target_name' => $scamInfo->target_name ?? 'Chưa rõ thông tin',
+                'type' => $scamInfo->type ?? 'Từ khóa hệ thống',
+                'search_count' => $search->count,
+                'slug' => $scamInfo->slug ?? '#',
+            ];
+        });
     }
 }

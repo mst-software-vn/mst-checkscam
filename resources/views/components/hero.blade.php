@@ -172,37 +172,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         const li = document.createElement('li');
                         li.className = 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors';
                         
-                        if (item.type === 'history') {
-                            li.innerHTML = `
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-gray-400">
-                                            <i class="fa-solid fa-clock-rotate-left text-xs"></i>
-                                        </div>
-                                        <span class="font-medium text-sm text-gray-700 dark:text-gray-300">${item.value}</span>
-                                    </div>
-                                    <span class="text-[10px] text-gray-400 uppercase font-bold">Lịch sử</span>
+                        // Style type badge based on type
+                        let typeColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
+                        if (item.type === 'bank') typeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
+                        if (item.type === 'phone') typeColor = 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
+                        if (item.type === 'facebook') typeColor = 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
+                        
+                        const targetNameHTML = item.target_name ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-user mr-1"></i>${item.target_name}</div>` : '';
+                        
+                        li.innerHTML = `
+                            <div class="flex flex-col">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
+                                    <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
                                 </div>
-                            `;
-                        } else {
-                            // Style type badge based on type
-                            let typeColor = 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
-                            if (item.type === 'bank') typeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
-                            if (item.type === 'phone') typeColor = 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
-                            if (item.type === 'facebook') typeColor = 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
-                            
-                            const targetNameHTML = item.target_name ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-user mr-1"></i>${item.target_name}</div>` : '';
-                            
-                            li.innerHTML = `
-                                <div class="flex flex-col">
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
-                                        <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
-                                    </div>
-                                    ${targetNameHTML}
-                                </div>
-                            `;
-                        }
+                                ${targetNameHTML}
+                            </div>
+                        `;
                         
                         li.addEventListener('click', () => {
                             input.value = item.value;
@@ -211,19 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         resultsObj.appendChild(li);
                     });
                     resultsObj.style.display = 'block';
-                } else {
-                    if (query.length >= 3) {
-                        resultsObj.innerHTML = `
-                            <li class="p-4 text-center text-sm text-gray-500 dark:text-gray-400 font-medium">
-                                <i class="fa-regular fa-face-frown text-lg mb-2 block"></i>
-                                Không tìm thấy dữ liệu phù hợp
-                            </li>
-                        `;
-                        resultsObj.style.display = 'block';
-                    } else {
-                        resultsObj.style.display = 'none';
-                    }
-                }
+                } 
             })
             .catch(() => {
                 resultsObj.style.display = 'none';
