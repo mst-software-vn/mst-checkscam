@@ -1,5 +1,6 @@
 @extends("admin.layouts.master")
 @section("content")
+    {{-- Row 1: Cần xử lý ngay --}}
     <div class="row">
         <div class="col-lg-3 col-sm-6 col-12">
             <div class="dash-widget">
@@ -7,11 +8,8 @@
                     <span><img src="/assets/img/icons/dash1.svg" alt="img" /></span>
                 </div>
                 <div class="dash-widgetcontent">
-                    <h5>
-                        $
-                        <span class="counters" data-count="307144.00">$307,144.00</span>
-                    </h5>
-                    <h6>Total Purchase Due</h6>
+                    <h5><span class="counters" data-count="12">0</span></h5>
+                    <h6>Báo cáo chờ duyệt</h6>
                 </div>
             </div>
         </div>
@@ -21,11 +19,8 @@
                     <span><img src="/assets/img/icons/dash2.svg" alt="img" /></span>
                 </div>
                 <div class="dash-widgetcontent">
-                    <h5>
-                        $
-                        <span class="counters" data-count="4385.00">$4,385.00</span>
-                    </h5>
-                    <h6>Total Sales Due</h6>
+                    <h5><span class="counters" data-count="1250">0</span></h5>
+                    <h6>Lượt tra cứu hôm nay</h6>
                 </div>
             </div>
         </div>
@@ -36,10 +31,10 @@
                 </div>
                 <div class="dash-widgetcontent">
                     <h5>
-                        $
-                        <span class="counters" data-count="385656.50">385,656.50</span>
+                        <span class="counters" data-count="350000000">0</span>
+                        ₫
                     </h5>
-                    <h6>Total Sale Amount</h6>
+                    <h6>Quỹ bảo hiểm</h6>
                 </div>
             </div>
         </div>
@@ -50,40 +45,33 @@
                 </div>
                 <div class="dash-widgetcontent">
                     <h5>
-                        $
-                        <span class="counters" data-count="40000.00">400.00</span>
+                        <span class="counters" data-count="2500000000">0</span>
+                        ₫
                     </h5>
-                    <h6>Total Sale Amount</h6>
+                    <h6>Tổng thiệt hại</h6>
                 </div>
             </div>
         </div>
+    </div>
+
+    {{-- Row 2: Thống kê tổng quan --}}
+    <div class="row">
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count">
                 <div class="dash-counts">
-                    <h4>100</h4>
-                    <h5>Customers</h5>
+                    <h4>156</h4>
+                    <h5>Đối tượng Scam</h5>
                 </div>
                 <div class="dash-imgs">
-                    <i data-feather="user"></i>
+                    <i data-feather="alert-triangle"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count das1">
                 <div class="dash-counts">
-                    <h4>100</h4>
-                    <h5>Suppliers</h5>
-                </div>
-                <div class="dash-imgs">
-                    <i data-feather="user-check"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 d-flex col-12">
-            <div class="dash-count das2">
-                <div class="dash-counts">
-                    <h4>100</h4>
-                    <h5>Purchase Invoice</h5>
+                    <h4>423</h4>
+                    <h5>Tổng báo cáo</h5>
                 </div>
                 <div class="dash-imgs">
                     <i data-feather="file-text"></i>
@@ -91,55 +79,40 @@
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 d-flex col-12">
-            <div class="dash-count das3">
+            <div class="dash-count das2">
                 <div class="dash-counts">
-                    <h4>105</h4>
-                    <h5>Sales Invoice</h5>
+                    <h4>1,205</h4>
+                    <h5>Tổng bình luận</h5>
                 </div>
                 <div class="dash-imgs">
-                    <i data-feather="file"></i>
+                    <i data-feather="message-square"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex col-12">
+            <div class="dash-count das3">
+                <div class="dash-counts">
+                    <h4>38</h4>
+                    <h5>Bài viết</h5>
+                </div>
+                <div class="dash-imgs">
+                    <i data-feather="edit"></i>
                 </div>
             </div>
         </div>
     </div>
 
+    {{-- Row 3: Chart + Top tra cứu --}}
     <div class="row">
         <div class="col-lg-7 col-sm-12 d-flex col-12">
             <div class="card flex-fill">
                 <div class="card-header d-flex justify-content-between align-items-center pb-0">
-                    <h5 class="card-title mb-0">Purchase & Sales</h5>
+                    <h5 class="card-title mb-0">Lượt tra cứu theo tuần</h5>
                     <div class="graph-sets">
                         <ul>
-                            <li>
-                                <span>Sales</span>
-                            </li>
-                            <li>
-                                <span>Purchase</span>
-                            </li>
+                            <li><span>Tìm thấy</span></li>
+                            <li><span>Không tìm thấy</span></li>
                         </ul>
-                        <div class="dropdown">
-                            <button
-                                class="btn btn-white btn-sm dropdown-toggle"
-                                type="button"
-                                id="dropdownMenuButton"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                2022
-                                <img src="/assets/img/icons/dropdown.svg" alt="img" class="ms-2" />
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <a href="javascript:void(0);" class="dropdown-item">2022</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);" class="dropdown-item">2021</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);" class="dropdown-item">2020</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -150,71 +123,43 @@
         <div class="col-lg-5 col-sm-12 d-flex col-12">
             <div class="card flex-fill">
                 <div class="card-header d-flex justify-content-between align-items-center pb-0">
-                    <h4 class="card-title mb-0">Recently Added Products</h4>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                            <i class="fa fa-ellipsis-v"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <a href="productlist.html" class="dropdown-item">Product List</a>
-                            </li>
-                            <li>
-                                <a href="addproduct.html" class="dropdown-item">Product Add</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="card-title mb-0">Top 5 tra cứu hôm nay</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dataview">
                         <table class="datatable table">
                             <thead>
                                 <tr>
-                                    <th>Sno</th>
-                                    <th>Products</th>
-                                    <th>Price</th>
+                                    <th>STT</th>
+                                    <th>Từ khóa</th>
+                                    <th>Lượt</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td class="productimgname">
-                                        <a href="productlist.html" class="product-img">
-                                            <img src="/assets/img/product/product22.jpg" alt="product" />
-                                        </a>
-                                        <a href="productlist.html">Apple Earpods</a>
-                                    </td>
-                                    <td>$891.2</td>
+                                    <td>0912345678</td>
+                                    <td>52</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td class="productimgname">
-                                        <a href="productlist.html" class="product-img">
-                                            <img src="/assets/img/product/product23.jpg" alt="product" />
-                                        </a>
-                                        <a href="productlist.html">iPhone 11</a>
-                                    </td>
-                                    <td>$668.51</td>
+                                    <td>1234567890123</td>
+                                    <td>38</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td class="productimgname">
-                                        <a href="productlist.html" class="product-img">
-                                            <img src="/assets/img/product/product24.jpg" alt="product" />
-                                        </a>
-                                        <a href="productlist.html">samsung</a>
-                                    </td>
-                                    <td>$522.29</td>
+                                    <td>facebook.com/scammer01</td>
+                                    <td>25</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td class="productimgname">
-                                        <a href="productlist.html" class="product-img">
-                                            <img src="/assets/img/product/product6.jpg" alt="product" />
-                                        </a>
-                                        <a href="productlist.html">Macbook Pro</a>
-                                    </td>
-                                    <td>$291.01</td>
+                                    <td>0987654321</td>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>9876543210987</td>
+                                    <td>14</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -223,77 +168,64 @@
             </div>
         </div>
     </div>
+
+    {{-- Row 4: Báo cáo gần nhất --}}
     <div class="card mb-0">
         <div class="card-body">
-            <h4 class="card-title">Expired Products</h4>
+            <h4 class="card-title">Báo cáo gần nhất</h4>
             <div class="table-responsive dataview">
                 <table class="datatable table">
                     <thead>
                         <tr>
-                            <th>SNo</th>
-                            <th>Product Code</th>
-                            <th>Product Name</th>
-                            <th>Brand Name</th>
-                            <th>Category Name</th>
-                            <th>Expiry Date</th>
+                            <th>ID</th>
+                            <th>Loại</th>
+                            <th>Đối tượng</th>
+                            <th>Người gửi</th>
+                            <th>Thiệt hại</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày gửi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td><a href="javascript:void(0);">IT0001</a></td>
-                            <td class="productimgname">
-                                <a class="product-img" href="productlist.html">
-                                    <img src="/assets/img/product/product2.jpg" alt="product" />
-                                </a>
-                                <a href="productlist.html">Orange</a>
-                            </td>
-                            <td>N/D</td>
-                            <td>Fruits</td>
-                            <td>12-12-2022</td>
+                            <td>#RPT001</td>
+                            <td>STK</td>
+                            <td>1234567890 — Nguyễn Văn A</td>
+                            <td>Ẩn danh</td>
+                            <td>5,000,000 ₫</td>
+                            <td><span class="badges bg-lightyellow">Chờ duyệt</span></td>
+                            <td>13/03/2026</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td><a href="javascript:void(0);">IT0002</a></td>
-                            <td class="productimgname">
-                                <a class="product-img" href="productlist.html">
-                                    <img src="/assets/img/product/product3.jpg" alt="product" />
-                                </a>
-                                <a href="productlist.html">Pineapple</a>
-                            </td>
-                            <td>N/D</td>
-                            <td>Fruits</td>
-                            <td>25-11-2022</td>
+                            <td>#RPT002</td>
+                            <td>SĐT</td>
+                            <td>0912345678</td>
+                            <td>Trần Thị B</td>
+                            <td>2,000,000 ₫</td>
+                            <td><span class="badges bg-lightgreen">Đã duyệt</span></td>
+                            <td>12/03/2026</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td><a href="javascript:void(0);">IT0003</a></td>
-                            <td class="productimgname">
-                                <a class="product-img" href="productlist.html">
-                                    <img src="/assets/img/product/product4.jpg" alt="product" />
-                                </a>
-                                <a href="productlist.html">Stawberry</a>
-                            </td>
-                            <td>N/D</td>
-                            <td>Fruits</td>
-                            <td>19-11-2022</td>
+                            <td>#RPT003</td>
+                            <td>Website</td>
+                            <td>scam-site.com</td>
+                            <td>Lê Văn C</td>
+                            <td>10,000,000 ₫</td>
+                            <td><span class="badges bg-lightyellow">Chờ duyệt</span></td>
+                            <td>12/03/2026</td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td><a href="javascript:void(0);">IT0004</a></td>
-                            <td class="productimgname">
-                                <a class="product-img" href="productlist.html">
-                                    <img src="/assets/img/product/product5.jpg" alt="product" />
-                                </a>
-                                <a href="productlist.html">Avocat</a>
-                            </td>
-                            <td>N/D</td>
-                            <td>Fruits</td>
-                            <td>20-11-2022</td>
+                            <td>#RPT004</td>
+                            <td>STK</td>
+                            <td>9876543210 — Phạm Thị D</td>
+                            <td>Ẩn danh</td>
+                            <td>15,000,000 ₫</td>
+                            <td><span class="badges bg-lightred">Từ chối</span></td>
+                            <td>11/03/2026</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-@endsection('content')
+@endsection
