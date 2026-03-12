@@ -54,11 +54,11 @@ class ReportFactory extends Factory
                 'target_id' => 'facebook.com/le.hoang.anh2000',
                 'target_name' => 'Lê Hoàng Anh',
                 'target_bank' => null,
-            ]
+            ],
         ];
 
         $status = ['pending', 'approved', 'rejected'];
-        
+
         // Randomly pick ONE scammer from the pool. This ensures duplication across many generated records.
         $target = $this->faker->randomElement($scammerPool);
 
@@ -73,12 +73,13 @@ class ReportFactory extends Factory
             'target_bank' => $target['target_bank'],
             'category' => $this->faker->randomElement(['Lừa đảo chuyển khoản', 'SCAM trung gian', 'Lừa đảo nạp thẻ game', 'Bán hàng giả mạo FB']),
             'description' => $this->faker->realText(200),
+            'damage_amount' => $this->faker->randomNumber(5) * 1000,
             'evidence_images' => ['https://techfest.vn/wp-content/uploads/2021/08/luong-canh-hinh-anh-768x402-1.jpg'],
             'status' => $this->faker->randomElement($status),
             'rejection_reason' => null,
             'view_count' => $this->faker->numberBetween(10, 5000),
             'search_count' => $this->faker->numberBetween(0, 1000),
-            'slug' => Str::slug($target['target_id'] . '-' . Str::random(5)),
+            'slug' => Str::slug($target['target_id'].'-'.Str::random(5)),
             // Spread data randomly over the last 15 days to test weekly queries.
             'created_at' => $this->faker->dateTimeBetween('-15 days', 'now'),
             'updated_at' => now(),

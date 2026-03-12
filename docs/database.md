@@ -69,6 +69,7 @@ Bảng quan trọng nhất lưu trữ thông tin các vụ lừa đảo.
 | `target_id`        | String      | No       | Số TK/SĐT hoặc URL website lừa đảo (Dùng để tra cứu) |
 | `target_name`      | String      | Yes      | Tên chủ tài khoản hoặc Tên website                   |
 | `target_bank`      | String      | Yes      | Tên ngân hàng/Ví điện tử (Dành cho `type=account`)   |
+| `damage_amount`    | Decimal     | Yes      | Số tiền bị lừa (Dành cho `type=account`)             |
 | `category`         | String      | Yes      | Phân loại (Giả mạo ngân hàng, app, cá cược...)       |
 | `description`      | Text        | No       | Chi tiết sự việc                                     |
 | `evidence_images`  | Text        | Yes      | Danh sách URL ảnh bằng chứng (Mỗi ảnh 1 dòng)        |
