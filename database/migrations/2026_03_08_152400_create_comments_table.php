@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('report_id')->constrained('reports')->onDelete('cascade');
             $table->string('full_name');
             $table->text('content');
+            $table->string('ip_address', 45);
+            $table->boolean('is_anonymous')->default(false);
             $table->timestamps();
         });
     }
