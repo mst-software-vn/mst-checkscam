@@ -68,11 +68,12 @@
                             <div class="flex items-center gap-6">
                                 <div class="flex flex-col">
                                     <span
-                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">Lượt
-                                        tra cứu</span>
+                                        class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
+                                        Lượt xem
+                                    </span>
                                     <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
                                         <i class="fa-solid fa-magnifying-glass mr-1 opacity-50"></i>
-                                        {{ number_format($item->search_count ?? 0) }}
+                                        {{ number_format($item->view_count ?? 0) }}
                                     </span>
                                 </div>
                                 <div class="flex flex-col">
@@ -156,7 +157,7 @@
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
                                             <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ number_format($item->views) }}
+                                            {{ number_format($item->view_count ?? 0) }}
                                         </span>
                                     </div>
                                     <div class="flex flex-col">
@@ -328,17 +329,17 @@
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
                                             <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ number_format($item->views) }}
+                                            {{ str_pad($item->view_count, 2, '0', STR_PAD_LEFT) }}
                                         </span>
                                     </div>
                                     <div class="flex flex-col">
                                         <span
                                             class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Bài cảnh báo
+                                            Bình luận
                                         </span>
                                         <span class="text-cs_red text-xs font-bold">
                                             <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                            {{ str_pad($item->report_count, 2, '0', STR_PAD_LEFT) }}
+                                            {{ str_pad($item->comments_count, 2, '0', STR_PAD_LEFT) }}
                                         </span>
                                     </div>
                                 </div>

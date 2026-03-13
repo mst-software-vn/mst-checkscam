@@ -99,7 +99,7 @@ class ReportController extends Controller
 
         $totalSearchCount = Report::where('target_id', $report->target_id)
             ->where('status', 'approved')
-            ->sum('search_count');
+            ->max('search_count');
 
         $relatedReports = Report::where('status', 'approved')
             ->where('id', '!=', $report->id)
