@@ -43,7 +43,7 @@ class Comment extends Model
     public function canModify(string $ip): bool
     {
         return $this->ip_address === $ip
-            && $this->created_at->diffInMinutes(now()) <= 1;
+            && $this->created_at->diffInMinutes(now()) <= 15;
     }
 
     public function getDisplayNameAttribute(): string
