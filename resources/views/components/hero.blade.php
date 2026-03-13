@@ -14,8 +14,9 @@
 
             <!-- Search Box Centered -->
             <div class="mx-auto mb-6 max-w-3xl">
-                <div
-                    class="focus-within:border-cs_blue relative rounded-2xl border-2 border-gray-200 bg-white p-1 shadow-xl shadow-blue-900/5 transition-all focus-within:ring-4 focus-within:ring-blue-100 md:p-2 dark:border-gray-800 dark:bg-slate-900 dark:focus-within:ring-blue-900/30">
+                <div id="search-wrapper"
+                    class="focus-within:border-cs_blue relative rounded-2xl border-2 border-gray-200 bg-white p-1 shadow-xl shadow-blue-900/5 transition-all focus-within:ring-4 focus-within:ring-blue-100 md:p-2 dark:border-gray-800 dark:bg-slate-900 dark:focus-within:ring-blue-900/30"
+                    style="transition: border-radius 0.15s ease, border-color 0.2s;">
                     <form action="{{ route('search.index') }}" method="GET" class="relative">
                         <div class="flex flex-col items-center gap-2 sm:flex-row">
                             <div class="flex w-full min-w-0 flex-1 items-center relative">
@@ -33,14 +34,14 @@
                             </button>
                         </div>
 
-                        <!-- Div hiển thị gợi ý AutoComplete -->
+                        <!-- Dropdown gợi ý — KHÔNG có mt, nằm sát search box -->
                         <ul id="searchResults"
-                            class="absolute left-0 right-0 top-full mt-2 rounded-xl bg-white shadow-xl border border-gray-100 dark:bg-slate-800 dark:border-gray-700 max-h-80 overflow-y-auto text-left z-50 divide-y divide-gray-50 dark:divide-gray-700/50"
-                            style="display: none;"></ul>
+                            class="absolute left-0 right-0 top-full bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-gray-700/60 rounded-b-2xl shadow-xl shadow-blue-900/10 dark:shadow-black/30 max-h-80 overflow-y-auto text-left z-50 divide-y divide-gray-50 dark:divide-gray-800"
+                            style="display: none; margin: 0 -9px; width: calc(100% + 18px);"></ul>
                     </form>
                 </div>
+
                 @if (!request()->query("q"))
-                <!-- Stats -->
                 <div
                     class="mt-6 flex flex-wrap justify-center gap-3 text-[11px] font-bold text-gray-500 md:gap-8 md:text-sm dark:text-gray-400">
                     <span class="flex items-center">
@@ -132,9 +133,20 @@
 <script>
     $(document).ready(function() {
         const $input = $('#searchInput');
-        const $resultsObj = $('#searchResults');
+        const $results = $('#searchResults');
+        const $wrapper = $('#search-wrapper');
 
-        if (!$input.length || !$resultsObj.length) return;
+        if (!$input.length || !$results.length) return;
+
+        function openDropdown() {
+            $wrapper.css('border-radius', '1rem 1rem 0 0');
+            $results.show();
+        }
+
+        function closeDropdown() {
+            $wrapper.css('border-radius', '');
+            $results.hide().empty();
+        }
 
         function fetchSuggestions(query) {
             $.ajax({
@@ -145,32 +157,41 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    $resultsObj.empty();
-                    if (data.length > 0) {
-                        $.each(data, function(index, item) {
-                            let typeColor =
-                                'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
-                            if (item.type === 'bank') typeColor =
-                                'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
-                            if (item.type === 'phone') typeColor =
-                                'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
-                            if (item.type === 'facebook') typeColor =
-                                'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
+                    $results.empty();
 
-                            const targetNameHTML = item.target_name ?
-                                `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-user mr-1"></i>${item.target_name}</div>` :
+                    if (data && data.length > 0) {
+                        $.each(data, function(index, item) {
+                            let typeLabel = item.type;
+                            let typeColor =
+                                'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400';
+
+                            if (item.type === 'bank') {
+                                typeColor =
+                                    'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
+                                typeLabel = 'Ngân hàng';
+                            } else if (item.type === 'phone') {
+                                typeColor =
+                                    'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400';
+                                typeLabel = 'SĐT';
+                            } else if (item.type === 'facebook') {
+                                typeColor =
+                                    'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
+                                typeLabel = 'Facebook';
+                            }
+
+                            const nameHTML = item.target_name ?
+                                `<span class="text-[11px] text-gray-400 dark:text-gray-500 ml-1">— ${item.target_name}</span>` :
                                 '';
 
                             const $li = $('<li>', {
-                                class: 'p-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors',
+                                class: 'flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors group',
                                 html: `
-                                <div class="flex flex-col">
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-sm text-gray-800 dark:text-gray-200">${item.value}</span>
-                                        <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded ${typeColor}">${item.type}</span>
-                                    </div>
-                                    ${targetNameHTML}
+                                <i class="fa-solid fa-magnifying-glass text-gray-300 dark:text-gray-600 text-xs group-hover:text-gray-400 transition-colors"></i>
+                                <div class="flex items-center gap-2 min-w-0 flex-1">
+                                    <span class="font-bold text-sm text-gray-800 dark:text-gray-200 truncate">${item.value}</span>
+                                    ${nameHTML}
                                 </div>
+                                <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded shrink-0 ${typeColor}">${typeLabel}</span>
                             `
                             });
 
@@ -178,14 +199,46 @@
                                 $input.val(item.value);
                                 $input.closest('form').submit();
                             });
-
-                            $resultsObj.append($li);
+                            $results.append($li);
                         });
-                        $resultsObj.show();
+                    } else {
+                        let displayQuery = query;
+
+                        if (/^\d+$/.test(query)) {
+                            if (query.length > 10) {
+                                displayQuery = '... ' + query.slice(-3);
+                            }
+                        } else if (query.length > 15) {
+                            const words = query.trim().split(/\s+/);
+                            if (words.length > 1) {
+                                displayQuery = '... ' + words[words.length - 1];
+                            } else {
+                                displayQuery = '... ' + query.slice(-3);
+                            }
+                        }
+
+                        const $ghostLi = $('<li>', {
+                            class: 'flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors group',
+                            html: `
+            <i class="fa-solid fa-magnifying-glass text-gray-300 dark:text-gray-600 text-xs group-hover:text-gray-400 transition-colors"></i>
+            <span class="text-sm font-bold text-gray-700 dark:text-gray-300 flex-1">
+                Tra cứu "<span class="text-cs_blue">${displayQuery}</span>"
+            </span>
+            <i class="fa-solid fa-arrow-right text-xs text-gray-300 dark:text-gray-600 group-hover:text-gray-400 transition-colors"></i>
+        `
+                        });
+
+                        $ghostLi.on('click', function() {
+                            $input.val(query);
+                            $input.closest('form').submit();
+                        });
+                        $results.append($ghostLi);
                     }
+
+                    openDropdown();
                 },
                 error: function() {
-                    $resultsObj.hide();
+                    closeDropdown();
                 }
             });
         }
@@ -193,27 +246,21 @@
         let timeoutId;
         $input.on('input', function() {
             clearTimeout(timeoutId);
-            const query = $(this).val();
-
+            const query = $(this).val().trim();
             if (query.length < 2) {
-                $resultsObj.hide().empty();
+                closeDropdown();
                 return;
             }
 
-            timeoutId = setTimeout(() => {
-                fetchSuggestions(query);
-            }, 500);
+            timeoutId = setTimeout(() => fetchSuggestions(query), 350);
         });
 
         $input.on('focus', function() {
-            fetchSuggestions($(this).val());
+            if ($results.children().length > 0) openDropdown();
         });
 
         $(document).on('click', function(e) {
-            if (!$input.is(e.target) && $input.has(e.target).length === 0 &&
-                !$resultsObj.is(e.target) && $resultsObj.has(e.target).length === 0) {
-                $resultsObj.hide();
-            }
+            if (!$(e.target).closest('#search-wrapper').length) closeDropdown();
         });
     });
 </script>
