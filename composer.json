@@ -34,7 +34,8 @@
         },
         "files": [
             "app/Helpers/StringHelper.php",
-            "app/Helpers/StatsHelper.php"
+            "app/Helpers/StatsHelper.php",
+            "app/Helpers/FileHelper.php"
         ]
     },
     "autoload-dev": {
