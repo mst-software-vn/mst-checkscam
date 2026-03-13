@@ -602,15 +602,6 @@
                         </div>
                     </a>
                     @endforeach
-                    <!-- Nút xóa lịch sử -->
-                    <form action="{{ route('search.clearHistory') }}" method="POST"
-                        class="p-2 border-t border-gray-100 dark:border-gray-800">
-                        @csrf
-                        <button type="submit"
-                            class="w-full text-[10px] font-bold text-red-500 hover:text-red-700 py-2 rounded transition-colors hover:bg-red-50 dark:hover:bg-red-900/20">
-                            <i class="fa-regular fa-trash-can mr-1"></i> XÓA LỊCH SỬ TÌM KIẾM
-                        </button>
-                    </form>
                     @else
                     <div class="p-6 text-center">
                         <div class="text-gray-200 dark:text-gray-700 mb-2 text-3xl">
