@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,8 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'username' => 'htuanqn',
             'email' => 'tuan@mstsoftware.vn',
@@ -27,7 +27,15 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
 
-        // Generate 50 realistic clustered reports for the homepage statistics
-        \App\Models\Report::factory(50)->create();
+        Report::factory(50)->create();
+
+        $approvedReports = Report::where('status', 'approved')->get();
+
+        $approvedReports->each(function ($report) {
+            $count = fake()->numberBetween(2, 8);
+            Comment::factory($count)->create([
+                'report_id' => $report->id,
+            ]);
+        });
     }
 }
