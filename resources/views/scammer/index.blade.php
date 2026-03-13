@@ -137,7 +137,7 @@
                 </div>
             </div>
 
-            <!-- Reporter Information Section (New) -->
+            <!-- Reporter Information Section -->
             <div
                 class="dark:bg-dark_card group relative overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm dark:border-gray-800">
                 <div class="absolute top-0 right-0 p-4 opacity-5 transition-opacity group-hover:opacity-10">
@@ -251,7 +251,7 @@
                 </div>
             </div>
 
-            <!-- Related Reports Area (Enlarged) -->
+            <!-- Related Reports Area -->
             <div
                 class="dark:bg-dark_card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm dark:border-gray-800">
                 <div class="mb-8 flex items-center justify-between">
@@ -318,95 +318,257 @@
                 @endif
             </div>
 
-            <!-- Comments System (New Section) -->
-            <div
-                class="dark:bg-dark_card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm dark:border-gray-800">
-                <div class="mb-10 flex items-center gap-2">
-                    <div class="bg-cs_blue h-5 w-1 rounded-full"></div>
-                    <h2 class="text-sm font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
-                        Cộng đồng bình luận (12)
-                    </h2>
-                </div>
+            <!-- Comments System -->
+            <div class="dark:bg-dark_card rounded-3xl border border-gray-100 bg-white shadow-sm dark:border-gray-800"
+                id="comment-section">
 
-                <!-- Comment Input -->
-                <div class="mb-10">
-                    <div class="flex gap-3 md:gap-4">
-                        <div
-                            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-100 bg-gray-100 md:h-11 md:w-11 dark:border-gray-700 dark:bg-slate-800">
-                            <i class="fa-solid fa-user text-sm text-gray-400 md:text-base"></i>
+                {{-- ── Header ─────────────────────────────────────────────── --}}
+                <div
+                    class="flex items-center justify-between border-b border-gray-50 bg-linear-to-r from-blue-50/30 to-transparent px-6 py-4 dark:border-gray-800 dark:from-blue-900/5">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-cs_blue/10 text-cs_blue flex h-9 w-9 items-center justify-center rounded-xl">
+                            <i class="fa-solid fa-comments text-sm"></i>
                         </div>
-                        <div class="flex-1">
-                            <textarea rows="2"
-                                class="focus:ring-cs_blue focus:border-cs_blue w-full resize-none rounded-2xl border border-gray-100 bg-gray-50/50 p-3 text-sm text-gray-600 transition-all outline-none focus:ring-1 md:p-4 dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
-                                placeholder="Chia sẻ thêm thông tin..."></textarea>
-                            <div class="mt-3 flex justify-end">
-                                <button
-                                    class="bg-cs_blue cursor-pointer rounded-xl px-6 py-2 text-[10px] font-bold text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:px-8 md:py-2.5 md:text-xs">
-                                    Gửi bình luận
-                                </button>
-                            </div>
+                        <div>
+                            <h2
+                                class="text-xs leading-none font-bold tracking-tight text-gray-800 uppercase md:text-sm dark:text-gray-100">
+                                Cộng đồng bình luận
+                            </h2>
+                            <span class="mt-1 block text-[9px] font-bold tracking-widest text-gray-400 uppercase"
+                                id="comment-count-label">
+                                {{ $comments->count() }} bình luận
+                            </span>
                         </div>
+                    </div>
+                    <div
+                        class="flex items-center gap-1.5 rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-1.5 dark:border-blue-900/20 dark:bg-blue-900/10">
+                        <i class="fa-solid fa-shield-halved text-cs_blue text-[10px]"></i>
+                        <span class="text-[9px] font-bold tracking-widest text-blue-500 uppercase">Cộng đồng kiểm
+                            chứng</span>
                     </div>
                 </div>
 
-                <!-- Comment List -->
-                <div class="space-y-8">
-                    <!-- Single Comment -->
-                    <div class="group flex gap-3 md:gap-4">
-                        <div
-                            class="from-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr to-blue-400 text-[10px] font-bold text-white shadow-sm md:h-11 md:w-11 md:text-sm">
-                            AN
-                        </div>
-                        <div class="flex-1">
-                            <div
-                                class="rounded-2xl rounded-tl-none border border-gray-50 bg-gray-50/50 p-4 dark:border-gray-800/50 dark:bg-slate-900/50">
-                                <div class="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="text-xs font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
-                                            Người dùng ẩn danh
-                                        </span>
-                                    </div>
-                                    <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">
-                                        1 giờ trước
-                                    </span>
-                                </div>
-                                <p
-                                    class="text-[13px] leading-relaxed font-medium text-gray-600 md:text-sm dark:text-gray-400">
-                                    Chuẩn rồi, thằng này chuyên môn dùng chiêu bài giả mạo admin group Telegram để
-                                    lùa gà. Tôi cũng vừa bị nó hụt 200k tiền cọc. May mà search được web này kịp.
+                <div class="p-6">
+
+                    {{-- ── Comment Form ────────────────────────────────────── --}}
+                    <div class="mb-8" id="comment-form-wrapper">
+                        <form id="comment-form" action="{{ route('comment.store', $report->id) }}" method="POST">
+                            @csrf
+
+                            {{-- Bước 1: Thông tin người bình luận --}}
+                            <div class="mb-4 rounded-2xl border border-gray-100 bg-gray-50/50 p-4 dark:border-gray-800 dark:bg-slate-900/50"
+                                id="identity-block">
+                                <p class="mb-3 text-[9px] font-bold tracking-[2px] text-gray-400 uppercase">
+                                    <i class="fa-solid fa-circle-user mr-1.5 opacity-60"></i>Thông tin hiển thị
                                 </p>
+
+                                <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                                    {{-- Input tên --}}
+                                    <div class="relative flex-1" id="name-input-wrapper">
+                                        <div class="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+                                            <i
+                                                class="fa-solid fa-user text-[10px] text-gray-300 dark:text-gray-600"></i>
+                                        </div>
+                                        <input type="text" name="full_name" id="input-full-name"
+                                            class="focus:ring-cs_blue focus:border-cs_blue w-full rounded-xl border border-gray-200 bg-white py-3.5 pl-8 pr-4 text-xs font-medium text-gray-700 placeholder-gray-400 outline-none transition-all focus:ring-1 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300 dark:placeholder-gray-600"
+                                            placeholder="Tên hiển thị của bạn..." maxlength="100" />
+                                    </div>
+
+                                    {{-- Checkbox ẩn danh --}}
+                                    <label id="anon-label"
+                                        class="flex cursor-pointer select-none items-center gap-2.5 rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition-all hover:border-blue-200 hover:bg-blue-50/30 dark:border-gray-700 dark:bg-slate-800 dark:hover:border-blue-800 dark:hover:bg-blue-900/10"
+                                        for="is-anonymous">
+                                        <div class="relative">
+                                            <input type="checkbox" name="is_anonymous" id="is-anonymous" value="1"
+                                                class="peer sr-only" />
+                                            <div
+                                                class="peer-checked:bg-cs_blue peer-checked:border-cs_blue flex h-5 w-5 items-center justify-center rounded-md border-2 border-gray-300 bg-white transition-all dark:border-gray-600 dark:bg-slate-700">
+                                                <i class="fa-solid fa-check hidden text-[9px] text-white peer-checked:block"
+                                                    id="anon-check-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span
+                                                class="block text-[10px] font-bold text-gray-600 dark:text-gray-300">Ẩn
+                                                danh</span>
+                                            <span class="block text-[9px] text-gray-400">Không hiển thị tên</span>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
+
+                            {{-- Bước 2: Nội dung bình luận --}}
+                            <div class="flex gap-3 md:gap-4">
+                                {{-- Avatar placeholder --}}
+                                <div id="comment-avatar"
+                                    class="from-cs_blue flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-tr to-blue-400 text-[10px] font-bold text-white shadow-sm md:h-10 md:w-10 md:text-xs">
+                                    <i class="fa-solid fa-user text-xs"></i>
+                                </div>
+
+                                <div class="flex-1">
+                                    <textarea name="content" id="comment-content" rows="3"
+                                        class="focus:ring-cs_blue focus:border-cs_blue w-full resize-none rounded-2xl border border-gray-100 bg-gray-50/50 p-3 text-sm text-gray-600 transition-all outline-none focus:ring-1 md:p-4 dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
+                                        placeholder="Chia sẻ thêm thông tin về đối tượng này..."
+                                        maxlength="1000"></textarea>
+
+                                    {{-- Footer form --}}
+                                    <div class="mt-2.5 flex items-center justify-between">
+                                        <span class="text-[10px] font-medium text-gray-400" id="char-count">0 /
+                                            1000</span>
+                                        <div class="flex items-center gap-2">
+                                            <span class="hidden text-[10px] font-bold text-amber-500"
+                                                id="rate-limit-hint">
+                                                <i class="fa-solid fa-clock mr-1"></i>Còn <span
+                                                    id="remaining-count">5</span> lần hôm nay
+                                            </span>
+                                            <button type="submit" id="submit-comment-btn"
+                                                class="bg-cs_blue flex cursor-pointer items-center gap-2 rounded-xl px-5 py-2 text-[10px] font-bold text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:px-6 md:py-2.5 md:text-xs disabled:cursor-not-allowed disabled:opacity-50">
+                                                <i class="fa-solid fa-paper-plane text-[10px]" id="submit-icon"></i>
+                                                <span id="submit-text">Gửi bình luận</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Alert lỗi --}}
+                            <div id="comment-error"
+                                class="mt-3 hidden rounded-xl border border-red-100 bg-red-50/50 px-4 py-3 text-xs font-medium text-red-500 dark:border-red-900/20 dark:bg-red-900/10">
+                                <i class="fa-solid fa-circle-exclamation mr-2"></i><span id="comment-error-text"></span>
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- Single Comment -->
-                    <div class="group flex gap-3 md:gap-4">
-                        <div
-                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-gray-500 md:h-11 md:w-11 md:text-sm dark:bg-slate-800 dark:text-gray-400">
-                            TV
-                        </div>
-                        <div class="flex-1">
+                    {{-- ── Divider --}}
+                    @if($comments->count() > 0)
+                    <div class="mb-6 flex items-center gap-3">
+                        <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+                        <span class="text-[9px] font-bold tracking-[3px] text-gray-400 uppercase">Bình luận gần
+                            đây</span>
+                        <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+                    </div>
+                    @endif
+
+                    {{-- ── Comment List ─────────────────────────────────────── --}}
+                    <div class="space-y-5" id="comment-list">
+                        @forelse($comments as $comment)
+                        @php
+                        $initials = 'AN';
+                        if (!$comment->is_anonymous && $comment->full_name) {
+                        $words = explode(' ', trim($comment->full_name));
+                        $initials = mb_strtoupper(mb_substr($words[0], 0, 1));
+                        if (count($words) > 1) {
+                        $initials .= mb_strtoupper(mb_substr(end($words), 0, 1));
+                        }
+                        }
+
+                        $avatarColors = [
+                        'from-blue-500 to-blue-400',
+                        'from-violet-500 to-purple-400',
+                        'from-emerald-500 to-teal-400',
+                        'from-orange-500 to-amber-400',
+                        'from-rose-500 to-pink-400',
+                        ];
+                        $colorClass = $avatarColors[$comment->id % count($avatarColors)];
+
+                        $isAnon = $comment->is_anonymous;
+                        $canModify = $comment->canModify(request()->ip());
+                        @endphp
+
+                        <div class="comment-item group flex gap-3 md:gap-4" data-comment-id="{{ $comment->id }}">
+                            {{-- Avatar --}}
+                            @if($isAnon)
+                            <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                                class="flex h-9 w-9 shrink-0 rounded-full object-cover shadow-sm md:h-10 md:w-10"
+                                alt="Anonymous" />
+                            @else
                             <div
-                                class="rounded-2xl rounded-tl-none border border-gray-50 bg-gray-50/50 p-4 dark:border-gray-800/50 dark:bg-slate-900/50">
-                                <div class="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="text-xs font-bold tracking-tight text-gray-800 uppercase dark:text-gray-100">
-                                            Trung Van 9x
-                                        </span>
+                                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-tr {{ $colorClass }} text-[10px] font-bold text-white shadow-sm md:h-10 md:w-10 md:text-xs">
+                                {{ $initials }}
+                            </div>
+                            @endif
+
+                            <div class="flex-1 min-w-0">
+                                <div
+                                    class="rounded-2xl rounded-tl-none border border-gray-50 bg-gray-50/50 p-4 transition-colors group-hover:border-gray-100 dark:border-gray-800/50 dark:bg-slate-900/50 dark:group-hover:border-gray-700/50">
+
+                                    {{-- Header comment --}}
+                                    <div class="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs font-bold text-gray-800 dark:text-gray-100">
+                                                {{ $comment->display_name }}
+                                            </span>
+                                            @if($isAnon)
+                                            <span
+                                                class="rounded-md border border-gray-200 bg-gray-100 px-1.5 py-0.5 text-[8px] font-bold tracking-wider text-gray-400 uppercase dark:border-gray-700 dark:bg-slate-800">
+                                                <i class="fa-solid fa-user-secret mr-0.5"></i>Ẩn danh
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">
+                                                {{ $comment->created_at->locale('vi')->diffForHumans() }}
+                                            </span>
+                                            {{-- Edit/Delete (chỉ hiện khi còn trong 15 phút) --}}
+                                            @if($canModify)
+                                            <div
+                                                class="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                                                <button
+                                                    class="edit-comment-btn hover:text-cs_blue flex h-6 w-6 items-center justify-center rounded-lg border border-gray-100 bg-white text-gray-400 text-[10px] transition-all hover:border-blue-100 hover:bg-blue-50 dark:border-gray-700 dark:bg-slate-800"
+                                                    data-comment-id="{{ $comment->id }}"
+                                                    data-content="{{ $comment->content }}" title="Chỉnh sửa">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+                                                <button
+                                                    class="delete-comment-btn flex h-6 w-6 items-center justify-center rounded-lg border border-gray-100 bg-white text-gray-400 text-[10px] transition-all hover:border-red-100 hover:bg-red-50 hover:text-red-400 dark:border-gray-700 dark:bg-slate-800"
+                                                    data-comment-id="{{ $comment->id }}" title="Xoá">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">
-                                        3 giờ trước
-                                    </span>
+
+                                    {{-- Nội dung --}}
+                                    <p
+                                        class="comment-content text-[13px] leading-relaxed font-medium text-gray-600 md:text-sm dark:text-gray-400">
+                                        {{ $comment->content }}
+                                    </p>
+
+                                    {{-- Edit form (ẩn mặc định) --}}
+                                    @if($canModify)
+                                    <div class="edit-form mt-3 hidden">
+                                        <textarea
+                                            class="focus:ring-cs_blue focus:border-cs_blue w-full resize-none rounded-xl border border-gray-200 bg-white p-3 text-xs text-gray-600 outline-none transition-all focus:ring-1 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
+                                            rows="3" maxlength="1000">{{ $comment->content }}</textarea>
+                                        <div class="mt-2 flex items-center justify-end gap-2">
+                                            <button
+                                                class="cancel-edit-btn cursor-pointer rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-[10px] font-bold text-gray-500 uppercase transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800">
+                                                Huỷ
+                                            </button>
+                                            <button
+                                                class="save-edit-btn bg-cs_blue cursor-pointer rounded-lg px-4 py-1.5 text-[10px] font-bold text-white uppercase transition-all hover:bg-blue-600"
+                                                data-comment-id="{{ $comment->id }}">
+                                                Lưu thay đổi
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @endif
+
                                 </div>
-                                <p
-                                    class="text-[13px] leading-relaxed font-medium text-gray-600 md:text-sm dark:text-gray-400">
-                                    Anh em report mạnh tay vào để nó bay màu luôn nhé. Cảm ơn admin đã cập nhật
-                                    thông tin kịp thời.
-                                </p>
                             </div>
                         </div>
+                        @empty
+                        {{-- Empty state --}}
+                        <div class="py-10 text-center" id="empty-comment-state">
+                            <div
+                                class="bg-cs_blue/5 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl">
+                                <i class="fa-regular fa-comments text-cs_blue text-xl opacity-40"></i>
+                            </div>
+                            <p class="text-sm font-bold text-gray-400">Chưa có bình luận nào</p>
+                            <p class="mt-1 text-[11px] text-gray-400">Hãy là người đầu tiên chia sẻ thông tin!</p>
+                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -572,7 +734,7 @@
             </div>
         </div>
 
-        <!-- List Row Layout (Inspired by Home) -->
+        <!-- List Row Layout -->
         <section>
             <div
                 class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800">
@@ -650,7 +812,6 @@
                     Chưa có báo cáo nào khác.
                 </div>
                 @endforelse
-
             </div>
         </section>
     </div>
@@ -754,6 +915,30 @@
         font-weight: 600;
         letter-spacing: 2px;
     }
+
+    @keyframes fadeSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(12px);
+        }
+    }
 </style>
 
 <div id="lightbox">
@@ -769,7 +954,6 @@
         const lbImages = [];
         let lbIndex = 0;
 
-        // Thu thập tất cả ảnh bằng chứng
         $('.evidence-img').each(function() {
             lbImages.push($(this).data('src'));
         });
@@ -792,7 +976,6 @@
             $('#lb-prev, #lb-next').toggle(lbImages.length > 1);
         }
 
-        // Click ảnh → mở lightbox
         $(document).on('click', '.evidence-img', function() {
             openLightbox(parseInt($(this).data('index')));
         });
@@ -801,19 +984,16 @@
         $('#lightbox').on('click', function(e) {
             if ($(e.target).is('#lightbox')) closeLightbox();
         });
-
         $('#lb-prev').on('click', function(e) {
             e.stopPropagation();
             lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
             renderLightbox();
         });
-
         $('#lb-next').on('click', function(e) {
             e.stopPropagation();
             lbIndex = (lbIndex + 1) % lbImages.length;
             renderLightbox();
         });
-
         $(document).on('keydown', function(e) {
             if (!$('#lightbox').hasClass('active')) return;
             if (e.key === 'ArrowLeft') {
@@ -825,6 +1005,259 @@
                 renderLightbox();
             }
             if (e.key === 'Escape') closeLightbox();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        const STORE_URL = '{{ route("comment.store", $report->id) }}';
+        const UPDATE_URL = '/comments/';
+        const DELETE_URL = '/comments/';
+
+        // Char counter
+        $('#comment-content').on('input', function() {
+            const len = $(this).val().length;
+            $('#char-count').text(len + ' / 1000');
+            $('#char-count').toggleClass('text-red-400', len > 950).toggleClass('text-gray-400', len <=
+                950);
+        });
+
+        // Ẩn danh toggle
+        $('#is-anonymous').on('change', function() {
+            const isAnon = $(this).is(':checked');
+            if (isAnon) {
+                $('#name-input-wrapper').addClass('opacity-40 pointer-events-none');
+                $('#input-full-name').val('');
+                $('#anon-icon').removeClass('text-gray-300').addClass('text-cs_blue');
+                $('#anon-check-icon').removeClass('hidden');
+
+                // ← Thay thế toàn bộ avatar bằng img
+                $('#comment-avatar').replaceWith(`
+            <img id="comment-avatar"
+                src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                class="h-9 w-9 shrink-0 rounded-full object-cover shadow-sm md:h-10 md:w-10"
+                alt="Anonymous" />
+        `);
+            } else {
+                $('#name-input-wrapper').removeClass('opacity-40 pointer-events-none');
+                $('#anon-icon').addClass('text-gray-300').removeClass('text-cs_blue');
+                $('#anon-check-icon').addClass('hidden');
+
+                // ← Restore lại div gốc
+                $('#comment-avatar').replaceWith(`
+            <div id="comment-avatar"
+                class="from-cs_blue flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr to-blue-400 text-[10px] font-bold text-white shadow-sm md:h-10 md:w-10 md:text-xs">
+                <i class="fa-solid fa-user text-xs"></i>
+            </div>
+        `);
+            }
+        });
+
+        function showFormError(msg) {
+            $('#comment-error-text').text(msg);
+            $('#comment-error').removeClass('hidden');
+            setTimeout(() => $('#comment-error').addClass('hidden'), 4000);
+        }
+
+        function updateCommentCount(delta) {
+            const label = $('#comment-count-label');
+            const match = label.text().match(/\d+/);
+            const newCount = (match ? parseInt(match[0]) : 0) + delta;
+            label.text(newCount + ' bình luận');
+        }
+
+        function prependComment(c) {
+            $('#empty-comment-state').remove();
+
+            const avatarColors = [
+                'from-blue-500 to-blue-400', 'from-violet-500 to-purple-400',
+                'from-emerald-500 to-teal-400', 'from-orange-500 to-amber-400', 'from-rose-500 to-pink-400',
+            ];
+
+            const avatarHtml = c.is_anon ?
+                `<img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" class="h-9 w-9 shrink-0 rounded-full object-cover shadow-sm md:h-10 md:w-10" alt="Anonymous" />` :
+                `<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr ${avatarColors[c.id % avatarColors.length]} text-[10px] font-bold text-white shadow-sm md:h-10 md:w-10 md:text-xs">${c.initials}</div>`;
+
+            const anonBadge = c.is_anon ?
+                `<span class="rounded-md border border-gray-200 bg-gray-100 px-1.5 py-0.5 text-[8px] font-bold tracking-wider text-gray-400 uppercase dark:border-gray-700 dark:bg-slate-800"><i class="fa-solid fa-user-secret mr-0.5"></i>Ẩn danh</span>` :
+                '';
+
+            const html = `
+        <div class="comment-item group flex gap-3 md:gap-4" data-comment-id="${c.id}" style="animation:fadeSlideIn .3s ease">
+           ${avatarHtml}
+            <div class="flex-1 min-w-0">
+                <div class="rounded-2xl rounded-tl-none border border-gray-50 bg-gray-50/50 p-4 transition-colors group-hover:border-gray-100 dark:border-gray-800/50 dark:bg-slate-900/50">
+                    <div class="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-gray-800 dark:text-gray-100">${c.display_name}</span>
+                            ${anonBadge}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-bold tracking-tighter text-gray-400 uppercase">${c.created_at}</span>
+                            <div class="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                                <button class="edit-comment-btn hover:text-cs_blue flex h-6 w-6 items-center justify-center rounded-lg border border-gray-100 bg-white text-gray-400 text-[10px] transition-all hover:border-blue-100 hover:bg-blue-50 dark:border-gray-700 dark:bg-slate-800" data-comment-id="${c.id}" data-content="${c.content}" title="Chỉnh sửa"><i class="fa-solid fa-pen"></i></button>
+                                <button class="delete-comment-btn flex h-6 w-6 items-center justify-center rounded-lg border border-gray-100 bg-white text-gray-400 text-[10px] transition-all hover:border-red-100 hover:bg-red-50 hover:text-red-400 dark:border-gray-700 dark:bg-slate-800" data-comment-id="${c.id}" title="Xoá"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="comment-content text-[13px] leading-relaxed font-medium text-gray-600 md:text-sm dark:text-gray-400">${c.content}</p>
+                    <div class="edit-form mt-3 hidden">
+                        <textarea class="focus:ring-cs_blue focus:border-cs_blue w-full resize-none rounded-xl border border-gray-200 bg-white p-3 text-xs text-gray-600 outline-none transition-all focus:ring-1 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300" rows="3" maxlength="1000">${c.content}</textarea>
+                        <div class="mt-2 flex items-center justify-end gap-2">
+                            <button class="cancel-edit-btn cursor-pointer rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-[10px] font-bold text-gray-500 uppercase transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800">Huỷ</button>
+                            <button class="save-edit-btn bg-cs_blue cursor-pointer rounded-lg px-4 py-1.5 text-[10px] font-bold text-white uppercase transition-all hover:bg-blue-600" data-comment-id="${c.id}">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+            $('#comment-list').prepend(html);
+            updateCommentCount(1);
+        }
+
+        // Submit
+        $('#comment-form').on('submit', function(e) {
+            e.preventDefault();
+            const content = $('#comment-content').val().trim();
+            const fullName = $('#input-full-name').val().trim();
+            const isAnon = $('#is-anonymous').is(':checked');
+
+            if (!content) {
+                showFormError('Vui lòng nhập nội dung bình luận.');
+                return;
+            }
+            if (content.length < 10) {
+                showFormError('Bình luận cần ít nhất 10 ký tự.');
+                return;
+            }
+            if (!isAnon && !fullName) {
+                showFormError('Vui lòng nhập tên hiển thị hoặc chọn ẩn danh.');
+                return;
+            }
+
+            $('#submit-icon').removeClass('fa-paper-plane').addClass('fa-spinner fa-spin');
+            $('#submit-text').text('Đang gửi...');
+            $('#submit-comment-btn').prop('disabled', true);
+
+            $.ajax({
+                url: STORE_URL,
+                method: 'POST',
+                data: $(this).serialize(),
+                success(res) {
+                    prependComment(res.comment);
+                    $('#comment-content').val('');
+                    $('#input-full-name').val('');
+                    $('#is-anonymous').prop('checked', false).trigger('change');
+                    $('#char-count').text('0 / 1000');
+                    $('#comment-error').addClass('hidden');
+                },
+                error(xhr) {
+                    const data = xhr.responseJSON;
+                    if (data?.errors?.general) showFormError(data.errors.general[0]);
+                    else if (data?.errors) showFormError(data.errors[Object.keys(data.errors)[0]][
+                        0
+                    ]);
+                    else showFormError('Có lỗi xảy ra, vui lòng thử lại.');
+                },
+                complete() {
+                    $('#submit-icon').removeClass('fa-spinner fa-spin').addClass('fa-paper-plane');
+                    $('#submit-text').text('Gửi bình luận');
+                    $('#submit-comment-btn').prop('disabled', false);
+                }
+            });
+        });
+
+        // Edit — mở
+        $(document).on('click', '.edit-comment-btn', function() {
+            const $item = $(this).closest('.comment-item');
+            $item.find('.comment-content').addClass('hidden');
+            $item.find('.edit-form').removeClass('hidden');
+        });
+
+        // Edit — huỷ
+        $(document).on('click', '.cancel-edit-btn', function() {
+            const $item = $(this).closest('.comment-item');
+            $item.find('.comment-content').removeClass('hidden');
+            $item.find('.edit-form').addClass('hidden');
+        });
+
+        // Edit — lưu
+        $(document).on('click', '.save-edit-btn', function() {
+            const $btn = $(this);
+            const commentId = $btn.data('comment-id');
+            const $item = $btn.closest('.comment-item');
+            const newContent = $item.find('.edit-form textarea').val().trim();
+
+            if (!newContent || newContent.length < 10) {
+                alert('Bình luận cần ít nhất 10 ký tự.');
+                return;
+            }
+
+            $btn.text('Đang lưu...').prop('disabled', true);
+            $.ajax({
+                url: UPDATE_URL + commentId,
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    _method: 'PATCH',
+                    content: newContent
+                },
+                success(res) {
+                    $item.find('.comment-content').text(res.content).removeClass('hidden');
+                    $item.find('.edit-form').addClass('hidden').find('textarea').val(res.content);
+                },
+                error(xhr) {
+                    alert(xhr.responseJSON?.errors?.general?.[0] ??
+                        'Không thể chỉnh sửa. Có thể đã quá 15 phút.');
+                },
+                complete() {
+                    $btn.text('Lưu thay đổi').prop('disabled', false);
+                }
+            });
+        });
+
+        // Delete
+        $(document).on('click', '.delete-comment-btn', function() {
+            if (!confirm('Bạn có chắc muốn xoá bình luận này không?')) return;
+
+            const $btn = $(this);
+            const commentId = $btn.data('comment-id');
+            const $item = $btn.closest('.comment-item');
+
+            $btn.html('<i class="fa-solid fa-spinner fa-spin"></i>').prop('disabled', true);
+            $.ajax({
+                url: DELETE_URL + commentId,
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    _method: 'DELETE'
+                },
+                success() {
+                    $item.css('animation', 'fadeOut .25s ease forwards');
+                    setTimeout(() => {
+                        $item.remove();
+                        updateCommentCount(-1);
+                        if ($('#comment-list .comment-item').length === 0) {
+                            $('#comment-list').html(`
+                        <div class="py-10 text-center" id="empty-comment-state">
+                            <div class="bg-cs_blue/5 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl">
+                                <i class="fa-regular fa-comments text-cs_blue text-xl opacity-40"></i>
+                            </div>
+                            <p class="text-sm font-bold text-gray-400">Chưa có bình luận nào</p>
+                            <p class="mt-1 text-[11px] text-gray-400">Hãy là người đầu tiên chia sẻ thông tin!</p>
+                        </div>`);
+                        }
+                    }, 280);
+                },
+                error(xhr) {
+                    alert(xhr.responseJSON?.errors?.general?.[0] ??
+                        'Không thể xoá. Có thể đã quá 15 phút.');
+                    $btn.html('<i class="fa-solid fa-trash"></i>').prop('disabled', false);
+                }
+            });
         });
     });
 </script>

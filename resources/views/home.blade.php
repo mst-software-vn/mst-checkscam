@@ -378,7 +378,6 @@
                         @foreach($topWeeklyReports as $index => $item)
                         <a href="/{{ $item->slug }}"
                             class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50">
-                            <!-- Đối tượng & Ngày -->
                             <div class="flex w-full items-center gap-3 sm:w-4/12">
                                 <div
                                     class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-xs transition-transform duration-300 dark:bg-red-900/20">
@@ -396,7 +395,6 @@
                                 </div>
                             </div>
 
-                            <!-- Thông tin định danh -->
                             <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
                                 <div class="flex flex-col">
                                     <span
@@ -408,9 +406,8 @@
                                 </div>
                             </div>
 
-                            <!-- Chỉ số tín nhiệm (Stats) -->
-                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                <div class="flex items-center gap-6">
+                            <div class="w-full border-gray-100 sm:w-4/12 sm:border-l sm:px-4 dark:border-gray-800">
+                                <div class="flex items-center justify-between sm:justify-start sm:gap-4 md:gap-6">
                                     <div class="flex flex-col">
                                         <span
                                             class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
@@ -418,13 +415,23 @@
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
                                             <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ number_format($item->views) }}
+                                            {{ str_pad($item->total_views, 2, '0', STR_PAD_LEFT) }}
                                         </span>
                                     </div>
                                     <div class="flex flex-col">
                                         <span
                                             class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Bài cảnh báo
+                                            Lượt tra cứu
+                                        </span>
+                                        <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
+                                            {{ str_pad($item->total_searches, 2, '0', STR_PAD_LEFT) }}
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
+                                            Bài tố cáo
                                         </span>
                                         <span class="text-cs_red text-xs font-bold">
                                             <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
@@ -434,8 +441,7 @@
                                 </div>
                             </div>
 
-                            <!-- Hành động -->
-                            <div class="w-full text-right sm:w-2/12">
+                            <div class="w-full text-right sm:w-1/12">
                                 <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20">
                                     Chi tiết

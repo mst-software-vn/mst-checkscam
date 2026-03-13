@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\AdminReportController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
@@ -119,5 +119,13 @@ Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 Route::get('/search/autocomplete', [SearchController::class, 'autoComplete'])->name('search.autocomplete');
 Route::post('/search/clear-history', [SearchController::class, 'clearHistory'])->name('search.clearHistory');
 
-// Luôn nằm ở cuối (Hiển thị chi tiết Report theo Slug)
+Route::post('/reports/{reportId}/comments', [CommentController::class, 'store'])
+    ->name('comment.store');
+
+Route::patch('/comments/{id}', [CommentController::class, 'update'])
+    ->name('comment.update');
+
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])
+    ->name('comment.destroy');
+
 Route::get('/{slug}', [App\Http\Controllers\ReportController::class, 'show'])->name('scammer.show');

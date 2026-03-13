@@ -11,13 +11,18 @@ if (! function_exists('getTopWeeklyReports')) {
             ->where('created_at', '>=', now()->subDays(7))
             ->select(
                 'target_id',
-                DB::raw('MAX(target_name) as target_name'),
-                DB::raw('MAX(type) as type'),
-                DB::raw('SUM(view_count) as view_count'),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(slug ORDER BY (view_count + search_count) DESC), ',', 1) as slug"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(target_name ORDER BY (view_count + search_count) DESC), ',', 1) as target_name"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(type ORDER BY (view_count + search_count) DESC), ',', 1) as type"),
+
+                DB::raw('SUM(view_count) as total_views'),
+                DB::raw('SUM(search_count) as total_searches'),
                 DB::raw('COUNT(*) as report_count'),
+
+                DB::raw('(SUM(view_count) + SUM(search_count)) as heat_index')
             )
             ->groupBy('target_id')
-            ->orderByDesc('report_count')
+            ->orderByDesc('heat_index')
             ->limit(7)
             ->get();
     }

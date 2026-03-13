@@ -120,6 +120,7 @@ class ReportController extends Controller
             ->limit(3)
             ->get();
 
+        $comments = $report->comments()->latest()->get();
         $stats = [
             'total_scammers' => Report::where('status', 'approved')->count(DB::raw('DISTINCT target_id')),
             'total_comments' => DB::table('comments')->count(),
@@ -132,7 +133,8 @@ class ReportController extends Controller
             'totalSearchCount',
             'relatedReports',
             'latestReports',
-            'stats'
+            'stats',
+            'comments'
         ));
     }
 }
