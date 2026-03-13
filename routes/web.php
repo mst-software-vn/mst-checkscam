@@ -54,6 +54,58 @@ Route::get('/giai-quyet-khieu-nai', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Reports
+        Route::get('/reports', function () {
+            return view('admin.reports.index');
+        })->name('reports.index');
+        Route::get('/reports/{id}', function ($id) {
+            return view('admin.reports.detail', ['id' => $id]);
+        })->name('reports.detail');
+
+        // Scam Records
+        Route::get('/scam-records', function () {
+            return view('admin.scam-records.index');
+        })->name('scam-records.index');
+
+        // Insurances
+        Route::get('/insurances', function () {
+            return view('admin.insurances.index');
+        })->name('insurances.index');
+        Route::get('/insurances/create', function () {
+            return view('admin.insurances.create');
+        })->name('insurances.create');
+
+        // Posts
+        Route::get('/posts', function () {
+            return view('admin.posts.index');
+        })->name('posts.index');
+        Route::get('/posts/create', function () {
+            return view('admin.posts.create');
+        })->name('posts.create');
+
+        // Comments
+        Route::get('/comments', function () {
+            return view('admin.comments.index');
+        })->name('comments.index');
+
+        // Search Analytics
+        Route::get('/search-analytics', function () {
+            return view('admin.search-analytics.index');
+        })->name('search-analytics.index');
+
+        // Users
+        Route::get('/users', function () {
+            return view('admin.users.index');
+        })->name('users.index');
+        Route::get('/users/create', function () {
+            return view('admin.users.create');
+        })->name('users.create');
+
+        // Settings
+        Route::get('/settings', function () {
+            return view('admin.settings.index');
+        })->name('settings.index');
     });
 
     Route::name('auth.')->group(function () {

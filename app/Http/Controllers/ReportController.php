@@ -71,7 +71,6 @@ class ReportController extends Controller
             'slug'             => $slug,
         ]);
 
-        // ← Trả JSON redirect cho AJAX, redirect thường cho non-AJAX
         if ($request->ajax()) {
             return response()->json(['redirect' => route('home')]);
         }
