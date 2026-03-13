@@ -180,15 +180,15 @@
                             }
 
                             const nameHTML = item.target_name ?
-                                `<span class="text-[11px] text-gray-400 dark:text-gray-500 ml-1">— ${item.target_name}</span>` :
+                                `<span class="text-[12px] text-gray-400 dark:text-gray-500 ml-1">— ${item.target_name}</span>` :
                                 '';
 
                             const $li = $('<li>', {
-                                class: 'flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors group',
+                                class: 'flex items-center gap-3 px-7 py-5 hover:bg-gray-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors group',
                                 html: `
                                 <i class="fa-solid fa-magnifying-glass text-gray-300 dark:text-gray-600 text-xs group-hover:text-gray-400 transition-colors"></i>
                                 <div class="flex items-center gap-2 min-w-0 flex-1">
-                                    <span class="font-bold text-sm text-gray-800 dark:text-gray-200 truncate">${item.value}</span>
+                                    <span class="font-bold text-[14px] text-gray-800 dark:text-gray-200 truncate">${item.value}</span>
                                     ${nameHTML}
                                 </div>
                                 <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded shrink-0 ${typeColor}">${typeLabel}</span>
