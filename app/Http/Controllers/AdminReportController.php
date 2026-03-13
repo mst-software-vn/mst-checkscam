@@ -7,9 +7,26 @@ use Illuminate\Http\Request;
 
 class AdminReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::latest()->paginate(10);
+        $query = Report::latest();
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('target_id', 'like', '%' . $request->search . '%')
+                    ->orWhere('target_name', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $reports = $query->paginate(15);
 
         return view('admin.reports.index', compact('reports'));
     }
@@ -18,7 +35,17 @@ class AdminReportController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        return view('admin.reports.show', compact('report'));
+        $reportsCount = Report::where('target_id', $report->target_id)
+            ->where('status', 'approved')
+            ->count();
+
+        $relatedReports = Report::where('target_id', $report->target_id)
+            ->where('id', '!=', $report->id)
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('admin.reports.detail', compact('report', 'reportsCount', 'relatedReports'));
     }
 
     public function approve(string $id)
