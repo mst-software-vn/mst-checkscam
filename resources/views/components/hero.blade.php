@@ -195,9 +195,14 @@
             clearTimeout(timeoutId);
             const query = $(this).val();
 
+            if (query.length < 2) {
+                $resultsObj.hide().empty();
+                return;
+            }
+
             timeoutId = setTimeout(() => {
                 fetchSuggestions(query);
-            }, 300);
+            }, 500);
         });
 
         $input.on('focus', function() {

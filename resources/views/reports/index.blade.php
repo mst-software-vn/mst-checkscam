@@ -1076,7 +1076,6 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     },
                     success: function(res) {
-                        // Giữ spinner thêm 1s cho mượt, rồi show modal
                         setTimeout(function() {
                             $btn.removeClass('btn-loading').html(origHtml);
                             const redirectUrl = res.redirect || '{{ route("home") }}';
