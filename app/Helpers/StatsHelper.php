@@ -13,7 +13,7 @@ if (! function_exists('getTopWeeklyReports')) {
                 'target_id',
                 DB::raw('MAX(target_name) as target_name'),
                 DB::raw('MAX(type) as type'),
-                DB::raw('SUM(view_count) as total_views'),
+                DB::raw('SUM(view_count) as view_count'),
                 DB::raw('COUNT(*) as report_count'),
             )
             ->groupBy('target_id')
@@ -51,6 +51,7 @@ if (! function_exists('getTopDailySearches')) {
                 'target_name' => $scamInfo->target_name ?? 'Chưa rõ thông tin',
                 'type' => $scamInfo->type ?? 'Từ khóa hệ thống',
                 'search_count' => $search->count,
+                'view_count' => $search->count,
                 'slug' => $scamInfo->slug ?? '#',
             ];
         });

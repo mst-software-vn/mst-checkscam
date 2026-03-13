@@ -44,6 +44,7 @@ class HomeController extends Controller
     private function getLatestReports()
     {
         return Report::where('status', 'approved')
+            ->withCount('comments')
             ->latest()
             ->limit(5)
             ->get();

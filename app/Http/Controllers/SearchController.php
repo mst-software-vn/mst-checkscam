@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
@@ -44,17 +43,18 @@ class SearchController extends Controller
                 })
                 ->orderByDesc('created_at');
 
-            // tăng search_count với target_id
             $matchedIds = (clone $dbQuery)->pluck('id');
-            if ($matchedIds->isNotEmpty()) {
+            $ip = $request->ip();
+            $searchCacheKey = 'search_' . md5($query) . '_' . $ip;
+
+            if ($matchedIds->isNotEmpty() && !Cache::has($searchCacheKey)) {
                 Report::whereIn('id', $matchedIds)->increment('search_count');
+                Cache::put($searchCacheKey, true, now()->addHours(24));
             }
 
             $results = $dbQuery->paginate(10)->withQueryString();
             $isFound = $results->total() > 0;
 
-            // ghi lại lịch sử tìm kiếm vào search_logs table
-            $ip = $request->ip();
             $alreadyLogged = SearchLog::where('search_query', $query)
                 ->where('ip_address', $ip)
                 ->where('created_at', '>=', now()->subMinute())
