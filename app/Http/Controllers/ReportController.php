@@ -89,7 +89,7 @@ class ReportController extends Controller
         $cacheKey = 'view_' . $report->id . '_' . request()->ip();
         if (!Cache::has($cacheKey)) {
             $report->incrementViewCount();
-            Cache::put($cacheKey, true, now()->addMinutes(15));
+            Cache::put($cacheKey, true, now()->addHours(24));
         }
 
         $displayReporterName = $report->is_anonymous ? 'Người dùng ẩn danh' : $report->reporter_name;

@@ -49,13 +49,12 @@ class SearchController extends Controller
 
             if ($matchedIds->isNotEmpty() && !Cache::has($searchCacheKey)) {
                 Report::whereIn('id', $matchedIds)->increment('search_count');
-                Cache::put($searchCacheKey, true, now()->addMinutes(15));
+                Cache::put($searchCacheKey, true, now()->addHours(24));
             }
 
             $results = $dbQuery->paginate(10)->withQueryString();
             $isFound = $results->total() > 0;
 
-            $ip = $request->ip();
             $alreadyLogged = SearchLog::where('search_query', $query)
                 ->where('ip_address', $ip)
                 ->where('created_at', '>=', now()->subMinute())
