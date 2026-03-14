@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
@@ -106,6 +107,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/settings', function () {
             return view('admin.settings.index');
         })->name('settings.index');
+
+        /**
+         * ------------------------------------------
+         * ---             Report                 ---
+         * ------------------------------------------
+         */
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/', [AdminReportController::class, 'index'])->name('index');
+            Route::get('/{id}', [AdminReportController::class, 'show'])->name('detail');
+            Route::post('/{id}/approve', [AdminReportController::class, 'approve'])->name('approve');
+            Route::post('/{id}/reject', [AdminReportController::class, 'reject'])->name('reject');
+            Route::put('/{id}', [AdminReportController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminReportController::class, 'destroy'])->name('destroy');
+        });
     });
 
     Route::name('auth.')->group(function () {
@@ -115,10 +130,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
+/**
+ * ------------------------------------------
+ * ---             Search                 ---
+ * ------------------------------------------
+ */
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 Route::get('/search/autocomplete', [SearchController::class, 'autoComplete'])->name('search.autocomplete');
 Route::post('/search/clear-history', [SearchController::class, 'clearHistory'])->name('search.clearHistory');
 
+/**
+ * ------------------------------------------
+ * ---             Comment                ---
+ * ------------------------------------------
+ */
 Route::post('/reports/{reportId}/comments', [CommentController::class, 'store'])
     ->name('comment.store');
 
@@ -128,4 +153,9 @@ Route::patch('/comments/{id}', [CommentController::class, 'update'])
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])
     ->name('comment.destroy');
 
+/**
+ * ------------------------------------------
+ * ---             Slug URL               ---
+ * ------------------------------------------
+ */
 Route::get('/{slug}', [App\Http\Controllers\ReportController::class, 'show'])->name('scammer.show');

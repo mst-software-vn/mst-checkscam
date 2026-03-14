@@ -26,6 +26,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'status' => 1,
         ]);
+        User::factory()->create([
+            'username' => 'maaitlunghau',
+            'email' => 'trunghau@mstsoftware.vn',
+            'password' => Hash::make('admin@123'),
+            'full_name' => 'Mai Trung Hậu',
+            'role' => 'admin',
+            'status' => 1,
+        ]);
 
         Report::factory(50)->create();
 
