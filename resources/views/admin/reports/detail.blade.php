@@ -83,16 +83,34 @@
                     <h5 class="card-title mt-4">Ảnh bằng chứng ({{ count($report->evidence_images ?? []) }})</h5>
                     @if (! empty($report->evidence_images))
                         <div class="row">
-                            @foreach ($report->evidence_images as $image)
+                            @foreach ($report->evidence_images as $index => $image)
                                 <div class="col-md-3 mb-3">
-                                    <a href="{{ asset("storage/" . $image) }}" target="_blank">
+                                    <div
+                                        style="
+                                            position: relative;
+                                            aspect-ratio: 1;
+                                            cursor: zoom-in;
+                                            overflow: hidden;
+                                            border-radius: 8px;
+                                            border: 1px solid #e2e8f0;
+                                        "
+                                    >
                                         <img
                                             src="{{ asset("storage/" . $image) }}"
-                                            class="img-fluid rounded border"
-                                            style="height: 120px; width: 100%; object-fit: cover"
+                                            class="admin-evidence-img"
+                                            data-src="{{ asset("storage/" . $image) }}"
+                                            data-index="{{ $index }}"
+                                            style="
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                                transition: opacity 0.2s;
+                                            "
+                                            onmouseover="this.style.opacity = '.85'"
+                                            onmouseout="this.style.opacity = '1'"
                                             alt="Bằng chứng"
                                         />
-                                    </a>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -299,6 +317,122 @@
         </div>
     </div>
 
+    {{-- ── Lightbox bằng chứng ────────────────────────────────────── --}}
+    <div
+        id="admin-lightbox"
+        style="
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+        "
+    >
+        <button
+            id="alb-close"
+            style="
+                position: absolute;
+                top: 18px;
+                right: 22px;
+                color: #fff;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.7;
+                background: none;
+                border: none;
+                line-height: 1;
+                transition: opacity 0.2s;
+            "
+            onmouseover="this.style.opacity = 1"
+            onmouseout="this.style.opacity = 0.7"
+        >
+            <i data-feather="x" style="width: 24px; height: 24px"></i>
+        </button>
+        <button
+            id="alb-prev"
+            style="
+                position: absolute;
+                top: 50%;
+                left: 16px;
+                transform: translateY(-50%);
+                color: #fff;
+                cursor: pointer;
+                opacity: 0.6;
+                background: rgba(255, 255, 255, 0.08);
+                border: none;
+                border-radius: 50%;
+                width: 46px;
+                height: 46px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+            "
+            onmouseover="
+                this.style.opacity = 1;
+                this.style.background = 'rgba(255,255,255,.18)';
+            "
+            onmouseout="
+                this.style.opacity = 0.6;
+                this.style.background = 'rgba(255,255,255,.08)';
+            "
+        >
+            <i data-feather="chevron-left" style="width: 26px; height: 26px"></i>
+        </button>
+        <img
+            id="alb-img"
+            src=""
+            alt="evidence"
+            style="max-width: 90vw; max-height: 88vh; border-radius: 10px; object-fit: contain; user-select: none"
+        />
+        <button
+            id="alb-next"
+            style="
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                color: #fff;
+                cursor: pointer;
+                opacity: 0.6;
+                background: rgba(255, 255, 255, 0.08);
+                border: none;
+                border-radius: 50%;
+                width: 46px;
+                height: 46px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+            "
+            onmouseover="
+                this.style.opacity = 1;
+                this.style.background = 'rgba(255,255,255,.18)';
+            "
+            onmouseout="
+                this.style.opacity = 0.6;
+                this.style.background = 'rgba(255,255,255,.08)';
+            "
+        >
+            <i data-feather="chevron-right" style="width: 26px; height: 26px"></i>
+        </button>
+        <span
+            id="alb-counter"
+            style="
+                position: absolute;
+                bottom: 18px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 2px;
+            "
+        ></span>
+    </div>
+
     {{-- ── Modal: Xác nhận Duyệt ──────────────────────────────────── --}}
     <div class="modal fade" id="modalApprove" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -416,7 +550,7 @@
                             </label>
                             <textarea
                                 name="rejection_reason"
-                                class="form-control @error(" rejection_reason") is-invalid@enderror"
+                                class="form-control @error("rejection_reason") is-invalid @enderror"
                                 rows="3"
                                 placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
                                 style="resize: none; font-size: 13px"
@@ -516,7 +650,75 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Config: mỗi button submit trong modal → spinner + delay trước khi submit
+        // ── Lightbox bằng chứng ──
+        const albImages = [];
+        let albIndex = 0;
+        const lb = document.getElementById('admin-lightbox');
+
+        document.querySelectorAll('.admin-evidence-img').forEach(function (img) {
+            albImages.push(img.getAttribute('data-src'));
+        });
+
+        function openAlb(index) {
+            albIndex = index;
+            renderAlb();
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            feather.replace();
+        }
+
+        function closeAlb() {
+            lb.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function renderAlb() {
+            document.getElementById('alb-img').src = albImages[albIndex];
+            document.getElementById('alb-counter').textContent = albIndex + 1 + ' / ' + albImages.length;
+            const showNav = albImages.length > 1;
+            document.getElementById('alb-prev').style.display = showNav ? 'flex' : 'none';
+            document.getElementById('alb-next').style.display = showNav ? 'flex' : 'none';
+        }
+
+        document.querySelectorAll('.admin-evidence-img').forEach(function (img) {
+            img.addEventListener('click', function () {
+                openAlb(parseInt(this.getAttribute('data-index')));
+            });
+        });
+
+        document.getElementById('alb-close').addEventListener('click', closeAlb);
+
+        lb.addEventListener('click', function (e) {
+            if (e.target === lb) closeAlb();
+        });
+
+        document.getElementById('alb-prev').addEventListener('click', function (e) {
+            e.stopPropagation();
+            albIndex = (albIndex - 1 + albImages.length) % albImages.length;
+            renderAlb();
+        });
+
+        document.getElementById('alb-next').addEventListener('click', function (e) {
+            e.stopPropagation();
+            albIndex = (albIndex + 1) % albImages.length;
+            renderAlb();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (lb.style.display !== 'flex') return;
+            if (e.key === 'ArrowLeft') {
+                albIndex = (albIndex - 1 + albImages.length) % albImages.length;
+                renderAlb();
+            }
+            if (e.key === 'ArrowRight') {
+                albIndex = (albIndex + 1) % albImages.length;
+                renderAlb();
+            }
+            if (e.key === 'Escape') closeAlb();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
         const modalForms = [
             {
                 btnSelector: '#modalApprove button[type="submit"]',
