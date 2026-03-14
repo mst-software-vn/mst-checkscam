@@ -108,7 +108,7 @@
                                 <label>Họ tên</label>
                                 <p class="mb-0">
                                     <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : $report->reporter_name ?? "—" }}
+                                        {{ $report->reporter_name }}
                                     </strong>
                                 </p>
                             </div>
@@ -118,7 +118,7 @@
                                 <label>Liên hệ</label>
                                 <p class="mb-0">
                                     <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : ($report->reporter_contact ?: "Không cung cấp") }}
+                                        {{ $report->reporter_contact }}
                                     </strong>
                                 </p>
                             </div>
@@ -416,12 +416,12 @@
                             </label>
                             <textarea
                                 name="rejection_reason"
-                                class="form-control @error("rejection_reason") is-invalid @enderror"
+                                class="form-control @error(" rejection_reason") is-invalid@enderror"
                                 rows="3"
                                 placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
                                 style="resize: none; font-size: 13px"
                             >
-{{ old("rejection_reason") }}</textarea
+                        {{ old("rejection_reason") }}</textarea
                             >
                             @error("rejection_reason")
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -513,3 +513,49 @@
         </script>
     @endif
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Config: mỗi button submit trong modal → spinner + delay trước khi submit
+        const modalForms = [
+            {
+                btnSelector: '#modalApprove button[type="submit"]',
+                loadingText: 'Đang duyệt...',
+                delay: 800,
+            },
+            {
+                btnSelector: '#modalReject button[type="submit"]',
+                loadingText: 'Đang từ chối...',
+                delay: 800,
+            },
+            {
+                btnSelector: '#modalDestroy button[type="submit"]',
+                loadingText: 'Đang xóa...',
+                delay: 1000,
+            },
+        ];
+
+        modalForms.forEach(({ btnSelector, loadingText, delay }) => {
+            const btn = document.querySelector(btnSelector);
+            if (!btn) return;
+
+            const form = btn.closest('form');
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Đổi nội dung button sang spinner
+                btn.disabled = true;
+                btn.innerHTML = `
+                    <span class="spinner-border spinner-border-sm me-2"
+                          role="status" aria-hidden="true"></span>
+                    ${loadingText}
+                `;
+
+                // Submit thật sau delay
+                setTimeout(() => form.submit(), delay);
+            });
+        });
+    });
+</script>
