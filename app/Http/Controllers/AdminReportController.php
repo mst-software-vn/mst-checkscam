@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModerationLog;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -14,15 +15,13 @@ class AdminReportController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
-
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
-
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
-                $q->where('target_id', 'like', '%' . $request->search . '%')
-                    ->orWhere('target_name', 'like', '%' . $request->search . '%');
+                $q->where('target_id', 'like', '%'.$request->search.'%')
+                    ->orWhere('target_name', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -45,16 +44,37 @@ class AdminReportController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.reports.detail', compact('report', 'reportsCount', 'relatedReports'));
+        $moderationLogs = $report->moderationLogs()->with('admin')->get();
+
+        return view('admin.reports.detail', compact(
+            'report',
+            'reportsCount',
+            'relatedReports',
+            'moderationLogs',
+        ));
     }
 
     public function approve(string $id)
     {
         $report = Report::findOrFail($id);
+
+        // Chặn nếu đã được xử lý
+        if ($report->status !== 'pending') {
+            return back()->with('error', 'Báo cáo này đã được xử lý rồi.');
+        }
+
         $report->update([
             'status' => 'approved',
-            'moderator_id' => auth()->id() ?? null,
-            'rejection_reason' => null
+            'moderator_id' => auth()->id(),
+            'rejection_reason' => null,
+        ]);
+
+        // Ghi log
+        ModerationLog::create([
+            'report_id' => $report->id,
+            'admin_id' => auth()->id(),
+            'action' => 'approved',
+            'reason' => null,
         ]);
 
         return back()->with('success', 'Báo cáo đã được duyệt thành công.');
@@ -62,17 +82,31 @@ class AdminReportController extends Controller
 
     public function reject(Request $request, string $id)
     {
+        $report = Report::findOrFail($id);
+
+        // Chặn nếu đã được xử lý
+        if ($report->status !== 'pending') {
+            return back()->with('error', 'Báo cáo này đã được xử lý rồi.');
+        }
+
         $validated = $request->validate([
-            'rejection_reason' => 'required|string|max:500'
+            'rejection_reason' => 'required|string|max:500',
         ], [
-            'rejection_reason.required' => 'Vui lòng cung cấp lý do từ chối để người dùng biết.'
+            'rejection_reason.required' => 'Vui lòng cung cấp lý do từ chối.',
         ]);
 
-        $report = Report::findOrFail($id);
         $report->update([
             'status' => 'rejected',
-            'moderator_id' => auth()->id() ?? null,
-            'rejection_reason' => $validated['rejection_reason']
+            'moderator_id' => auth()->id(),
+            'rejection_reason' => $validated['rejection_reason'],
+        ]);
+
+        // Ghi log
+        ModerationLog::create([
+            'report_id' => $report->id,
+            'admin_id' => auth()->id(),
+            'action' => 'rejected',
+            'reason' => $validated['rejection_reason'],
         ]);
 
         return back()->with('success', 'Báo cáo đã bị từ chối.');
@@ -97,12 +131,12 @@ class AdminReportController extends Controller
             'evidence_images' => 'nullable|array',
             'evidence_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'remove_images' => 'nullable|array',
-            'remove_images.*' => 'string'
+            'remove_images.*' => 'string',
         ]);
 
         $currentImages = $report->evidence_images ?? [];
 
-        if (!empty($validated['remove_images'])) {
+        if (! empty($validated['remove_images'])) {
             deleteMultipleImages($validated['remove_images']);
             $currentImages = array_diff($currentImages, $validated['remove_images']);
         }
@@ -137,12 +171,13 @@ class AdminReportController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        if (!empty($report->evidence_images)) {
+        if (! empty($report->evidence_images)) {
             deleteMultipleImages($report->evidence_images);
         }
 
         $report->delete();
 
-        return redirect()->route('admin.reports.index')->with('success', 'Đã xóa báo cáo và dọn dẹp tệp tin liên quan khỏi hệ thống hoàn toàn.');
+        return redirect()->route('admin.reports.index')
+            ->with('success', 'Đã xóa báo cáo khỏi hệ thống.');
     }
 }
