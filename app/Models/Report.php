@@ -55,11 +55,6 @@ class Report extends Model
         return $this->hasMany(Comment::class, 'report_id')->latest();
     }
 
-    public function moderationLogs()
-    {
-        return $this->hasMany(ModerationLog::class)->latest();
-    }
-
     /**
      * ------------------------------------------------------
      * Helper Methods

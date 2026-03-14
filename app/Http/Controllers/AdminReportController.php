@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ModerationLog;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -44,13 +43,10 @@ class AdminReportController extends Controller
             ->limit(5)
             ->get();
 
-        $moderationLogs = $report->moderationLogs()->with('admin')->get();
-
         return view('admin.reports.detail', compact(
             'report',
             'reportsCount',
             'relatedReports',
-            'moderationLogs',
         ));
     }
 
@@ -58,7 +54,6 @@ class AdminReportController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        // Chặn nếu đã được xử lý
         if ($report->status !== 'pending') {
             return back()->with('error', 'Báo cáo này đã được xử lý rồi.');
         }
@@ -69,14 +64,6 @@ class AdminReportController extends Controller
             'rejection_reason' => null,
         ]);
 
-        // Ghi log
-        ModerationLog::create([
-            'report_id' => $report->id,
-            'admin_id' => auth()->id(),
-            'action' => 'approved',
-            'reason' => null,
-        ]);
-
         return back()->with('success', 'Báo cáo đã được duyệt thành công.');
     }
 
@@ -84,7 +71,6 @@ class AdminReportController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        // Chặn nếu đã được xử lý
         if ($report->status !== 'pending') {
             return back()->with('error', 'Báo cáo này đã được xử lý rồi.');
         }
@@ -99,14 +85,6 @@ class AdminReportController extends Controller
             'status' => 'rejected',
             'moderator_id' => auth()->id(),
             'rejection_reason' => $validated['rejection_reason'],
-        ]);
-
-        // Ghi log
-        ModerationLog::create([
-            'report_id' => $report->id,
-            'admin_id' => auth()->id(),
-            'action' => 'rejected',
-            'reason' => $validated['rejection_reason'],
         ]);
 
         return back()->with('success', 'Báo cáo đã bị từ chối.');

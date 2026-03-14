@@ -23,7 +23,7 @@
     @endif
 
     <div class="row">
-        {{-- Cột trái: Nội dung báo cáo --}}
+        {{-- Cột trái --}}
         <div class="col-lg" style="flex: 0 0 62.5%; max-width: 62.5%">
             <div class="card">
                 <div class="card-body">
@@ -126,7 +126,7 @@
                                 <label>Họ tên</label>
                                 <p class="mb-0">
                                     <strong>
-                                        {{ $report->reporter_name }}
+                                        {{ $report->is_anonymous ? "— Ẩn danh —" : $report->reporter_name ?? "—" }}
                                     </strong>
                                 </p>
                             </div>
@@ -136,7 +136,7 @@
                                 <label>Liên hệ</label>
                                 <p class="mb-0">
                                     <strong>
-                                        {{ $report->reporter_contact }}
+                                        {{ $report->is_anonymous ? "— Ẩn danh —" : ($report->reporter_contact ?: "Không cung cấp") }}
                                     </strong>
                                 </p>
                             </div>
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        {{-- Cột phải: Thao tác --}}
+        {{-- Cột phải --}}
         <div class="col-lg" style="flex: 0 0 37.5%; max-width: 37.5%">
             <div class="card">
                 <div class="card-body">
@@ -161,7 +161,8 @@
                         @endif
                     </p>
 
-                    @if ($report->rejection_reason)
+                    {{-- Chỉ hiện lý do khi bị từ chối --}}
+                    @if ($report->status === "rejected" && $report->rejection_reason)
                         <div class="alert alert-warning p-2">
                             <small>
                                 <strong>Lý do từ chối:</strong>
@@ -175,7 +176,6 @@
                     <h5 class="card-title">Thao tác kiểm duyệt</h5>
 
                     @if ($report->status === "pending")
-                        {{-- Nút mở modal Duyệt --}}
                         <button
                             type="button"
                             class="btn btn-success mb-3 w-100 py-2"
@@ -185,8 +185,6 @@
                             <i data-feather="check" class="me-1"></i>
                             Duyệt báo cáo
                         </button>
-
-                        {{-- Nút mở modal Từ chối --}}
                         <button
                             type="button"
                             class="btn btn-cancel mb-3 w-100 py-2"
@@ -207,7 +205,6 @@
 
                     <hr />
 
-                    {{-- Xóa — luôn hiển thị --}}
                     <button
                         type="button"
                         class="btn btn-danger w-100"
@@ -220,58 +217,12 @@
                 </div>
             </div>
 
-            {{-- Lịch sử kiểm duyệt --}}
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Lịch sử kiểm duyệt</h5>
-
-                    @if ($moderationLogs->isNotEmpty())
-                        <div class="table-responsive">
-                            <table class="table-sm table">
-                                <thead>
-                                    <tr>
-                                        <th>Admin</th>
-                                        <th>Hành động</th>
-                                        <th>Lý do</th>
-                                        <th>Thời gian</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($moderationLogs as $log)
-                                        <tr>
-                                            <td>{{ $log->admin->name ?? "—" }}</td>
-                                            <td>
-                                                @if ($log->action === "approved")
-                                                    <span class="badges bg-lightgreen">Đã duyệt</span>
-                                                @else
-                                                    <span class="badges bg-lightred">Từ chối</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($log->action === "rejected" && $log->reason)
-                                                    <small class="text-muted">{{ $log->reason }}</small>
-                                                @else
-                                                    <span class="text-muted">—</span>
-                                                @endif
-                                            </td>
-                                            <td><small>{{ $log->created_at->format("d/m/Y H:i") }}</small></td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <p class="text-muted mb-0">Chưa có lịch sử kiểm duyệt.</p>
-                    @endif
-                </div>
-            </div>
-
             {{-- Lịch sử đối tượng --}}
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Lịch sử đối tượng</h5>
                     <p class="text-muted mb-3">
-                        <strong>{{ $report->target_name }}</strong>
+                        <strong>{{ $report->target_id }}</strong>
                         đã bị báo cáo
                         <strong class="text-danger">{{ $reportsCount }} lần</strong>
                     </p>
@@ -337,7 +288,6 @@
                 top: 18px;
                 right: 22px;
                 color: #fff;
-                font-size: 24px;
                 cursor: pointer;
                 opacity: 0.7;
                 background: none;
@@ -455,7 +405,6 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
                 <div class="modal-body px-4 py-3">
                     <div class="rounded-3 mb-3 p-3" style="background: #f8fafc; border: 1px solid #e2e8f0">
                         <div class="d-flex justify-content-between mb-2">
@@ -482,7 +431,6 @@
                         . Hãy chắc chắn bạn đã xem xét kỹ nội dung và bằng chứng.
                     </p>
                 </div>
-
                 <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
                     <button type="button" class="btn btn-cancel flex-fill" data-bs-dismiss="modal">Huỷ bỏ</button>
                     <form action="{{ route("admin.reports.approve", $report->id) }}" method="POST" class="flex-fill">
@@ -519,7 +467,6 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
                 <form action="{{ route("admin.reports.reject", $report->id) }}" method="POST">
                     @csrf
                     <div class="modal-body px-4 py-3">
@@ -542,7 +489,6 @@
                                 <small class="text-muted d-block mt-1">{{ $report->target_name }}</small>
                             @endif
                         </div>
-
                         <div class="form-group mb-0">
                             <label class="fw-bold mb-1" style="font-size: 13px">
                                 Lý do từ chối
@@ -555,16 +501,17 @@
                                 placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
                                 style="resize: none; font-size: 13px"
                             >
-                        {{ old("rejection_reason") }}</textarea
+{{ old("rejection_reason") }}</textarea
                             >
                             @error("rejection_reason")
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
 
-                            <small class="text-muted d-block mt-1">Lý do này sẽ được lưu vào lịch sử kiểm duyệt.</small>
+                            <small class="text-muted d-block mt-1">
+                                Lý do sẽ hiển thị trên trang chi tiết báo cáo.
+                            </small>
                         </div>
                     </div>
-
                     <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
                         <button type="button" class="btn btn-cancel flex-fill" data-bs-dismiss="modal">Huỷ bỏ</button>
                         <button type="submit" class="btn btn-danger flex-fill">
@@ -599,7 +546,6 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
                 <div class="modal-body px-4 py-3">
                     <div class="rounded-3 mb-3 p-3" style="background: #f8fafc; border: 1px solid #e2e8f0">
                         <div class="d-flex justify-content-between align-items-center">
@@ -615,14 +561,11 @@
                     <p class="text-muted mb-0" style="font-size: 13px">
                         Toàn bộ dữ liệu bao gồm
                         <strong>ảnh bằng chứng</strong>
-                        và
-                        <strong>lịch sử kiểm duyệt</strong>
                         sẽ bị xóa vĩnh viễn. Hành động này
                         <strong class="text-danger">không thể hoàn tác</strong>
                         .
                     </p>
                 </div>
-
                 <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
                     <button type="button" class="btn btn-cancel flex-fill" data-bs-dismiss="modal">Huỷ bỏ</button>
                     <form action="{{ route("admin.reports.destroy", $report->id) }}" method="POST" class="flex-fill">
@@ -638,7 +581,6 @@
         </div>
     </div>
 
-    {{-- Auto-reopen modal Từ chối nếu có validation error --}}
     @if ($errors->has("rejection_reason"))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -650,7 +592,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // ── Lightbox bằng chứng ──
+        // ── Lightbox ──
         const albImages = [];
         let albIndex = 0;
         const lb = document.getElementById('admin-lightbox');
@@ -687,23 +629,19 @@
         });
 
         document.getElementById('alb-close').addEventListener('click', closeAlb);
-
         lb.addEventListener('click', function (e) {
             if (e.target === lb) closeAlb();
         });
-
         document.getElementById('alb-prev').addEventListener('click', function (e) {
             e.stopPropagation();
             albIndex = (albIndex - 1 + albImages.length) % albImages.length;
             renderAlb();
         });
-
         document.getElementById('alb-next').addEventListener('click', function (e) {
             e.stopPropagation();
             albIndex = (albIndex + 1) % albImages.length;
             renderAlb();
         });
-
         document.addEventListener('keydown', function (e) {
             if (lb.style.display !== 'flex') return;
             if (e.key === 'ArrowLeft') {
@@ -716,9 +654,8 @@
             }
             if (e.key === 'Escape') closeAlb();
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function () {
+        // ── Spinner trên button modal ──
         const modalForms = [
             {
                 btnSelector: '#modalApprove button[type="submit"]',
@@ -740,22 +677,12 @@
         modalForms.forEach(({ btnSelector, loadingText, delay }) => {
             const btn = document.querySelector(btnSelector);
             if (!btn) return;
-
             const form = btn.closest('form');
             if (!form) return;
-
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
-
-                // Đổi nội dung button sang spinner
                 btn.disabled = true;
-                btn.innerHTML = `
-                    <span class="spinner-border spinner-border-sm me-2"
-                          role="status" aria-hidden="true"></span>
-                    ${loadingText}
-                `;
-
-                // Submit thật sau delay
+                btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>${loadingText}`;
                 setTimeout(() => form.submit(), delay);
             });
         });
