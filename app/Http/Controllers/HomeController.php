@@ -23,12 +23,42 @@ class HomeController extends Controller
             ->unique()
             ->values();
 
+        // Initial load shows 8, subsequent loads show 20
+        $page = $request->input('page', 1);
+        if ($page == 1) {
+            $perPage = 8;
+            $offset = 0;
+        } else {
+            $perPage = 16;
+            $offset = 8 + ($page - 2) * 16;
+        }
+
+        $query = \App\Models\Comment::whereHas('report', function ($query) {
+            $query->where('status', 'approved');
+        })->with('report')->latest();
+
+        $totalCount = $query->count();
+        $items = $query->skip($offset)->take($perPage)->get();
+
+        $comments = new \Illuminate\Pagination\LengthAwarePaginator(
+            $items,
+            $totalCount,
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        if ($request->ajax()) {
+            return view('partials.comment-items', compact('comments'))->render();
+        }
+
         return view('home', compact(
             'stats',
             'latestReports',
             'topWeeklyReports',
             'topDailySearches',
             'recentSearches',
+            'comments',
         ));
     }
 

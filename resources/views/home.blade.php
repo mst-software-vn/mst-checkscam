@@ -645,57 +645,22 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
-                <?php
-                $comments = [
-                    ['user' => 'Lê Văn Tám', 'time' => '2 phút trước', 'content' => 'Thằng này vừa lừa mình 500k tiền cọc mua acc, mọi người cẩn thận nhé.', 'target' => '0981.234.xxx', 'color' => '3b82f6'],
-                    ['user' => 'Nguyễn Bích', 'time' => '15 phút trước', 'content' => 'Cảm ơn CheckScam, nhờ tra cứu mà mình không bị mất tiền cho đứa này.', 'target' => 'Vietcombank - 102...', 'color' => '10b981'],
-                    ['user' => 'Trần Quang', 'time' => '1 giờ trước', 'content' => 'Thấy nó đăng bài uy tín lắm mà check ra đầy vết đen. Sợ thật!', 'target' => 'fb.com/quang_scam', 'color' => 'f59e0b'],
-                    ['user' => 'Minh Anh', 'time' => '3 giờ trước', 'content' => 'Mọi người lưu ý số tài khoản này nhá, chuyên đi lừa đảo thẻ cào.', 'target' => '0342.999.xxx', 'color' => 'ef4444'],
-                    ['user' => 'Hoàng Nam', 'time' => '5 giờ trước', 'content' => 'Web quá hữu ích, nên có thêm nhiều người chung tay tố cáo.', 'target' => 'Cộng đồng CS', 'color' => '6366f1'],
-                    ['user' => 'Thu Thảo', 'time' => '8 giờ trước', 'content' => 'Mình đã gửi bằng chứng lên rồi, mong admin sớm duyệt để cảnh báo.', 'target' => 'Đang chờ duyệt', 'color' => 'ec4899'],
-                    ['user' => 'Thanh Ngân', 'time' => '12 giờ trước', 'content' => 'Mọi người cẩn thận với số tài khoản này nhé, chuyên đi lừa đảo thẻ cào.', 'target' => '0772.345.xxx', 'color' => '8b5cf6'],
-                    ['user' => 'Duy Mạnh', 'time' => '1 ngày trước', 'content' => 'Vừa check xong, xém tí thì chuyển khoản cho nó. May quá!', 'target' => 'Momo - 0941...', 'color' => '06b6d4'],
-                ];
-                foreach ($comments as $cmt) { ?>
-
-                    <div
-                        class="dark:bg-dark_card rounded-2xl border border-gray-100 bg-white p-5 shadow-xs dark:border-gray-800">
-                        <div class="mb-4 flex items-center gap-3">
-                            <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($cmt["user"]); ?>&background=<?php echo $cmt["color"]; ?>&color=fff&size=40"
-                                class="h-10 w-10 rounded-full border-2 border-gray-50 dark:border-gray-800" alt="User" />
-                            <div>
-                                <h4 class="text-sm font-bold text-gray-800 dark:text-gray-100">
-                                    <?php echo $cmt["user"]; ?>
-                                </h4>
-                                <span class="text-[10px] font-medium text-gray-400 dark:text-gray-500">
-                                    <?php echo $cmt["time"]; ?>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="mb-4 line-clamp-2 text-xs leading-relaxed text-gray-600 italic dark:text-gray-400">
-                            "<?php echo $cmt["content"]; ?>"
-                        </p>
-                        <div class="flex items-center justify-between border-t border-gray-50 pt-3 dark:border-gray-800">
-                            <span class="text-[10px] font-bold tracking-tighter text-gray-400 uppercase dark:text-gray-500">
-                                Đối tượng:
-                            </span>
-                            <span
-                                class="text-cs_red rounded bg-red-50 px-2 py-0.5 text-[10px] font-black dark:bg-red-900/20">
-                                <?php echo $cmt["target"]; ?>
-                            </span>
-                        </div>
-                    </div>
-
-                <?php } ?>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4" id="comments-container">
+                @include('partials.comment-items', ['comments' => $comments])
             </div>
 
-            <div class="mt-8 text-center">
-                <a href="#" class="text-cs_blue text-xs font-black tracking-widest uppercase hover:underline">
-                    Xem tất cả bình luận
-                    <i class="fa-solid fa-arrow-right ml-1"></i>
-                </a>
-            </div>
+            @if ($comments->hasMorePages())
+                <div class="mt-8 text-center" id="load-more-comments-container">
+                    <button
+                        id="btn-load-more-comments"
+                        data-next-page="{{ $comments->currentPage() + 1 }}"
+                        class="text-cs_blue cursor-pointer text-xs font-black tracking-widest uppercase hover:underline"
+                    >
+                        Xem thêm bình luận
+                        <i class="fa-solid fa-arrow-down-long ml-1"></i>
+                    </button>
+                </div>
+            @endif
         </section>
 
         <!-- Section: Nghị Định Thư Tín Nhiệm Số (Digital Trust Protocol) -->
@@ -968,4 +933,75 @@
     </div>
 </main>
 <x-notification />
+@push("scripts")
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function initLoadMoreComments() {
+                const btnLoadMore = document.getElementById('btn-load-more-comments');
+                if (!btnLoadMore) return;
+
+                btnLoadMore.addEventListener('click', function () {
+                    const btn = this;
+                    const nextPage = btn.getAttribute('data-next-page');
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('page', nextPage);
+
+                    btn.disabled = true;
+                    btn.innerHTML =
+                        '<span>Đang tải bình luận...</span> <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
+
+                    // Artificial delay for smooth UX
+                    setTimeout(() => {
+                        fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                            .then((response) => response.text())
+                            .then((html) => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+
+                                // Select all items in the partial - wait, the partial just returns the items
+                                // So html IS the list of items
+                                const commentsContainer = document.getElementById('comments-container');
+
+                                // Create a temporary div to parse the HTML string
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = html;
+
+                                // Append each comment
+                                while (tempDiv.firstChild) {
+                                    commentsContainer.appendChild(tempDiv.firstChild);
+                                }
+
+                                // Handle next page/remove button
+                                // We need to check if there's more pages in the newly fetched data
+                                // But the AJAX request only returns the partial items.
+                                // I should probably have the controller return JSON with html and hasMore info,
+                                // or just check if we received exactly 20 items.
+                                // Alternatively, I can return the button too in the partial if I want.
+
+                                // Let's keep it simple: assume if it returned something, we might have more.
+                                // Or better: I'll update the controller to return both.
+                                // Actually, I'll just check if the number of children in tempDiv is < 20.
+
+                                if (tempDiv.querySelectorAll('.dark\\:bg-dark_card').length < 16) {
+                                    document.getElementById('load-more-comments-container').remove();
+                                } else {
+                                    btn.setAttribute('data-next-page', parseInt(nextPage) + 1);
+                                    btn.disabled = false;
+                                    btn.innerHTML =
+                                        'Xem thêm bình luận <i class="fa-solid fa-arrow-down-long ml-1"></i>';
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Load more comments error:', error);
+                                btn.disabled = false;
+                                btn.innerHTML = 'Thử lại';
+                            });
+                    }, 800);
+                });
+            }
+
+            initLoadMoreComments();
+        });
+    </script>
+@endpush
 @endsection
