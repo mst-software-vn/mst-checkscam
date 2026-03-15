@@ -101,10 +101,14 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Ngày hết hạn</label>
+                                    <label>
+                                        Ngày hết hạn
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <input
                                         type="date"
                                         name="expired_at"
+                                        required
                                         class="form-control"
                                         value="{{ old("expired_at", isset($insurance) && $insurance->expired_at ? $insurance->expired_at->format("Y-m-d") : "") }}"
                                     />
@@ -123,10 +127,14 @@
                                 <div class="row align-items-end contact-row mb-3">
                                     <div class="col-lg-5">
                                         <div class="form-group mb-0">
-                                            <label>Nền tảng (VD: Facebook, Zalo, SĐT)</label>
+                                            <label>
+                                                Nền tảng (VD: Facebook, Zalo, SĐT)
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="contact_info[{{ $i }}][platform]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $contact["platform"] ?? "" }}"
                                             />
@@ -134,10 +142,14 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group mb-0">
-                                            <label>Giá trị (Link/Số)</label>
+                                            <label>
+                                                Giá trị (Link/Số)
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="contact_info[{{ $i }}][link]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $contact["link"] ?? "" }}"
                                             />
@@ -169,10 +181,14 @@
                                 <div class="row align-items-end payment-row mb-3">
                                     <div class="col-lg-4">
                                         <div class="form-group mb-0">
-                                            <label>Ngân hàng/Ví</label>
+                                            <label>
+                                                Ngân hàng/Ví
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="payment_accounts[{{ $i }}][bank]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $payment["bank"] ?? "" }}"
                                             />
@@ -180,10 +196,14 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-0">
-                                            <label>Số tài khoản</label>
+                                            <label>
+                                                Số tài khoản
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="payment_accounts[{{ $i }}][number]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $payment["number"] ?? "" }}"
                                             />
@@ -191,10 +211,14 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group mb-0">
-                                            <label>Chủ TK</label>
+                                            <label>
+                                                Chủ TK
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="payment_accounts[{{ $i }}][name]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $payment["name"] ?? "" }}"
                                             />
@@ -226,10 +250,14 @@
                                 <div class="row align-items-end service-row mb-3">
                                     <div class="col-lg-11">
                                         <div class="form-group mb-0">
-                                            <label>Tên dịch vụ</label>
+                                            <label>
+                                                Tên dịch vụ
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="services[{{ $i }}][title]"
+                                                required
                                                 class="form-control"
                                                 value="{{ $service["title"] ?? "" }}"
                                             />
@@ -276,38 +304,30 @@
                         >
                             <ul class="row">
                                 <li class="col-12 pt-3 text-center">
-                                    <a
-                                        href="{{ isset($insurance) && $insurance->avatar ? asset("storage/" . $insurance->avatar) : "#" }}"
-                                        id="lightboxLink"
-                                        target="_blank"
-                                        title="Click để xem ảnh lớn"
-                                    >
-                                        <img
-                                            src="{{ isset($insurance) && $insurance->avatar ? asset("storage/" . $insurance->avatar) : "" }}"
-                                            alt="avatar"
-                                            id="avatarPreview"
-                                            class="img-fluid rounded"
-                                            style="
-                                                max-height: 200px;
-                                                cursor: pointer;
-                                                border: 1px solid #ddd;
-                                                padding: 5px;
-                                            "
-                                        />
-                                    </a>
+                                    <img
+                                        src="{{ isset($insurance) && $insurance->avatar ? asset("storage/" . $insurance->avatar) : "" }}"
+                                        alt="avatar"
+                                        id="avatarPreview"
+                                        class="img-fluid rounded"
+                                        style="
+                                            max-height: 250px;
+                                            cursor: zoom-in;
+                                            border: 2px dashed #ff9f43;
+                                            padding: 5px;
+                                            transition: all 0.3s;
+                                        "
+                                        title="Click để phóng to ảnh"
+                                    />
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            Bấm vào ảnh trên để xem lớn. Bấm vào khu vực
+                                            <b>Tải lên</b>
+                                            bên trên nếu muốn thay đổi ảnh khác.
+                                        </small>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
-
-                        @if (! isset($insurance) || ! $insurance->avatar)
-                            <div class="product-list" id="defaultTextContainer">
-                                <ul class="row">
-                                    <li class="col-12 pt-3 text-center">
-                                        <h6>Mặc định sẽ lấy avatar từ tài khoản User nếu không upload.</h6>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                 </div>
 
@@ -401,28 +421,99 @@
                 }
             });
 
-            // --- Logic: Thumbnail Preview ---
+            // --- Logic: Lightbox for Avatar ---
+            const lbStyle = `
+                <style>
+                    #insurance-lightbox {
+                        display: none;
+                        position: fixed;
+                        inset: 0;
+                        z-index: 9999;
+                        background: rgba(0, 0, 0, .9);
+                        align-items: center;
+                        justify-content: center;
+                        cursor: zoom-out;
+                    }
+                    #insurance-lightbox.active { display: flex; }
+                    #insurance-lightbox img {
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        border-radius: 8px;
+                        box-shadow: 0 0 20px rgba(0,0,0,.5);
+                    }
+                    #insurance-lightbox .lb-close {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        color: #fff;
+                        font-size: 30px;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', lbStyle);
+
+            const lbHtml = `
+                <div id="insurance-lightbox">
+                    <button class="lb-close">&times;</button>
+                    <img src="" alt="preview" />
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', lbHtml);
+
+            const lb = document.getElementById('insurance-lightbox');
+            const lbImg = lb.querySelector('img');
+
+            document.getElementById('avatarPreview').addEventListener('click', function() {
+                lbImg.src = this.src;
+                lb.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            lb.addEventListener('click', function() {
+                lb.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // --- Logic: Thumbnail Preview & Persistence ---
             const avatarInput = document.getElementById('avatarInput');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const imgElem = document.getElementById('avatarPreview');
+            const storageKey = 'insurance_avatar_preview';
+
+            // Restore from session storage if validation failed
+            @if($errors->any())
+                const savedPreview = sessionStorage.getItem(storageKey);
+                if (savedPreview) {
+                    if (imgElem) imgElem.src = savedPreview;
+                    if (previewContainer) previewContainer.style.display = 'block';
+                }
+            @else
+                // Clear storage if no errors (fresh load)
+                sessionStorage.removeItem(storageKey);
+            @endif
+
             if (avatarInput) {
                 avatarInput.addEventListener('change', function (e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
                         reader.onload = function (e) {
-                            const previewContainer = document.getElementById('imagePreviewContainer');
-                            const defaultText = document.getElementById('defaultTextContainer');
-                            const imgElem = document.getElementById('avatarPreview');
-                            const lbLink = document.getElementById('lightboxLink');
-
-                            if (imgElem) imgElem.src = e.target.result;
-                            if (lbLink) lbLink.href = e.target.result;
+                            const base64 = e.target.result;
+                            if (imgElem) imgElem.src = base64;
                             if (previewContainer) previewContainer.style.display = 'block';
-                            if (defaultText) defaultText.style.display = 'none';
+                            // Save to session storage
+                            sessionStorage.setItem(storageKey, base64);
                         };
                         reader.readAsDataURL(file);
                     }
                 });
             }
+
+            // Clear storage on cancel or successful submit
+            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(storageKey));
 
             // --- Logic: Confirm Modal + Spinner delay 1s ---
             const form = document.getElementById('insuranceForm');
@@ -449,7 +540,58 @@
                                 '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
 
                             setTimeout(() => {
-                                form.submit();
+                                const formData = new FormData(form);
+
+                                $.ajax({
+                                    url: form.action,
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    },
+                                    success: function(res) {
+                                        if (res.success) {
+                                            sessionStorage.removeItem(storageKey);
+                                            Swal.fire({
+                                                title: 'Thành công!',
+                                                text: res.message,
+                                                icon: 'success',
+                                                timer: 1500,
+                                                showConfirmButton: false
+                                            }).then(() => {
+                                                window.location.href = res.redirect;
+                                            });
+                                        }
+                                    },
+                                    error: function(xhr) {
+                                        btnSubmit.disabled = false;
+                                        btnSubmit.innerHTML = originalText;
+
+                                        if (xhr.status === 422) {
+                                            const errors = xhr.responseJSON.errors;
+                                            let errorMsg = '';
+                                            Object.values(errors).forEach(err => {
+                                                errorMsg += `• ${err[0]}<br>`;
+                                            });
+
+                                            Swal.fire({
+                                                title: 'Lỗi nhập liệu',
+                                                html: `<div class="text-start">${errorMsg}</div>`,
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Lỗi!',
+                                                text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        }
+                                    }
+                                });
                             }, 1000);
                         }
                     });
