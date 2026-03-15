@@ -125,9 +125,7 @@
                             <div class="form-group">
                                 <label>Họ tên</label>
                                 <p class="mb-0">
-                                    <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : $report->reporter_name ?? "—" }}
-                                    </strong>
+                                    <strong>{{ $report->reporter_name ?? "—" }}</strong>
                                 </p>
                             </div>
                         </div>
@@ -135,9 +133,7 @@
                             <div class="form-group">
                                 <label>Liên hệ</label>
                                 <p class="mb-0">
-                                    <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : ($report->reporter_contact ?: "Không cung cấp") }}
-                                    </strong>
+                                    <strong>{{ $report->reporter_contact ?: "Không cung cấp" }}</strong>
                                 </p>
                             </div>
                         </div>

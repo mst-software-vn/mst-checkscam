@@ -122,7 +122,7 @@ class AdminReportController extends Controller
             'description' => 'required|string|min:50',
             'reporter_name' => 'nullable|string|max:255',
             'reporter_contact' => 'nullable|string|max:255',
-            'is_anonymous' => 'nullable|boolean',
+
             'status' => 'required|in:pending,approved,rejected',
             'rejection_reason' => 'nullable|string',
             'evidence_images' => 'nullable|array',
@@ -154,7 +154,7 @@ class AdminReportController extends Controller
             'description' => $validated['description'],
             'reporter_name' => $validated['reporter_name'] ?? 'Người dùng',
             'reporter_contact' => $validated['reporter_contact'] ?? '',
-            'is_anonymous' => $request->boolean('is_anonymous'),
+
             'status' => $validated['status'],
             'rejection_reason' => $validated['status'] === 'rejected' ? $validated['rejection_reason'] : null,
             'evidence_images' => $currentImages,

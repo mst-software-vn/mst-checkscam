@@ -255,9 +255,7 @@
                                     <p class="mb-0.5 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
                                         Số điện thoại
                                     </p>
-                                    <p class="text-sm font-bold text-gray-700 dark:text-gray-200">
-                                        {{ $report->is_anonymous ? "******" : ($report->reporter_contact ?: "Không cung cấp") }}
-                                    </p>
+                                    <p class="text-sm font-bold text-gray-700 dark:text-gray-200">******</p>
                                 </div>
                             </div>
                         </div>

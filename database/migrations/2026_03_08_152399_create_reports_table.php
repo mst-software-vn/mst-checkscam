@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('type', ['account', 'website'])->default('account');
             $table->string('reporter_name');
             $table->string('reporter_contact');
-            $table->boolean('is_anonymous')->default(false);
+
             $table->string('target_id'); // STK/SĐT or URL
             $table->string('ip_address', 45)->nullable();
             $table->string('target_name')->nullable();

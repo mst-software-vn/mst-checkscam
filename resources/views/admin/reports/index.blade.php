@@ -177,11 +177,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($report->is_anonymous)
-                                        <span class="text-muted">Ẩn danh</span>
-                                    @else
-                                        {{ $report->reporter_name ?? "—" }}
-                                    @endif
+                                    {{ $report->reporter_name ?? "—" }}
                                 </td>
                                 <td>{{ count($report->evidence_images ?? []) }} ảnh</td>
                                 <td>
