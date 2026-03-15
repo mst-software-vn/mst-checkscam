@@ -250,17 +250,13 @@
                                         <option value="">-- Chọn hình thức --</option>
                                         <option
                                             value="Lừa đảo mua bán"
-                                            {{
-                                                old("category") == "Lừa đảo mua bán" ? "selected" : ""
-                                            }}
+                                            {{ old("category") == "Lừa đảo mua bán" ? "selected" : "" }}
                                         >
                                             Lừa đảo mua bán
                                         </option>
                                         <option
                                             value="Giả mạo Telegram"
-                                            {{
-                                                old("category") == "Giả mạo Telegram" ? "selected" : ""
-                                            }}
+                                            {{ old("category") == "Giả mạo Telegram" ? "selected" : "" }}
                                         >
                                             Giả mạo Telegram
                                         </option>
@@ -286,6 +282,25 @@
                                             Khác
                                         </option>
                                     </select>
+                                </div>
+
+                                {{-- Số tiền thiệt hại --}}
+                                <div class="space-y-2 md:col-span-2">
+                                    <label
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
+                                    >
+                                        Số tiền thiệt hại (VNĐ)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="damage_amount"
+                                        value="{{ old("damage_amount") }}"
+                                        placeholder="Ví dụ: 500000"
+                                        class="focus:border-cs_red w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
+                                    />
+                                    <p class="mt-1 text-[10px] text-gray-400 italic">
+                                        Có thể để trống nếu không rõ hoặc chưa bị mất tiền.
+                                    </p>
                                 </div>
                             </div>
 
@@ -498,6 +513,25 @@
                                         <option value="Đánh cắp tài khoản">Đánh cắp tài khoản</option>
                                         <option value="Khác">Khác</option>
                                     </select>
+                                </div>
+
+                                {{-- Số tiền thiệt hại --}}
+                                <div class="space-y-2 md:col-span-2">
+                                    <label
+                                        class="ml-1 text-[10px] font-semibold tracking-widest text-gray-800 uppercase md:text-[11px] dark:text-gray-200"
+                                    >
+                                        Số tiền thiệt hại (VNĐ)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="damage_amount"
+                                        value="{{ old("damage_amount") }}"
+                                        placeholder="Ví dụ: 500000"
+                                        class="focus:border-cs_blue w-full rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
+                                    />
+                                    <p class="mt-1 text-[10px] text-gray-400 italic">
+                                        Có thể để trống nếu không rõ hoặc chưa bị mất tiền.
+                                    </p>
                                 </div>
                             </div>
 

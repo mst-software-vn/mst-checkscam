@@ -11,7 +11,7 @@
                 <li class="submenu {{ request()->is("admin/reports*") ? "active" : "" }}">
                     <a href="javascript:void(0);">
                         <img src="/assets/img/icons/time.svg" alt="img" />
-                        <span>Báo cáo</span>
+                        <span>Tố cáo</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
@@ -20,7 +20,7 @@
                                 href="{{ route("admin.reports.index") }}"
                                 class="{{ request()->routeIs("admin.reports.index") ? "active" : "" }}"
                             >
-                                Danh sách báo cáo
+                                Danh sách tố cáo
                             </a>
                         </li>
                     </ul>
