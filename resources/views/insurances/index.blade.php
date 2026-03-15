@@ -38,7 +38,10 @@
                                 >
                                     Tổng quỹ
                                 </p>
-                                <p class="text-cs_blue text-sm font-black">~ 5.8 tỷ</p>
+                                <p class="text-cs_blue text-sm font-black">
+                                    ~
+                                    {{ $total_fund >= 1000000000 ? number_format($total_fund / 1000000000, 1, ".", "") . " tỷ" : number_format($total_fund / 1000000, 0, ",", ".") . " triệu" }}
+                                </p>
                             </div>
                         </div>
                         <div
@@ -55,7 +58,7 @@
                                 >
                                     Thành viên
                                 </p>
-                                <p class="text-cs_green text-sm font-black">128+</p>
+                                <p class="text-cs_green text-sm font-black">{{ $total_members }}+</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +66,7 @@
 
                 <!-- Filters/Search (Styled like Report Form Input) -->
                 <div class="mx-auto mt-6 max-w-xl lg:mx-0">
-                    <div class="group relative">
+                    <form action="{{ route("insurances.frontend.index") }}" method="GET" class="group relative">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                             <i
                                 class="fa-solid fa-magnifying-glass group-focus-within:text-cs_blue text-xs text-gray-300 transition-colors"
@@ -71,56 +74,93 @@
                         </div>
                         <input
                             type="text"
+                            name="search"
+                            value="{{ request("search") }}"
                             placeholder="Tìm kiếm nhanh..."
                             class="focus:border-cs_blue w-full rounded-xl border-2 border-gray-100 bg-white py-4 pr-4 pl-10 text-sm font-bold text-gray-700 shadow-sm transition-all outline-none dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
                         />
-                    </div>
+                    </form>
                 </div>
             </header>
 
             <!-- Main Listing Grid - SMALLER ITEMS FOR BETTER SEARCHABILITY -->
-            <div
-                class="grid grid-cols-3 gap-x-2 gap-y-6 rounded-xl border border-gray-300 p-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-10 dark:border-gray-800"
-            >
-                @foreach ($insurances as $member)
-                    <a
-                        href="{{ route("insurances.frontend.show", $member->slug) }}"
-                        class="group flex flex-col items-center"
-                    >
-                        <div class="relative mb-2">
-                            <!-- Smaller Circular Avatar -->
-                            <div
-                                class="group-hover:shadow-cs_blue/20 h-14 w-14 overflow-hidden rounded-full border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110 active:scale-95 md:h-16 md:w-16 dark:border-slate-800"
-                            >
-                                <img
-                                    src="{{ asset("storage/" . $member->avatar) }}"
-                                    class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3"
-                                    alt="{{ $member->full_name }}"
-                                    loading="lazy"
-                                />
+            <div id="insurance-list-container">
+                <div
+                    class="grid grid-cols-3 gap-x-2 gap-y-6 rounded-xl border border-gray-300 p-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-10 dark:border-gray-800"
+                >
+                    @forelse ($insurances as $member)
+                        <a
+                            href="{{ route("insurances.frontend.show", $member->slug) }}"
+                            class="group flex flex-col items-center"
+                        >
+                            <div class="relative mb-2">
+                                <!-- Smaller Circular Avatar -->
+                                <div
+                                    class="group-hover:shadow-cs_blue/20 h-14 w-14 overflow-hidden rounded-full border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110 active:scale-95 md:h-16 md:w-16 dark:border-slate-800"
+                                >
+                                    @if ($member->avatar_url)
+                                        <img
+                                            src="{{ $member->avatar_url }}"
+                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3"
+                                            alt="{{ $member->full_name }}"
+                                            loading="lazy"
+                                            onerror="
+                                                this.style.display = 'none';
+                                                this.nextElementSibling.style.display = 'flex';
+                                            "
+                                        />
+                                        <div
+                                            class="hidden h-full w-full items-center justify-center bg-gray-100 text-lg font-bold text-gray-400 dark:bg-gray-800"
+                                        >
+                                            {{ strtoupper(substr($member->full_name, 0, 1)) }}
+                                        </div>
+                                    @else
+                                        <div
+                                            class="flex h-full w-full items-center justify-center bg-gray-100 text-lg font-bold text-gray-400 dark:bg-gray-800"
+                                        >
+                                            {{ strtoupper(substr($member->full_name, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Compact Info Label -->
-                        <div class="px-1 text-center">
-                            <h3
-                                class="group-hover:text-cs_blue line-clamp-2 text-[10px] leading-tight font-bold text-gray-700 transition-colors md:text-[11px] dark:text-gray-300"
+                            <!-- Compact Info Label -->
+                            <div class="px-1 text-center">
+                                <h3
+                                    class="group-hover:text-cs_blue line-clamp-2 text-[10px] leading-tight font-bold text-gray-700 transition-colors md:text-[11px] dark:text-gray-300"
+                                >
+                                    {{ $member->id }}. {{ $member->full_name }}
+                                </h3>
+                                <span
+                                    class="text-cs_green block translate-y-1 transform text-[9px] font-black tracking-tighter uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                                >
+                                    {{ number_format($member->amount, 0, ",", ".") }}đ
+                                </span>
+                            </div>
+                        </a>
+                    @empty
+                        <div class="col-span-full py-16 text-center">
+                            <div
+                                class="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-gray-50 dark:bg-slate-800"
                             >
-                                {{ $member->id }}. {{ $member->full_name }}
+                                <i class="fa-solid fa-magnifying-glass-chart text-3xl text-gray-300"></i>
+                            </div>
+                            <h3 class="text-lg font-black text-gray-800 dark:text-gray-300">
+                                Không tìm thấy thành viên
                             </h3>
-                            <span
-                                class="text-cs_green block translate-y-1 transform text-[9px] font-black tracking-tighter uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                            >
-                                {{ number_format($member->amount, 0, ",", ".") }}đ
-                            </span>
+                            <p class="mt-2 text-sm font-semibold text-gray-500">
+                                Không có kết quả nào khớp với từ khóa "
+                                <span class="text-cs_blue">{{ request("search") }}</span>
+                                "
+                            </p>
                         </div>
-                    </a>
-                @endforeach
-            </div>
+                    @endforelse
+                </div>
 
-            <!-- Pagination -->
-            <div class="mt-12 flex justify-center">
-                {{ $insurances->links() }}
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center">
+                    {{ $insurances->links() }}
+                </div>
             </div>
             <!-- SEO Content Section (Similar to Report Index) -->
             <article class="mx-auto mt-16 max-w-3xl">
@@ -165,4 +205,59 @@
             </article>
         </div>
     </main>
+    @push("scripts")
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const searchInput = document.querySelector('input[name="search"]');
+                const listContainer = document.getElementById('insurance-list-container');
+                let debounceTimer;
+
+                if (searchInput) {
+                    searchInput.addEventListener('input', function () {
+                        const query = this.value;
+                        clearTimeout(debounceTimer);
+
+                        debounceTimer = setTimeout(() => {
+                            const url = new URL(window.location.href);
+                            url.searchParams.set('search', query);
+                            // Reset to page 1 for new search
+                            url.searchParams.delete('page');
+
+                            // Show some loading state if needed
+                            listContainer.style.opacity = '0.5';
+
+                            fetch(url, {
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                            })
+                                .then((response) => response.text())
+                                .then((html) => {
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(html, 'text/html');
+                                    const newList = doc.getElementById('insurance-list-container');
+
+                                    if (newList) {
+                                        listContainer.innerHTML = newList.innerHTML;
+                                        // Update URL without reload
+                                        window.history.pushState({}, '', url);
+                                    }
+                                    listContainer.style.opacity = '1';
+                                })
+                                .catch((error) => {
+                                    console.error('Search error:', error);
+                                    listContainer.style.opacity = '1';
+                                });
+                        }, 400); // 400ms debounce
+                    });
+
+                    // Prevent form submit on Enter to keep it purely AJAX
+                    const form = searchInput.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', (e) => e.preventDefault());
+                    }
+                }
+            });
+        </script>
+    @endpush
 @endsection

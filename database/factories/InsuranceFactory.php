@@ -51,21 +51,26 @@ class InsuranceFactory extends Factory
         $fullName = $this->faker->randomElement($vietnameseNames);
 
         $avatarUrls = [
-            'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&h=400&fit=crop',
+            'https://i.pravatar.cc/300?u=1',
+            'https://i.pravatar.cc/300?u=2',
+            'https://i.pravatar.cc/300?u=3',
+            'https://i.pravatar.cc/300?u=4',
+            'https://i.pravatar.cc/300?u=5',
+            'https://i.pravatar.cc/300?u=6',
+            'https://i.pravatar.cc/300?u=7',
+            'https://i.pravatar.cc/300?u=8',
+            'https://i.pravatar.cc/300?u=9',
+            'https://i.pravatar.cc/300?u=10',
+            'https://i.pravatar.cc/300?u=11',
+            'https://i.pravatar.cc/300?u=12',
+            'https://i.pravatar.cc/300?u=13',
+            'https://i.pravatar.cc/300?u=14',
+            'https://i.pravatar.cc/300?u=15',
+            'https://i.pravatar.cc/300?u=16',
+            'https://i.pravatar.cc/300?u=17',
+            'https://i.pravatar.cc/300?u=18',
+            'https://i.pravatar.cc/300?u=19',
+            'https://i.pravatar.cc/300?u=20',
         ];
 
         $banks = ['Vietcombank', 'Techcombank', 'MB Bank', 'Agribank', 'BIDV', 'ACB', 'VPBank', 'TPBank', 'Sacombank', 'VIB'];
@@ -85,23 +90,38 @@ class InsuranceFactory extends Factory
         return [
             'full_name' => $fullName,
             'avatar' => $this->faker->randomElement($avatarUrls),
-            'amount' => $this->faker->randomElement([5000000, 10000000, 20000000, 50000000, 100000000, 200000000]),
+            'amount' => $this->faker->randomElement([5000000, 10000000, 15000000, 20000000, 50000000, 100000000, 200000000, 500000000]),
             'insurance_date' => $insuranceDate,
             'expired_at' => $expiredAt,
             'contact_info' => [
-                'zalo' => '0'.$this->faker->numberBetween(900000000, 999999999),
-                'facebook' => 'https://facebook.com/'.Str::slug($fullName),
-                'telegram' => '@'.Str::slug($fullName, '_'),
-                'phone' => '0'.$this->faker->numberBetween(300000000, 899999999),
+                [
+                    'platform' => 'Facebook',
+                    'link' => 'https://facebook.com/'.Str::slug($fullName),
+                ],
+                [
+                    'platform' => 'Zalo',
+                    'link' => 'https://zalo.me/0'.$this->faker->numberBetween(900000000, 999999999),
+                ],
+                [
+                    'platform' => 'Telegram',
+                    'link' => 'https://t.me/'.Str::slug($fullName, '_'),
+                ],
             ],
             'payment_accounts' => [
                 [
-                    'bank_name' => $this->faker->randomElement($banks),
-                    'account_number' => $this->faker->numerify('################'),
-                    'account_holder' => mb_convert_case($fullName, MB_CASE_UPPER, 'UTF-8'),
+                    'bank' => $this->faker->randomElement($banks),
+                    'number' => $this->faker->numerify('##########'),
+                    'name' => mb_convert_case($fullName, MB_CASE_UPPER, 'UTF-8'),
+                ],
+                [
+                    'bank' => $this->faker->randomElement($banks),
+                    'number' => $this->faker->numerify('##########'),
+                    'name' => mb_convert_case($fullName, MB_CASE_UPPER, 'UTF-8'),
                 ],
             ],
-            'services' => $this->faker->randomElements($servicesList, $this->faker->numberBetween(2, 5)),
+            'services' => collect($this->faker->randomElements($servicesList, $this->faker->numberBetween(2, 5)))
+                ->map(fn ($item) => ['title' => $item])
+                ->toArray(),
             'status' => $this->faker->randomElement([1, 1, 1, 0]), // 75% active
             'slug' => Str::slug($fullName).'-'.$this->faker->unique()->numberBetween(1000, 9999),
             'created_at' => $insuranceDate,
