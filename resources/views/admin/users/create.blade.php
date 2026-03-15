@@ -58,7 +58,7 @@
                                         @endunless
                                     </label>
                                     <input
-                                        type="password"
+                                        type="text"
                                         name="password"
                                         class="form-control"
                                         placeholder="{{ isset($user) ? "Để trống nếu không đổi mật khẩu" : "Nhập mật khẩu" }}"
@@ -137,17 +137,49 @@
                         </div>
                     </div>
 
-                    {{-- Placeholder avatar (không upload cho Users) --}}
+                    {{-- Image upload --}}
                     <div class="col-lg-4 col-sm-12">
                         <div class="form-group">
-                            <label>Avatar / Ảnh đại diện cá nhân</label>
+                            <label>Avatar / Ảnh đại diện</label>
                             <div class="image-upload">
-                                <input type="file" disabled />
+                                <input type="file" name="avatar" id="avatarInput" accept="image/*" />
                                 <div class="image-uploads">
                                     <img src="/assets/img/icons/upload.svg" alt="img" />
-                                    <h4>Tính năng upload avatar sẽ có sớm</h4>
+                                    <h4>Kéo thả file hoặc bấm vào đây để tải lên</h4>
                                 </div>
                             </div>
+                        </div>
+
+                        <div
+                            class="product-list"
+                            id="imagePreviewContainer"
+                            style="{{ isset($user) && $user->avatar ? "" : "display: none;" }}"
+                        >
+                            <ul class="row">
+                                <li class="col-12 pt-1 text-center">
+                                    <img
+                                        src="{{ isset($user) && $user->avatar ? asset("storage/" . $user->avatar) : "" }}"
+                                        alt="avatar"
+                                        id="avatarPreview"
+                                        class="img-fluid rounded"
+                                        style="
+                                            max-height: 200px;
+                                            cursor: zoom-in;
+                                            border: 2px dashed #ff9f43;
+                                            padding: 5px;
+                                            transition: all 0.3s;
+                                        "
+                                        title="Click để phóng to ảnh"
+                                    />
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            Bấm vào ảnh trên để xem lớn. Bấm vào khu vực
+                                            <b>Tải lên</b>
+                                            bên trên nếu muốn thay đổi ảnh khác.
+                                        </small>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -168,7 +200,94 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Logic: Confirm Modal + Spinner delay 1s ---
+            // --- Logic: Lightbox (Zoom) ---
+            const lbStyle = `
+                <style>
+                    #user-lightbox {
+                        display: none;
+                        position: fixed;
+                        inset: 0;
+                        z-index: 9999;
+                        background: rgba(0, 0, 0, .9);
+                        align-items: center;
+                        justify-content: center;
+                        cursor: zoom-out;
+                    }
+                    #user-lightbox.active { display: flex; }
+                    #user-lightbox img {
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        border-radius: 8px;
+                        box-shadow: 0 0 20px rgba(0,0,0,.5);
+                    }
+                    #user-lightbox .lb-close {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        color: #fff;
+                        font-size: 30px;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', lbStyle);
+
+            const lbHtml = `
+                <div id="user-lightbox">
+                    <button class="lb-close">&times;</button>
+                    <img src="" alt="preview" />
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', lbHtml);
+
+            const lb = document.getElementById('user-lightbox');
+            const lbImg = lb.querySelector('img');
+
+            const previewImg = document.getElementById('avatarPreview');
+            if (previewImg) {
+                previewImg.addEventListener('click', function() {
+                    lbImg.src = this.src;
+                    lb.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            lb.addEventListener('click', function() {
+                lb.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // --- Logic: Thumbnail Preview & Persistence ---
+            const avatarInput = document.getElementById('avatarInput');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const imgElem = document.getElementById('avatarPreview');
+            const storageKey = 'user_avatar_preview';
+
+            // Restore from session storage if page was reloaded (not ideal for avatar but helpful for UX)
+            // Clear storage if fresh load
+            @unless($errors->any())
+                sessionStorage.removeItem(storageKey);
+            @endunless
+
+            if (avatarInput) {
+                avatarInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const base64 = e.target.result;
+                            if (imgElem) imgElem.src = base64;
+                            if (previewContainer) previewContainer.style.display = 'block';
+                            sessionStorage.setItem(storageKey, base64);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // --- Logic: Confirm Modal + AJax Submit + Spinner ---
             const form = document.getElementById('userForm');
             if (form) {
                 form.addEventListener('submit', function (e) {
@@ -186,13 +305,65 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const btnSubmit = document.getElementById('btnSubmit');
+                            const originalText = btnSubmit.innerHTML;
 
                             btnSubmit.disabled = true;
                             btnSubmit.innerHTML =
                                 '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
 
                             setTimeout(() => {
-                                form.submit();
+                                const formData = new FormData(form);
+
+                                $.ajax({
+                                    url: form.action,
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    },
+                                    success: function(res) {
+                                        if (res.success) {
+                                            sessionStorage.removeItem(storageKey);
+                                            Swal.fire({
+                                                title: 'Thành công!',
+                                                text: res.message,
+                                                icon: 'success',
+                                                timer: 1500,
+                                                showConfirmButton: false
+                                            }).then(() => {
+                                                window.location.href = res.redirect;
+                                            });
+                                        }
+                                    },
+                                    error: function(xhr) {
+                                        btnSubmit.disabled = false;
+                                        btnSubmit.innerHTML = originalText;
+
+                                        if (xhr.status === 422) {
+                                            const errors = xhr.responseJSON.errors;
+                                            let errorMsg = '';
+                                            Object.values(errors).forEach(err => {
+                                                errorMsg += `• ${err[0]}<br>`;
+                                            });
+
+                                            Swal.fire({
+                                                title: 'Lỗi nhập liệu',
+                                                html: `<div class="text-start">${errorMsg}</div>`,
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Lỗi!',
+                                                text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        }
+                                    }
+                                });
                             }, 1000);
                         }
                     });

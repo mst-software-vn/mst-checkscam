@@ -20,25 +20,21 @@ class AdminSearchAnalyticsController extends Controller
             : 0;
 
         $hotTargets = SearchLog::where('created_at', '>=', now()->subDays(30))
-            ->select('search_query', DB::raw('COUNT(*) as search_count'))
+            ->select('search_query', DB::raw('COUNT(*) as search_count'), DB::raw('MAX(created_at) as last_searched_at'), DB::raw('MAX(ip_address) as last_ip'))
             ->groupBy('search_query')
             ->orderByDesc('search_count')
-            ->limit(10)
-            ->get()
-            ->map(function ($item) {
+            ->paginate(10)
+            ->through(function ($item) {
                 $reportCount = Report::where('target_id', $item->search_query)
                     ->where('status', 'approved')
-                    ->count();
-
-                $pendingCount = Report::where('target_id', $item->search_query)
-                    ->where('status', 'pending')
                     ->count();
 
                 return (object) [
                     'search_query' => $item->search_query,
                     'search_count' => $item->search_count,
                     'report_count' => $reportCount,
-                    'pending_count' => $pendingCount,
+                    'last_ip' => $item->last_ip,
+                    'last_searched_at' => $item->last_searched_at,
                 ];
             });
 

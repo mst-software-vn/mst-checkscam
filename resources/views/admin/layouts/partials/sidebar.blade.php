@@ -81,12 +81,7 @@
                         <span>Bình luận</span>
                     </a>
                 </li>
-                <li class="{{ request()->is("admin/search-analytics*") ? "active" : "" }}">
-                    <a href="{{ route("admin.search-analytics.index") }}">
-                        <i data-feather="bar-chart-2"></i>
-                        <span>Search Analytics</span>
-                    </a>
-                </li>
+
                 <li class="submenu {{ request()->is("admin/users*") ? "active" : "" }}">
                     <a href="javascript:void(0);">
                         <img src="/assets/img/icons/users1.svg" alt="img" />
@@ -112,14 +107,20 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="menu-title mt-3"><span>Tính năng mở rộng</span></li>
+                <li class="{{ request()->is("admin/search-analytics*") ? "active" : "" }}">
+                    <a href="{{ route("admin.search-analytics.index") }}">
+                        <i data-feather="bar-chart-2"></i>
+                        <span>Search Analytics</span>
+                    </a>
+                </li>
                 <li class="{{ request()->is("admin/settings*") ? "active" : "" }}">
                     <a href="{{ route("admin.settings.index") }}">
                         <img src="/assets/img/icons/settings.svg" alt="img" />
                         <span>Cài đặt</span>
                     </a>
                 </li>
-
-                <li class="menu-title mt-3"><span>Tính năng mở rộng</span></li>
                 <li>
                     <a href="javascript:void(0);" onclick="alert('Tính năng đang phát triển!')">
                         <i data-feather="code"></i>

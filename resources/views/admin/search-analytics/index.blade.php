@@ -56,9 +56,9 @@
                             <th>STT</th>
                             <th>Từ khoá / STK / SĐT</th>
                             <th>Lượt tra cứu</th>
-                            <th>Số báo cáo (đã duyệt)</th>
-                            <th>Đang chờ duyệt</th>
-                            <th>Mức độ</th>
+                            <th>Số báo cáo</th>
+                            <th>IP gần nhất</th>
+                            <th>Thời gian tra cứu</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,23 +69,9 @@
                                 <td>{{ number_format($target->search_count) }}</td>
                                 <td>{{ $target->report_count }}</td>
                                 <td>
-                                    @if ($target->pending_count > 0)
-                                        <span class="badges bg-lightyellow">{{ $target->pending_count }} chờ</span>
-                                    @else
-                                        <span class="text-muted">0</span>
-                                    @endif
+                                    <span class="badges bg-lightgrey text-dark">{{ $target->last_ip }}</span>
                                 </td>
-                                <td>
-                                    @if ($target->report_count >= 5)
-                                        <span class="badges bg-lightred">Rất nguy hiểm</span>
-                                    @elseif ($target->report_count >= 2)
-                                        <span class="badges bg-lightyellow">Cần chú ý</span>
-                                    @elseif ($target->report_count >= 1)
-                                        <span class="badges bg-lightgreen">Có báo cáo</span>
-                                    @else
-                                        <span class="text-muted">Chưa có</span>
-                                    @endif
-                                </td>
+                                <td>{{ \Carbon\Carbon::parse($target->last_searched_at)->format("d/m/Y H:i") }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -95,13 +81,16 @@
                     </tbody>
                 </table>
             </div>
+            <div class="mt-3">
+                {{ $hotTargets->links("pagination::bootstrap-5") }}
+            </div>
         </div>
     </div>
 
     {{-- Recent Searches --}}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Lịch sử tra cứu gần nhất</h5>
+            <h5 class="card-title">Lịch sử tra cứu gần nhất (Top 20)</h5>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
