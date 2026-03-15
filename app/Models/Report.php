@@ -17,7 +17,7 @@ class Report extends Model
         'type',
         'reporter_name',
         'reporter_contact',
-        'is_anonymous',
+
         'target_id',
         'target_name',
         'target_bank',

@@ -16,7 +16,6 @@ class AdminPostController extends Controller
             $query->where(fn ($q) => $q->where('is_featured', $request->boolean('is_featured')));
         }
 
-        // Filter by time range
         if ($request->filled('time_range')) {
             switch ($request->time_range) {
                 case 'today':

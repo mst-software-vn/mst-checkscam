@@ -16,7 +16,6 @@ class AdminInsuranceController extends Controller
             $query->where('status', $request->integer('status'));
         }
 
-        // Filter by time range
         if ($request->filled('time_range')) {
             switch ($request->time_range) {
                 case 'today':
@@ -182,7 +181,6 @@ class AdminInsuranceController extends Controller
         $paymentAccounts = $this->filterEmptyArrayItems($validated['payment_accounts'] ?? [], ['bank', 'number']);
         $services = $this->filterEmptyArrayItems($validated['services'] ?? [], ['title']);
 
-        // Only regenerate slug if name changed
         $globalSlug = $insurance->slug;
         if ($insurance->full_name !== $validated['full_name']) {
             $globalSlug = $this->generateInsuranceSlug($validated['full_name'], $insurance->id);

@@ -95,3 +95,109 @@ if (! function_exists('generateGlobalUniqueSlug')) {
         return $slug;
     }
 }
+
+if (! function_exists('mask_name')) {
+    /**
+     * Che giấu một phần tên (ví dụ: Mai Trung Hậu -> Mai Trung H.)
+     */
+    function mask_name(?string $name): string
+    {
+        if (! $name || mb_strtolower($name) === 'không rõ tên' || mb_strtolower($name) === 'chưa rõ thông tin' || mb_strtolower($name) === 'người dùng') {
+            return 'Chưa rõ tên';
+        }
+
+        $name = preg_replace('/\s+/', ' ', trim($name));
+        $parts = explode(' ', $name);
+        $count = count($parts);
+
+        if ($count <= 1) {
+            $n = $parts[0];
+
+            return (mb_strlen($n) > 1 ? mb_substr($n, 0, 1, 'UTF-8') : $n).'.';
+        }
+
+        $lastPart = array_pop($parts);
+        $maskedLastPart = mb_substr($lastPart, 0, 1, 'UTF-8').'.';
+
+        return implode(' ', $parts).' '.$maskedLastPart;
+    }
+}
+
+if (! function_exists('mask_id')) {
+    /**
+     * Che giấu ID (SĐT/STK/Website)
+     * - SĐT/STK: Chừa 3 số đầu & 3 số cuối (ví dụ: 098***093)
+     * - Website: Che giấu phần sau domain tương tự mask_name
+     */
+    function mask_id(?string $id, string $type = 'bank'): string
+    {
+        if (! $id) {
+            return 'Đang cập nhật';
+        }
+
+        if ($type === 'website' || str_contains($id, '/')) {
+            if (str_contains($id, '/')) {
+                $parts = explode('/', $id);
+                $lastPart = array_pop($parts);
+                if (empty($lastPart)) {
+                    $lastPart = array_pop($parts);
+                }
+
+                return implode('/', $parts).'/'.mask_name($lastPart);
+            }
+
+            return mask_name($id);
+        }
+
+        $id = preg_replace('/\D/', '', $id);
+        if (strlen($id) <= 6) {
+            return substr($id, 0, 1).'***'.substr($id, -1);
+        }
+
+        return substr($id, 0, 3).'***'.substr($id, -3);
+    }
+}
+
+if (! function_exists('mask_reporter_name')) {
+    /**
+     * Che giấu tên người báo cáo (ví dụ: Nguyen Van Khoa -> Nguyen Van K******)
+     */
+    function mask_reporter_name(?string $name): string
+    {
+        if (! $name || mb_strtolower($name) === 'người dùng') {
+            return 'Người dùng';
+        }
+
+        $name = preg_replace('/\s+/', ' ', trim($name));
+        $parts = explode(' ', $name);
+        $count = count($parts);
+
+        if ($count <= 1) {
+            return mb_substr($parts[0], 0, 1, 'UTF-8').'******';
+        }
+
+        $lastPart = array_pop($parts);
+        $maskedLastPart = mb_substr($lastPart, 0, 1, 'UTF-8').'******';
+
+        return implode(' ', $parts).' '.$maskedLastPart;
+    }
+}
+
+if (! function_exists('mask_phone')) {
+    /**
+     * Che giấu số điện thoại (ví dụ: 09380003345 -> 0938000****)
+     */
+    function mask_phone(?string $phone): string
+    {
+        if (! $phone) {
+            return '';
+        }
+
+        $phone = trim($phone);
+        if (strlen($phone) <= 4) {
+            return '****';
+        }
+
+        return substr($phone, 0, -4).'****';
+    }
+}

@@ -24,7 +24,11 @@
             <form
                 method="POST"
                 id="userForm"
-                action="{{ isset($user) ? route("admin.users.update", $user->id) : route("admin.users.store") }}"
+                action="{{
+                    isset($user)
+                        ? route("admin.users.update", $user->id)
+                        : route("admin.users.store")
+                }}"
             >
                 @csrf
                 @if (isset($user))
@@ -61,7 +65,12 @@
                                         type="text"
                                         name="password"
                                         class="form-control"
-                                        placeholder="{{ isset($user) ? "Để trống nếu không đổi mật khẩu" : "Nhập mật khẩu" }}"
+                                        placeholder="{{
+                                            isset($user)
+                                                ? "
+                                                                                Để trống nếu không đổi mật khẩu"
+                                                : "Nhập mật khẩu"
+                                        }}"
                                     />
                                 </div>
                             </div>
@@ -76,7 +85,9 @@
                                         name="full_name"
                                         class="form-control"
                                         placeholder="Họ và tên hoặc Biệt danh"
-                                        value="{{ old("full_name", $user->full_name ?? "") }}"
+                                        value="{{
+                                            old("full_name", $user->full_name ?? "")
+                                        }}"
                                     />
                                 </div>
                             </div>
@@ -104,13 +115,17 @@
                                     <select name="role" class="select">
                                         <option
                                             value="moderator"
-                                            {{ old("role", $user->role ?? "moderator") === "moderator" ? "selected" : "" }}
+                                            {{
+                                                old("role", $user->role ?? "moderator") === "moderator" ? "selected" : ""
+                                            }}
                                         >
                                             Người kiểm duyệt (Moderator)
                                         </option>
                                         <option
                                             value="admin"
-                                            {{ old("role", $user->role ?? "moderator") === "admin" ? "selected" : "" }}
+                                            {{
+                                                old("role", $user->role ?? "moderator") === "admin" ? "selected" : ""
+                                            }}
                                         >
                                             Quản trị viên (Admin)
                                         </option>
@@ -129,7 +144,7 @@
                                             value="1"
                                             {{ old("status", $user->status ?? 1) ? "checked" : "" }}
                                         />
-                                        <label for="user-status" class="checktoggle">checkbox</label>
+                                        <label for="user-status" class="checktoggle"></label>
                                         <span class="ms-2">Đang hoạt động</span>
                                     </div>
                                 </div>
@@ -153,12 +168,12 @@
                         <div
                             class="product-list"
                             id="imagePreviewContainer"
-                            style="{{ isset($user) && $user->avatar ? "" : "display: none;" }}"
+                            style="{{ isset($user) && $user->avatar ? "" : " display: none;" }}"
                         >
                             <ul class="row">
                                 <li class="col-12 pt-1 text-center">
                                     <img
-                                        src="{{ isset($user) && $user->avatar ? asset("storage/" . $user->avatar) : "" }}"
+                                        src="{{ isset($user) && $user->avatar ? asset(" storage/" . $user->avatar) : "" }}"
                                         alt="avatar"
                                         id="avatarPreview"
                                         class="img-fluid rounded"
@@ -200,175 +215,175 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Logic: Lightbox (Zoom) ---
-            const lbStyle = `
-                <style>
-                    #user-lightbox {
-                        display: none;
-                        position: fixed;
-                        inset: 0;
-                        z-index: 9999;
-                        background: rgba(0, 0, 0, .9);
-                        align-items: center;
-                        justify-content: center;
-                        cursor: zoom-out;
-                    }
-                    #user-lightbox.active { display: flex; }
-                    #user-lightbox img {
-                        max-width: 90vw;
-                        max-height: 90vh;
-                        border-radius: 8px;
-                        box-shadow: 0 0 20px rgba(0,0,0,.5);
-                    }
-                    #user-lightbox .lb-close {
-                        position: absolute;
-                        top: 20px;
-                        right: 20px;
-                        color: #fff;
-                        font-size: 30px;
-                        cursor: pointer;
-                        background: none;
-                        border: none;
-                    }
-                </style>
-            `;
-            document.head.insertAdjacentHTML('beforeend', lbStyle);
+                // --- Logic: Lightbox (Zoom) ---
+                const lbStyle = `
+                        <style>
+                            #user-lightbox {
+                                display: none;
+                                position: fixed;
+                                inset: 0;
+                                z-index: 9999;
+                                background: rgba(0, 0, 0, .9);
+                                align-items: center;
+                                justify-content: center;
+                                cursor: zoom-out;
+                            }
+                            #user-lightbox.active { display: flex; }
+                            #user-lightbox img {
+                                max-width: 90vw;
+                                max-height: 90vh;
+                                border-radius: 8px;
+                                box-shadow: 0 0 20px rgba(0,0,0,.5);
+                            }
+                            #user-lightbox .lb-close {
+                                position: absolute;
+                                top: 20px;
+                                right: 20px;
+                                color: #fff;
+                                font-size: 30px;
+                                cursor: pointer;
+                                background: none;
+                                border: none;
+                            }
+                        </style>
+                    `;
+                document.head.insertAdjacentHTML('beforeend', lbStyle);
 
-            const lbHtml = `
-                <div id="user-lightbox">
-                    <button class="lb-close">&times;</button>
-                    <img src="" alt="preview" />
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', lbHtml);
+                const lbHtml = `
+                        <div id="user-lightbox">
+                            <button class="lb-close">&times;</button>
+                            <img src="" alt="preview" />
+                        </div>
+                    `;
+                document.body.insertAdjacentHTML('beforeend', lbHtml);
 
-            const lb = document.getElementById('user-lightbox');
-            const lbImg = lb.querySelector('img');
+                const lb = document.getElementById('user-lightbox');
+                const lbImg = lb.querySelector('img');
 
-            const previewImg = document.getElementById('avatarPreview');
-            if (previewImg) {
-                previewImg.addEventListener('click', function() {
-                    lbImg.src = this.src;
-                    lb.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                const previewImg = document.getElementById('avatarPreview');
+                if (previewImg) {
+                    previewImg.addEventListener('click', function () {
+                        lbImg.src = this.src;
+                        lb.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
+
+                lb.addEventListener('click', function () {
+                    lb.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
-            }
 
-            lb.addEventListener('click', function() {
-                lb.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+                // --- Logic: Thumbnail Preview & Persistence ---
+                const avatarInput = document.getElementById('avatarInput');
+                const previewContainer = document.getElementById('imagePreviewContainer');
+                const imgElem = document.getElementById('avatarPreview');
+                const storageKey = 'user_avatar_preview';
 
-            // --- Logic: Thumbnail Preview & Persistence ---
-            const avatarInput = document.getElementById('avatarInput');
-            const previewContainer = document.getElementById('imagePreviewContainer');
-            const imgElem = document.getElementById('avatarPreview');
-            const storageKey = 'user_avatar_preview';
-
-            // Restore from session storage if page was reloaded (not ideal for avatar but helpful for UX)
-            // Clear storage if fresh load
-            @unless($errors->any())
+                // Restore from session storage if page was reloaded (not ideal for avatar but helpful for UX)
+                // Clear storage if fresh load
+                @unless($errors -> any())
                 sessionStorage.removeItem(storageKey);
-            @endunless
+                @endunless
 
-            if (avatarInput) {
-                avatarInput.addEventListener('change', function (e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const base64 = e.target.result;
-                            if (imgElem) imgElem.src = base64;
-                            if (previewContainer) previewContainer.style.display = 'block';
-                            sessionStorage.setItem(storageKey, base64);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-
-            // --- Logic: Confirm Modal + AJax Submit + Spinner ---
-            const form = document.getElementById('userForm');
-            if (form) {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    Swal.fire({
-                        title: 'Xác nhận lưu?',
-                        text: 'Bạn có chắc chắn muốn lưu thông tin tài khoản này?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#ff9f43',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Đồng ý',
-                        cancelButtonText: 'Hủy',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const btnSubmit = document.getElementById('btnSubmit');
-                            const originalText = btnSubmit.innerHTML;
-
-                            btnSubmit.disabled = true;
-                            btnSubmit.innerHTML =
-                                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
-
-                            setTimeout(() => {
-                                const formData = new FormData(form);
-
-                                $.ajax({
-                                    url: form.action,
-                                    method: 'POST',
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    headers: {
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    },
-                                    success: function(res) {
-                                        if (res.success) {
-                                            sessionStorage.removeItem(storageKey);
-                                            Swal.fire({
-                                                title: 'Thành công!',
-                                                text: res.message,
-                                                icon: 'success',
-                                                timer: 1500,
-                                                showConfirmButton: false
-                                            }).then(() => {
-                                                window.location.href = res.redirect;
-                                            });
-                                        }
-                                    },
-                                    error: function(xhr) {
-                                        btnSubmit.disabled = false;
-                                        btnSubmit.innerHTML = originalText;
-
-                                        if (xhr.status === 422) {
-                                            const errors = xhr.responseJSON.errors;
-                                            let errorMsg = '';
-                                            Object.values(errors).forEach(err => {
-                                                errorMsg += `• ${err[0]}<br>`;
-                                            });
-
-                                            Swal.fire({
-                                                title: 'Lỗi nhập liệu',
-                                                html: `<div class="text-start">${errorMsg}</div>`,
-                                                icon: 'error',
-                                                confirmButtonColor: '#ff9f43'
-                                            });
-                                        } else {
-                                            Swal.fire({
-                                                title: 'Lỗi!',
-                                                text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
-                                                icon: 'error',
-                                                confirmButtonColor: '#ff9f43'
-                                            });
-                                        }
-                                    }
-                                });
-                            }, 1000);
+                if (avatarInput) {
+                    avatarInput.addEventListener('change', function (e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const base64 = e.target.result;
+                                if (imgElem) imgElem.src = base64;
+                                if (previewContainer) previewContainer.style.display = 'block';
+                                sessionStorage.setItem(storageKey, base64);
+                            };
+                            reader.readAsDataURL(file);
                         }
                     });
-                });
-            }
-        });
+                }
+
+                // --- Logic: Confirm Modal + AJax Submit + Spinner ---
+                const form = document.getElementById('userForm');
+                if (form) {
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        Swal.fire({
+                            title: 'Xác nhận lưu?',
+                            text: 'Bạn có chắc chắn muốn lưu thông tin tài khoản này?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#ff9f43',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Đồng ý',
+                            cancelButtonText: 'Hủy',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const btnSubmit = document.getElementById('btnSubmit');
+                                const originalText = btnSubmit.innerHTML;
+
+                                btnSubmit.disabled = true;
+                                btnSubmit.innerHTML =
+                                    '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
+
+                                setTimeout(() => {
+                                    const formData = new FormData(form);
+
+                                    $.ajax({
+                                        url: form.action,
+                                        method: 'POST',
+                                        data: formData,
+                                        processData: false,
+                                        contentType: false,
+                                        headers: {
+                                            'X-Requested-With': 'XMLHttpRequest'
+                                        },
+                                        success: function (res) {
+                                            if (res.success) {
+                                                sessionStorage.removeItem(storageKey);
+                                                Swal.fire({
+                                                    title: 'Thành công!',
+                                                    text: res.message,
+                                                    icon: 'success',
+                                                    timer: 1500,
+                                                    showConfirmButton: false
+                                                }).then(() => {
+                                                    window.location.href = res.redirect;
+                                                });
+                                            }
+                                        },
+                                        error: function (xhr) {
+                                            btnSubmit.disabled = false;
+                                            btnSubmit.innerHTML = originalText;
+
+                                            if (xhr.status === 422) {
+                                                const errors = xhr.responseJSON.errors;
+                                                let errorMsg = '';
+                                                Object.values(errors).forEach(err => {
+                                                    errorMsg += `• ${err[0]}<br>`;
+                                                });
+
+                                                Swal.fire({
+                                                    title: 'Lỗi nhập liệu',
+                                                    html: `<div class="text-start">${errorMsg}</div>`,
+                                                    icon: 'error',
+                                                    confirmButtonColor: '#ff9f43'
+                                                });
+                                            } else {
+                                                Swal.fire({
+                                                    title: 'Lỗi!',
+                                                    text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+                                                    icon: 'error',
+                                                    confirmButtonColor: '#ff9f43'
+                                                });
+                                            }
+                                        }
+                                    });
+                                }, 1000);
+                            }
+                        });
+                    });
+                }
+            });
     </script>
 @endpush

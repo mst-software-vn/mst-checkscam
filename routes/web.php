@@ -3,12 +3,12 @@
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminInsuranceController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminReportController;
 use App\Http\Controllers\Admin\AdminSearchAnalyticsController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
@@ -28,7 +28,6 @@ Route::get('/bao-hiem-cs/{slug}', [\App\Http\Controllers\InsuranceController::cl
 Route::get('/bai-viet', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.frontend.index');
 Route::get('/bai-viet/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.frontend.show');
 
-// Các trang hệ thống (System)
 Route::get('/api-checkscam', function () {
     return view('system.api');
 });
@@ -36,7 +35,6 @@ Route::get('/doi-tac-uy-tin', function () {
     return view('system.partners');
 });
 
-// Các trang hỗ trợ (Support)
 Route::get('/huong-dan-to-cao', function () {
     return view('support.guide');
 });
@@ -44,7 +42,6 @@ Route::get('/lien-he-admin', function () {
     return view('support.contact');
 });
 
-// Các trang pháp lý (Legal)
 Route::get('/dieu-khoan', function () {
     return view('legal.terms');
 });
@@ -68,7 +65,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/reject', [AdminReportController::class, 'reject'])->name('reject');
             Route::put('/{id}', [AdminReportController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminReportController::class, 'destroy'])->name('destroy');
-        });
+        },
+        );
 
         /**
          * ------------------------------------------
@@ -83,7 +81,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{id}/edit', [AdminInsuranceController::class, 'edit'])->name('edit');
             Route::put('/{id}', [AdminInsuranceController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminInsuranceController::class, 'destroy'])->name('destroy');
-        });
+        },
+        );
 
         /**
          * ------------------------------------------
@@ -98,7 +97,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{id}/edit', [AdminPostController::class, 'edit'])->name('edit');
             Route::put('/{id}', [AdminPostController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminPostController::class, 'destroy'])->name('destroy');
-        });
+        },
+        );
 
         /**
          * ------------------------------------------
@@ -109,7 +109,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('comments')->name('comments.')->group(function () {
             Route::get('/', [AdminCommentController::class, 'index'])->name('index');
             Route::delete('/{id}', [AdminCommentController::class, 'destroy'])->name('destroy');
-        });
+        },
+        );
 
         /**
          * ------------------------------------------
@@ -131,7 +132,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{id}/edit', [AdminUserController::class, 'edit'])->name('edit');
             Route::put('/{id}', [AdminUserController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminUserController::class, 'destroy'])->name('destroy');
-        });
+        },
+        );
 
         /**
          * ------------------------------------------
@@ -141,14 +143,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/', [AdminSettingController::class, 'index'])->name('index');
             Route::post('/', [AdminSettingController::class, 'update'])->name('update');
-        });
-    });
+        },
+        );
+    },
+    );
 
     Route::name('auth.')->group(function () {
         Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'login'])->name('login');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    });
+    },
+    );
 });
 
 /**

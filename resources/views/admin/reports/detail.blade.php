@@ -3,8 +3,8 @@
     @include(
         "admin.components.page-header",
         [
-            "title" => "Chi tiết báo cáo #CS-" . $report->id,
-            "subtitle" => "Xem và xử lý báo cáo lừa đảo",
+            "title" => "Chi tiết tố cáo #CS-" . $report->id,
+            "subtitle" => "Xem và xử lý tố cáo lừa đảo",
         ]
     )
 
@@ -74,6 +74,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Số tiền thiệt hại</label>
+                                <p class="mb-0">
+                                    <strong class="text-danger">
+                                        {{ $report->damage_amount ? number_format($report->damage_amount) . " VNĐ" : "Không cung cấp" }}
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group mb-3">
                         <label>Nội dung mô tả</label>
                         <div class="bg-light rounded p-3">{{ $report->description }}</div>
@@ -125,9 +137,7 @@
                             <div class="form-group">
                                 <label>Họ tên</label>
                                 <p class="mb-0">
-                                    <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : $report->reporter_name ?? "—" }}
-                                    </strong>
+                                    <strong>{{ $report->reporter_name ?? "—" }}</strong>
                                 </p>
                             </div>
                         </div>
@@ -135,9 +145,7 @@
                             <div class="form-group">
                                 <label>Liên hệ</label>
                                 <p class="mb-0">
-                                    <strong>
-                                        {{ $report->is_anonymous ? "— Ẩn danh —" : ($report->reporter_contact ?: "Không cung cấp") }}
-                                    </strong>
+                                    <strong>{{ $report->reporter_contact ?: "Không cung cấp" }}</strong>
                                 </p>
                             </div>
                         </div>
@@ -183,7 +191,7 @@
                             data-bs-target="#modalApprove"
                         >
                             <i data-feather="check" class="me-1"></i>
-                            Duyệt báo cáo
+                            Duyệt tố cáo
                         </button>
                         <button
                             type="button"
@@ -192,7 +200,7 @@
                             data-bs-target="#modalReject"
                         >
                             <i data-feather="x" class="me-1"></i>
-                            Từ chối báo cáo
+                            Từ chối tố cáo
                         </button>
                     @else
                         <div class="alert alert-secondary mb-3 p-2">
@@ -212,7 +220,7 @@
                         data-bs-target="#modalDestroy"
                     >
                         <i data-feather="trash-2" class="me-1"></i>
-                        Xóa báo cáo
+                        Xóa tố cáo
                     </button>
                 </div>
             </div>

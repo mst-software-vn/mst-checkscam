@@ -16,7 +16,9 @@ return new class extends Migration
             $table->enum('type', ['account', 'website'])->default('account');
             $table->string('reporter_name');
             $table->string('reporter_contact');
+
             $table->string('target_id'); // STK/SĐT or URL
+            $table->string('ip_address', 45)->nullable();
             $table->string('target_name')->nullable();
             $table->string('target_bank')->nullable();
             $table->decimal('damage_amount', 10, 2)->nullable();

@@ -28,7 +28,6 @@ class AdminCommentController extends Controller
             $query->where(fn ($q) => $q->where('is_anonymous', $request->boolean('is_anonymous')));
         }
 
-        // Filter by time range
         if ($request->filled('time_range')) {
             switch ($request->time_range) {
                 case 'today':

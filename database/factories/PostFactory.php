@@ -164,7 +164,7 @@ class PostFactory extends Factory
                 <p><strong>ZaloPay:</strong> Tích hợp ngay trong Zalo, giao dịch cực kỳ nhanh chóng.</p>
                 <p><strong>Viettel Money:</strong> An toàn cao, hỗ trợ tốt cả những nơi không có mạng Internet qua USSD.</p>
                 <p>Dù dùng ví nào, bạn cũng nên đặt mật khẩu khác nhau và không bao giờ liên kết quá nhiều tiền từ tài khoản ngân hàng chính vào ví.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1593526612308-d4629baaa841?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1512075135822-67cdd9dd7314?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'vi-dien-tu, momo, zalopay, vnpay',
             ],
             [
@@ -211,7 +211,7 @@ class PostFactory extends Factory
                     <li>Link Facebook/Telegram của người bán.</li>
                 </ul>
                 <p>Nếu kết quả hiện "Bị báo cáo lừa đảo", hãy dừng ngay giao dịch. Đây là cách đơn giản nhất để bảo vệ túi tiền của chính bạn khỏi những kẻ gian gian lận trên mạng.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1601597111158-2fcee29ecad5?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'checkscam, giao-dich, an-toan, ngan-hang',
             ],
             [
@@ -234,7 +234,7 @@ class PostFactory extends Factory
                     <li>Thông tin chi tiết về đối tượng (STK, SĐT, Link trang cá nhân).</li>
                 </ol>
                 <p>Báo cáo của bạn sẽ giúp hàng nghìn người khác không bị mất tiền như bạn. Hãy chung tay bảo vệ cộng đồng!</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1589216532372-1c2a367900d8?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'report, checkscam, cong-dong, canh-bao',
             ],
             [
@@ -267,7 +267,7 @@ class PostFactory extends Factory
                     <li>Hỗ trợ giải quyết tranh chấp nhanh chóng.</li>
                 </ul>
                 <p>Hãy liên hệ ngay với Admin chính thức để tìm hiểu về mức phí và quy trình tham gia bảo hiểm chuyên nghiệp.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1554224155-1696413575b9?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'bao-hiem, uy-tin, checkscam, quy-bao-hiem',
             ],
             [
@@ -285,7 +285,7 @@ class PostFactory extends Factory
                 'content' => '<h3>Sự thật về các sàn giao dịch quyền chọn nhị phân</h3>
                 <p>Các sàn BO thực chất là một hình thức đánh bạc đội lốt đầu tư tài chính. Người chơi chỉ có 2 lựa chọn lên hoặc xuống trong thời gian cực ngắn. Các "chuyên gia" thường khoe cuộc sống sang chảnh để lôi kéo người chơi nạp tiền.</p>
                 <p>Hệ thống sàn thường có thể can thiệp vào kết quả giao dịch ở những giây cuối cùng. Hãy tránh xa các sàn giao dịch này nếu không muốn trắng tay trong một đêm.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1611974714400-999313db4608?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'bo, chung-khoan, dau-tu, rui-ro',
             ],
             [
@@ -323,7 +323,7 @@ class PostFactory extends Factory
                     <li>Khôi phục cài đặt gốc ngay tại chỗ để tránh iCloud ẩn.</li>
                 </ul>
                 <p>Đừng vì quá ham rẻ mà mua phải những chiếc máy "mất vân, hư cam" hoặc máy đã qua sửa chữa nặng nề.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1510557880182-3d4d3cba3f21?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'iphone, cong-nghe, mua-ban, tips',
             ],
             [
@@ -332,7 +332,7 @@ class PostFactory extends Factory
                 'content' => '<h3>Cảnh giác với các cuộc gọi thông báo "phạt nguội"</h3>
                 <p>Tội phạm mạo danh cán bộ CSGT gọi điện đe dọa nạn nhân liên quan đến các vụ án giao thông nghiêm trọng hoặc có biên bản phạt nguội chưa nộp. Chúng yêu cầu bạn chuyển khoản ngay để "đình chỉ vụ việc".</p>
                 <p><strong>Lưu ý quan trọng:</strong> Cơ quan Công an chỉ làm việc thông qua giấy mời, giấy triệu tập tại trụ sở chính thức. Mọi yêu cầu chuyển tiền qua điện thoại đều là hành vi lừa đảo chiếm đoạt tài sản.</p>',
-                'thumbnail' => 'https://images.unsplash.com/photo-1503676260728-1c00da07bb5e?w=1000&q=80',
+                'thumbnail' => 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
                 'hashtags' => 'cong-an, phat-nguoi, lua-dao, canh-bao',
             ],
         ];
