@@ -60,6 +60,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
          * ---             Report                 ---
          * ------------------------------------------
          */
+        Route::post('/reports/bulk-delete', [AdminReportController::class, 'bulkDestroy'])->name('reports.bulk-delete');
         Route::prefix('reports')->name('reports.')->group(function () {
             Route::get('/', [AdminReportController::class, 'index'])->name('index');
             Route::get('/{id}', [AdminReportController::class, 'show'])->name('detail');
