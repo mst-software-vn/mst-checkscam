@@ -120,7 +120,9 @@
                                     <option value="1" {{ request("status") === "1" ? "selected" : "" }}>
                                         Hoạt động
                                     </option>
-                                    <option value="0" {{ request("status") === "0" ? "selected" : "" }}>Vô hiệu</option>
+                                    <option value="0" {{ request("status") === "0" ? "selected" : "" }}>
+                                        Vô hiệu
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-6">
