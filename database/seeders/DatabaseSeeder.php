@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Report::factory()->count(50)->create();
-        Insurance::factory()->count(20)->create();
-        Post::factory()->count(25)->create();
+        Insurance::factory()->count(200)->create();
+        Post::factory()->count(300)->create();
         User::factory()->count(2)->create();
 
         $approvedReports = Report::where('status', 'approved')->get();
