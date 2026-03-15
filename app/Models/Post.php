@@ -63,4 +63,17 @@ class Post extends Model
     {
         $this->increment('view_count');
     }
+
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        if (! $this->thumbnail) {
+            return null;
+        }
+
+        if (filter_var($this->thumbnail, FILTER_VALIDATE_URL)) {
+            return $this->thumbnail;
+        }
+
+        return asset('storage/'.$this->thumbnail);
+    }
 }

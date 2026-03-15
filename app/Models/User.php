@@ -39,4 +39,17 @@ class User extends Authenticatable
     {
         return $this->status === 1;
     }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if (! $this->avatar) {
+            return 'https://ui-avatars.com/api/?name='.urlencode($this->full_name ?? $this->username ?? 'User').'&background=0068FF&color=fff';
+        }
+
+        if (filter_var($this->avatar, FILTER_VALIDATE_URL)) {
+            return $this->avatar;
+        }
+
+        return asset('storage/'.$this->avatar);
+    }
 }

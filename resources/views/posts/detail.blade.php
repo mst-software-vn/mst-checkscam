@@ -95,7 +95,7 @@
                                 <div class="flex items-center gap-4">
                                     <div class="relative">
                                         <img
-                                            src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? "Admin") }}&background=0068FF&color=fff"
+                                            src="{{ $post->author ? $post->author->avatar_url : "https://ui-avatars.com/api/?name=Admin&background=0068FF&color=fff" }}"
                                             class="h-12 w-12 rounded-2xl border-2 border-white shadow-sm dark:border-gray-800"
                                             alt="Author"
                                         />
@@ -136,7 +136,7 @@
                         <!-- Featured Image -->
                         <div class="group relative overflow-hidden">
                             <img
-                                src="{{ asset("storage/" . $post->thumbnail) }}"
+                                src="{{ $post->thumbnail_url }}"
                                 class="aspect-[21/9] w-full object-cover"
                                 alt="{{ $post->title }}"
                             />
@@ -226,7 +226,7 @@
                                 >
                                     <div class="aspect-video overflow-hidden">
                                         <img
-                                            src="{{ asset("storage/" . $related->thumbnail) }}"
+                                            src="{{ $related->thumbnail_url }}"
                                             class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                             alt="{{ $related->title }}"
                                         />
