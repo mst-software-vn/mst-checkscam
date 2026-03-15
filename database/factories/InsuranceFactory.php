@@ -142,7 +142,7 @@ class InsuranceFactory extends Factory
             'services' => collect($this->faker->randomElements($servicesList, $this->faker->numberBetween(2, 5)))
                 ->map(fn ($item) => ['title' => $item])
                 ->toArray(),
-            'status' => $this->faker->randomElement([1, 1, 1, 0]), // 75% active
+            'status' => 1, // 100% active to match user expectations for 200 members
             'slug' => Str::slug($fullName).'-'.$this->faker->unique()->numberBetween(1000, 9999),
             'created_at' => $insuranceDate,
             'updated_at' => now(),

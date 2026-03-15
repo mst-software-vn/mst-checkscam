@@ -156,11 +156,6 @@
                         </div>
                     @endforelse
                 </div>
-
-                <!-- Pagination -->
-                <div class="mt-12 flex justify-center">
-                    {{ $insurances->links() }}
-                </div>
             </div>
             <!-- SEO Content Section (Similar to Report Index) -->
             <article class="mx-auto mt-16 max-w-3xl">
@@ -220,8 +215,6 @@
                         debounceTimer = setTimeout(() => {
                             const url = new URL(window.location.href);
                             url.searchParams.set('search', query);
-                            // Reset to page 1 for new search
-                            url.searchParams.delete('page');
 
                             // Show some loading state if needed
                             listContainer.style.opacity = '0.5';

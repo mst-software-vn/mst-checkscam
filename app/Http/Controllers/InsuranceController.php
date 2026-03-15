@@ -19,8 +19,7 @@ class InsuranceController extends Controller
             });
         }
 
-        $insurances = $query->orderBy('id', 'asc')
-            ->paginate(100);
+        $insurances = $query->orderBy('id', 'asc')->get();
 
         // Thống kê động
         $total_fund = Insurance::where('status', 1)->sum('amount');
