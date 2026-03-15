@@ -16,6 +16,24 @@ class AdminPostController extends Controller
             $query->where('is_featured', $request->boolean('is_featured'));
         }
 
+        // Filter by time range
+        if ($request->filled('time_range')) {
+            switch ($request->time_range) {
+                case 'today':
+                    $query->whereDate('created_at', now()->today());
+                    break;
+                case '3_days':
+                    $query->where('created_at', '>=', now()->subDays(3));
+                    break;
+                case '7_days':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '1_month':
+                    $query->where('created_at', '>=', now()->subMonths(1));
+                    break;
+            }
+        }
+
         if ($request->filled('search')) {
             $query->where('title', 'like', '%'.$request->search.'%');
         }
@@ -156,6 +174,13 @@ class AdminPostController extends Controller
         }
 
         $post->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã xóa bài viết thành công.',
+            ]);
+        }
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã xóa bài viết.');
