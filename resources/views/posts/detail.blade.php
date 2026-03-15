@@ -146,7 +146,7 @@
                         <!-- Post Body -->
                         <div class="p-8 md:p-14">
                             <section
-                                class="prose prose-blue dark:prose-invert prose-headings:font-black prose-headings:text-gray-900 dark:prose-headings:text-white prose-headings:tracking-tight prose-p:text-gray-600 dark:prose-p:text-gray-400 prose-p:leading-[1.9] prose-p:text-[16px] md:prose-p:text-[17px] prose-strong:text-gray-800 dark:prose-strong:text-white prose-strong:font-black prose-img:rounded-2xl prose-img:shadow-sm prose-img:border prose-img:border-gray-100 dark:prose-img:border-gray-800 max-w-none"
+                                class="prose prose-blue dark:prose-invert prose-headings:font-black prose-headings:text-gray-900 dark:prose-headings:text-white prose-headings:tracking-tight prose-p:text-gray-600 dark:prose-p:text-slate-50 prose-p:leading-[1.9] prose-p:text-[16px] md:prose-p:text-[17px] prose-strong:text-gray-800 dark:prose-strong:text-white prose-strong:font-black prose-img:rounded-2xl prose-img:shadow-sm prose-img:border prose-img:border-gray-100 dark:prose-img:border-gray-800 max-w-none"
                             >
                                 {!! $post->content !!}
                             </section>

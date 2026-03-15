@@ -76,7 +76,7 @@
                                             {{ $post->title }}
                                         </h2>
                                         <p
-                                            class="mt-4 line-clamp-3 text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                                            class="mt-4 line-clamp-3 text-base leading-relaxed text-gray-500 dark:text-slate-200"
                                         >
                                             {{ $post->description }}
                                         </p>
@@ -125,7 +125,7 @@
                                             {{ $post->title }}
                                         </h3>
                                         <p
-                                            class="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400"
+                                            class="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-slate-200"
                                         >
                                             {{ $post->description }}
                                         </p>
