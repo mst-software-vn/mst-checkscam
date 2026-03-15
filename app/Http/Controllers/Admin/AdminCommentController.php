@@ -13,7 +13,7 @@ class AdminCommentController extends Controller
         $query = Comment::with('report')->latest();
 
         if ($request->filled('report_id')) {
-            $query->where('report_id', $request->integer('report_id'));
+            $query->where(fn ($q) => $q->where('report_id', $request->integer('report_id')));
         }
 
         if ($request->filled('keyword')) {
@@ -25,7 +25,7 @@ class AdminCommentController extends Controller
         }
 
         if ($request->filled('is_anonymous')) {
-            $query->where('is_anonymous', $request->boolean('is_anonymous'));
+            $query->where(fn ($q) => $q->where('is_anonymous', $request->boolean('is_anonymous')));
         }
 
         // Filter by time range
@@ -35,13 +35,13 @@ class AdminCommentController extends Controller
                     $query->whereDate('created_at', now()->today());
                     break;
                 case '3_days':
-                    $query->where('created_at', '>=', now()->subDays(3));
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subDays(3)));
                     break;
                 case '7_days':
-                    $query->where('created_at', '>=', now()->subDays(7));
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subDays(7)));
                     break;
                 case '1_month':
-                    $query->where('created_at', '>=', now()->subMonth());
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subMonth()));
                     break;
             }
         }

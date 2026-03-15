@@ -13,7 +13,7 @@ class AdminPostController extends Controller
         $query = Post::query()->with('author')->latest();
 
         if ($request->filled('is_featured')) {
-            $query->where('is_featured', $request->boolean('is_featured'));
+            $query->where(fn ($q) => $q->where('is_featured', $request->boolean('is_featured')));
         }
 
         // Filter by time range
@@ -23,19 +23,19 @@ class AdminPostController extends Controller
                     $query->whereDate('created_at', now()->today());
                     break;
                 case '3_days':
-                    $query->where('created_at', '>=', now()->subDays(3));
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subDays(3)));
                     break;
                 case '7_days':
-                    $query->where('created_at', '>=', now()->subDays(7));
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subDays(7)));
                     break;
                 case '1_month':
-                    $query->where('created_at', '>=', now()->subMonths(1));
+                    $query->where(fn ($q) => $q->where('created_at', '>=', now()->subMonths(1)));
                     break;
             }
         }
 
         if ($request->filled('search')) {
-            $query->where('title', 'like', '%'.$request->search.'%');
+            $query->where(fn ($q) => $q->where('title', 'like', '%'.$request->search.'%'));
         }
 
         $posts = $query->paginate(15)->withQueryString();
