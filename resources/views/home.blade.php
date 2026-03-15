@@ -390,7 +390,7 @@
                                     </h3>
                                     <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
-                                        {{ now()->format('d/m/Y') }}
+                                        {{ \Carbon\Carbon::parse($item->last_reported_at)->format('d/m/Y') }}
                                     </div>
                                 </div>
                             </div>
@@ -415,7 +415,7 @@
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
                                             <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ str_pad($item->total_views, 2, '0', STR_PAD_LEFT) }}
+                                            {{ number_format($item->total_views) }}
                                         </span>
                                     </div>
                                     <div class="flex flex-col">
@@ -424,18 +424,8 @@
                                             Lượt tra cứu
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ str_pad($item->total_searches, 2, '0', STR_PAD_LEFT) }}
-                                        </span>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Bài tố cáo
-                                        </span>
-                                        <span class="text-cs_red text-xs font-bold">
-                                            <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                            {{ str_pad($item->report_count, 2, '0', STR_PAD_LEFT) }}
+                                            <i class="fa-solid fa-magnifying-glass mr-1 text-[10px] opacity-50"></i>
+                                            {{ number_format($item->total_searches) }}
                                         </span>
                                     </div>
                                 </div>

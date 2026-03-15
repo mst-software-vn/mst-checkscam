@@ -11,15 +11,14 @@ if (! function_exists('getTopWeeklyReports')) {
             ->where('created_at', '>=', now()->subDays(7))
             ->select(
                 'target_id',
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(slug ORDER BY (view_count + search_count) DESC), ',', 1) as slug"),
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(target_name ORDER BY (view_count + search_count) DESC), ',', 1) as target_name"),
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(type ORDER BY (view_count + search_count) DESC), ',', 1) as type"),
-
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(slug ORDER BY (view_count + search_count) DESC SEPARATOR '|||'), '|||', 1) as slug"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(target_name ORDER BY (view_count + search_count) DESC SEPARATOR '|||'), '|||', 1) as target_name"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(type ORDER BY (view_count + search_count) DESC SEPARATOR '|||'), '|||', 1) as type"),
+                DB::raw('MAX(created_at) as last_reported_at'),
                 DB::raw('SUM(view_count) as total_views'),
-                DB::raw('SUM(search_count) as total_searches'),
+                DB::raw('MAX(search_count) as total_searches'),
                 DB::raw('COUNT(*) as report_count'),
-
-                DB::raw('(SUM(view_count) + SUM(search_count)) as heat_index')
+                DB::raw('(SUM(view_count) + MAX(search_count)) as heat_index')
             )
             ->groupBy('target_id')
             ->orderByDesc('heat_index')
