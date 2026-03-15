@@ -28,6 +28,24 @@ class AdminCommentController extends Controller
             $query->where('is_anonymous', $request->boolean('is_anonymous'));
         }
 
+        // Filter by time range
+        if ($request->filled('time_range')) {
+            switch ($request->time_range) {
+                case 'today':
+                    $query->whereDate('created_at', now()->today());
+                    break;
+                case '3_days':
+                    $query->where('created_at', '>=', now()->subDays(3));
+                    break;
+                case '7_days':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '1_month':
+                    $query->where('created_at', '>=', now()->subMonth());
+                    break;
+            }
+        }
+
         $comments = $query->paginate(20)->withQueryString();
 
         return view('admin.comments.index', compact('comments'));
@@ -38,6 +56,18 @@ class AdminCommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return redirect()->back()->with('success', 'Đã xoá bình luận thành công!');
+        return response()->json(['success' => true, 'message' => 'Đã xoá bình luận thành công!']);
+    }
+
+    public function bulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        $comments = Comment::whereIn('id', $ids)->get();
+
+        foreach ($comments as $comment) {
+            $comment->delete();
+        }
+
+        return response()->json(['success' => true, 'message' => 'Đã xóa '.count($comments).' bình luận thành công.']);
     }
 }

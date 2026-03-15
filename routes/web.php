@@ -105,6 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
          * ---            Comments                ---
          * ------------------------------------------
          */
+        Route::post('/comments/bulk-delete', [AdminCommentController::class, 'bulkDestroy'])->name('comments.bulk-delete');
         Route::prefix('comments')->name('comments.')->group(function () {
             Route::get('/', [AdminCommentController::class, 'index'])->name('index');
             Route::delete('/{id}', [AdminCommentController::class, 'destroy'])->name('destroy');
