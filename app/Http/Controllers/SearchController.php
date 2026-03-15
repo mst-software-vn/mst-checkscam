@@ -85,6 +85,30 @@ class SearchController extends Controller
         $topWeeklyReports = getTopWeeklyReports();
         $topDailySearches = getTopDailySearches();
 
+        $page = $request->input('page', 1);
+        if ($page == 1) {
+            $perPage = 8;
+            $offset = 0;
+        } else {
+            $perPage = 16;
+            $offset = 8 + ($page - 2) * 16;
+        }
+
+        $commentsQuery = \App\Models\Comment::whereHas('report', function ($query) {
+            $query->where('status', 'approved');
+        })->with('report')->latest();
+
+        $totalCommentsCount = $commentsQuery->count();
+        $commentItems = $commentsQuery->skip($offset)->take($perPage)->get();
+
+        $comments = new \Illuminate\Pagination\LengthAwarePaginator(
+            $commentItems,
+            $totalCommentsCount,
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()],
+        );
+
         return view('home', compact(
             'query',
             'results',
@@ -94,6 +118,7 @@ class SearchController extends Controller
             'stats',
             'topWeeklyReports',
             'topDailySearches',
+            'comments',
         ));
     }
 

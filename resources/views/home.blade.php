@@ -115,7 +115,7 @@
                         class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800 mb-6">
                         @if(isset($topWeeklyReports) && $topWeeklyReports->count() > 0)
                         @foreach($topWeeklyReports as $index => $item)
-                        <a href="/{{ $item->slug }}"
+                        <a href="{{ route('search.index', ['q' => $item->target_id]) }}"
                             class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50">
                             <!-- Đối tượng & Ngày -->
                             <div class="flex w-full items-center gap-3 sm:w-4/12">
@@ -130,7 +130,7 @@
                                     </h3>
                                     <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
-                                        {{ now()->format('d/m/Y') }}
+                                        {{ \Carbon\Carbon::parse($item->last_reported_at)->format('d/m/Y') }}
                                     </div>
                                 </div>
                             </div>
@@ -148,36 +148,26 @@
                             </div>
 
                             <!-- Chỉ số tín nhiệm (Stats) -->
-                            <div class="w-full border-gray-100 sm:w-3/12 sm:border-l sm:px-6 dark:border-gray-800">
-                                <div class="flex items-center gap-6">
+                            <div class="w-full border-gray-100 sm:w-4/12 sm:border-l sm:px-4 dark:border-gray-800">
+                                <div class="flex items-center justify-between sm:justify-start sm:gap-4 md:gap-6">
                                     <div class="flex flex-col">
                                         <span
                                             class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Lượt xem
+                                            Tố cáo
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ number_format($item->view_count ?? 0) }}
-                                        </span>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Bài cảnh báo
-                                        </span>
-                                        <span class="text-cs_red text-xs font-bold">
-                                            <i class="fa-solid fa-circle-exclamation mr-1 opacity-50"></i>
-                                            {{ str_pad($item->report_count, 2, '0', STR_PAD_LEFT) }}
+                                            <i class="fa-solid fa-bullhorn mr-1 text-[10px] opacity-50"></i>
+                                            {{ number_format($item->report_count) }} bài tố cáo
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Hành động -->
-                            <div class="w-full text-right sm:w-2/12">
+                            <div class="w-full text-right sm:w-1/12">
                                 <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20">
-                                    Chi tiết
+                                    Xem chi tiết
                                 </span>
                             </div>
                         </a>
@@ -376,7 +366,7 @@
                         class="dark:bg-dark_card overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs dark:border-gray-800">
                         @if(isset($topWeeklyReports) && $topWeeklyReports->count() > 0)
                         @foreach($topWeeklyReports as $index => $item)
-                        <a href="/{{ $item->slug }}"
+                        <a href="{{ route('search.index', ['q' => $item->target_id]) }}"
                             class="{{ !$loop->last ? 'border-b border-gray-100 dark:border-gray-800' : '' }} group flex flex-col items-center gap-4 p-5 transition-all duration-300 hover:bg-gray-50/80 sm:flex-row sm:gap-0 dark:hover:bg-slate-800/50">
                             <div class="flex w-full items-center gap-3 sm:w-4/12">
                                 <div
@@ -411,21 +401,11 @@
                                     <div class="flex flex-col">
                                         <span
                                             class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Lượt xem
+                                            Tố cáo
                                         </span>
                                         <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                            <i class="fa-regular fa-eye mr-1 opacity-50"></i>
-                                            {{ number_format($item->total_views) }}
-                                        </span>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-                                            Lượt tra cứu
-                                        </span>
-                                        <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
-                                            <i class="fa-solid fa-magnifying-glass mr-1 text-[10px] opacity-50"></i>
-                                            {{ number_format($item->total_searches) }}
+                                            <i class="fa-solid fa-bullhorn mr-1 text-[10px] opacity-50"></i>
+                                            {{ number_format($item->report_count) }} bài tố cáo
                                         </span>
                                     </div>
                                 </div>
@@ -434,7 +414,7 @@
                             <div class="w-full text-right sm:w-1/12">
                                 <span
                                     class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20">
-                                    Chi tiết
+                                    Xem chi tiết
                                 </span>
                             </div>
                         </a>
