@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
 
-        Report::factory(50)->create();
-        Insurance::factory(20)->create();
-        Post::factory(10)->create();
+        Report::factory()->count(50)->create();
+        Insurance::factory()->count(20)->create();
+        Post::factory()->count(25)->create();
 
         $approvedReports = Report::where('status', 'approved')->get();
 
