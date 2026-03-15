@@ -138,45 +138,37 @@
                         >
                             <ul class="row">
                                 <li class="col-12 pt-3 text-center">
-                                    <a
-                                        href="{{ isset($post) && $post->thumbnail ? asset("storage/" . $post->thumbnail) : "#" }}"
-                                        id="lightboxLink"
-                                        target="_blank"
-                                        title="Click để xem ảnh lớn"
-                                    >
-                                        <img
-                                            src="{{ isset($post) && $post->thumbnail ? asset("storage/" . $post->thumbnail) : "" }}"
-                                            alt="thumbnail preview"
-                                            id="avatarPreview"
-                                            class="img-fluid rounded"
-                                            style="
-                                                max-height: 200px;
-                                                cursor: pointer;
-                                                border: 1px solid #ddd;
-                                                padding: 5px;
-                                            "
-                                        />
-                                    </a>
+                                    <img
+                                        src="{{ isset($post) && $post->thumbnail ? asset("storage/" . $post->thumbnail) : "" }}"
+                                        alt="thumbnail preview"
+                                        id="avatarPreview"
+                                        class="img-fluid rounded"
+                                        style="
+                                            max-height: 250px;
+                                            cursor: zoom-in;
+                                            border: 2px dashed #ff9f43;
+                                            padding: 5px;
+                                            transition: all 0.3s;
+                                        "
+                                        title="Click để phóng to ảnh"
+                                    />
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            Bấm vào ảnh trên để xem lớn. Bấm vào khu vực
+                                            <b>Tải lên</b>
+                                            bên trên nếu muốn thay đổi ảnh khác.
+                                        </small>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
-
-                        @if (! isset($post) || ! $post->thumbnail)
-                            <div class="product-list" id="defaultTextContainer">
-                                <ul class="row">
-                                    <li class="col-12 pt-3 text-center">
-                                        <h6>Chưa có ảnh nào được chọn.</h6>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
                     </div>
 
                     <hr />
                     <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" id="btnSubmit" class="btn btn-submit me-2">Lưu bài viết</button>
-                            <a href="{{ route("admin.posts.index") }}" class="btn btn-cancel">Hủy</a>
+                        <div class="col-lg-12 text-end">
+                            <a href="{{ route("admin.posts.index") }}" class="btn btn-cancel me-2">Hủy bỏ</a>
+                            <button type="submit" id="btnSubmit" class="btn btn-submit">Lưu bài viết</button>
                         </div>
                     </div>
                 </div>
@@ -189,30 +181,104 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Logic: Thumbnail Preview ---
+            // --- Logic: Lightbox for Thumbnail ---
+            const lbStyle = `
+                <style>
+                    #post-lightbox {
+                        display: none;
+                        position: fixed;
+                        inset: 0;
+                        z-index: 9999;
+                        background: rgba(0, 0, 0, .9);
+                        align-items: center;
+                        justify-content: center;
+                        cursor: zoom-out;
+                    }
+                    #post-lightbox.active { display: flex; }
+                    #post-lightbox img {
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        border-radius: 8px;
+                        box-shadow: 0 0 20px rgba(0,0,0,.5);
+                    }
+                    #post-lightbox .lb-close {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        color: #fff;
+                        font-size: 30px;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', lbStyle);
+
+            const lbHtml = `
+                <div id="post-lightbox">
+                    <button class="lb-close">&times;</button>
+                    <img src="" alt="preview" />
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', lbHtml);
+
+            const lb = document.getElementById('post-lightbox');
+            const lbImg = lb.querySelector('img');
+
+            const avatarPreview = document.getElementById('avatarPreview');
+            if (avatarPreview) {
+                avatarPreview.addEventListener('click', function() {
+                    lbImg.src = this.src;
+                    lb.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            lb.addEventListener('click', function() {
+                lb.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // --- Logic: Thumbnail Preview & Persistence ---
             const avatarInput = document.getElementById('avatarInput');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const imgElem = document.getElementById('avatarPreview');
+            const storageKey = 'post_thumbnail_preview';
+
+            // Restore from session storage if validation failed
+            @if($errors->any())
+                const savedPreview = sessionStorage.getItem(storageKey);
+                if (savedPreview) {
+                    if (imgElem) imgElem.src = savedPreview;
+                    if (previewContainer) previewContainer.style.display = 'block';
+                }
+            @else
+                // Clear storage if no errors (fresh load)
+                sessionStorage.removeItem(storageKey);
+            @endif
+
             if (avatarInput) {
                 avatarInput.addEventListener('change', function (e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
                         reader.onload = function (e) {
-                            const previewContainer = document.getElementById('imagePreviewContainer');
-                            const defaultText = document.getElementById('defaultTextContainer');
-                            const imgElem = document.getElementById('avatarPreview');
-                            const lbLink = document.getElementById('lightboxLink');
-
-                            if (imgElem) imgElem.src = e.target.result;
-                            if (lbLink) lbLink.href = e.target.result;
+                            const base64 = e.target.result;
+                            if (imgElem) imgElem.src = base64;
                             if (previewContainer) previewContainer.style.display = 'block';
-                            if (defaultText) defaultText.style.display = 'none';
+                            // Save to session storage
+                            sessionStorage.setItem(storageKey, base64);
                         };
                         reader.readAsDataURL(file);
                     }
                 });
             }
 
-            // --- Logic: Confirm Modal + Spinner delay 1s ---
+            // Clear storage on cancel
+            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(storageKey));
+
+            // --- Logic: Confirm Modal + AJAX + Spinner delay 1s ---
             const form = document.getElementById('postForm');
             if (form) {
                 form.addEventListener('submit', function (e) {
@@ -230,12 +296,65 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const btnSubmit = document.getElementById('btnSubmit');
+                            const originalText = btnSubmit.innerHTML;
+
                             btnSubmit.disabled = true;
                             btnSubmit.innerHTML =
-                                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang lưu...';
+                                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
 
                             setTimeout(() => {
-                                form.submit();
+                                const formData = new FormData(form);
+
+                                $.ajax({
+                                    url: form.action,
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    },
+                                    success: function(res) {
+                                        if (res.success) {
+                                            sessionStorage.removeItem(storageKey);
+                                            Swal.fire({
+                                                title: 'Thành công!',
+                                                text: res.message,
+                                                icon: 'success',
+                                                timer: 1500,
+                                                showConfirmButton: false
+                                            }).then(() => {
+                                                window.location.href = res.redirect;
+                                            });
+                                        }
+                                    },
+                                    error: function(xhr) {
+                                        btnSubmit.disabled = false;
+                                        btnSubmit.innerHTML = originalText;
+
+                                        if (xhr.status === 422) {
+                                            const errors = xhr.responseJSON.errors;
+                                            let errorMsg = '';
+                                            Object.values(errors).forEach(err => {
+                                                errorMsg += `• ${err[0]}<br>`;
+                                            });
+
+                                            Swal.fire({
+                                                title: 'Lỗi nhập liệu',
+                                                html: `<div class="text-start">${errorMsg}</div>`,
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Lỗi!',
+                                                text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+                                                icon: 'error',
+                                                confirmButtonColor: '#ff9f43'
+                                            });
+                                        }
+                                    }
+                                });
                             }, 1000);
                         }
                     });

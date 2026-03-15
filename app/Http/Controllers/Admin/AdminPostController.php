@@ -39,7 +39,18 @@ class AdminPostController extends Controller
             'content' => 'required|string|min:50',
             'is_featured' => 'nullable|boolean',
             'hashtags' => 'nullable|string|max:500',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ], [
+            'title.required' => 'Tiêu đề bài viết không được để trống.',
+            'title.max' => 'Tiêu đề bài viết không quá 255 ký tự.',
+            'description.required' => 'Mô tả ngắn không được để trống.',
+            'description.max' => 'Mô tả ngắn không quá 500 ký tự.',
+            'content.required' => 'Nội dung bài viết không được để trống.',
+            'content.min' => 'Nội dung bài viết phải có ít nhất 50 ký tự.',
+            'thumbnail.required' => 'Thumbnail / Ảnh đại diện là bắt buộc.',
+            'thumbnail.image' => 'File tải lên phải là hình ảnh.',
+            'thumbnail.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
+            'thumbnail.max' => 'Dung lượng ảnh tối đa 5MB.',
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
@@ -60,6 +71,14 @@ class AdminPostController extends Controller
             'thumbnail' => $thumbnailPath,
             'author_id' => auth()->id(),
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã tạo bài viết thành công.',
+                'redirect' => route('admin.posts.index'),
+            ]);
+        }
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã tạo bài viết thành công.');
@@ -84,6 +103,16 @@ class AdminPostController extends Controller
             'is_featured' => 'nullable|boolean',
             'hashtags' => 'nullable|string|max:500',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ], [
+            'title.required' => 'Tiêu đề bài viết không được để trống.',
+            'title.max' => 'Tiêu đề bài viết không quá 255 ký tự.',
+            'description.required' => 'Mô tả ngắn không được để trống.',
+            'description.max' => 'Mô tả ngắn không quá 500 ký tự.',
+            'content.required' => 'Nội dung bài viết không được để trống.',
+            'content.min' => 'Nội dung bài viết phải có ít nhất 50 ký tự.',
+            'thumbnail.image' => 'File tải lên phải là hình ảnh.',
+            'thumbnail.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
+            'thumbnail.max' => 'Dung lượng ảnh tối đa 5MB.',
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
@@ -105,6 +134,14 @@ class AdminPostController extends Controller
             'hashtags' => $validated['hashtags'] ?? null,
             'thumbnail' => $validated['thumbnail'] ?? $post->thumbnail,
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã cập nhật bài viết thành công.',
+                'redirect' => route('admin.posts.index'),
+            ]);
+        }
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã cập nhật bài viết thành công.');
