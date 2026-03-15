@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->decimal('amount', 15, 2);
             $table->date('insurance_date');
+            $table->date('expired_at')->nullable();
             $table->json('contact_info')->nullable();
             $table->json('payment_accounts')->nullable();
             $table->json('services')->nullable();

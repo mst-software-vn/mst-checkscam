@@ -1,5 +1,12 @@
 @extends("admin.layouts.master")
 @section("content")
+    <style>
+        .dataTables_paginate,
+        .dataTables_info,
+        .dataTables_length {
+            display: none !important;
+        }
+    </style>
     @include(
         "admin.components.page-header",
         [
@@ -69,7 +76,7 @@
                                 <td>{{ number_format($target->search_count) }}</td>
                                 <td>{{ $target->report_count }}</td>
                                 <td>
-                                    <span class="badges bg-lightgrey text-dark">{{ $target->last_ip }}</span>
+                                    <span class="badges bg-lightgrey text-white">{{ $target->last_ip }}</span>
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($target->last_searched_at)->format("d/m/Y H:i") }}</td>
                             </tr>

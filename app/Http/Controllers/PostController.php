@@ -9,8 +9,18 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        // For now, no pagination needed or maybe 12 per page
-        $posts = Post::with('author')->orderBy('id', 'desc')->paginate(12);
+        $query = Post::with('author')->orderBy('id', 'desc');
+
+        if ($request->has('search') && ! empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('hashtags', 'like', "%{$search}%");
+            });
+        }
+
+        $posts = $query->paginate(9);
 
         return view('posts.index', compact('posts'));
     }

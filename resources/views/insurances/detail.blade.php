@@ -19,11 +19,28 @@
                     <div
                         class="ring-cs_blue/20 relative h-24 w-24 overflow-hidden rounded-full border-2 border-white shadow-xl ring-2 ring-offset-2 md:h-28 md:w-28 dark:border-slate-800"
                     >
-                        <img
-                            src="{{ asset("storage/" . $insurance->avatar) }}"
-                            class="h-full w-full object-cover"
-                            alt="{{ $insurance->full_name }} Avatar"
-                        />
+                        @if ($insurance->avatar_url)
+                            <img
+                                src="{{ $insurance->avatar_url }}"
+                                class="h-full w-full object-cover"
+                                alt="{{ $insurance->full_name }} Avatar"
+                                onerror="
+                                    this.style.display = 'none';
+                                    this.nextElementSibling.style.display = 'flex';
+                                "
+                            />
+                            <div
+                                class="hidden h-full w-full items-center justify-center bg-gray-100 text-3xl font-bold text-gray-400 dark:bg-gray-800"
+                            >
+                                {{ strtoupper(substr($insurance->full_name, 0, 1)) }}
+                            </div>
+                        @else
+                            <div
+                                class="flex h-full w-full items-center justify-center bg-gray-100 text-3xl font-bold text-gray-400 dark:bg-gray-800"
+                            >
+                                {{ strtoupper(substr($insurance->full_name, 0, 1)) }}
+                            </div>
+                        @endif
                     </div>
                 </div>
 

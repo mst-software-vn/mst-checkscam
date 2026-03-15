@@ -3,8 +3,8 @@
     @include(
         "admin.components.page-header",
         [
-            "title" => "Quản lý báo cáo",
-            "subtitle" => "Duyệt và quản lý các báo cáo lừa đảo",
+            "title" => "Quản lý tố cáo",
+            "subtitle" => "Duyệt và quản lý các tố cáo lừa đảo",
         ]
     )
 
@@ -59,7 +59,7 @@
                     <form method="GET" action="{{ route("admin.reports.index") }}">
                         <div class="row g-3 align-items-end">
                             <div class="col-lg-3 col-md-6">
-                                <label class="form-label fw-bold small text-muted mb-2">Trạng thái báo cáo</label>
+                                <label class="form-label fw-bold small text-muted mb-2">Trạng thái tố cáo</label>
                                 <select name="status" class="form-select select2-basic">
                                     <option value="">Tất cả trạng thái</option>
                                     <option value="pending" {{ request("status") == "pending" ? "selected" : "" }}>
@@ -177,11 +177,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($report->is_anonymous)
-                                        <span class="text-muted">Ẩn danh</span>
-                                    @else
-                                        {{ $report->reporter_name ?? "—" }}
-                                    @endif
+                                    {{ $report->reporter_name ?? "—" }}
                                 </td>
                                 <td>{{ count($report->evidence_images ?? []) }} ảnh</td>
                                 <td>
@@ -209,7 +205,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-muted py-4 text-center">Không có báo cáo nào.</td>
+                                <td colspan="8" class="text-muted py-4 text-center">Không có tố cáo nào.</td>
                             </tr>
                         @endforelse
                     </tbody>

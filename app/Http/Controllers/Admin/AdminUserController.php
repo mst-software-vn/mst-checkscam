@@ -237,7 +237,7 @@ class AdminUserController extends Controller
         $users = User::whereIn('id', $ids)->get();
         $count = 0;
         foreach ($users as $user) {
-            // Không được xoá chính mình hoặc account root(id=1)
+
             if ($user->id == 1 || $user->id == auth()->id()) {
                 continue;
             }

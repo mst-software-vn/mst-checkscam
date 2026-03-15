@@ -9,7 +9,7 @@
                 </div>
                 <div class="dash-widgetcontent">
                     <h5><span class="counters" data-count="{{ $metrics["pending_reports"] }}">0</span></h5>
-                    <h6>Báo cáo chờ duyệt</h6>
+                    <h6>Tố cáo chờ duyệt</h6>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
             <div class="dash-count das1">
                 <div class="dash-counts">
                     <h4>{{ number_format($metrics["total_reports"]) }}</h4>
-                    <h5>Tổng báo cáo</h5>
+                    <h5>Tổng tố cáo</h5>
                 </div>
                 <div class="dash-imgs">
                     <i data-feather="file-text"></i>
@@ -158,7 +158,7 @@
     {{-- Row 4: Báo cáo gần nhất --}}
     <div class="card mb-0">
         <div class="card-body">
-            <h4 class="card-title">Báo cáo gần nhất</h4>
+            <h4 class="card-title">Tố cáo gần nhất</h4>
             <div class="table-responsive dataview">
                 <table class="table">
                     <thead>
@@ -200,7 +200,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-muted text-center">Chưa có báo cáo nào.</td>
+                                <td colspan="7" class="text-muted text-center">Chưa có tố cáo nào.</td>
                             </tr>
                         @endforelse
                     </tbody>
