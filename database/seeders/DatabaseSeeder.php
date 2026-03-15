@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Comment;
 use App\Models\Insurance;
+use App\Models\Post;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
 
         Report::factory(50)->create();
         Insurance::factory(20)->create();
+        Post::factory(10)->create();
 
         $approvedReports = Report::where('status', 'approved')->get();
 
