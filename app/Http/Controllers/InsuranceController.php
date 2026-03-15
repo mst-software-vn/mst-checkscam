@@ -21,7 +21,6 @@ class InsuranceController extends Controller
 
         $insurances = $query->orderBy('id', 'asc')->get();
 
-        // Thống kê động
         $total_fund = Insurance::where('status', 1)->sum('amount');
         $total_members = Insurance::where('status', 1)->count();
 

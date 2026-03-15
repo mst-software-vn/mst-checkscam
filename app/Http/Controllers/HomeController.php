@@ -23,7 +23,6 @@ class HomeController extends Controller
             ->unique()
             ->values();
 
-        // Initial load shows 8, subsequent loads show 20
         $page = $request->input('page', 1);
         if ($page == 1) {
             $perPage = 8;
@@ -45,7 +44,7 @@ class HomeController extends Controller
             $totalCount,
             $perPage,
             $page,
-            ['path' => $request->url(), 'query' => $request->query()]
+            ['path' => $request->url(), 'query' => $request->query()],
         );
 
         if ($request->ajax()) {

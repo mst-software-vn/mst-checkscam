@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,6 @@ class AdminReportController extends Controller
             $query->where('type', $request->type);
         }
 
-        // Filter by time range
         if ($request->filled('time_range')) {
             switch ($request->time_range) {
                 case 'today':

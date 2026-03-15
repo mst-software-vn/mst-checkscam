@@ -14,7 +14,7 @@ class SearchController extends Controller
         $query = trim($request->query('q', ''));
         $results = collect();
         $isFound = false;
-        $type    = null;
+        $type = null;
 
         if ($query !== '') {
             [$type, $formattedQuery] = detectQueryType($query);
@@ -38,16 +38,16 @@ class SearchController extends Controller
                 ->when($type === 'name', function ($q) use ($normalizedQuery) {
                     $q->whereRaw(
                         "LOWER(TRIM(REGEXP_REPLACE(target_name, '\\\\s+', ' '))) = ?",
-                        [$normalizedQuery]
+                        [$normalizedQuery],
                     );
                 })
                 ->orderByDesc('created_at');
 
             $matchedIds = (clone $dbQuery)->pluck('id');
             $ip = $request->ip();
-            $searchCacheKey = 'search_' . md5($query) . '_' . $ip;
+            $searchCacheKey = 'search_'.md5($query).'_'.$ip;
 
-            if ($matchedIds->isNotEmpty() && !Cache::has($searchCacheKey)) {
+            if ($matchedIds->isNotEmpty() && ! Cache::has($searchCacheKey)) {
                 Report::whereIn('id', $matchedIds)->increment('search_count');
                 Cache::put($searchCacheKey, true, now()->addHours(24));
             }
@@ -60,18 +60,15 @@ class SearchController extends Controller
                 ->where('created_at', '>=', now()->subMinute())
                 ->exists();
 
-            if (!$alreadyLogged) {
+            if (! $alreadyLogged) {
                 SearchLog::create([
                     'search_query' => $query,
-                    'is_found'     => $isFound,
-                    'ip_address'   => $ip,
+                    'is_found' => $isFound,
+                    'ip_address' => $ip,
                 ]);
             }
         }
 
-        // -----------------------------------------------
-        // lịch sử tìm kiếm gần đây của IP này (max 10)
-        // -----------------------------------------------
         $recentSearches = SearchLog::where('ip_address', $request->ip())
             ->orderByDesc('created_at')
             ->limit(10)
@@ -79,9 +76,6 @@ class SearchController extends Controller
             ->unique()
             ->values();
 
-        // -----------------------------------------------
-        // thống kê nhanh cho trang search (SAU NÀY CÓ THỂ ÁP DỤNG CACHE)
-        // -----------------------------------------------
         $stats = [
             'total_reports' => Report::where('status', 'approved')->count(),
             'total_account' => Report::where('status', 'approved')->where('type', 'account')->count(),
@@ -99,7 +93,7 @@ class SearchController extends Controller
             'recentSearches',
             'stats',
             'topWeeklyReports',
-            'topDailySearches'
+            'topDailySearches',
         ));
     }
 
@@ -124,12 +118,12 @@ class SearchController extends Controller
             ->unique('target_id')
             ->take(8)
             ->values()
-            ->map(fn($r) => [
-                'label'       => $r->target_id . ($r->target_name ? " — {$r->target_name}" : ''),
-                'value'       => $r->target_id,
-                'type'        => $r->type,
+            ->map(fn ($r) => [
+                'label' => $r->target_id.($r->target_name ? " — {$r->target_name}" : ''),
+                'value' => $r->target_id,
+                'type' => $r->type,
                 'target_name' => $r->target_name,
-                'slug'        => $r->slug,
+                'slug' => $r->slug,
             ]);
 
         return response()->json($suggestions);

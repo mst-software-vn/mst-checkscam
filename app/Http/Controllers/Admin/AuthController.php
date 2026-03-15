@@ -18,7 +18,6 @@ class AuthController extends Controller
         return view('admin.auth.login');
     }
 
-    // POST Login
     public function login(Request $request)
     {
 
