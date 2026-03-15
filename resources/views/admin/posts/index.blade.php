@@ -4,11 +4,18 @@
         "admin.components.page-header",
         [
             "title" => "Danh sách bài viết",
-            "subtitle" => "Quản lý các bài viết trên blog",
-            "btnText" => "Thêm bài viết mới",
+            "subtitle" => "Quản lý nội dung blog và bài viết cảnh báo",
+            "btnText" => "Thêm bài viết",
             "btnUrl" => route("admin.posts.create"),
         ]
     )
+
+    @if (session("success"))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session("success") }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
 
     <div class="card">
         <div class="card-body">
@@ -23,59 +30,56 @@
                     <div class="search-input">
                         <a class="btn btn-searchset"><img src="/assets/img/icons/search-white.svg" alt="img" /></a>
                     </div>
-                </div>
-                <div class="wordset">
-                    <ul>
-                        <li>
-                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf">
-                                <img src="/assets/img/icons/pdf.svg" alt="img" />
-                            </a>
-                        </li>
-                        <li>
-                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel">
-                                <img src="/assets/img/icons/excel.svg" alt="img" />
-                            </a>
-                        </li>
-                        <li>
-                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print">
-                                <img src="/assets/img/icons/printer.svg" alt="img" />
-                            </a>
-                        </li>
-                    </ul>
+
+                    <div class="ms-3" style="display: none" id="bulk-delete-container">
+                        <button type="button" class="btn btn-danger" id="btn-bulk-delete">
+                            <i data-feather="trash-2" class="me-1"></i>
+                            Xóa mục đã chọn (
+                            <span id="selected-count">0</span>
+                            )
+                        </button>
+                    </div>
                 </div>
             </div>
 
             {{-- Filter --}}
             <div class="card mb-0" id="filter_inputs">
                 <div class="card-body pb-0">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12">
-                            <div class="row">
-                                <div class="col-lg col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <select class="select">
-                                            <option>Tất cả danh mục</option>
-                                            <option>Cảnh báo lừa đảo</option>
-                                            <option>Tin tức</option>
-                                            <option>Kiến thức</option>
-                                        </select>
-                                    </div>
+                    <form method="GET" action="{{ route("admin.posts.index") }}">
+                        <div class="row">
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <select name="is_featured" class="select">
+                                        <option value="">Tất cả</option>
+                                        <option value="1" {{ request("is_featured") === "1" ? "selected" : "" }}>
+                                            Nổi bật
+                                        </option>
+                                        <option value="0" {{ request("is_featured") === "0" ? "selected" : "" }}>
+                                            Thường
+                                        </option>
+                                    </select>
                                 </div>
-                                <div class="col-lg col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Tìm theo tiêu đề..." />
-                                    </div>
+                            </div>
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="Tìm theo tiêu đề..."
+                                        value="{{ request("search") }}"
+                                    />
                                 </div>
-                                <div class="col-lg-1 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <a class="btn btn-filters ms-auto">
-                                            <img src="/assets/img/icons/search-whites.svg" alt="img" />
-                                        </a>
-                                    </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-filters ms-auto">
+                                        <img src="/assets/img/icons/search-whites.svg" alt="img" />
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -90,70 +94,165 @@
                                     <span class="checkmarks"></span>
                                 </label>
                             </th>
-                            <th>Bài viết</th>
+                            <th>Tiêu đề</th>
                             <th>Tác giả</th>
-                            <th>Nổi bật</th>
                             <th>Lượt xem</th>
+                            <th>Nổi bật</th>
                             <th>Ngày tạo</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <label class="checkboxs">
-                                    <input type="checkbox" />
-                                    <span class="checkmarks"></span>
-                                </label>
-                            </td>
-                            <td class="productimgname">
-                                <a href="javascript:void(0);" class="product-img">
-                                    <img src="/assets/img/product/product1.jpg" alt="product" />
-                                </a>
-                                <a href="javascript:void(0);">Cảnh báo thủ đoạn lừa đảo qua Telegram</a>
-                            </td>
-                            <td>Admin Tuan</td>
-                            <td><span class="badges bg-lightgreen">Có</span></td>
-                            <td>1,245</td>
-                            <td>13/03/2026</td>
-                            <td>
-                                <a class="me-3" href="{{ route("admin.posts.create") }}">
-                                    <img src="/assets/img/icons/edit.svg" alt="img" />
-                                </a>
-                                <a class="confirm-text" href="javascript:void(0);">
-                                    <img src="/assets/img/icons/delete.svg" alt="img" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkboxs">
-                                    <input type="checkbox" />
-                                    <span class="checkmarks"></span>
-                                </label>
-                            </td>
-                            <td class="productimgname">
-                                <a href="javascript:void(0);" class="product-img">
-                                    <img src="/assets/img/product/product2.jpg" alt="product" />
-                                </a>
-                                <a href="javascript:void(0);">Làm sao để nhận biết website giả mạo?</a>
-                            </td>
-                            <td>Mod Hieu</td>
-                            <td><span class="badges bg-lightgrey">Không</span></td>
-                            <td>850</td>
-                            <td>10/03/2026</td>
-                            <td>
-                                <a class="me-3" href="{{ route("admin.posts.create") }}">
-                                    <img src="/assets/img/icons/edit.svg" alt="img" />
-                                </a>
-                                <a class="confirm-text" href="javascript:void(0);">
-                                    <img src="/assets/img/icons/delete.svg" alt="img" />
-                                </a>
-                            </td>
-                        </tr>
+                        @forelse ($posts as $post)
+                            <tr>
+                                <td>
+                                    <label class="checkboxs">
+                                        <input type="checkbox" class="check-item" value="{{ $post->id }}" />
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </td>
+                                <td class="productimgname">
+                                    <a href="javascript:void(0);" class="product-img">
+                                        <img
+                                            src="{{ $post->thumbnail ? asset("storage/" . $post->thumbnail) : "/assets/img/product/noimage.png" }}"
+                                            alt="thumb"
+                                        />
+                                    </a>
+                                    <a href="{{ route("admin.posts.edit", $post->id) }}">
+                                        {{ Str::limit($post->title, 50) }}
+                                    </a>
+                                </td>
+                                <td>{{ $post->author?->full_name ?? "—" }}</td>
+                                <td>{{ number_format($post->view_count) }}</td>
+                                <td>
+                                    @if ($post->isFeatured())
+                                        <span class="badges bg-lightgreen">Có</span>
+                                    @else
+                                        <span class="badges bg-lightgrey">Không</span>
+                                    @endif
+                                </td>
+                                <td>{{ $post->created_at->format("d/m/Y") }}</td>
+                                <td>
+                                    <a class="me-3" href="{{ route("admin.posts.edit", $post->id) }}">
+                                        <img src="/assets/img/icons/edit.svg" alt="sửa" />
+                                    </a>
+                                    <form
+                                        action="{{ route("admin.posts.destroy", $post->id) }}"
+                                        method="POST"
+                                        class="d-inline"
+                                        onsubmit="return confirm('Xác nhận xóa bài viết này?');"
+                                    >
+                                        @csrf
+                                        @method("DELETE")
+                                        <button type="submit" class="border-0 bg-transparent p-0">
+                                            <img src="/assets/img/icons/delete.svg" alt="xóa" />
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-muted py-4 text-center">Chưa có bài viết nào.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            {{-- Pagination --}}
+            <div class="mt-3">
+                {{ $posts->withQueryString()->links("pagination::simple-bootstrap-5") }}
             </div>
         </div>
     </div>
 @endsection
+
+@push("scripts")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAll = document.getElementById('select-all');
+            const checkItems = document.querySelectorAll('.check-item');
+            const bulkDeleteContainer = document.getElementById('bulk-delete-container');
+            const selectedCountSpan = document.getElementById('selected-count');
+            const btnBulkDelete = document.getElementById('btn-bulk-delete');
+
+            function updateBulkDeleteUI() {
+                const checkedCount = document.querySelectorAll('.check-item:checked').length;
+                selectedCountSpan.textContent = checkedCount;
+
+                if (checkedCount > 0) {
+                    bulkDeleteContainer.style.display = 'inline-block';
+                } else {
+                    bulkDeleteContainer.style.display = 'none';
+                    selectAll.checked = false;
+                }
+
+                if (checkedCount === checkItems.length && checkItems.length > 0) {
+                    selectAll.checked = true;
+                } else {
+                    selectAll.checked = false;
+                }
+            }
+
+            if (selectAll) {
+                selectAll.addEventListener('change', function () {
+                    checkItems.forEach((item) => {
+                        item.checked = selectAll.checked;
+                    });
+                    updateBulkDeleteUI();
+                });
+            }
+
+            checkItems.forEach((item) => {
+                item.addEventListener('change', updateBulkDeleteUI);
+            });
+
+            if (btnBulkDelete) {
+                btnBulkDelete.addEventListener('click', function () {
+                    const selectedIds = Array.from(document.querySelectorAll('.check-item:checked')).map(
+                        (cb) => cb.value,
+                    );
+
+                    if (selectedIds.length === 0) return;
+
+                    Swal.fire({
+                        title: 'Xóa hàng loạt bài viết?',
+                        text: `Bạn có chắc chắn muốn xóa ${selectedIds.length} bài viết đã chọn? Hành động này không thể hoàn tác!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Có, xóa ngay!',
+                        cancelButtonText: 'Hủy',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Gọi Ajax xóa
+                            fetch('{{ route("admin.posts.bulk-delete") }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                },
+                                body: JSON.stringify({ ids: selectedIds }),
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    if (data.success) {
+                                        Swal.fire('Đã xóa!', data.message, 'success').then(() => {
+                                            window.location.reload();
+                                        });
+                                    } else {
+                                        Swal.fire('Lỗi!', data.message || 'Đã có lỗi xảy ra.', 'error');
+                                    }
+                                })
+                                .catch((error) => {
+                                    Swal.fire('Lỗi!', 'Không thể thực hiện yêu cầu lúc này.', 'error');
+                                });
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+@endpush

@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCommentController;
+use App\Http\Controllers\Admin\AdminInsuranceController;
+use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminSearchAnalyticsController;
+use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminReportController;
@@ -16,18 +22,11 @@ Route::get('/to-cao-lua-dao', function () {
 
 Route::post('/to-cao-lua-dao', [ReportController::class, 'store'])->name('report.store');
 
-Route::get('/bao-hiem-cs', function () {
-    return view('insurances.index');
-});
-Route::get('/bao-hiem-cs/{id}', function ($id) {
-    return view('insurances.detail', ['id' => $id]);
-});
-Route::get('/bai-viet', function () {
-    return view('posts.index');
-});
-Route::get('/bai-viet/{id}', function ($id) {
-    return view('posts.detail', ['id' => $id]);
-});
+Route::get('/bao-hiem-cs', [\App\Http\Controllers\InsuranceController::class, 'index'])->name('insurances.frontend.index');
+Route::get('/bao-hiem-cs/{slug}', [\App\Http\Controllers\InsuranceController::class, 'show'])->name('insurances.frontend.show');
+
+Route::get('/bai-viet', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.frontend.index');
+Route::get('/bai-viet/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.frontend.show');
 
 // Các trang hệ thống (System)
 Route::get('/api-checkscam', function () {
@@ -56,58 +55,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Reports
-        Route::get('/reports', function () {
-            return view('admin.reports.index');
-        })->name('reports.index');
-        Route::get('/reports/{id}', function ($id) {
-            return view('admin.reports.detail', ['id' => $id]);
-        })->name('reports.detail');
-
-        // Scam Records
-        Route::get('/scam-records', function () {
-            return view('admin.scam-records.index');
-        })->name('scam-records.index');
-
-        // Insurances
-        Route::get('/insurances', function () {
-            return view('admin.insurances.index');
-        })->name('insurances.index');
-        Route::get('/insurances/create', function () {
-            return view('admin.insurances.create');
-        })->name('insurances.create');
-
-        // Posts
-        Route::get('/posts', function () {
-            return view('admin.posts.index');
-        })->name('posts.index');
-        Route::get('/posts/create', function () {
-            return view('admin.posts.create');
-        })->name('posts.create');
-
-        // Comments
-        Route::get('/comments', function () {
-            return view('admin.comments.index');
-        })->name('comments.index');
-
-        // Search Analytics
-        Route::get('/search-analytics', function () {
-            return view('admin.search-analytics.index');
-        })->name('search-analytics.index');
-
-        // Users
-        Route::get('/users', function () {
-            return view('admin.users.index');
-        })->name('users.index');
-        Route::get('/users/create', function () {
-            return view('admin.users.create');
-        })->name('users.create');
-
-        // Settings
-        Route::get('/settings', function () {
-            return view('admin.settings.index');
-        })->name('settings.index');
-
         /**
          * ------------------------------------------
          * ---             Report                 ---
@@ -120,6 +67,78 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/reject', [AdminReportController::class, 'reject'])->name('reject');
             Route::put('/{id}', [AdminReportController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminReportController::class, 'destroy'])->name('destroy');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---           Insurances               ---
+         * ------------------------------------------
+         */
+        Route::post('/insurances/bulk-delete', [AdminInsuranceController::class, 'bulkDestroy'])->name('insurances.bulk-delete');
+        Route::prefix('insurances')->name('insurances.')->group(function () {
+            Route::get('/', [AdminInsuranceController::class, 'index'])->name('index');
+            Route::get('/create', [AdminInsuranceController::class, 'create'])->name('create');
+            Route::post('/', [AdminInsuranceController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [AdminInsuranceController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [AdminInsuranceController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminInsuranceController::class, 'destroy'])->name('destroy');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---              Posts                 ---
+         * ------------------------------------------
+         */
+        Route::post('/posts/bulk-delete', [AdminPostController::class, 'bulkDestroy'])->name('posts.bulk-delete');
+        Route::prefix('posts')->name('posts.')->group(function () {
+            Route::get('/', [AdminPostController::class, 'index'])->name('index');
+            Route::get('/create', [AdminPostController::class, 'create'])->name('create');
+            Route::post('/', [AdminPostController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [AdminPostController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [AdminPostController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminPostController::class, 'destroy'])->name('destroy');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---            Comments                ---
+         * ------------------------------------------
+         */
+        Route::prefix('comments')->name('comments.')->group(function () {
+            Route::get('/', [AdminCommentController::class, 'index'])->name('index');
+            Route::delete('/{id}', [AdminCommentController::class, 'destroy'])->name('destroy');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---        Search Analytics            ---
+         * ------------------------------------------
+         */
+        Route::get('/search-analytics', [AdminSearchAnalyticsController::class, 'index'])->name('search-analytics.index');
+
+        /**
+         * ------------------------------------------
+         * ---              Users                 ---
+         * ------------------------------------------
+         */
+        Route::post('/users/bulk-delete', [AdminUserController::class, 'bulkDestroy'])->name('users.bulk-delete');
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [AdminUserController::class, 'index'])->name('index');
+            Route::get('/create', [AdminUserController::class, 'create'])->name('create');
+            Route::post('/', [AdminUserController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [AdminUserController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [AdminUserController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminUserController::class, 'destroy'])->name('destroy');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---            Settings                ---
+         * ------------------------------------------
+         */
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [AdminSettingController::class, 'index'])->name('index');
+            Route::post('/', [AdminSettingController::class, 'update'])->name('update');
         });
     });
 

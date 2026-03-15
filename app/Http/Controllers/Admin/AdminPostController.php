@@ -1,0 +1,144 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\Request;
+
+class AdminPostController extends Controller
+{
+    public function index(Request $request)
+    {
+        $query = Post::query()->with('author')->latest();
+
+        if ($request->filled('is_featured')) {
+            $query->where('is_featured', $request->boolean('is_featured'));
+        }
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+
+        $posts = $query->paginate(15)->withQueryString();
+
+        return view('admin.posts.index', compact('posts'));
+    }
+
+    public function create()
+    {
+        return view('admin.posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:posts,slug',
+            'description' => 'required|string|max:500',
+            'content' => 'required|string|min:50',
+            'is_featured' => 'nullable|boolean',
+            'hashtags' => 'nullable|string|max:500',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ]);
+
+        $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
+        $globalSlug = generateGlobalUniqueSlug($slugSource);
+
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = uploadImage($request->file('thumbnail'), 'posts');
+        }
+
+        Post::create([
+            'title' => $validated['title'],
+            'slug' => $globalSlug,
+            'description' => $validated['description'],
+            'content' => $validated['content'],
+            'is_featured' => $request->boolean('is_featured'),
+            'hashtags' => $validated['hashtags'] ?? null,
+            'thumbnail' => $thumbnailPath,
+            'author_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('admin.posts.index')
+            ->with('success', 'Đã tạo bài viết thành công.');
+    }
+
+    public function edit(int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.create', compact('post'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+            'description' => 'required|string|max:500',
+            'content' => 'required|string|min:50',
+            'is_featured' => 'nullable|boolean',
+            'hashtags' => 'nullable|string|max:500',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ]);
+
+        $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
+        $globalSlug = generateGlobalUniqueSlug($slugSource, null, $post->id);
+
+        if ($request->hasFile('thumbnail')) {
+            if ($post->thumbnail) {
+                deleteImage($post->thumbnail);
+            }
+            $validated['thumbnail'] = uploadImage($request->file('thumbnail'), 'posts');
+        }
+
+        $post->update([
+            'title' => $validated['title'],
+            'slug' => $globalSlug,
+            'description' => $validated['description'],
+            'content' => $validated['content'],
+            'is_featured' => $request->boolean('is_featured'),
+            'hashtags' => $validated['hashtags'] ?? null,
+            'thumbnail' => $validated['thumbnail'] ?? $post->thumbnail,
+        ]);
+
+        return redirect()->route('admin.posts.index')
+            ->with('success', 'Đã cập nhật bài viết thành công.');
+    }
+
+    public function destroy(int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        if ($post->thumbnail) {
+            deleteImage($post->thumbnail);
+        }
+
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')
+            ->with('success', 'Đã xóa bài viết.');
+    }
+
+    public function bulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'Không có bài viết nào được chọn.']);
+        }
+
+        $posts = Post::whereIn('id', $ids)->get();
+        foreach ($posts as $post) {
+            if ($post->thumbnail) {
+                deleteImage($post->thumbnail);
+            }
+            $post->delete();
+        }
+
+        return response()->json(['success' => true, 'message' => 'Đã xóa '.count($posts).' bài viết thành công.']);
+    }
+}

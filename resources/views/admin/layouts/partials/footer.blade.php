@@ -13,3 +13,5 @@
 <script src="/assets/plugins/apexchart/chart-data.js"></script>
 
 <script src="/assets/js/script.js"></script>
+
+@stack("scripts")

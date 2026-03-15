@@ -82,83 +82,20 @@
             <div
                 class="grid grid-cols-3 gap-x-2 gap-y-6 rounded-xl border border-gray-300 p-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-10 dark:border-gray-800"
             >
-                <?php
-                $names = [
-                    "Nguyễn Hoàng Dương",
-                    "Tống Hoàng Phương Dương",
-                    "Nguyễn Hồng Dương",
-                    "Trần Ngọc Thu",
-                    "Phạm Văn Huy",
-                    "Nguyễn Văn Phúc",
-                    "Zolo",
-                    "Huỳnh Công Sang",
-                    "Huỳnh Lê Minh Hiếu",
-                    "Hoàng Văn Mạnh",
-                    "Bùi Đức Long",
-                    "Đỗ Văn Mạnh",
-                    "Dương Thị Vân",
-                    "Duy Nguyễn",
-                    "Lò Văn Thực",
-                    "Hoàng Mai Thuận",
-                    "Phan Anh Quân",
-                    "Phạm Phúc Thịnh",
-                    "Nguyễn Hồng Ân",
-                    "Lê Văn Việt",
-                    "XBOXTECH",
-                    "Khang Khang",
-                    "Đào Xuân Mạnh",
-                    "NguyễN ThiệN",
-                    "Trần Văn Vinh",
-                    "Anh Mon Vũ",
-                    "Võ Xuân Sang",
-                    "Nguyễn Văn Khôi",
-                    "Huỳnh Trung Tín",
-                    "Nguyễn Hoà",
-                    "Quốc Bảo",
-                    "Tuấn Lê",
-                    "Công Lực",
-                    "Trần Phạm Gia Huy",
-                    "Phạm Thủy Tiên",
-                    "Hoàng Xuân",
-                    "Nguyễn Tiến Đại",
-                    "Nguyễn Văn Điệu",
-                    "Phan Thị Kim Quyên",
-                    "Hoàng Văn Tùng",
-                    "Vương Xuân Giáp",
-                    "Đinh Duy Khánh",
-                    "Nguyễn Hồ Thiện Bảo",
-                    "Nguyễn Bằng",
-                    "Dương Hiếu",
-                    "Đặng Đức Bình",
-                    "Nguyễn Duy Phước",
-                    "Nguyễn Văn Mạnh",
-                    "Phạm Ngọc Đình Khiêm",
-                    "Đỗ Đình Khải",
-                ];
-                // Duplicate and add more to reach 90+ like image
-                $members = [];
-                for ($i = 1; $i <= 100; $i++) {
-                    $nameIndex = ($i - 1) % count($names);
-                    $members[] = [
-                        "id" => $i,
-                        "name" => $names[$nameIndex],
-                        "amount" => rand(10, 200) . ".000.000đ",
-                        "avatar" => "https://i.pravatar.cc/150?u=cs_user_" . $i,
-                    ];
-                }
-                ?>
-
-                @foreach ($members as $member)
-                    <a href="/bao-hiem-cs/{{ $member["id"] }}" class="group flex flex-col items-center">
+                @foreach ($insurances as $member)
+                    <a
+                        href="{{ route("insurances.frontend.show", $member->slug) }}"
+                        class="group flex flex-col items-center"
+                    >
                         <div class="relative mb-2">
                             <!-- Smaller Circular Avatar -->
                             <div
                                 class="group-hover:shadow-cs_blue/20 h-14 w-14 overflow-hidden rounded-full border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110 active:scale-95 md:h-16 md:w-16 dark:border-slate-800"
                             >
                                 <img
-                                    src="{{ $member["avatar"] }}"
+                                    src="{{ asset("storage/" . $member->avatar) }}"
                                     class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3"
-                                    alt="{{ $member["name"] }}"
+                                    alt="{{ $member->full_name }}"
                                     loading="lazy"
                                 />
                             </div>
@@ -169,16 +106,21 @@
                             <h3
                                 class="group-hover:text-cs_blue line-clamp-2 text-[10px] leading-tight font-bold text-gray-700 transition-colors md:text-[11px] dark:text-gray-300"
                             >
-                                {{ $member["id"] }}. {{ $member["name"] }}
+                                {{ $member->id }}. {{ $member->full_name }}
                             </h3>
                             <span
                                 class="text-cs_green block translate-y-1 transform text-[9px] font-black tracking-tighter uppercase opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
                             >
-                                {{ $member["amount"] }}
+                                {{ number_format($member->amount, 0, ",", ".") }}đ
                             </span>
                         </div>
                     </a>
                 @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-12 flex justify-center">
+                {{ $insurances->links() }}
             </div>
             <!-- SEO Content Section (Similar to Report Index) -->
             <article class="mx-auto mt-16 max-w-3xl">
