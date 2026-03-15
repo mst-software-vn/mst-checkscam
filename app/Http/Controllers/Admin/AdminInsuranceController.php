@@ -16,6 +16,24 @@ class AdminInsuranceController extends Controller
             $query->where('status', $request->integer('status'));
         }
 
+        // Filter by time range
+        if ($request->filled('time_range')) {
+            switch ($request->time_range) {
+                case 'today':
+                    $query->whereDate('created_at', now()->today());
+                    break;
+                case '3_days':
+                    $query->where('created_at', '>=', now()->subDays(3));
+                    break;
+                case '7_days':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '1_month':
+                    $query->where('created_at', '>=', now()->subMonths(1));
+                    break;
+            }
+        }
+
         if ($request->filled('search')) {
             $query->where('full_name', 'like', '%'.$request->search.'%');
         }
@@ -218,6 +236,13 @@ class AdminInsuranceController extends Controller
         }
 
         $insurance->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã xóa thành viên bảo hiểm thành công.',
+            ]);
+        }
 
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã xóa thành viên bảo hiểm.');
