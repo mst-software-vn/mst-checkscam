@@ -17,12 +17,40 @@ class DashboardController extends Controller
         $metrics = $this->getMetrics();
         $topSearches = $this->getTopSearchesToday();
         $latestReports = $this->getLatestReports();
+        $weeklyStats = $this->getWeeklySearchStats();
 
         return view('admin.dashboard', compact(
             'metrics',
             'topSearches',
             'latestReports',
+            'weeklyStats',
         ));
+    }
+
+    private function getWeeklySearchStats(): array
+    {
+        $days = [];
+        $foundData = [];
+        $notFoundData = [];
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i);
+            $days[] = $date->format('d/m');
+
+            $foundData[] = SearchLog::whereDate('created_at', $date->toDateString())
+                ->where('is_found', true)
+                ->count();
+
+            $notFoundData[] = SearchLog::whereDate('created_at', $date->toDateString())
+                ->where('is_found', false)
+                ->count();
+        }
+
+        return [
+            'labels' => $days,
+            'found' => $foundData,
+            'not_found' => $notFoundData,
+        ];
     }
 
     private function getMetrics(): array

@@ -208,4 +208,85 @@
             </div>
         </div>
     </div>
+    @push("scripts")
+        <script>
+            $(document).ready(function () {
+                if ($('#sales_charts').length > 0) {
+                    const weeklyStats = @json($weeklyStats);
+
+                    // Hủy biểu đồ cũ nếu nó được khởi tạo bởi chart-data.js
+                    // Thường thì ApexCharts sẽ ghi đè nếu render lại vào cùng 1 selector
+                    // nhưng để chắc chắn ta có thể clear nội dung
+                    $('#sales_charts').empty();
+
+                    const options = {
+                        series: [
+                            {
+                                name: 'Tìm thấy',
+                                data: weeklyStats.found,
+                            },
+                            {
+                                name: 'Không tìm thấy',
+                                data: weeklyStats.not_found,
+                            },
+                        ],
+                        colors: ['#28C76F', '#EA5455'],
+                        chart: {
+                            type: 'bar',
+                            height: 300,
+                            stacked: true,
+                            zoom: {
+                                enabled: false,
+                            },
+                            toolbar: {
+                                show: false,
+                            },
+                        },
+                        responsive: [
+                            {
+                                breakpoint: 280,
+                                options: {
+                                    legend: {
+                                        position: 'bottom',
+                                        offsetY: 0,
+                                    },
+                                },
+                            },
+                        ],
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                                columnWidth: '35%',
+                                borderRadius: 5,
+                                dataLabels: {
+                                    total: {
+                                        enabled: false,
+                                    },
+                                },
+                            },
+                        },
+                        xaxis: {
+                            categories: weeklyStats.labels,
+                        },
+                        legend: {
+                            show: false,
+                        },
+                        fill: {
+                            opacity: 1,
+                        },
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return val + ' lượt';
+                                },
+                            },
+                        },
+                    };
+
+                    const chart = new ApexCharts(document.querySelector('#sales_charts'), options);
+                    chart.render();
+                }
+            });
+        </script>
+    @endpush
 @endsection
