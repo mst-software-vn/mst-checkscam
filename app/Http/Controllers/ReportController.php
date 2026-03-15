@@ -95,7 +95,7 @@ class ReportController extends Controller
             Cache::put($cacheKey, true, now()->addHours(24));
         }
 
-        $displayReporterName = 'Người dùng ẩn danh';
+        $displayReporterName = mask_reporter_name($report->reporter_name);
 
         $reportsCount = Report::where('target_id', $report->target_id)
             ->where('status', 'approved')

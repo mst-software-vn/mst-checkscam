@@ -144,10 +144,10 @@ class SearchController extends Controller
             ->take(8)
             ->values()
             ->map(fn ($r) => [
-                'label' => $r->target_id.($r->target_name ? " — {$r->target_name}" : ''),
+                'label' => $r->target_id.($r->target_name ? ' — '.mask_name($r->target_name) : ''),
                 'value' => $r->target_id,
                 'type' => $r->type,
-                'target_name' => $r->target_name,
+                'target_name' => mask_name($r->target_name),
                 'slug' => $r->slug,
             ]);
 

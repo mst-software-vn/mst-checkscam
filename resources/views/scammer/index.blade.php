@@ -3,7 +3,7 @@
 @section("content")
     <!-- Hero Section -->
     <section class="dark:bg-dark_bg md:pd-24 pb-12">
-        <x-breadcrumb :links="[['name' => 'Chi tiết: ' . ($report->target_name ?? $report->target_id)]]" />
+        <x-breadcrumb :links="[['name' => 'Chi tiết: ' . mask_id($report->target_id, $report->type)]]" />
 
         <x-hero :stats="$stats" />
     </section>
@@ -63,11 +63,11 @@
                                     <h3
                                         class="text-sm font-bold text-gray-800 uppercase md:text-base dark:text-gray-100"
                                     >
-                                        {{ $report->target_name ?? "Chưa rõ thông tin" }}
+                                        {{ mask_name($report->target_name) }}
                                     </h3>
                                 </div>
                                 <button
-                                    data-copy="{{ $report->target_name ?? "" }}"
+                                    data-copy="{{ mask_name($report->target_name) }}"
                                     onclick="
                                         {
                                             const text = this.getAttribute('data-copy');
@@ -102,7 +102,7 @@
                                         <h3
                                             class="text-base font-bold tracking-widest text-gray-900 md:text-xl dark:text-gray-300"
                                         >
-                                            {{ $report->target_id }}
+                                            {{ mask_id($report->target_id, $report->type) }}
                                         </h3>
                                         @if ($report->target_bank)
                                             <span
@@ -255,7 +255,9 @@
                                     <p class="mb-0.5 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
                                         Số điện thoại
                                     </p>
-                                    <p class="text-sm font-bold text-gray-700 dark:text-gray-200">******</p>
+                                    <p class="text-sm font-bold text-gray-700 dark:text-gray-200">
+                                        {{ mask_phone($report->reporter_contact) }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -938,7 +940,7 @@
                                     <h3
                                         class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                                     >
-                                        {{ $latest->target_name ?? "Chưa rõ thông tin" }}
+                                        {{ mask_name($latest->target_name) }}
                                     </h3>
                                     <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                                         <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
@@ -956,7 +958,7 @@
                                         Tài khoản lừa đảo
                                     </span>
                                     <span class="text-cs_red text-xs font-bold tracking-wider">
-                                        {{ $latest->target_id }}
+                                        {{ mask_id($latest->target_id, $latest->type) }}
                                     </span>
                                 </div>
                             </div>
