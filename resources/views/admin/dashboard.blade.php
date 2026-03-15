@@ -8,7 +8,7 @@
                     <span><img src="/assets/img/icons/dash1.svg" alt="img" /></span>
                 </div>
                 <div class="dash-widgetcontent">
-                    <h5><span class="counters" data-count="12">0</span></h5>
+                    <h5><span class="counters" data-count="{{ $metrics["pending_reports"] }}">0</span></h5>
                     <h6>Báo cáo chờ duyệt</h6>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     <span><img src="/assets/img/icons/dash2.svg" alt="img" /></span>
                 </div>
                 <div class="dash-widgetcontent">
-                    <h5><span class="counters" data-count="1250">0</span></h5>
+                    <h5><span class="counters" data-count="{{ $metrics["searches_today"] }}">0</span></h5>
                     <h6>Lượt tra cứu hôm nay</h6>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="dash-widgetcontent">
                     <h5>
-                        <span class="counters" data-count="350000000">0</span>
+                        <span class="counters" data-count="{{ (int) $metrics["insurance_fund"] }}">0</span>
                         ₫
                     </h5>
                     <h6>Quỹ bảo hiểm</h6>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="dash-widgetcontent">
                     <h5>
-                        <span class="counters" data-count="2500000000">0</span>
+                        <span class="counters" data-count="{{ (int) $metrics["total_damage"] }}">0</span>
                         ₫
                     </h5>
                     <h6>Tổng thiệt hại</h6>
@@ -59,7 +59,7 @@
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count">
                 <div class="dash-counts">
-                    <h4>156</h4>
+                    <h4>{{ number_format($metrics["total_scammers"]) }}</h4>
                     <h5>Đối tượng Scam</h5>
                 </div>
                 <div class="dash-imgs">
@@ -70,7 +70,7 @@
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count das1">
                 <div class="dash-counts">
-                    <h4>423</h4>
+                    <h4>{{ number_format($metrics["total_reports"]) }}</h4>
                     <h5>Tổng báo cáo</h5>
                 </div>
                 <div class="dash-imgs">
@@ -81,7 +81,7 @@
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count das2">
                 <div class="dash-counts">
-                    <h4>1,205</h4>
+                    <h4>{{ number_format($metrics["total_comments"]) }}</h4>
                     <h5>Tổng bình luận</h5>
                 </div>
                 <div class="dash-imgs">
@@ -92,7 +92,7 @@
         <div class="col-lg-3 col-sm-6 d-flex col-12">
             <div class="dash-count das3">
                 <div class="dash-counts">
-                    <h4>38</h4>
+                    <h4>{{ number_format($metrics["total_posts"]) }}</h4>
                     <h5>Bài viết</h5>
                 </div>
                 <div class="dash-imgs">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dataview">
-                        <table class="datatable table">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -136,31 +136,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>0912345678</td>
-                                    <td>52</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>1234567890123</td>
-                                    <td>38</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>facebook.com/scammer01</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>0987654321</td>
-                                    <td>19</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>9876543210987</td>
-                                    <td>14</td>
-                                </tr>
+                                @forelse ($topSearches as $index => $search)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $search->search_query }}</td>
+                                        <td>{{ number_format($search->count) }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-muted text-center">Chưa có dữ liệu hôm nay.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -174,7 +160,7 @@
         <div class="card-body">
             <h4 class="card-title">Báo cáo gần nhất</h4>
             <div class="table-responsive dataview">
-                <table class="datatable table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -187,45 +173,120 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#RPT001</td>
-                            <td>STK</td>
-                            <td>1234567890 — Nguyễn Văn A</td>
-                            <td>Ẩn danh</td>
-                            <td>5,000,000 ₫</td>
-                            <td><span class="badges bg-lightyellow">Chờ duyệt</span></td>
-                            <td>13/03/2026</td>
-                        </tr>
-                        <tr>
-                            <td>#RPT002</td>
-                            <td>SĐT</td>
-                            <td>0912345678</td>
-                            <td>Trần Thị B</td>
-                            <td>2,000,000 ₫</td>
-                            <td><span class="badges bg-lightgreen">Đã duyệt</span></td>
-                            <td>12/03/2026</td>
-                        </tr>
-                        <tr>
-                            <td>#RPT003</td>
-                            <td>Website</td>
-                            <td>scam-site.com</td>
-                            <td>Lê Văn C</td>
-                            <td>10,000,000 ₫</td>
-                            <td><span class="badges bg-lightyellow">Chờ duyệt</span></td>
-                            <td>12/03/2026</td>
-                        </tr>
-                        <tr>
-                            <td>#RPT004</td>
-                            <td>STK</td>
-                            <td>9876543210 — Phạm Thị D</td>
-                            <td>Ẩn danh</td>
-                            <td>15,000,000 ₫</td>
-                            <td><span class="badges bg-lightred">Từ chối</span></td>
-                            <td>11/03/2026</td>
-                        </tr>
+                        @forelse ($latestReports as $report)
+                            <tr>
+                                <td>#RPT{{ str_pad($report->id, 3, "0", STR_PAD_LEFT) }}</td>
+                                <td>{{ $report->type === "account" ? "STK" : "Website" }}</td>
+                                <td>
+                                    {{ $report->target_id }}
+                                    @if ($report->target_name)
+                                        — {{ $report->target_name }}
+                                    @endif
+                                </td>
+                                <td>{{ $report->is_anonymous ? "Ẩn danh" : $report->reporter_name }}</td>
+                                <td>
+                                    {{ $report->damage_amount ? number_format($report->damage_amount, 0, ",", ",") . " ₫" : "—" }}
+                                </td>
+                                <td>
+                                    @if ($report->status === "pending")
+                                        <span class="badges bg-lightyellow">Chờ duyệt</span>
+                                    @elseif ($report->status === "approved")
+                                        <span class="badges bg-lightgreen">Đã duyệt</span>
+                                    @else
+                                        <span class="badges bg-lightred">Từ chối</span>
+                                    @endif
+                                </td>
+                                <td>{{ $report->created_at->format("d/m/Y") }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-muted text-center">Chưa có báo cáo nào.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    @push("scripts")
+        <script>
+            $(document).ready(function () {
+                if ($('#sales_charts').length > 0) {
+                    const weeklyStats = @json($weeklyStats);
+
+                    // Hủy biểu đồ cũ nếu nó được khởi tạo bởi chart-data.js
+                    // Thường thì ApexCharts sẽ ghi đè nếu render lại vào cùng 1 selector
+                    // nhưng để chắc chắn ta có thể clear nội dung
+                    $('#sales_charts').empty();
+
+                    const options = {
+                        series: [
+                            {
+                                name: 'Tìm thấy',
+                                data: weeklyStats.found,
+                            },
+                            {
+                                name: 'Không tìm thấy',
+                                data: weeklyStats.not_found,
+                            },
+                        ],
+                        colors: ['#28C76F', '#EA5455'],
+                        chart: {
+                            type: 'bar',
+                            height: 300,
+                            stacked: true,
+                            zoom: {
+                                enabled: false,
+                            },
+                            toolbar: {
+                                show: false,
+                            },
+                        },
+                        responsive: [
+                            {
+                                breakpoint: 280,
+                                options: {
+                                    legend: {
+                                        position: 'bottom',
+                                        offsetY: 0,
+                                    },
+                                },
+                            },
+                        ],
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                                columnWidth: '35%',
+                                borderRadius: 5,
+                                dataLabels: {
+                                    total: {
+                                        enabled: false,
+                                    },
+                                },
+                            },
+                        },
+                        xaxis: {
+                            categories: weeklyStats.labels,
+                        },
+                        legend: {
+                            show: false,
+                        },
+                        fill: {
+                            opacity: 1,
+                        },
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return val + ' lượt';
+                                },
+                            },
+                        },
+                    };
+
+                    const chart = new ApexCharts(document.querySelector('#sales_charts'), options);
+                    chart.render();
+                }
+            });
+        </script>
+    @endpush
 @endsection

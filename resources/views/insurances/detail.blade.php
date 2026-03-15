@@ -6,8 +6,8 @@
     <main class="pb-24">
         <x-breadcrumb
             :links="[
-                ['name' => 'Quỹ bảo hiểm', 'url' => '/bao-hiem-cs'],
-                ['name' => 'Võ Xuân Sang', 'url' => '/vo-xuan-sang'],
+                ['name' => 'Quỹ bảo hiểm', 'url' => route('insurances.frontend.index')],
+                ['name' => $insurance->full_name, 'url' => route('insurances.frontend.show', $insurance->slug)],
             ]"
         />
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -20,9 +20,9 @@
                         class="ring-cs_blue/20 relative h-24 w-24 overflow-hidden rounded-full border-2 border-white shadow-xl ring-2 ring-offset-2 md:h-28 md:w-28 dark:border-slate-800"
                     >
                         <img
-                            src="https://i.ibb.co/kVFkMXRj/avatar.jpg"
+                            src="{{ asset("storage/" . $insurance->avatar) }}"
                             class="h-full w-full object-cover"
-                            alt="Võ Xuân Sang Avatar"
+                            alt="{{ $insurance->full_name }} Avatar"
                         />
                     </div>
                 </div>
@@ -30,25 +30,21 @@
                 <h1
                     class="mb-4 text-2xl font-black tracking-tight text-gray-800 uppercase md:text-3xl dark:text-gray-300"
                 >
-                    Võ Xuân Sang
+                    {{ $insurance->full_name }}
                 </h1>
 
-                <div class="flex flex-wrap justify-center gap-3">
-                    <a
-                        href="#"
-                        class="bg-cs_blue flex items-center gap-2 rounded-lg px-6 py-2.5 text-[10px] font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:text-xs"
-                    >
-                        <i class="fa-brands fa-facebook"></i>
-                        Messenger
-                    </a>
-                    <a
-                        href="#"
-                        class="flex items-center gap-2 rounded-lg bg-slate-800 px-6 py-2.5 text-[10px] font-black tracking-widest text-white uppercase shadow-lg transition-all hover:bg-black active:scale-95 md:text-xs"
-                    >
-                        <i class="fa-solid fa-robot"></i>
-                        Bot GDV
-                    </a>
-                </div>
+                @if (is_array($insurance->contact_info) && count($insurance->contact_info) > 0)
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a
+                            href="{{ $insurance->contact_info[0]["link"] }}"
+                            target="_blank"
+                            class="bg-cs_blue flex items-center gap-2 rounded-lg px-6 py-2.5 text-[10px] font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/10 transition-all hover:bg-blue-600 active:scale-95 md:text-xs"
+                        >
+                            <i class="fa-brands fa-facebook"></i>
+                            Liên hệ
+                        </a>
+                    </div>
+                @endif
             </section>
 
             <!-- Details Grid -->
@@ -70,27 +66,29 @@
                                 Thông Tin Bảo Hiểm
                             </h2>
                             <ul class="space-y-3 text-[11px] font-bold text-gray-500 md:text-xs dark:text-gray-400">
-                                <li class="hover:text-cs_blue flex items-center gap-3 transition-colors">
-                                    <i class="fa-brands fa-facebook-f text-cs_blue w-5"></i>
-                                    <span>
-                                        Fb (chính):
-                                        <span class="ml-1 text-gray-800 dark:text-gray-200">100068913086808</span>
-                                    </span>
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <i class="fa-solid fa-paper-plane text-cs_blue w-5"></i>
-                                    <span>
-                                        Zalo:
-                                        <span class="ml-1 text-gray-800 dark:text-gray-200">0817337805</span>
-                                    </span>
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <i class="fa-solid fa-cart-shopping text-cs_blue w-5"></i>
-                                    <span>
-                                        Shop trên CS:
-                                        <span class="ml-1 text-gray-800 dark:text-gray-200">Cửa hàng của Sang</span>
-                                    </span>
-                                </li>
+                                @if (is_array($insurance->contact_info))
+                                    @foreach ($insurance->contact_info as $contact)
+                                        <li class="hover:text-cs_blue flex items-center gap-3 transition-colors">
+                                            @if (strtolower($contact["platform"]) == "facebook" || strtolower($contact["platform"]) == "fb")
+                                                <i class="fa-brands fa-facebook-f text-cs_blue w-5"></i>
+                                            @elseif (strtolower($contact["platform"]) == "zalo")
+                                                <i class="fa-solid fa-paper-plane text-cs_blue w-5"></i>
+                                            @else
+                                                <i class="fa-solid fa-link text-cs_blue w-5"></i>
+                                            @endif
+                                            <span>
+                                                {{ $contact["platform"] }}:
+                                                <a
+                                                    href="{{ $contact["link"] }}"
+                                                    target="_blank"
+                                                    class="ml-1 text-gray-800 hover:underline dark:text-gray-200"
+                                                >
+                                                    {{ Str::limit($contact["link"], 30) }}
+                                                </a>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                         <div class="ml-4 hidden shrink-0 md:block">
@@ -131,7 +129,9 @@
                             >
                                 Số dư ký quỹ
                             </p>
-                            <p class="text-cs_green text-xl font-black tracking-tighter md:text-2xl">10.000.000đ</p>
+                            <p class="text-cs_green text-xl font-black tracking-tighter md:text-2xl">
+                                {{ number_format($insurance->amount, 0, ",", ".") }}đ
+                            </p>
                         </div>
                     </div>
 
@@ -139,11 +139,13 @@
                         class="text-[11px] leading-relaxed font-semibold text-green-800/80 italic md:text-xs dark:text-green-300/80"
                     >
                         Từ ngày
-                        <span class="text-cs_green font-black">19/03/2022</span>
+                        <span class="text-cs_green font-black">
+                            {{ $insurance->insurance_date ? \Carbon\Carbon::parse($insurance->insurance_date)->format("d/m/Y") : "N/A" }}
+                        </span>
                         MSTSoftware.VN đứng ra
                         <span class="bg-cs_green px-1 font-bold text-white">bảo lãnh 100%</span>
                         cho thành viên
-                        <span class="text-cs_green font-black">Võ Xuân Sang</span>
+                        <span class="text-cs_green font-black">{{ $insurance->full_name }}</span>
                         .
                     </p>
                 </div>
@@ -161,68 +163,24 @@
                                 Dịch vụ cung cấp
                             </h2>
                             <ul class="space-y-4">
-                                <li class="group/item flex items-start gap-3">
-                                    <div
-                                        class="text-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-sm transition-transform group-hover/item:rotate-12 dark:bg-blue-900/30"
-                                    >
-                                        <i class="fa-solid fa-people-arrows"></i>
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-xs font-black text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
-                                        >
-                                            Giao dịch Trung gian - Đổi Tiền
-                                        </h4>
-                                        <p class="mt-0.5 text-[10px] font-bold text-gray-400 italic dark:text-gray-500">
-                                            Nhanh chóng, an toàn.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="group/item flex items-start gap-3">
-                                    <div
-                                        class="text-cs_green flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-50 text-sm transition-transform group-hover/item:rotate-12 dark:bg-green-900/30"
-                                    >
-                                        <i class="fa-solid fa-tags"></i>
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-xs font-black text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
-                                        >
-                                            Thu mua Acc & Tài khoản
-                                        </h4>
-                                        <p class="mt-0.5 text-[10px] font-bold text-gray-400 italic dark:text-gray-500">
-                                            Gaming, Social...
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="group/item flex items-start gap-3">
-                                    <div
-                                        class="text-cs_orange flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-sm transition-transform group-hover/item:rotate-12 dark:bg-orange-900/30"
-                                    >
-                                        <i class="fa-solid fa-shop"></i>
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-xs font-black text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
-                                        >
-                                            Kho Acc sẵn giá rẻ
-                                        </h4>
-                                        <div class="mt-1.5 flex flex-wrap gap-2">
-                                            <a
-                                                href="#"
-                                                class="text-cs_blue hover:bg-cs_blue rounded-md bg-gray-50 px-2 py-0.5 text-[9px] transition-colors hover:text-white dark:bg-slate-800"
+                                @if (is_array($insurance->services))
+                                    @foreach ($insurance->services as $service)
+                                        <li class="group/item flex items-start gap-3">
+                                            <div
+                                                class="text-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-sm transition-transform group-hover/item:rotate-12 dark:bg-blue-900/30"
                                             >
-                                                Kho 1
-                                            </a>
-                                            <a
-                                                href="#"
-                                                class="text-cs_blue hover:bg-cs_blue rounded-md bg-gray-50 px-2 py-0.5 text-[9px] transition-colors hover:text-white dark:bg-slate-800"
-                                            >
-                                                Kho 2
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
+                                                <i class="fa-solid fa-check-circle"></i>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="text-xs font-black text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
+                                                >
+                                                    {{ $service["title"] }}
+                                                </h4>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
 
@@ -234,65 +192,41 @@
                                 Tài khoản thanh toán
                             </h2>
                             <div class="space-y-3">
-                                <?php
-                                $banks = [
-                                    [
-                                        "name" => "Momo",
-                                        "number" => "0817337805",
-                                        "logo" => "https://ui-avatars.com/api/?name=MO&background=e02a88&color=fff",
-                                    ],
-                                    [
-                                        "name" => "BIDV",
-                                        "number" => "5321247995",
-                                        "logo" => "https://ui-avatars.com/api/?name=BI&background=213a91&color=fff",
-                                    ],
-                                    [
-                                        "name" => "Vietcombank",
-                                        "number" => "1047701405",
-                                        "logo" => "https://ui-avatars.com/api/?name=VCB&background=00aeef&color=fff",
-                                    ],
-                                    [
-                                        "name" => "MB Bank",
-                                        "number" => "1236089999",
-                                        "logo" => "https://ui-avatars.com/api/?name=MB&background=0254cf&color=fff",
-                                    ],
-                                    [
-                                        "name" => "Techcombank",
-                                        "number" => "867977777777",
-                                        "logo" => "https://ui-avatars.com/api/?name=TCB&background=e31837&color=fff",
-                                    ],
-                                ];
-                                ?>
-
-                                @foreach ($banks as $bank)
-                                    <div
-                                        class="group/bank hover:border-cs_red/20 flex items-center justify-between rounded-xl border border-gray-100 bg-gray-50 p-2.5 transition-all dark:border-gray-800 dark:bg-slate-800/50"
-                                    >
-                                        <div class="flex items-center gap-2.5">
-                                            <img
-                                                src="{{ $bank["logo"] }}"
-                                                class="h-8 w-8 rounded-lg"
-                                                alt="{{ $bank["name"] }}"
-                                            />
-                                            <div>
-                                                <p
-                                                    class="text-[8px] leading-none font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
-                                                >
-                                                    {{ $bank["name"] }}
-                                                </p>
-                                                <p class="text-xs font-bold text-gray-800 dark:text-gray-200">
-                                                    {{ $bank["number"] }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button
-                                            class="hover:text-cs_red flex h-7 w-7 items-center justify-center text-xs text-gray-400 transition-colors"
-                                            title="Copy"
+                                @if (is_array($insurance->payment_accounts))
+                                    @foreach ($insurance->payment_accounts as $account)
+                                        <div
+                                            class="group/bank hover:border-cs_red/20 flex items-center justify-between rounded-xl border border-gray-100 bg-gray-50 p-2.5 transition-all dark:border-gray-800 dark:bg-slate-800/50"
                                         >
-                                            <i class="fa-regular fa-copy"></i>
-                                        </button>
-                                    </div>
-                                @endforeach
+                                            <div class="flex items-center gap-2.5">
+                                                <img
+                                                    src="https://ui-avatars.com/api/?name={{ urlencode(substr($account["bank"], 0, 2)) }}&background=random&color=fff"
+                                                    class="h-8 w-8 rounded-lg"
+                                                    alt="{{ $account["bank"] }}"
+                                                />
+                                                <div>
+                                                    <p
+                                                        class="text-[8px] leading-none font-black tracking-widest text-gray-400 uppercase dark:text-gray-500"
+                                                    >
+                                                        {{ $account["bank"] }}
+                                                    </p>
+                                                    <p class="text-xs font-bold text-gray-800 dark:text-gray-200">
+                                                        {{ $account["number"] }}
+                                                        @if (! empty($account["name"]))
+                                                                - {{ $account["name"] }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button
+                                                class="hover:text-cs_red flex h-7 w-7 items-center justify-center text-xs text-gray-400 transition-colors"
+                                                title="Copy"
+                                                onclick="navigator.clipboard.writeText('{{ $account["number"] }}')"
+                                            >
+                                                <i class="fa-regular fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -349,8 +283,8 @@
                                     .
                                 </p>
                                 <p>
-                                    2. Mọi yêu cầu chuyển tiền từ các tài khoản khác, dù có thông tin trùng tên "Võ Xuân
-                                    Sang", đều là hành vi
+                                    2. Mọi yêu cầu chuyển tiền từ các tài khoản khác, dù có thông tin trùng tên
+                                    "{{ $insurance->full_name }}", đều là hành vi
                                     <span class="text-cs_red font-black">LỪA ĐẢO</span>
                                     .
                                 </p>

@@ -14,6 +14,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'avatar',
         'full_name',
         'role',
         'status',
@@ -21,7 +22,7 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     public function isAdmin(): bool

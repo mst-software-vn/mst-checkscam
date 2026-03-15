@@ -17,6 +17,25 @@ class AdminReportController extends Controller
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
+
+        // Filter by time range
+        if ($request->filled('time_range')) {
+            switch ($request->time_range) {
+                case 'today':
+                    $query->whereDate('created_at', now()->today());
+                    break;
+                case '3_days':
+                    $query->where('created_at', '>=', now()->subDays(3));
+                    break;
+                case '7_days':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '1_month':
+                    $query->where('created_at', '>=', now()->subMonths(1));
+                    break;
+            }
+        }
+
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('target_id', 'like', '%'.$request->search.'%')
@@ -157,5 +176,23 @@ class AdminReportController extends Controller
 
         return redirect()->route('admin.reports.index')
             ->with('success', 'Đã xóa báo cáo khỏi hệ thống.');
+    }
+
+    public function bulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'Không có mục nào được chọn.']);
+        }
+
+        $reports = Report::whereIn('id', $ids)->get();
+        foreach ($reports as $report) {
+            if (! empty($report->evidence_images)) {
+                deleteMultipleImages($report->evidence_images);
+            }
+            $report->delete();
+        }
+
+        return response()->json(['success' => true, 'message' => 'Đã xóa '.count($reports).' báo cáo thành công.']);
     }
 }
