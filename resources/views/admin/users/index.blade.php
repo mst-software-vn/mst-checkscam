@@ -1,5 +1,38 @@
 @extends("admin.layouts.master")
 @section("content")
+    <style>
+        .dataTables_paginate,
+        .dataTables_info,
+        .dataTables_length {
+            display: none !important;
+        }
+
+        .action-disabled {
+            cursor: not-allowed !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            opacity: 0.6;
+        }
+
+        .action-disabled img {
+            filter: grayscale(1);
+            pointer-events: none;
+        }
+
+        .action-disabled .slash-overlay {
+            position: absolute;
+            color: #ef4444;
+            font-size: 16px;
+            pointer-events: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-10deg);
+        }
+    </style>
     @include(
         "admin.components.page-header",
         [
@@ -38,7 +71,7 @@
                         <a class="btn btn-searchset"><img src="/assets/img/icons/search-white.svg" alt="img" /></a>
                     </div>
 
-                    <div class="ms-3" style="display: none" id="bulk-delete-container">
+                    <div class="d-none ms-3" id="user-bulk-delete-container">
                         <button type="button" class="btn btn-danger" id="btn-bulk-delete">
                             <img
                                 src="/assets/img/icons/delete-2.svg"
@@ -47,7 +80,7 @@
                                 style="width: 18px; filter: brightness(0) invert(1)"
                             />
                             Xóa tài khoản đã chọn (
-                            <span id="selected-count">0</span>
+                            <span id="user-selected-count">0</span>
                             )
                         </button>
                     </div>
@@ -87,9 +120,7 @@
                                     <option value="1" {{ request("status") === "1" ? "selected" : "" }}>
                                         Hoạt động
                                     </option>
-                                    <option value="0" {{ request("status") === "0" ? "selected" : "" }}>
-                                        Vô hiệu
-                                    </option>
+                                    <option value="0" {{ request("status") === "0" ? "selected" : "" }}>Vô hiệu</option>
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-6">
@@ -215,6 +246,7 @@
                                     <a class="me-3" href="{{ route("admin.users.edit", $user->id) }}">
                                         <img src="/assets/img/icons/edit.svg" alt="sửa" />
                                     </a>
+
                                     @if ($user->id != 1 && $user->id != auth()->id())
                                         <button
                                             type="button"
@@ -224,6 +256,11 @@
                                         >
                                             <img src="/assets/img/icons/delete.svg" alt="xóa" />
                                         </button>
+                                    @else
+                                        <span class="action-disabled" title="Tài khoản này được bảo vệ, không thể xóa">
+                                            <img src="/assets/img/icons/delete.svg" alt="xóa" />
+                                            <i class="fas fa-slash slash-overlay"></i>
+                                        </span>
                                     @endif
                                 </td>
                             </tr>
@@ -242,255 +279,164 @@
             </div>
         </div>
     </div>
-
-    {{-- ── Modal: Xác nhận Xóa Hàng Loạt ────────────────────────────────── --}}
-    <div class="modal fade" id="modalBulkDestroy" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">
-                <div
-                    class="modal-header border-0 pb-0"
-                    style="background: linear-gradient(135deg, #fff5f5 0%, #fff 100%)"
-                >
-                    <div class="d-flex align-items-center w-100 gap-3 px-1 pt-1">
-                        <div
-                            class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10"
-                            style="width: 44px; height: 44px; flex-shrink: 0"
-                        >
-                            <i data-feather="trash-2" style="width: 22px; height: 22px; color: #dc2626"></i>
-                        </div>
-                        <div>
-                            <h5 class="modal-title fw-bold mb-0">
-                                Xóa hàng loạt
-                                <span id="bulk-count">0</span>
-                                tài khoản
-                            </h5>
-                            <small class="text-muted">Dữ liệu sẽ được gỡ bỏ vĩnh viễn</small>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body px-4 py-4">
-                    <div class="rounded-3 mb-3 p-3 text-center" style="background: #fff5f5; border: 1px solid #fee2e2">
-                        <i data-feather="alert-triangle" class="text-danger mb-2" style="width: 32px; height: 32px"></i>
-                        <p class="text-danger fw-bold mb-0">Cảnh báo quan trọng!</p>
-                    </div>
-                    <p class="text-muted mb-0" style="font-size: 14px">
-                        Bạn đang chọn xóa
-                        <strong>
-                            <span id="bulk-count-text">0</span>
-                            tài khoản
-                        </strong>
-                        người dùng. Mọi thông tin cá nhân và ảnh đại diện sẽ bị
-                        <strong class="text-danger">xóa vĩnh viễn</strong>
-                        . Hành động này không thể hoàn tác.
-                    </p>
-                </div>
-                <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
-                    <button type="button" class="btn btn-cancel flex-fill" data-bs-dismiss="modal">Huỷ bỏ</button>
-                    <button type="button" class="btn btn-danger flex-fill" id="confirm-bulk-delete">
-                        <i data-feather="trash-2" class="me-1"></i>
-                        Xác nhận xóa ngay
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- ── Modal: Xác nhận Xóa Một Bản Ghi ────────────────────────────────── --}}
-    <div class="modal fade" id="modalDestroySingle" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">
-                <div
-                    class="modal-header border-0 pb-0"
-                    style="background: linear-gradient(135deg, #fff5f5 0%, #fff 100%)"
-                >
-                    <div class="d-flex align-items-center w-100 gap-3 px-1 pt-1">
-                        <div
-                            class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10"
-                            style="width: 44px; height: 44px; flex-shrink: 0"
-                        >
-                            <i data-feather="trash-2" style="width: 22px; height: 22px; color: #dc2626"></i>
-                        </div>
-                        <div>
-                            <h5 class="modal-title fw-bold mb-0">
-                                Xóa tài khoản:
-                                <span id="single-username" class="text-danger"></span>
-                            </h5>
-                            <small class="text-muted">
-                                Mã ID: #
-                                <span id="single-user-id">0</span>
-                            </small>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body px-4 py-4">
-                    <div class="rounded-3 mb-3 p-3 text-center" style="background: #fff5f5; border: 1px solid #fee2e2">
-                        <i data-feather="alert-triangle" class="text-danger mb-2" style="width: 32px; height: 32px"></i>
-                        <p class="text-danger fw-bold mb-0">Xác nhận xóa tài khoản!</p>
-                    </div>
-                    <p class="text-muted mb-0" style="font-size: 14px">
-                        Bạn có chắc chắn muốn xóa tài khoản này? Mọi thông tin cá nhân và ảnh đại diện đi kèm sẽ bị
-                        <strong class="text-danger">gỡ bỏ vĩnh viễn</strong>
-                        khỏi hệ thống.
-                    </p>
-                </div>
-                <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
-                    <button type="button" class="btn btn-cancel flex-fill" data-bs-dismiss="modal">Huỷ bỏ</button>
-                    <button type="button" class="btn btn-danger flex-fill" id="confirm-single-delete">
-                        <i data-feather="trash-2" class="me-1"></i>
-                        Xác nhận xóa
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push("scripts")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // --- Logic Checkbox & Bulk Delete UI ---
-            const selectAll = document.getElementById('select-all');
-            const bulkDeleteContainer = document.getElementById('bulk-delete-container');
-            const selectedCountSpan = document.getElementById('selected-count');
-            const btnBulkDelete = document.getElementById('btn-bulk-delete');
-
-            const bulkModal = new bootstrap.Modal(document.getElementById('modalBulkDestroy'));
-            const bulkCountEl = document.getElementById('bulk-count');
-            const bulkCountTextEl = document.getElementById('bulk-count-text');
-            const confirmBulkDeleteBtn = document.getElementById('confirm-bulk-delete');
-
             function updateBulkDeleteUI() {
-                const checkItemsCurrent = document.querySelectorAll('.check-item:not(:disabled)');
-                const checkedItems = document.querySelectorAll('.check-item:checked');
-                const checkedCount = checkedItems.length;
-                selectedCountSpan.textContent = checkedCount;
+                const $container = $('#user-bulk-delete-container');
+                const $count = $('#user-selected-count');
+                const $checkItems = $('.check-item:not(:disabled)');
+                const checkedCount = $('.check-item:checked').length;
+
+                if ($count.length) $count.text(checkedCount);
 
                 if (checkedCount > 0) {
-                    bulkDeleteContainer.style.display = 'inline-block';
+                    $container.removeClass('d-none').addClass('d-inline-block');
+                    $container.attr('style', 'display: inline-block !important; margin-left: 1rem;');
                 } else {
-                    bulkDeleteContainer.style.display = 'none';
-                    if (selectAll) selectAll.checked = false;
+                    $container.addClass('d-none').removeClass('d-inline-block');
+                    $container.attr('style', 'display: none !important');
+                    $('#select-all').prop('checked', false);
                 }
 
-                if (selectAll) {
-                    selectAll.checked = checkedCount === checkItemsCurrent.length && checkItemsCurrent.length > 0;
+                if ($('#select-all').length) {
+                    // Chỉ check "Select All" nếu toàn bộ số lượng checkbox (không bị disable) đều được chọn
+                    $('#select-all').prop('checked', checkedCount === $checkItems.length && $checkItems.length > 0);
                 }
             }
 
-            document.addEventListener('click', function (e) {
-                if (e.target && e.target.id === 'select-all') {
-                    const isChecked = e.target.checked;
-                    document.querySelectorAll('.check-item:not(:disabled)').forEach((item) => {
-                        item.checked = isChecked;
-                    });
-                    updateBulkDeleteUI();
-                }
+            // Khởi tạo trạng thái ban đầu
+            updateBulkDeleteUI();
 
-                if (e.target && e.target.classList.contains('check-item')) {
-                    updateBulkDeleteUI();
-                }
+            // Dùng jQuery event delegation để ổn định và bắt kịp DataTables
+            $(document).on('change', '#select-all', function () {
+                const isChecked = $(this).is(':checked');
+                $('.check-item:not(:disabled)').prop('checked', isChecked);
+                updateBulkDeleteUI();
             });
 
-            if (btnBulkDelete) {
-                btnBulkDelete.addEventListener('click', function () {
-                    const count = document.querySelectorAll('.check-item:checked').length;
-                    bulkCountEl.textContent = count;
-                    bulkCountTextEl.textContent = count;
-                    bulkModal.show();
-                });
-            }
+            $(document).on('change click', '.check-item', function () {
+                updateBulkDeleteUI();
+            });
 
-            if (confirmBulkDeleteBtn) {
-                confirmBulkDeleteBtn.addEventListener('click', function () {
-                    const selectedIds = Array.from(document.querySelectorAll('.check-item:checked')).map(
-                        (cb) => cb.value,
-                    );
+            // --- Logic Xóa Hàng Loạt với SweetAlert2 ---
+            $(document).on('click', '#btn-bulk-delete', function () {
+                const selectedIds = $('.check-item:checked')
+                    .map(function () {
+                        return $(this).val();
+                    })
+                    .get();
+                const count = selectedIds.length;
 
-                    confirmBulkDeleteBtn.disabled = true;
-                    confirmBulkDeleteBtn.innerHTML =
-                        '<span class="spinner-border spinner-border-sm me-2"></span>Đang xử lý...';
+                Swal.fire({
+                    title: 'Xóa hàng loạt?',
+                    text: `Bạn có chắc chắn muốn xóa ${count} tài khoản đã chọn? Hành động này không thể hoàn tác!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ff9f43',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý xóa',
+                    cancelButtonText: 'Hủy',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Đang xử lý...',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                        });
 
-                    setTimeout(() => {
                         fetch('{{ route("admin.users.bulk-delete") }}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'X-Requested-With': 'XMLHttpRequest',
                             },
                             body: JSON.stringify({ ids: selectedIds }),
                         })
                             .then((response) => response.json())
                             .then((data) => {
                                 if (data.success) {
-                                    window.location.reload();
+                                    Swal.fire({
+                                        title: 'Thành công!',
+                                        text: data.message,
+                                        icon: 'success',
+                                        timer: 1500,
+                                        showConfirmButton: false,
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
                                 } else {
-                                    alert(data.message || 'Có lỗi xảy ra');
-                                    confirmBulkDeleteBtn.disabled = false;
-                                    confirmBulkDeleteBtn.innerHTML =
-                                        '<i data-feather="trash-2" class="me-1"></i>Xác nhận xóa ngay';
-                                    feather.replace();
+                                    Swal.fire('Lỗi!', data.message || 'Có lỗi xảy ra', 'error');
                                 }
                             })
                             .catch((error) => {
-                                console.error('Error:', error);
-                                alert('Lỗi kết nối hệ thống');
-                                confirmBulkDeleteBtn.disabled = false;
-                                confirmBulkDeleteBtn.innerHTML =
-                                    '<i data-feather="trash-2" class="me-1"></i>Xác nhận xóa ngay';
-                                feather.replace();
+                                Swal.fire('Lỗi!', 'Lỗi kết nối hệ thống', 'error');
                             });
-                    }, 1000);
+                    }
                 });
-            }
-
-            // --- Logic Xóa Một Bản Ghi ---
-            const singleModalEl = document.getElementById('modalDestroySingle');
-            const singleModal = new bootstrap.Modal(singleModalEl);
-            const singleUserIdEl = document.getElementById('single-user-id');
-            const singleUsernameEl = document.getElementById('single-username');
-            const confirmSingleDeleteBtn = document.getElementById('confirm-single-delete');
-            let currentDeleteId = null;
-
-            document.addEventListener('click', function (e) {
-                const btn = e.target.closest('.btn-delete-single');
-                if (btn) {
-                    currentDeleteId = btn.getAttribute('data-id');
-                    const username = btn.getAttribute('data-username');
-                    singleUserIdEl.textContent = currentDeleteId;
-                    singleUsernameEl.textContent = username;
-                    singleModal.show();
-                }
             });
 
-            if (confirmSingleDeleteBtn) {
-                confirmSingleDeleteBtn.addEventListener('click', function () {
-                    if (!currentDeleteId) return;
+            // --- Logic Xóa Một Bản Ghi với SweetAlert2 ---
+            $(document).on('click', '.btn-delete-single', function () {
+                const userId = $(this).data('id');
+                const username = $(this).data('username');
 
-                    confirmSingleDeleteBtn.disabled = true;
-                    confirmSingleDeleteBtn.innerHTML =
-                        '<span class="spinner-border spinner-border-sm me-2"></span>Đang xóa...';
+                Swal.fire({
+                    title: 'Xác nhận xóa?',
+                    html: `Bạn có chắc chắn muốn xóa tài khoản <strong>${username}</strong> (ID: #${userId})?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ff9f43',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý xóa',
+                    cancelButtonText: 'Hủy',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Đang xóa...',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                        });
 
-                    setTimeout(() => {
-                        fetch(`{{ url("admin/users") }}/${currentDeleteId}`, {
+                        fetch(`{{ url("admin/users") }}/${userId}`, {
                             method: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 Accept: 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest',
                             },
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                window.location.reload();
+                                if (data.success) {
+                                    Swal.fire({
+                                        title: 'Thành công!',
+                                        text: data.message,
+                                        icon: 'success',
+                                        timer: 1500,
+                                        showConfirmButton: false,
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('Lỗi!', data.message || 'Có lỗi xảy ra', 'error');
+                                }
                             })
                             .catch((error) => {
-                                console.error('Error:', error);
-                                window.location.reload();
+                                Swal.fire('Lỗi!', 'Lỗi khi thực hiện xóa', 'error');
                             });
-                    }, 1000);
+                    }
                 });
-            }
+            });
         });
     </script>
 @endpush
