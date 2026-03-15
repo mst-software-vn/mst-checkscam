@@ -255,10 +255,16 @@
                                             Lừa đảo mua bán
                                         </option>
                                         <option
-                                            value="Giả mạo Telegram"
-                                            {{ old("category") == "Giả mạo Telegram" ? "selected" : "" }}
+                                            value="Giả mạo Ngân hàng / App"
+                                            {{ old("category") == "Giả mạo Ngân hàng / App" ? "selected" : "" }}
                                         >
-                                            Giả mạo Telegram
+                                            Giả mạo Ngân hàng / App
+                                        </option>
+                                        <option
+                                            value="Giả mạo Telegram / MXH"
+                                            {{ old("category") == "Giả mạo Telegram / MXH" ? "selected" : "" }}
+                                        >
+                                            Giả mạo Telegram / MXH
                                         </option>
                                         <option
                                             value="Lừa đảo CTV"
@@ -267,16 +273,28 @@
                                             Lừa đảo CTV
                                         </option>
                                         <option
-                                            value="Scam Trading"
-                                            {{ old("category") == "Scam Trading" ? "selected" : "" }}
+                                            value="Scam Trading / Đầu tư"
+                                            {{ old("category") == "Scam Trading / Đầu tư" ? "selected" : "" }}
                                         >
-                                            Scam Trading
+                                            Scam Trading / Đầu tư
                                         </option>
                                         <option
-                                            value="Fake Bank App"
-                                            {{ old("category") == "Fake Bank App" ? "selected" : "" }}
+                                            value="Đánh cắp tài khoản"
+                                            {{ old("category") == "Đánh cắp tài khoản" ? "selected" : "" }}
                                         >
-                                            Fake Bank App
+                                            Đánh cắp tài khoản
+                                        </option>
+                                        <option
+                                            value="Cá cược, lô đề"
+                                            {{ old("category") == "Cá cược, lô đề" ? "selected" : "" }}
+                                        >
+                                            Cá cược, lô đề
+                                        </option>
+                                        <option
+                                            value="Đầu tư đa cấp ảo"
+                                            {{ old("category") == "Đầu tư đa cấp ảo" ? "selected" : "" }}
+                                        >
+                                            Đầu tư đa cấp ảo
                                         </option>
                                         <option value="Khác" {{ old("category") == "Khác" ? "selected" : "" }}>
                                             Khác
@@ -506,12 +524,58 @@
                                         name="category"
                                         class="focus:border-cs_blue w-full cursor-pointer rounded-md border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm font-semibold text-gray-900 outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                     >
-                                        <option value="">Chọn loại hình</option>
-                                        <option value="Giả mạo ngân hàng/app">Giả mạo ngân hàng/app</option>
-                                        <option value="Cá cược, lô đề">Cá cược, lô đề</option>
-                                        <option value="Đầu tư đa cấp ảo">Đầu tư đa cấp ảo</option>
-                                        <option value="Đánh cắp tài khoản">Đánh cắp tài khoản</option>
-                                        <option value="Khác">Khác</option>
+                                        <option value="">-- Chọn hình thức --</option>
+                                        <option
+                                            value="Lừa đảo mua bán"
+                                            {{ old("category") == "Lừa đảo mua bán" ? "selected" : "" }}
+                                        >
+                                            Lừa đảo mua bán
+                                        </option>
+                                        <option
+                                            value="Giả mạo Ngân hàng / App"
+                                            {{ old("category") == "Giả mạo Ngân hàng / App" ? "selected" : "" }}
+                                        >
+                                            Giả mạo Ngân hàng / App
+                                        </option>
+                                        <option
+                                            value="Giả mạo Telegram / MXH"
+                                            {{ old("category") == "Giả mạo Telegram / MXH" ? "selected" : "" }}
+                                        >
+                                            Giả mạo Telegram / MXH
+                                        </option>
+                                        <option
+                                            value="Lừa đảo CTV"
+                                            {{ old("category") == "Lừa đảo CTV" ? "selected" : "" }}
+                                        >
+                                            Lừa đảo CTV
+                                        </option>
+                                        <option
+                                            value="Scam Trading / Đầu tư"
+                                            {{ old("category") == "Scam Trading / Đầu tư" ? "selected" : "" }}
+                                        >
+                                            Scam Trading / Đầu tư
+                                        </option>
+                                        <option
+                                            value="Đánh cắp tài khoản"
+                                            {{ old("category") == "Đánh cắp tài khoản" ? "selected" : "" }}
+                                        >
+                                            Đánh cắp tài khoản
+                                        </option>
+                                        <option
+                                            value="Cá cược, lô đề"
+                                            {{ old("category") == "Cá cược, lô đề" ? "selected" : "" }}
+                                        >
+                                            Cá cược, lô đề
+                                        </option>
+                                        <option
+                                            value="Đầu tư đa cấp ảo"
+                                            {{ old("category") == "Đầu tư đa cấp ảo" ? "selected" : "" }}
+                                        >
+                                            Đầu tư đa cấp ảo
+                                        </option>
+                                        <option value="Khác" {{ old("category") == "Khác" ? "selected" : "" }}>
+                                            Khác
+                                        </option>
                                     </select>
                                 </div>
 
