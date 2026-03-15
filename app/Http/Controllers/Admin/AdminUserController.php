@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
 {
@@ -15,6 +17,27 @@ class AdminUserController extends Controller
 
         if ($request->filled('role')) {
             $query->where('role', $request->role);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('time_range')) {
+            switch ($request->time_range) {
+                case 'today':
+                    $query->whereDate('created_at', today());
+                    break;
+                case '3_days':
+                    $query->where('created_at', '>=', now()->subDays(3));
+                    break;
+                case '7_days':
+                    $query->where('created_at', '>=', now()->subDays(7));
+                    break;
+                case '1_month':
+                    $query->where('created_at', '>=', now()->subMonth());
+                    break;
+            }
         }
 
         if ($request->filled('search')) {
@@ -38,23 +61,63 @@ class AdminUserController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $rules = [
             'username' => 'required|string|max:100|unique:users,username',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
             'full_name' => 'required|string|max:255',
             'role' => 'required|in:admin,moderator',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable|boolean',
-        ]);
+        ];
+
+        $messages = [
+            'username.required' => 'Tên đăng nhập không được để trống.',
+            'username.unique' => 'Tên đăng nhập đã tồn tại.',
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.unique' => 'Email đã được sử dụng.',
+            'password.required' => 'Mật khẩu không được để trống.',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+            'full_name.required' => 'Họ và tên không được để trống.',
+            'role.required' => 'Vui lòng chọn vai trò.',
+            'avatar.image' => 'Ảnh đại diện phải là định dạng hình ảnh.',
+            'avatar.mimes' => 'Chỉ chấp nhận các định dạng: jpeg, png, jpg, gif, svg.',
+            'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
+        ];
+
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+            $validated = $validator->validated();
+        } else {
+            $validated = $request->validate($rules, $messages);
+        }
+
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('users', 'public');
+        }
 
         User::create([
             'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'full_name' => $validated['full_name'],
+            'avatar' => $avatarPath,
             'role' => $validated['role'],
             'status' => $request->boolean('status', true) ? 1 : 0,
         ]);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã tạo tài khoản người dùng thành công.',
+                'redirect' => route('admin.users.index'),
+            ]);
+        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã tạo tài khoản thành công.');
@@ -71,14 +134,39 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $validated = $request->validate([
+        $rules = [
             'username' => 'required|string|max:100|unique:users,username,'.$user->id,
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|string|min:6',
             'full_name' => 'required|string|max:255',
             'role' => 'required|in:admin,moderator',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable|boolean',
-        ]);
+        ];
+
+        $messages = [
+            'username.required' => 'Tên đăng nhập không được để trống.',
+            'username.unique' => 'Tên đăng nhập đã tồn tại.',
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.unique' => 'Email đã được sử dụng.',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+            'full_name.required' => 'Họ và tên không được để trống.',
+            'role.required' => 'Vui lòng chọn vai trò.',
+            'avatar.image' => 'Ảnh đại diện phải là định dạng hình ảnh.',
+            'avatar.mimes' => 'Chỉ chấp nhận các định dạng: jpeg, png, jpg, gif, svg.',
+            'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
+        ];
+
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+            $validated = $validator->validated();
+        } else {
+            $validated = $request->validate($rules, $messages);
+        }
 
         $data = [
             'username' => $validated['username'],
@@ -92,21 +180,48 @@ class AdminUserController extends Controller
             $data['password'] = Hash::make($validated['password']);
         }
 
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = $request->file('avatar')->store('users', 'public');
+        }
+
         $user->update($data);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã cập nhật thông tin người dùng thành công.',
+                'redirect' => route('admin.users.index'),
+            ]);
+        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã cập nhật thông tin tài khoản.');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id, Request $request)
     {
         $user = User::findOrFail($id);
 
         if ($user->id === auth()->id()) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Bạn không thể xóa chính mình.'], 403);
+            }
+
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
         $user->delete();
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Đã xóa người dùng thành công.']);
+        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã xóa người dùng thành công.');
@@ -126,12 +241,9 @@ class AdminUserController extends Controller
             if ($user->id == 1 || $user->id == auth()->id()) {
                 continue;
             }
-            // Xóa ảnh đại diện (nếu tương lai có)
+
             if ($user->avatar) {
-                // Assuming deleteImage is a helper function or a method on the User model
-                // If it's a global helper, ensure it's available.
-                // For now, commenting it out as it's not defined in this context.
-                // deleteImage($user->avatar);
+                Storage::disk('public')->delete($user->avatar);
             }
             $user->delete();
             $count++;
