@@ -37,7 +37,7 @@
             </li>
             <li>
               <i class="fas fa-check-circle text-success mt-1"></i>
-              Quản lý Scam Records hệ thống
+              Quản lý dữ liệu Scam trên hệ thống
             </li>
             <li>
               <i class="fas fa-check-circle text-success mt-1"></i>
@@ -45,11 +45,11 @@
             </li>
             <li>
               <i class="fas fa-check-circle text-success mt-1"></i>
-              Telegram Bot: Lệnh /check
+              Quỹ bảo hiểm: Quản lý thủ công
             </li>
             <li>
               <i class="fas fa-check-circle text-success mt-1"></i>
-              Quỹ bảo hiểm: Quản lý thủ công
+              Quản lý QC - Banner Ads tự động hóa
             </li>
             <li class="not-included">
               <i class="fas fa-times-circle text-muted mt-1"></i>
@@ -93,6 +93,11 @@
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
+              <strong>Telegram Bot:</strong>
+              Lệnh /check
+            </li>
+            <li>
+              <i class="fas fa-star text-warning mt-1"></i>
               <strong>Auto Push Channel:</strong>
               Tự động kéo traffic 24/7
             </li>
@@ -106,11 +111,7 @@
               <strong>Activity Logs:</strong>
               Giám sát mọi hành động Admin
             </li>
-            <li>
-              <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Quản lý QC:</strong>
-              Banner Ads tự động hóa
-            </li>
+
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Phân quyền Pro:</strong>
