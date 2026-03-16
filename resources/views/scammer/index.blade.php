@@ -3,7 +3,7 @@
 
 @section('content')
   <!-- Hero Section -->
-  <section class="dark:bg-dark_bg md:pd-24 pb-12">
+  <section class="dark:bg-dark_bg md:pb-24 pb-12">
     <x-breadcrumb :links="[['name' => 'Chi tiết: ' . StringHelper::mask_id($report->target_id, $report->type)]]" />
 
     <x-hero :stats="$stats" />
@@ -275,10 +275,10 @@
 
             <!-- Subtle SCAMMER Watermark -->
             <div
-              class="pointer-events-none absolute top-1/2 left-1/2 z-10 flex w-full -translate-x-1/4 -translate-y-1/2 -rotate-12 justify-center opacity-10"
+              class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-10"
             >
               <div
-                class="border-cs_red text-cs_red rounded-xl border-2 px-4 py-2 text-xl font-bold tracking-[6px] uppercase md:rounded-2xl md:border-4 md:px-6 md:py-3 md:text-4xl md:tracking-[12px]"
+                class="border-cs_red text-cs_red -rotate-12 rounded-xl border-2 px-4 py-2 text-xl font-bold tracking-[6px] uppercase md:rounded-2xl md:border-4 md:px-6 md:py-3 md:text-4xl md:tracking-[12px]"
               >
                 SCAMMER
               </div>
@@ -292,7 +292,7 @@
               <div class="text-cs_blue mt-0.5">
                 <i class="fa-solid fa-quote-left text-sm opacity-40"></i>
               </div>
-              <p class="text-[11px] leading-relaxed font-medium text-gray-600 md:text-xs dark:text-gray-300">
+              <p class="text-[11px] leading-relaxed font-medium text-gray-600 break-words md:text-xs dark:text-gray-300">
                 "{{ $report->description }}"
               </p>
             </div>
