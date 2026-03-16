@@ -274,9 +274,7 @@
             @endif
 
             <!-- Subtle SCAMMER Watermark -->
-            <div
-              class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-10"
-            >
+            <div class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-10">
               <div
                 class="border-cs_red text-cs_red -rotate-12 rounded-xl border-2 px-4 py-2 text-xl font-bold tracking-[6px] uppercase md:rounded-2xl md:border-4 md:px-6 md:py-3 md:text-4xl md:tracking-[12px]"
               >
@@ -292,7 +290,9 @@
               <div class="text-cs_blue mt-0.5">
                 <i class="fa-solid fa-quote-left text-sm opacity-40"></i>
               </div>
-              <p class="text-[11px] leading-relaxed font-medium text-gray-600 break-words md:text-xs dark:text-gray-300">
+              <p
+                class="text-[11px] leading-relaxed font-medium text-gray-600 break-words md:text-xs dark:text-gray-300"
+              >
                 "{{ $report->description }}"
               </p>
             </div>
@@ -855,7 +855,7 @@
                     Tài khoản lừa đảo
                   </span>
                   <span class="text-cs_red text-xs font-bold tracking-wider">
-                    {{ StringHelper::mask_id($latest->target_id, $latest->type) }}
+                    {{ $latest->target_id }}
                   </span>
                 </div>
               </div>
