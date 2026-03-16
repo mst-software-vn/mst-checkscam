@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ConfigHelper;
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
@@ -62,6 +63,8 @@ class AdminSettingController extends Controller
             $path = FileHelper::uploadImage($request->file('og_image'), 'settings');
             Setting::setValue('og_image', $path);
         }
+
+        ConfigHelper::clearCache();
 
         return back()->with('success', 'Đã lưu cài đặt thành công.');
     }

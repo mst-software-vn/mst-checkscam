@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(SettingSeeder::class);
+        $this->call(BannerSeeder::class);
         User::factory()->create([
             'username' => 'htuanqn',
             'email' => 'tuan@mstsoftware.vn',
