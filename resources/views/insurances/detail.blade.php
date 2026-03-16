@@ -1,26 +1,35 @@
 @extends('layouts.app')
 
 @section('structured_data')
-  <script type="application/ld+json">
+
+{{-- prettier-ignore-start --}}
+@verbatim
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfilePage",
       "mainEntity": {
         "@type": "Person",
+@endverbatim
         "name": "{{ $insurance->full_name }}",
         "description": "Thành viên bảo hiểm uy tín trên hệ thống",
         "image": "{{ $insurance->avatar_url }}"
+@verbatim
       },
       "publisher": {
         "@type": "Organization",
+@endverbatim
         "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
         "logo": {
           "@type": "ImageObject",
           "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
         }
+@verbatim
       }
     }
-  </script>
+</script>
+@endverbatim
+{{-- prettier-ignore-end --}}
 @endsection
 
 @section('content')
