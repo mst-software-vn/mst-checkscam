@@ -2,7 +2,7 @@
     'stats' => [],
     'isAction' => true
 ])
-<section class="relative overflow-hidden {{ $isAction ? "py-12 md:pb-20" : "" }} md:pb-2">
+<section class="relative overflow-hidden py-12 {{ $isAction ? "md:pb-20" : "" }} md:pb-2">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
             <h1
