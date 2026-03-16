@@ -143,8 +143,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/', [AdminSettingController::class, 'index'])->name('index');
             Route::post('/', [AdminSettingController::class, 'update'])->name('update');
-        },
-        );
+        });
+
+        Route::get('/upgrade', function () {
+            return view('admin.system.upgrade');
+        })->name('upgrade');
     },
     );
 
