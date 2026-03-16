@@ -194,7 +194,11 @@
 
                             listContainer.style.opacity = '0.5';
 
-                            fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                            fetch(url, {
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                            })
                                 .then((response) => response.text())
                                 .then((html) => {
                                     const parser = new DOMParser();
@@ -235,7 +239,11 @@
 
                         // Thêm delay 800ms để tạo cảm giác mượt mà
                         setTimeout(() => {
-                            fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                            fetch(url, {
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                            })
                                 .then((response) => response.text())
                                 .then((html) => {
                                     const parser = new DOMParser();

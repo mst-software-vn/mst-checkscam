@@ -509,7 +509,7 @@
                                 placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
                                 style="resize: none; font-size: 13px"
                             >
-{{ old("rejection_reason") }}</textarea
+    {{ old("rejection_reason") }}</textarea
                             >
                             @error("rejection_reason")
                                 <div class="invalid-feedback">{{ $message }}</div>

@@ -698,7 +698,7 @@
                                                         rows="3"
                                                         maxlength="1000"
                                                     >
-{{ $comment->content }}</textarea
+    {{ $comment->content }}</textarea
                                                     >
                                                     <div class="mt-2 flex items-center justify-end gap-2">
                                                         <button

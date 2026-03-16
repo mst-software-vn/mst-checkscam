@@ -120,7 +120,10 @@
                         <h5 class="card-title mt-4">Thông tin liên hệ</h5>
                         <div id="contact-rows">
                             @php
-                                $contacts = old("contact_info", $insurance->contact_info ?? [["platform" => "", "link" => ""]]);
+                                $contacts = old(
+                                    "contact_info",
+                                    $insurance->contact_info ?? [["platform" => "", "link" => ""]],
+                                );
                             @endphp
 
                             @foreach ($contacts as $i => $contact)
@@ -348,17 +351,25 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             let contactIdx = {{ count($contacts) }};
             let paymentIdx = {{ count($payments) }};
             let serviceIdx = {{ count($services) }};
 
             // --- Logic: Ẩn/hiện icon thùng rác ---
             function toggleRemoveButtons() {
-                const rowsTypes = [
-                    { id: 'contact-rows', class: 'contact-row' },
-                    { id: 'payment-rows', class: 'payment-row' },
-                    { id: 'service-rows', class: 'service-row' },
+                const rowsTypes = [{
+                        id: 'contact-rows',
+                        class: 'contact-row'
+                    },
+                    {
+                        id: 'payment-rows',
+                        class: 'payment-row'
+                    },
+                    {
+                        id: 'service-rows',
+                        class: 'service-row'
+                    },
                 ];
 
                 rowsTypes.forEach((type) => {
@@ -377,7 +388,7 @@
             // Gọi lần đầu để thiết lập trạng thái ẩn hiện icon xóa
             toggleRemoveButtons();
 
-            document.getElementById('add-contact').addEventListener('click', function () {
+            document.getElementById('add-contact').addEventListener('click', function() {
                 const html = `<div class="row align-items-end mb-3 contact-row">
                 <div class="col-lg-5"><div class="form-group mb-0"><label>Nền tảng</label><input type="text" name="contact_info[${contactIdx}][platform]" class="form-control" /></div></div>
                 <div class="col-lg-6"><div class="form-group mb-0"><label>Giá trị</label><input type="text" name="contact_info[${contactIdx}][link]" class="form-control" /></div></div>
@@ -389,7 +400,7 @@
                 toggleRemoveButtons();
             });
 
-            document.getElementById('add-payment').addEventListener('click', function () {
+            document.getElementById('add-payment').addEventListener('click', function() {
                 const html = `<div class="row align-items-end mb-3 payment-row">
                 <div class="col-lg-4"><div class="form-group mb-0"><label>Ngân hàng/Ví</label><input type="text" name="payment_accounts[${paymentIdx}][bank]" class="form-control" /></div></div>
                 <div class="col-lg-4"><div class="form-group mb-0"><label>Số tài khoản</label><input type="text" name="payment_accounts[${paymentIdx}][number]" class="form-control" /></div></div>
@@ -402,7 +413,7 @@
                 toggleRemoveButtons();
             });
 
-            document.getElementById('add-service').addEventListener('click', function () {
+            document.getElementById('add-service').addEventListener('click', function() {
                 const html = `<div class="row align-items-end mb-3 service-row">
                 <div class="col-lg-11"><div class="form-group mb-0"><label>Tên dịch vụ</label><input type="text" name="services[${serviceIdx}][title]" class="form-control" /></div></div>
                 <div class="col-lg-1 text-end"><a href="javascript:void(0);" class="btn btn-danger btn-sm btn-remove-row"><i data-feather="trash-2"></i></a></div>
@@ -413,7 +424,7 @@
                 toggleRemoveButtons();
             });
 
-            document.addEventListener('click', function (e) {
+            document.addEventListener('click', function(e) {
                 const removeBtn = e.target.closest('.btn-remove-row');
                 if (removeBtn) {
                     removeBtn.closest('.row').remove();
@@ -484,7 +495,7 @@
             const storageKey = 'insurance_avatar_preview';
 
             // Restore from session storage if validation failed
-            @if($errors->any())
+            @if ($errors->any())
                 const savedPreview = sessionStorage.getItem(storageKey);
                 if (savedPreview) {
                     if (imgElem) imgElem.src = savedPreview;
@@ -496,11 +507,11 @@
             @endif
 
             if (avatarInput) {
-                avatarInput.addEventListener('change', function (e) {
+                avatarInput.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function (e) {
+                        reader.onload = function(e) {
                             const base64 = e.target.result;
                             if (imgElem) imgElem.src = base64;
                             if (previewContainer) previewContainer.style.display = 'block';
@@ -513,12 +524,13 @@
             }
 
             // Clear storage on cancel or successful submit
-            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(storageKey));
+            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(
+                storageKey));
 
             // --- Logic: Confirm Modal + Spinner delay 1s ---
             const form = document.getElementById('insuranceForm');
             if (form) {
-                form.addEventListener('submit', function (e) {
+                form.addEventListener('submit', function(e) {
                     e.preventDefault();
 
                     Swal.fire({
@@ -553,7 +565,8 @@
                                     },
                                     success: function(res) {
                                         if (res.success) {
-                                            sessionStorage.removeItem(storageKey);
+                                            sessionStorage.removeItem(
+                                                storageKey);
                                             Swal.fire({
                                                 title: 'Thành công!',
                                                 text: res.message,
@@ -561,7 +574,8 @@
                                                 timer: 1500,
                                                 showConfirmButton: false
                                             }).then(() => {
-                                                window.location.href = res.redirect;
+                                                window.location.href =
+                                                    res.redirect;
                                             });
                                         }
                                     },
@@ -570,11 +584,14 @@
                                         btnSubmit.innerHTML = originalText;
 
                                         if (xhr.status === 422) {
-                                            const errors = xhr.responseJSON.errors;
+                                            const errors = xhr.responseJSON
+                                                .errors;
                                             let errorMsg = '';
-                                            Object.values(errors).forEach(err => {
-                                                errorMsg += `• ${err[0]}<br>`;
-                                            });
+                                            Object.values(errors).forEach(
+                                                err => {
+                                                    errorMsg +=
+                                                        `• ${err[0]}<br>`;
+                                                });
 
                                             Swal.fire({
                                                 title: 'Lỗi nhập liệu',
