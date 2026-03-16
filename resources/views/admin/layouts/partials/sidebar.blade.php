@@ -142,27 +142,6 @@
         <li class="menu-title">
           <span>TÍNH NĂNG PRO</span>
         </li>
-        <style>
-          .pro-feature-link span {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            width: 100%;
-          }
-          .pro-feature-link i.fa-crown {
-            color: #ffca28;
-            font-size: 10px;
-            filter: drop-shadow(0 0 2px rgba(255, 202, 40, 0.4));
-            margin-right: 5px;
-          }
-          .pro-feature-text {
-            color: #ffb300 !important;
-            font-weight: 600 !important;
-          }
-          body.dark-only .pro-feature-text {
-            color: #ffd54f !important;
-          }
-        </style>
         <li>
           <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="zap"></i>

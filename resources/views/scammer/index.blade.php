@@ -1,14 +1,16 @@
 @use('App\Helpers\StringHelper')
 @extends('layouts.app')
-
 @section('structured_data')
   <script type="application/ld+json">
+    @verbatim
     {
       "@context": "https://schema.org",
       "@type": "Review",
       "itemReviewed": {
         "@type": "Thing",
+    @endverbatim
         "name": "{{ $report->target_id }} - {{ $report->target_name ?? 'Đối tượng' }}"
+    @verbatim
       },
       "reviewRating": {
         "@type": "Rating",
@@ -17,19 +19,28 @@
       },
       "author": {
         "@type": "Organization",
+    @endverbatim
         "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}"
+    @verbatim
       },
       "publisher": {
         "@type": "Organization",
+    @endverbatim
         "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
+    @verbatim
         "logo": {
           "@type": "ImageObject",
+    @endverbatim
           "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
+    @verbatim
         }
       },
+    @endverbatim
       "description": "{{ $meta['description'] ?? '' }}",
       "datePublished": "{{ $report->created_at->toIso8601String() }}"
+    @verbatim
     }
+    @endverbatim
   </script>
 @endsection
 
@@ -1074,14 +1085,6 @@
     }
   </script>
 
-  <div id="lightbox">
-    <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
-    <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
-    <img src="" id="lb-img" alt="evidence" />
-    <button class="lb-nav lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
-    <span class="lb-counter" id="lb-counter"></span>
-  </div>
-
   <script>
     $(document).ready(function () {
       const lbImages = [];
@@ -1394,3 +1397,11 @@
     });
   </script>
 @endpush
+
+<div id="lightbox">
+  <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+  <img src="" id="lb-img" alt="evidence" />
+  <button class="lb-nav lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+  <span class="lb-counter" id="lb-counter"></span>
+</div>
