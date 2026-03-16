@@ -3,6 +3,7 @@
 @php
   $keyword = request()->query('q');
 @endphp
+
 @section('content')
   <x-hero :stats="$stats" :is-action="$keyword ? false : true" />
 
@@ -10,11 +11,7 @@
   <main class="mx-auto w-full max-w-7xl grow px-4 py-4 sm:px-6 lg:px-8">
     <!-- Top Full Width Banner -->
     @if (! $keyword)
-      <x-ads-horizontal
-        image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
-        url="#"
-        alt="Ads"
-      />
+      <x-banner-ads position="home_top" class="mb-8" />
       <h2 class="text-cs_blue mt-12 mb-6 text-center text-lg font-black uppercase md:text-xl">
         {{ date('d/m/Y') }} CÓ {{ isset($stats) ? number_format($stats['total_reports']) : 0 }} CẢNH BÁO
       </h2>
@@ -200,7 +197,7 @@
           </section>
 
           <!-- BANNER QUẢNG CÁO 2 -->
-          <x-ads-horizontal image="https://i.ibb.co/BV9hbrP2/banner3.gif" url="#" alt="Ads" />
+          <x-banner-ads position="home_between" class="my-6" />
 
           <!-- PHẦN 3: TOP 3 TÌM KIẾM TRONG NGÀY -->
           <section class="mt-6">
@@ -379,7 +376,7 @@
           </section>
 
           <!-- BANNER QUẢNG CÁO 1 -->
-          <x-ads-horizontal image="https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif" url="#" alt="Ads" />
+          <x-banner-ads position="home_between" class="my-6" />
 
           <!-- PHẦN 2: LỪA ĐẢO PHỔ BIẾN 7 NGÀY GẦN ĐÂY -->
           <section>
@@ -459,7 +456,7 @@
           </section>
 
           <!-- BANNER QUẢNG CÁO 2 -->
-          <x-ads-horizontal image="https://i.ibb.co/BV9hbrP2/banner3.gif" url="#" alt="Ads" />
+          <x-banner-ads position="home_between" class="my-6" />
 
           <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
           <section>
@@ -553,12 +550,7 @@
         <!-- Khu Vực Phải: Sidebar Widget -->
         <aside class="w-full space-y-3 lg:w-3/12">
           <!-- Right Sidebar Banner -->
-          <x-ads-square image="https://i.ibb.co/kgwtn4vF/fpayment.jpg" url="#" alt="Fpayment Ads" />
-          <x-ads-square
-            image="https://png.pngtree.com/png-clipart/20250126/original/pngtree-hologram-gradient-flash-sale-square-poster-banner-promotion-vector-png-image_19237469.png"
-            url="#"
-            alt="Fpayment Ads"
-          />
+          <x-banner-ads position="home_sidebar" class="mb-4" />
 
           <!-- Action Button -->
           <div
@@ -969,7 +961,7 @@
             url.searchParams.set('page', nextPage);
 
             btn.disabled = false;
- true.innerHTML = '<span>Đang tải bình luận...</span> <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
+            true.innerHTML = '<span>Đang tải bình luận...</span> <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
 
             // Artificial delay for smooth UX
             setTimeout(() => {

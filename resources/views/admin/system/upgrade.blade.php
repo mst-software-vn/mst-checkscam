@@ -84,43 +84,42 @@
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Hệ thống Public API:</strong>
-              Kết nối Website khác
+              Mở cổng tra cứu cho bên thứ 3, hỗ trợ bán KEY API tích hợp.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Telegram Hub:</strong>
-              Duyệt & Từ chối ngay trên Chat
-            </li>
-            <li>
-              <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Telegram Bot:</strong>
-              Lệnh /check
+              Duyệt bài, từ chối hoặc nhận thông báo tức thì qua Bot Telegram.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Auto Push Channel:</strong>
-              Tự động kéo traffic 24/7
+              Tự động đẩy bài viết đã duyệt lên Telegram Channel để kéo traffic.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Tranh Chấp:</strong>
-              Quy trình đối chất chuyên nghiệp
+              <strong>Hệ thống Tranh Chấp:</strong>
+              Quy trình xử lý đối chất giữa người báo cáo và người bị báo cáo.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Activity Logs:</strong>
-              Giám sát mọi hành động Admin
-            </li>
-
-            <li>
-              <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Phân quyền Pro:</strong>
-              Tạo Admin, Mod, Editor
+              <strong>Logs Audit & Activity:</strong>
+              Theo dõi chi tiết lịch sử mọi thao tác của Admin và Moderator.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Support 24/7:</strong>
-              Cài đặt & Hỗ trợ kỹ thuật VIP
+              <strong>Phân quyền Nâng cao:</strong>
+              Tạo không giới hạn nhóm quyền (Admin, Mod, Editor, Support).
+            </li>
+            <li>
+              <i class="fas fa-star text-warning mt-1"></i>
+              <strong>Module SEO Max:</strong>
+              Tối ưu hóa Schema.org, Sitemap tự động và cấu hình SEO chi tiết.
+            </li>
+            <li>
+              <i class="fas fa-star text-warning mt-1"></i>
+              <strong>Support VIP 24/7:</strong>
+              Đội ngũ kỹ thuật hỗ trợ trực tiếp qua nhóm kín Zalo/Telegram.
             </li>
           </ul>
 

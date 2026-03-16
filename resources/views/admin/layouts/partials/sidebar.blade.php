@@ -144,9 +144,27 @@
         </li>
         <li>
           <a href="{{ route('admin.upgrade') }}">
+            <i data-feather="zap"></i>
+            <span>
+              Telegram Hub
+              <span class="badge-pro-sm">PRO</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('admin.upgrade') }}">
+            <i data-feather="share-2"></i>
+            <span>
+              Auto Bot & Channel
+              <span class="badge-pro-sm">PRO</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('admin.upgrade') }}">
             <i data-feather="code"></i>
             <span>
-              Quản lý API
+              Public API (Bán Key)
               <span class="badge-pro-sm">PRO</span>
             </span>
           </a>
@@ -155,16 +173,7 @@
           <a href="{{ route('admin.upgrade') }}">
             <i data-feather="alert-triangle"></i>
             <span>
-              Khiếu nại
-              <span class="badge-pro-sm">PRO</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('admin.upgrade') }}">
-            <i data-feather="shield-off"></i>
-            <span>
-              Blacklist
+              Hệ thống Tranh chấp
               <span class="badge-pro-sm">PRO</span>
             </span>
           </a>
@@ -173,7 +182,7 @@
           <a href="{{ route('admin.upgrade') }}">
             <i data-feather="activity"></i>
             <span>
-              Activity Logs
+              Logs Audit & Bảo mật
               <span class="badge-pro-sm">PRO</span>
             </span>
           </a>
