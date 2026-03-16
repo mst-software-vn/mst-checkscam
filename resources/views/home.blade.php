@@ -550,7 +550,7 @@
         <!-- Khu Vực Phải: Sidebar Widget -->
         <aside class="w-full space-y-3 lg:w-3/12">
           <!-- Right Sidebar Banner -->
-          <x-banner-ads position="home_sidebar" class="mb-4" />
+          <x-banner-ads position="home_sidebar" class="mb-4" :limit="3" />
 
           <!-- Action Button -->
           <div
