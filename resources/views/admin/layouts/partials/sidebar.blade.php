@@ -8,7 +8,7 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="submenu {{ request()->is('admin/reports*') ? 'active' : '' }}">
+        <li class="submenu">
           <a href="javascript:void(0);">
             <img src="/assets/img/icons/time.svg" alt="img" />
             <span>Tố cáo</span>
@@ -25,7 +25,7 @@
             </li>
           </ul>
         </li>
-        <li class="submenu {{ request()->is('admin/insurances*') ? 'active' : '' }}">
+        <li class="submenu">
           <a href="javascript:void(0);">
             <i data-feather="shield"></i>
             <span>Bảo hiểm</span>
@@ -50,7 +50,7 @@
             </li>
           </ul>
         </li>
-        <li class="submenu {{ request()->is('admin/posts*') ? 'active' : '' }}">
+        <li class="submenu">
           <a href="javascript:void(0);">
             <i data-feather="file-text"></i>
             <span>Bài viết</span>
@@ -82,7 +82,7 @@
           </a>
         </li>
 
-        <li class="submenu {{ request()->is('admin/users*') ? 'active' : '' }}">
+        <li class="submenu">
           <a href="javascript:void(0);">
             <img src="/assets/img/icons/users1.svg" alt="img" />
             <span>Users</span>

@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
 
   <link rel="stylesheet" href="/assets/css/animate.css" />
+  <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css" />
   <link rel="stylesheet" href="/assets/css/customs.css" />
 
   <link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css" />

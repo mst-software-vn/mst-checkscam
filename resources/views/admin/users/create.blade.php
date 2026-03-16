@@ -64,7 +64,7 @@
                     placeholder="{{
                       isset($user)
                         ? "
-                                                                                                                                                                                                                                                                                                                      Để trống nếu không đổi mật khẩu"
+                                                                                                                                                                                                                                                                                                                                            Để trống nếu không đổi mật khẩu"
                         : 'Nhập mật khẩu'
                     }}"
                   />
@@ -107,17 +107,9 @@
                     <span class="text-danger">*</span>
                   </label>
                   <select name="role" class="select">
-                    {{--
-                      <option
-                      value="moderator"
-                      {{ old("role", $user->role ?? "moderator") === "moderator" ? "selected" : "" }}
-                      >
-                      Người kiểm duyệt (Moderator) - [BẢN PRO]
-                      </option>
-                    --}}
-                    <option value="admin" {{ old('role', $user->role ?? 'moderator') === 'admin' ? 'selected' : '' }}>
-                      Quản trị viên (Admin)
-                    </option>
+                    <option value="">Vai trò</option>
+                    <option value="admin">Admin</option>
+                    <option value="moderator">Moderator - Bản PRO</option>
                   </select>
                 </div>
               </div>
