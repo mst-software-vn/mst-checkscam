@@ -1,43 +1,54 @@
 <?php
 
+namespace App\Helpers;
+
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-if (! function_exists('uploadImage')) {
-    function uploadImage(UploadedFile $file, string $path = 'reports'): string
+class FileHelper
+{
+    /**
+     * Upload một hình ảnh đơn lẻ
+     */
+    public static function uploadImage(UploadedFile $file, string $path = 'reports'): string
     {
         return $file->store($path, 'public');
     }
-}
 
-if (! function_exists('uploadMultipleImages')) {
-    function uploadMultipleImages(array $files, string $path = 'reports'): array
+    /**
+     * Upload nhiều hình ảnh cùng lúc
+     */
+    public static function uploadMultipleImages(array $files, string $path = 'reports'): array
     {
         $paths = [];
         foreach ($files as $file) {
             if ($file instanceof UploadedFile) {
-                $paths[] = uploadImage($file, $path);
+                // Gọi method static trong cùng class thông qua self::
+                $paths[] = self::uploadImage($file, $path);
             }
         }
 
         return $paths;
     }
-}
 
-if (! function_exists('deleteImage')) {
-    function deleteImage(string $filePath, string $disk = 'public'): void
+    /**
+     * Xóa một hình ảnh khỏi Storage
+     */
+    public static function deleteImage(string $filePath, string $disk = 'public'): void
     {
         if (Storage::disk($disk)->exists($filePath)) {
             Storage::disk($disk)->delete($filePath);
         }
     }
-}
 
-if (! function_exists('deleteMultipleImages')) {
-    function deleteMultipleImages(array $filePaths, string $disk = 'public'): void
+    /**
+     * Xóa nhiều hình ảnh cùng lúc
+     */
+    public static function deleteMultipleImages(array $filePaths, string $disk = 'public'): void
     {
         foreach ($filePaths as $path) {
-            deleteImage($path, $disk);
+            // Gọi method static trong cùng class thông qua self::
+            self::deleteImage($path, $disk);
         }
     }
 }

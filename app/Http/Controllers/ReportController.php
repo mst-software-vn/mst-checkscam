@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FileHelper;
 use App\Helpers\StringHelper;
 use App\Models\Report;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class ReportController extends Controller
 
         $evidencePaths = [];
         if ($request->hasFile('evidence_images')) {
-            $evidencePaths = uploadMultipleImages($request->file('evidence_images'), 'reports');
+            $evidencePaths = FileHelper::uploadMultipleImages($request->file('evidence_images'), 'reports');
         }
 
         $slug = Str::slug(($validated['target_name'] ?? 'scammer').'-'.Str::random(8));

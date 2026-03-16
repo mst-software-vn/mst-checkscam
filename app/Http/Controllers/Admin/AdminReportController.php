@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
@@ -134,12 +135,12 @@ class AdminReportController extends Controller
         $currentImages = $report->evidence_images ?? [];
 
         if (! empty($validated['remove_images'])) {
-            deleteMultipleImages($validated['remove_images']);
+            FileHelper::deleteMultipleImages($validated['remove_images']);
             $currentImages = array_diff($currentImages, $validated['remove_images']);
         }
 
         if ($request->hasFile('evidence_images')) {
-            $newPaths = uploadMultipleImages($request->file('evidence_images'), 'reports');
+            $newPaths = FileHelper::uploadMultipleImages($request->file('evidence_images'), 'reports');
             $currentImages = array_merge($currentImages, $newPaths);
         }
 
@@ -169,7 +170,7 @@ class AdminReportController extends Controller
         $report = Report::findOrFail($id);
 
         if (! empty($report->evidence_images)) {
-            deleteMultipleImages($report->evidence_images);
+            FileHelper::deleteMultipleImages($report->evidence_images);
         }
 
         $report->delete();
@@ -188,7 +189,7 @@ class AdminReportController extends Controller
         $reports = Report::whereIn('id', $ids)->get();
         foreach ($reports as $report) {
             if (! empty($report->evidence_images)) {
-                deleteMultipleImages($report->evidence_images);
+                FileHelper::deleteMultipleImages($report->evidence_images);
             }
             $report->delete();
         }

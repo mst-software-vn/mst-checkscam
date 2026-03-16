@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Helpers\StringHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -76,7 +77,7 @@ class AdminPostController extends Controller
 
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = uploadImage($request->file('thumbnail'), 'posts');
+            $thumbnailPath = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
         }
 
         Post::create([
@@ -138,9 +139,9 @@ class AdminPostController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             if ($post->thumbnail) {
-                deleteImage($post->thumbnail);
+                FileHelper::deleteImage($post->thumbnail);
             }
-            $validated['thumbnail'] = uploadImage($request->file('thumbnail'), 'posts');
+            $validated['thumbnail'] = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
         }
 
         $post->update([
@@ -170,7 +171,7 @@ class AdminPostController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->thumbnail) {
-            deleteImage($post->thumbnail);
+            FileHelper::deleteImage($post->thumbnail);
         }
 
         $post->delete();
@@ -195,7 +196,7 @@ class AdminPostController extends Controller
         $posts = Post::whereIn('id', $ids)->get();
         foreach ($posts as $post) {
             if ($post->thumbnail) {
-                deleteImage($post->thumbnail);
+                FileHelper::deleteImage($post->thumbnail);
             }
             $post->delete();
         }
