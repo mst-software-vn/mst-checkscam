@@ -1,6 +1,38 @@
 @use('App\Helpers\StringHelper')
 @extends('layouts.app')
 
+@section('structured_data')
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Thing",
+        "name": "{{ $report->target_id }} - {{ $report->target_name ?? 'Đối tượng' }}"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "1",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
+        }
+      },
+      "description": "{{ $meta['description'] ?? '' }}",
+      "datePublished": "{{ $report->created_at->toIso8601String() }}"
+    }
+  </script>
+@endsection
+
 @section('content')
   <!-- Hero Section -->
   <section class="dark:bg-dark_bg">

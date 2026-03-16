@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ConfigHelper;
 use App\Models\Insurance;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,14 @@ class InsuranceController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        return view('insurances.detail', compact('insurance'));
+        // Advanced SEO
+        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam.vn');
+        $meta = [
+            'title' => $insurance->full_name.' | Quỹ bảo hiểm uy tín - '.$siteTitle,
+            'description' => 'Thông tin bảo hiểm của '.$insurance->full_name.' với số tiền '.number_format($insurance->amount).' VNĐ. Cam kết uy tín và an toàn tuyệt đối tại '.$siteTitle.'.',
+            'keywords' => 'bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín',
+        ];
+
+        return view('insurances.detail', compact('insurance', 'meta'));
     }
 }

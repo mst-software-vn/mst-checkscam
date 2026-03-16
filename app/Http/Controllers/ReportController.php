@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ConfigHelper;
 use App\Helpers\FileHelper;
 use App\Helpers\StringHelper;
 use App\Models\Report;
@@ -132,6 +133,15 @@ class ReportController extends Controller
             'total_comments' => DB::table('comments')->count(),
         ];
 
+        // Advanced SEO
+        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam.vn');
+        $meta = [
+            'title' => ($report->target_id ? $report->target_id.' | ' : '').($report->target_name ? $report->target_name.' ' : '').'Lừa đảo - Bị tố cáo trên '.$siteTitle,
+            'description' => 'Cảnh báo lừa đảo: '.($report->target_name ? $report->target_name.' ' : '').'('.$report->target_id.'). Hình thức: '.$report->category.'. '.Str::limit($report->description, 150),
+            'keywords' => implode(', ', array_filter([$report->target_id, $report->target_name, $report->category, 'lừa đảo', 'scammer', 'tài khoản lừa đảo'])),
+            'og_image' => ! empty($report->evidence_images) ? asset('storage/'.$report->evidence_images[0]) : null,
+        ];
+
         return view('scammer.index', compact(
             'report',
             'displayReporterName',
@@ -141,6 +151,7 @@ class ReportController extends Controller
             'latestReports',
             'stats',
             'comments',
+            'meta',
         ));
     }
 }

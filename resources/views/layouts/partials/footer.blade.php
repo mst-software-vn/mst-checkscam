@@ -13,8 +13,7 @@
           <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="h-16 w-auto" />
         </a>
         <p class="max-w-md text-sm leading-relaxed text-gray-400 md:text-base">
-          Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Chúng tôi xây dựng một môi trường internet an toàn
-          hơn thông qua sức mạnh cộng đồng và dữ liệu minh bạch.
+          {{ $siteConfig['description'] ?? 'Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.' }}
         </p>
         <div class="flex gap-4">
           <a
@@ -55,7 +54,7 @@
           </li>
           <li>
             <a href="/api-checkscam" class="hover:text-cs_blue text-sm font-bold text-gray-400 transition-colors">
-              API Check Scam
+              Hệ thống Public API
             </a>
           </li>
           <li>
@@ -169,7 +168,7 @@
     >
       <p class="text-center md:text-left">
         &copy; {{ date('Y') }}
-        <span class="text-white">CheckScam Global</span>
+        <span class="text-white">{{ $siteConfig['title'] ?? 'Tra cứu lừa đảo' }}</span>
         . All Rights Reserved.
       </p>
       <p>
