@@ -84,42 +84,42 @@
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Hệ thống Public API:</strong>
-              Mở cổng tra cứu cho bên thứ 3, hỗ trợ bán KEY API tích hợp.
+              Mở cổng tra cứu & bán KEY API tích hợp.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Telegram Hub:</strong>
-              Duyệt bài, từ chối hoặc nhận thông báo tức thì qua Bot Telegram.
+              Duyệt bài & nhận thông báo qua Bot Telegram.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Auto Push Channel:</strong>
-              Tự động đẩy bài viết đã duyệt lên Telegram Channel để kéo traffic.
+              Tự động đẩy bài lên Telegram Channel kéo traffic.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Hệ thống Tranh Chấp:</strong>
-              Quy trình xử lý đối chất giữa người báo cáo và người bị báo cáo.
+              Quy trình xử lý đối chất người dùng chuyên nghiệp.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Logs Audit & Activity:</strong>
-              Theo dõi chi tiết lịch sử mọi thao tác của Admin và Moderator.
+              <strong>Logs Audit & Security:</strong>
+              Theo dõi chi tiết lịch sử thao tác của Admin.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Phân quyền Nâng cao:</strong>
-              Tạo không giới hạn nhóm quyền (Admin, Mod, Editor, Support).
+              Tạo không giới hạn nhóm & quyền hạn Moderation.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Module SEO Max:</strong>
-              Tối ưu hóa Schema.org, Sitemap tự động và cấu hình SEO chi tiết.
+              Tối ưu Schema, Sitemap & SEO chi tiết tự động.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Support VIP 24/7:</strong>
-              Đội ngũ kỹ thuật hỗ trợ trực tiếp qua nhóm kín Zalo/Telegram.
+              Hỗ trợ kỹ thuật trực tiếp qua Zalo/Telegram.
             </li>
           </ul>
 
