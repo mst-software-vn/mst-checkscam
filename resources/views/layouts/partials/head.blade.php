@@ -14,6 +14,7 @@
     name="keywords"
     content="@yield('keywords', $meta['keywords'] ?? ($siteConfig['keywords'] ?? 'check scam, tố cáo lừa đảo'))"
   />
+  <meta name="author" content="{{ $siteConfig['site_author'] ?? 'MST SOFTWARE' }}" />
 
   <link rel="canonical" href="{{ url()->current() }}" />
 
