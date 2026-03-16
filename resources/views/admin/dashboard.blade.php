@@ -1,3 +1,4 @@
+@use('App\Helpers\Helpers')
 @extends('admin.layouts.master')
 @section('content')
   <div class="page-header">
@@ -62,7 +63,7 @@
         </div>
         <div class="dash-widgetcontent">
           <h5>
-            <span class="counters" data-count="{{ (int) $metrics['insurance_fund'] }}">0</span>
+            <span>{{ Helpers::formatCurrency($metrics['insurance_fund']) }}</span>
             ₫
           </h5>
           <h6>Quỹ bảo hiểm</h6>
@@ -76,7 +77,7 @@
         </div>
         <div class="dash-widgetcontent">
           <h5>
-            <span class="counters" data-count="{{ (int) $metrics['total_damage'] }}">0</span>
+            <span>{{ Helpers::formatCurrency($metrics['total_damage']) }}</span>
             ₫
           </h5>
           <h6>Tổng thiệt hại</h6>
@@ -90,7 +91,7 @@
     <div class="col-lg-3 col-sm-6 d-flex col-12">
       <div class="dash-count">
         <div class="dash-counts">
-          <h4>{{ number_format($metrics['total_scammers']) }}</h4>
+          <h4>{{ Helpers::formatCurrency($metrics['total_scammers']) }}</h4>
           <h5>Đối tượng Scam</h5>
         </div>
         <div class="dash-imgs">
@@ -101,7 +102,7 @@
     <div class="col-lg-3 col-sm-6 d-flex col-12">
       <div class="dash-count das1">
         <div class="dash-counts">
-          <h4>{{ number_format($metrics['total_reports']) }}</h4>
+          <h4>{{ Helpers::formatCurrency($metrics['total_reports']) }}</h4>
           <h5>Tổng tố cáo</h5>
         </div>
         <div class="dash-imgs">
@@ -112,7 +113,7 @@
     <div class="col-lg-3 col-sm-6 d-flex col-12">
       <div class="dash-count das2">
         <div class="dash-counts">
-          <h4>{{ number_format($metrics['total_comments']) }}</h4>
+          <h4>{{ Helpers::formatCurrency($metrics['total_comments']) }}</h4>
           <h5>Tổng bình luận</h5>
         </div>
         <div class="dash-imgs">
@@ -123,7 +124,7 @@
     <div class="col-lg-3 col-sm-6 d-flex col-12">
       <div class="dash-count das3">
         <div class="dash-counts">
-          <h4>{{ number_format($metrics['total_posts']) }}</h4>
+          <h4>{{ Helpers::formatCurrency($metrics['total_posts']) }}</h4>
           <h5>Bài viết</h5>
         </div>
         <div class="dash-imgs">
@@ -171,7 +172,7 @@
                   <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $search->search_query }}</td>
-                    <td>{{ number_format($search->count) }}</td>
+                    <td>{{ Helpers::formatCurrency($search->count) }}</td>
                   </tr>
                 @empty
                   <tr>
@@ -216,7 +217,7 @@
                 </td>
                 <td>{{ $report->is_anonymous ? 'Ẩn danh' : $report->reporter_name }}</td>
                 <td>
-                  {{ $report->damage_amount ? number_format($report->damage_amount, 0, ',', ',') . ' ₫' : '—' }}
+                  {{ $report->damage_amount ? Helpers::formatCurrency($report->damage_amount) . ' ₫' : '—' }}
                 </td>
                 <td>
                   @if ($report->status === 'pending')
