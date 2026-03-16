@@ -47,8 +47,13 @@ class AppServiceProvider extends ServiceProvider
                 'facebook_link' => ConfigHelper::getConfig('facebook_link', 'https://www.facebook.com/mstsoftware.vn'),
                 'telegram_link' => ConfigHelper::getConfig('telegram_link', 'https://t.me/checkscam'),
                 'logo' => ConfigHelper::getConfig('logo'),
+                'logo_header_light' => ConfigHelper::getConfig('logo_header_light'),
+                'logo_header_dark' => ConfigHelper::getConfig('logo_header_dark'),
+                'logo_footer_light' => ConfigHelper::getConfig('logo_footer_light'),
+                'logo_footer_dark' => ConfigHelper::getConfig('logo_footer_dark'),
                 'favicon' => ConfigHelper::getConfig('favicon'),
                 'og_image' => ConfigHelper::getConfig('og_image'),
+                'site_author' => ConfigHelper::getConfig('site_author', 'MST SOFTWARE'),
                 'header_scripts' => ConfigHelper::getConfig('header_scripts'),
             ]);
         });
