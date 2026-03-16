@@ -143,47 +143,47 @@
           <span>TÍNH NĂNG PRO</span>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="zap"></i>
             <span>
-              Telegram Hub
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Telegram Hub</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="share-2"></i>
             <span>
-              Auto Bot & Channel
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Auto Bot & Channel</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="code"></i>
             <span>
-              Public API (Bán Key)
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Public API</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="alert-triangle"></i>
             <span>
-              Hệ thống Tranh chấp
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Tranh chấp</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="activity"></i>
             <span>
-              Logs Audit & Bảo mật
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Logs Audit & Bảo mật</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>

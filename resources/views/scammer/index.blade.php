@@ -1,5 +1,48 @@
 @use('App\Helpers\StringHelper')
 @extends('layouts.app')
+@section('structured_data')
+  <script type="application/ld+json">
+    @verbatim
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Thing",
+    @endverbatim
+        "name": "{{ $report->target_id }} - {{ $report->target_name ?? 'Đối tượng' }}"
+    @verbatim
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "1",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Organization",
+    @endverbatim
+        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}"
+    @verbatim
+      },
+      "publisher": {
+        "@type": "Organization",
+    @endverbatim
+        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
+    @verbatim
+        "logo": {
+          "@type": "ImageObject",
+    @endverbatim
+          "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
+    @verbatim
+        }
+      },
+    @endverbatim
+      "description": "{{ $meta['description'] ?? '' }}",
+      "datePublished": "{{ $report->created_at->toIso8601String() }}"
+    @verbatim
+    }
+    @endverbatim
+  </script>
+@endsection
 
 @section('content')
   <!-- Hero Section -->
@@ -905,17 +948,13 @@
   </main>
 @endsection
 
-<script>
-  function showCopied(text) {
-    navigator.clipboard.writeText(text);
-    const toast = document.createElement('div');
-    toast.className =
-      'fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] rounded-md bg-gray-900 px-4 py-2.5 text-xs font-semibold text-white shadow-lg';
-    toast.innerHTML = '<i class="fa-solid fa-check mr-2 text-green-400"></i>Đã sao chép: ' + text;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
-  }
-</script>
+<div id="lightbox">
+  <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+  <img src="" id="lb-img" alt="evidence" />
+  <button class="lb-nav lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+  <span class="lb-counter" id="lb-counter"></span>
+</div>
 
 @push('styles')
   <style>
@@ -1041,14 +1080,6 @@
       setTimeout(() => toast.remove(), 2000);
     }
   </script>
-
-  <div id="lightbox">
-    <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
-    <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
-    <img src="" id="lb-img" alt="evidence" />
-    <button class="lb-nav lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
-    <span class="lb-counter" id="lb-counter"></span>
-  </div>
 
   <script>
     $(document).ready(function () {
@@ -1361,4 +1392,6 @@
       });
     });
   </script>
+@endpush
+
 @endpush

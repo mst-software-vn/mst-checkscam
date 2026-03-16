@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Thêm Bài Viết')
 @section('content')
   @include(
     'admin.components.page-header',
@@ -62,7 +63,7 @@
                         value="1"
                         {{ old('is_featured', $post->is_featured ?? false) ? 'checked' : '' }}
                       />
-                      <label for="is_featured" class="checktoggle">checkbox</label>
+                      <label for="is_featured" class="checktoggle"></label>
                       <span class="ms-2 mb-2">Bài nổi bật</span>
                     </div>
                   </div>
