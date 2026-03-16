@@ -113,6 +113,31 @@
             <span>Bình luận</span>
           </a>
         </li>
+        <li class="submenu">
+          <a href="javascript:void(0);">
+            <i data-feather="image"></i>
+            <span>Quảng cáo</span>
+            <span class="menu-arrow"></span>
+          </a>
+          <ul>
+            <li>
+              <a
+                href="{{ route('admin.banners.index') }}"
+                class="{{ request()->routeIs('admin.banners.index') ? 'active' : '' }}"
+              >
+                Danh sách
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ route('admin.banners.create') }}"
+                class="{{ request()->routeIs('admin.banners.create') ? 'active' : '' }}"
+              >
+                Thêm mới
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li class="menu-title">
           <span>TÍNH NĂNG PRO</span>

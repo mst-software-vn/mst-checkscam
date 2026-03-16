@@ -1,5 +1,8 @@
-<!-- Hero Section -->
-<section class="relative overflow-hidden py-12 md:py-20 md:pb-2">
+@props([
+    'stats' => [],
+    'isAction' => true
+])
+<section class="relative overflow-hidden py-12 {{ $isAction ? "md:pb-20" : "" }} md:pb-2">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
             <h1
@@ -75,91 +78,14 @@
                 @endif
             </div>
 
+            @if($isAction)
             <div class="mt-8 grid grid-cols-2 gap-3 md:mt-12 md:grid-cols-4 md:gap-4">
-                <a
-                    href="/to-cao-lua-dao/"
-                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-red-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-red-900/10"
-                >
-                    <div
-                        class="text-cs_red flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-red-900/30"
-                    >
-                        <i class="fa-solid fa-bullhorn"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
-                            Report
-                        </p>
-                        <p
-                            class="group-hover:text-cs_red text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
-                        >
-                            Tố Cáo Scam
-                        </p>
-                    </div>
-                </a>
-
-                <a
-                    href="/bao-hiem-cs/"
-                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-blue-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-blue-900/10"
-                >
-                    <div
-                        class="text-cs_blue flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-blue-900/30"
-                    >
-                        <i class="fa-solid fa-shield-cat"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
-                            Insurance
-                        </p>
-                        <p
-                            class="group-hover:text-cs_blue text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
-                        >
-                            Bảo Hiểm CS
-                        </p>
-                    </div>
-                </a>
-
-                <a
-                    href="#"
-                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-green-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-green-900/10"
-                >
-                    <div
-                        class="text-cs_green flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-green-900/30"
-                    >
-                        <i class="fa-solid fa-store"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
-                            Trading
-                        </p>
-                        <p
-                            class="group-hover:text-cs_green text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
-                        >
-                            Chợ Buôn Bán
-                        </p>
-                    </div>
-                </a>
-
-                <a
-                    href="#"
-                    class="dark:bg-dark_card group flex items-center gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-xs transition-all hover:bg-gray-50 md:gap-4 md:p-4 dark:border-gray-800 dark:hover:bg-slate-800"
-                >
-                    <div
-                        class="text-cs_blue flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 transition-transform group-hover:rotate-12 md:h-12 md:w-12 md:text-xl dark:bg-slate-800"
-                    >
-                        <i class="fa-brands fa-telegram"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[8px] font-black text-gray-400 uppercase md:text-[9px] dark:text-gray-500">
-                            Automation
-                        </p>
-                        <p
-                            class="group-hover:text-cs_blue text-[10px] font-black text-gray-800 uppercase transition-colors md:text-xs dark:text-gray-200"
-                        >
-                            Bot Check
-                        </p>
-                    </div>
-                </a>
+                <x-hero.action-card href="/to-cao-lua-dao/" icon="fa-bullhorn" label="Tố Cáo Scam" sub="Report" color="red" />
+                <x-hero.action-card href="/bao-hiem-cs/" icon="fa-shield-cat" label="Bảo Hiểm CS" sub="Insurance" color="blue" />
+                <x-hero.action-card href="#" icon="fa-store" label="Chợ Buôn Bán" sub="Trading" color="green" />
+                <x-hero.action-card href="#" icon="fa-brands fa-telegram" label="Bot Check" sub="Automation" color="blue" />
             </div>
+            @endif
         </div>
     </div>
 </section>

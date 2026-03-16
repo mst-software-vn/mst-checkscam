@@ -2,28 +2,51 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <!-- SEO Optimization -->
-  {{-- <title>[ CHECKSCAM ] - Hệ thống kiểm tra và tố giác scam uy tín nhất Việt Nam</title> --}}
+  <!-- SEO Optimization (Dynamic from DB) -->
   @hasSection('title')
     <title>@yield('title')</title>
   @else
-    <title>[ CHECKSCAM ] - Hệ thống kiểm tra và tố giác scam uy tín nhất Việt Nam</title>
+    <title>{{ $siteConfig['title'] ?? 'CheckScam.vn — Tra cứu lừa đảo' }}</title>
   @endif
-  <meta
-    name="description"
-    content="CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Tra cứu số điện thoại, số tài khoản, link Facebook lừa đảo để bảo vệ túi tiền của bạn."
-  />
-  <meta name="keywords" content="check scam, tố cáo lừa đảo, kiểm tra stk lừa đảo, kiểm tra sdt lừa đảo, quỹ bảo đảm" />
+  @hasSection('description')
+    <meta name="description" content="@yield('description')" />
+  @else
+    <meta
+      name="description"
+      content="{{ $siteConfig['description'] ?? 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.' }}"
+    />
+  @endif
+  @hasSection('keywords')
+    <meta name="keywords" content="@yield('keywords')" />
+  @else
+    <meta name="keywords" content="{{ $siteConfig['keywords'] ?? 'check scam, tố cáo lừa đảo' }}" />
+  @endif
   <link rel="canonical" href="{{ url()->current() }}" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CheckScam - Hệ thống kiểm tra và tố giác scam" />
-  <meta
-    property="og:description"
-    content="Tra cứu thông tin kẻ lừa đảo ngay lập tức. Cùng cộng đồng xây dựng môi trường MMO sạch sẽ."
-  />
-  <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png" />
+  @hasSection('og_title')
+    <meta property="og:title" content="@yield('og_title')" />
+  @else
+    <meta
+      property="og:title"
+      content="{{ $siteConfig['title'] ?? 'CheckScam - Hệ thống kiểm tra và tố giác scam' }}"
+    />
+  @endif
+  @hasSection('og_description')
+    <meta property="og:description" content="@yield('og_description')" />
+  @else
+    <meta
+      property="og:description"
+      content="{{ $siteConfig['description'] ?? 'Tra cứu thông tin kẻ lừa đảo ngay lập tức.' }}"
+    />
+  @endif
+
+  @if (! empty($siteConfig['og_image']))
+    <meta property="og:image" content="{{ asset('storage/' . $siteConfig['og_image']) }}" />
+  @else
+    <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png" />
+  @endif
 
   <!-- Preconnect để tăng tốc kết nối CDN -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -39,7 +62,12 @@
   ></script>
 
   <link href="/css/tailwind.css" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
+
+  @if (! empty($siteConfig['favicon']))
+    <link rel="icon" type="image/png" href="{{ asset('storage/' . $siteConfig['favicon']) }}" />
+  @else
+    <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
+  @endif
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -152,4 +180,9 @@
     }
   </style>
   @stack('styles')
+
+  {{-- Header Scripts from Admin Settings (Google Analytics, Facebook Pixel, etc.) --}}
+  @if (! empty($siteConfig['header_scripts']))
+    {!! $siteConfig['header_scripts'] !!}
+  @endif
 </head>
