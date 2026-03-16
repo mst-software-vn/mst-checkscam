@@ -23,6 +23,7 @@ class AdminSettingController extends Controller
             'site_title',
             'site_description',
             'seo_keywords',
+            'site_author',
             'hotline',
             'support_email',
             'zalo_link',
@@ -46,22 +47,25 @@ class AdminSettingController extends Controller
             }
         }
 
-        if ($request->hasFile('logo')) {
-            $request->validate(['logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']);
-            $path = FileHelper::uploadImage($request->file('logo'), 'settings');
-            Setting::setValue('logo', $path);
-        }
+        $imageKeys = [
+            'logo' => 'logo',
+            'logo_header_light' => 'logo_header_light',
+            'logo_header_dark' => 'logo_header_dark',
+            'logo_footer_light' => 'logo_footer_light',
+            'logo_footer_dark' => 'logo_footer_dark',
+            'favicon' => 'favicon',
+            'og_image' => 'og_image',
+        ];
 
-        if ($request->hasFile('favicon')) {
-            $request->validate(['favicon' => 'image|mimes:jpeg,png,jpg,gif,svg,ico|max:1024']);
-            $path = FileHelper::uploadImage($request->file('favicon'), 'settings');
-            Setting::setValue('favicon', $path);
-        }
+        foreach ($imageKeys as $fileInput => $settingKey) {
+            if ($request->hasFile($fileInput)) {
+                $mimes = $fileInput === 'favicon' ? 'jpeg,png,jpg,gif,svg,ico' : 'jpeg,png,jpg,gif,svg';
+                $max = $fileInput === 'favicon' ? 1024 : 2048;
 
-        if ($request->hasFile('og_image')) {
-            $request->validate(['og_image' => 'image|mimes:jpeg,png,jpg|max:2048']);
-            $path = FileHelper::uploadImage($request->file('og_image'), 'settings');
-            Setting::setValue('og_image', $path);
+                $request->validate([$fileInput => "image|mimes:$mimes|max:$max"]);
+                $path = FileHelper::uploadImage($request->file($fileInput), 'settings');
+                Setting::setValue($settingKey, $path);
+            }
         }
 
         ConfigHelper::clearCache();
