@@ -182,7 +182,7 @@
                             <ul class="space-y-4">
                                 @if (is_array($insurance->services))
                                     @foreach ($insurance->services as $service)
-                                        <li class="group/item flex items-start gap-3">
+                                        <li class="group/item flex items-center gap-3">
                                             <div
                                                 class="text-cs_blue flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-sm transition-transform group-hover/item:rotate-12 dark:bg-blue-900/30"
                                             >
@@ -190,7 +190,7 @@
                                             </div>
                                             <div>
                                                 <h4
-                                                    class="text-xs font-black text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
+                                                    class="text-xs text-gray-800 uppercase md:text-[13px] dark:text-gray-200"
                                                 >
                                                     {{ $service["title"] }}
                                                 </h4>

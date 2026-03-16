@@ -360,7 +360,9 @@
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 'X-Requested-With': 'XMLHttpRequest',
                             },
-                            body: JSON.stringify({ ids: selectedIds }),
+                            body: JSON.stringify({
+                                ids: selectedIds,
+                            }),
                         })
                             .then((response) => response.json())
                             .then((data) => {

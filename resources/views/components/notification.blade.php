@@ -93,7 +93,15 @@
                     })
                     .hide()
                     .fadeIn(400)
-                    .animate({ opacity: 1 }, { queue: false, duration: 400 });
+                    .animate(
+                        {
+                            opacity: 1,
+                        },
+                        {
+                            queue: false,
+                            duration: 400,
+                        },
+                    );
             }, 1200);
         }
     });

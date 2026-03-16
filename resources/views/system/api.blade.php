@@ -82,17 +82,17 @@
                             <pre
                                 class="overflow-x-auto rounded-lg border border-white/5 bg-black/30 p-4 font-mono text-[10px] text-gray-400 md:text-sm"
                             >
-{
-  "status": "danger",
-  "message": "Đối tượng nằm trong danh sách đen",
-  "data": {
-    "name": "NGUYEN VAN A",
-    "stk": "0987xxx321",
-    "bank": "Vietcombank",
-    "reports": 3
-  }
-}
-</pre
+    {
+      "status": "danger",
+      "message": "Đối tượng nằm trong danh sách đen",
+      "data": {
+        "name": "NGUYEN VAN A",
+        "stk": "0987xxx321",
+        "bank": "Vietcombank",
+        "reports": 3
+      }
+    }
+    </pre
                             >
                         </div>
                     </div>
