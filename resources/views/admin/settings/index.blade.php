@@ -143,7 +143,7 @@
                   value="1"
                   {{ ($settings['enable_insurance'] ?? '1') === '1' ? 'checked' : '' }}
                 />
-                <label for="enable_insurance" class="checktoggle">checkbox</label>
+                <label for="enable_insurance" class="checktoggle"></label>
                 <span class="ms-2 mb-2">Module Bảo hiểm</span>
               </div>
             </div>
@@ -159,7 +159,7 @@
                   value="1"
                   {{ ($settings['enable_comments'] ?? '1') === '1' ? 'checked' : '' }}
                 />
-                <label for="enable_comments" class="checktoggle">checkbox</label>
+                <label for="enable_comments" class="checktoggle"></label>
                 <span class="ms-2 mb-2">Bình luận</span>
               </div>
             </div>
@@ -175,7 +175,7 @@
                   value="1"
                   {{ ($settings['maintenance_mode'] ?? '0') === '1' ? 'checked' : '' }}
                 />
-                <label for="maintenance_mode" class="checktoggle">checkbox</label>
+                <label for="maintenance_mode" class="checktoggle"></label>
                 <span class="ms-2 mb-2">Chế độ bảo trì</span>
               </div>
             </div>

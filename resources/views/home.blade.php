@@ -1,13 +1,15 @@
 @use('App\Helpers\StringHelper')
 @extends('layouts.app')
-
+@php
+  $keyword = request()->query('q');
+@endphp
 @section('content')
-  <x-hero :stats="$stats" />
+  <x-hero :stats="$stats" :is-action="$keyword ? false : true" />
 
   <!-- Main Content -->
   <main class="mx-auto w-full max-w-7xl grow px-4 py-4 sm:px-6 lg:px-8">
     <!-- Top Full Width Banner -->
-    @if (! request()->query('q'))
+    @if (! $keyword)
       <x-ads-horizontal
         image="https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp"
         url="#"
@@ -21,15 +23,15 @@
         <i class="fa-solid fa-magnifying-glass mr-2"></i>
         Có {{ isset($results) ? number_format($results->total()) : 0 }} vụ lừa đảo liên quan đến:
         <br />
-        <span class="text-slate-800 dark:text-white">"{{ request()->query('q') }}"</span>
+        <span class="text-slate-800 dark:text-white">"{{ $keyword }}"</span>
       </h2>
     @endif
 
     <!-- 2 Column Layout -->
     <div class="mb-10 flex flex-col gap-4 lg:flex-row">
       <!-- Khu Vực Trái -->
-      <div class="{{ request()->query('q') ? 'mx-auto lg:w-full' : 'lg:w-9/12' }} w-full space-y-8">
-        @if (request()->query('q'))
+      <div class="{{ $keyword ? 'mx-auto lg:w-full' : 'lg:w-9/12' }} w-full space-y-8">
+        @if ($keyword)
           <!-- KẾT QUẢ TÌM KIẾM -->
           <section>
             @if (isset($results) && $results->count() > 0)
@@ -67,7 +69,7 @@
                         <span class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
                         </span>
-                        <span class="text-cs_red text-xs font-bold tracking-wider">
+                        <span class="text-cs_red text-xs font-bold tracking-wider break-all line-clamp-2">
                           {{ $item->target_id }}
                         </span>
                       </div>
@@ -158,7 +160,7 @@
                         <span class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
                         </span>
-                        <span class="text-cs_red text-xs font-bold tracking-wider">
+                        <span class="text-cs_red text-xs font-bold tracking-wider break-all line-clamp-2">
                           {{ $item->target_id }}
                         </span>
                       </div>
@@ -246,7 +248,7 @@
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : ($item->type === 'phone' ? 'SĐT lừa đảo' : 'Từ khoá hệ thống')) }}
                         </span>
                         <span
-                          class="{{ $item->is_scam ? 'text-cs_red' : 'text-gray-700' }} text-xs font-bold tracking-wider"
+                          class="{{ $item->is_scam ? 'text-cs_red' : 'text-gray-700' }} text-xs font-bold tracking-wider break-all line-clamp-2"
                         >
                           {{ $item->target_id }}
                         </span>
@@ -287,7 +289,7 @@
           </section>
         @endif
 
-        @if (! request()->query('q'))
+        @if (! $keyword)
           <!-- PHẦN 1: 3 CẢNH BÁO NGÀY HÔM NAY -->
           <section>
             <div class="border-cs_blue mb-4 flex items-center gap-2 border-l-4 pl-3">
@@ -328,7 +330,7 @@
                         <span class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
                         </span>
-                        <span class="text-cs_red text-xs font-bold tracking-wider">
+                        <span class="text-cs_red text-xs font-bold tracking-wider break-all line-clamp-2">
                           {{ $item->target_id }}
                         </span>
                       </div>
@@ -419,7 +421,7 @@
                         <span class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
                         </span>
-                        <span class="text-cs_red text-xs font-bold tracking-wider">
+                        <span class="text-cs_red text-xs font-bold tracking-wider break-all line-clamp-2">
                           {{ $item->target_id }}
                         </span>
                       </div>
@@ -443,7 +445,7 @@
                       <span
                         class="text-cs_blue hover:bg-cs_blue inline-block rounded bg-blue-50 px-3 py-1 text-[10px] font-black uppercase transition-all hover:text-white dark:bg-blue-900/20"
                       >
-                        Xem chi tiết
+                        Chi tiết
                       </span>
                     </div>
                   </a>
@@ -505,7 +507,7 @@
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : ($item->type === 'phone' ? 'SĐT lừa đảo' : 'Từ khoá hệ thống')) }}
                         </span>
                         <span
-                          class="{{ $item->is_scam ? 'text-cs_red' : 'text-gray-700' }} text-xs font-bold tracking-wider"
+                          class="{{ $item->is_scam ? 'text-cs_red' : 'text-gray-700' }} text-xs font-bold tracking-wider break-all line-clamp-2"
                         >
                           {{ $item->target_id }}
                         </span>
@@ -547,7 +549,7 @@
         @endif
       </div>
 
-      @if (! request()->query('q'))
+      @if (! $keyword)
         <!-- Khu Vực Phải: Sidebar Widget -->
         <aside class="w-full space-y-3 lg:w-3/12">
           <!-- Right Sidebar Banner -->
@@ -678,7 +680,7 @@
       </section>
 
       <!-- Section: Nghị Định Thư Tín Nhiệm Số (Digital Trust Protocol) -->
-      @if (! request()->query('q'))
+      @if (! $keyword)
         <section aria-labelledby="protocol-title" class="relative px-4 py-20">
           <div class="relative z-10 mx-auto max-w-7xl">
             <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
@@ -827,7 +829,7 @@
       @endif
 
       <!-- Box FAQ -->
-      @if (! request()->query('q'))
+      @if (! $keyword)
         <section aria-labelledby="faq-title" class="mx-auto max-w-5xl lg:px-4">
           <div class="mb-8 flex flex-col items-center text-center md:mb-10">
             <div class="bg-cs_blue mb-6 h-1 w-12 rounded-full"></div>
@@ -966,8 +968,8 @@
             const url = new URL(window.location.href);
             url.searchParams.set('page', nextPage);
 
-            btn.disabled = true;
-            btn.innerHTML = '<span>Đang tải bình luận...</span> <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
+            btn.disabled = false;
+ true.innerHTML = '<span>Đang tải bình luận...</span> <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
 
             // Artificial delay for smooth UX
             setTimeout(() => {
