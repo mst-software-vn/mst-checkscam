@@ -419,7 +419,7 @@
                         <span class="text-[9px] font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                           {{ $item->type === 'bank' ? 'Tài khoản lừa đảo' : ($item->type === 'facebook' ? 'Link lừa đảo' : 'Thông tin lừa đảo') }}
                         </span>
-                        <span class="text-cs_red text-xs font-bold tracking-wider">
+                        <span class="text-cs_red text-xs font-bold tracking-wider line-clamp-1">
                           {{ $item->target_id }}
                         </span>
                       </div>

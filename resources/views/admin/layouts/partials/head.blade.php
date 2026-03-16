@@ -14,7 +14,7 @@
     <title>Quản trị viên</title>
   @endif
 
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.jpg" />
+  <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
 
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
 
