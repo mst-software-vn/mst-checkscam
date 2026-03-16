@@ -35,11 +35,12 @@ class InsuranceController extends Controller
             ->firstOrFail();
 
         // Advanced SEO
-        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam.vn');
+        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
         $meta = [
-            'title' => $insurance->full_name.' | Quỹ bảo hiểm uy tín - '.$siteTitle,
-            'description' => 'Thông tin bảo hiểm của '.$insurance->full_name.' với số tiền '.number_format($insurance->amount).' VNĐ. Cam kết uy tín và an toàn tuyệt đối tại '.$siteTitle.'.',
-            'keywords' => 'bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín',
+            'title' => $insurance->full_name.' | Xác minh Quỹ bảo hiểm uy tín - '.$siteTitle,
+            'description' => $insurance->full_name.' đã tham gia đóng quỹ bảo hiểm với số tiền '.number_format($insurance->amount).' VNĐ. Đây là thành viên đã được '.$siteTitle.' xác minh tín nhiệm, đảm bảo an toàn tuyệt đối khi giao dịch.',
+            'keywords' => 'bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín giao dịch, check tín nhiệm, '.$siteTitle,
+            'og_image' => $insurance->avatar ? asset('storage/'.$insurance->avatar) : ConfigHelper::getConfig('og_image'),
         ];
 
         return view('insurances.detail', compact('insurance', 'meta'));

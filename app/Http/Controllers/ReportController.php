@@ -134,12 +134,24 @@ class ReportController extends Controller
         ];
 
         // Advanced SEO
-        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam.vn');
+        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
+        $metaTitle = ($report->target_id ? $report->target_id.' - ' : '').($report->target_name ? $report->target_name.' ' : '').'Bị tố cáo lừa đảo trên '.$siteTitle;
+        $metaDesc = 'Cảnh báo lừa đảo: '.($report->target_name ? $report->target_name.' ' : '').'('.$report->target_id.'). Hình thức: '.$report->category.'. '.Str::limit($report->description, 160);
+
         $meta = [
-            'title' => ($report->target_id ? $report->target_id.' | ' : '').($report->target_name ? $report->target_name.' ' : '').'Lừa đảo - Bị tố cáo trên '.$siteTitle,
-            'description' => 'Cảnh báo lừa đảo: '.($report->target_name ? $report->target_name.' ' : '').'('.$report->target_id.'). Hình thức: '.$report->category.'. '.Str::limit($report->description, 150),
-            'keywords' => implode(', ', array_filter([$report->target_id, $report->target_name, $report->category, 'lừa đảo', 'scammer', 'tài khoản lừa đảo'])),
-            'og_image' => ! empty($report->evidence_images) ? asset('storage/'.$report->evidence_images[0]) : null,
+            'title' => $metaTitle,
+            'description' => $metaDesc,
+            'keywords' => implode(', ', array_filter([
+                $report->target_id,
+                $report->target_name,
+                $report->category,
+                'lừa đảo',
+                'scammer',
+                'tài khoản lừa đảo',
+                'kiểm tra lừa đảo',
+                $siteTitle,
+            ])),
+            'og_image' => ! empty($report->evidence_images) ? asset('storage/'.$report->evidence_images[0]) : ConfigHelper::getConfig('og_image'),
         ];
 
         return view('scammer.index', compact(
