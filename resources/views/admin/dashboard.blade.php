@@ -1,5 +1,6 @@
 @use('App\Helpers\Helpers')
 @extends('admin.layouts.master')
+@section('title', 'Admin Dashboard')
 @section('content')
   <div class="page-header">
     <div class="page-title">

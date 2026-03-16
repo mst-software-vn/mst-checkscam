@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('title', 'Nâng cấp phiên bản Pro - MST CheckScam')
 
 @section('content')

@@ -78,6 +78,17 @@
     }
   </script>
 
+  @hasSection('structured_data')
+    @yield('structured_data')
+  @endif
+
+  @stack('styles')
+
+  {{-- Header Scripts from Admin Settings (Google Analytics, Facebook Pixel, etc.) --}}
+  @if (! empty($siteConfig['header_scripts']))
+    {!! $siteConfig['header_scripts'] !!}
+  @endif
+
   <style>
     * {
       transition:
@@ -167,14 +178,4 @@
       }
     }
   </style>
-  @hasSection('structured_data')
-    @yield('structured_data')
-  @endif
-
-  @stack('styles')
-
-  {{-- Header Scripts from Admin Settings (Google Analytics, Facebook Pixel, etc.) --}}
-  @if (! empty($siteConfig['header_scripts']))
-    {!! $siteConfig['header_scripts'] !!}
-  @endif
 </head>

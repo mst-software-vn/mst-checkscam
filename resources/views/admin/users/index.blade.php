@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Quản lý người dùng')
 @section('content')
   <style>
     .dataTables_paginate,
