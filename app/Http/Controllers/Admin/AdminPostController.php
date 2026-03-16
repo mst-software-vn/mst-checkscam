@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
+use App\Helpers\StringHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -71,11 +73,11 @@ class AdminPostController extends Controller
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
-        $globalSlug = generateGlobalUniqueSlug($slugSource);
+        $globalSlug = StringHelper::generateGlobalUniqueSlug($slugSource);
 
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = uploadImage($request->file('thumbnail'), 'posts');
+            $thumbnailPath = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
         }
 
         Post::create([
@@ -133,13 +135,13 @@ class AdminPostController extends Controller
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
-        $globalSlug = generateGlobalUniqueSlug($slugSource, null, $post->id);
+        $globalSlug = StringHelper::generateGlobalUniqueSlug($slugSource, null, $post->id);
 
         if ($request->hasFile('thumbnail')) {
             if ($post->thumbnail) {
-                deleteImage($post->thumbnail);
+                FileHelper::deleteImage($post->thumbnail);
             }
-            $validated['thumbnail'] = uploadImage($request->file('thumbnail'), 'posts');
+            $validated['thumbnail'] = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
         }
 
         $post->update([
@@ -169,7 +171,7 @@ class AdminPostController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->thumbnail) {
-            deleteImage($post->thumbnail);
+            FileHelper::deleteImage($post->thumbnail);
         }
 
         $post->delete();
@@ -191,11 +193,10 @@ class AdminPostController extends Controller
         if (empty($ids)) {
             return response()->json(['success' => false, 'message' => 'Không có bài viết nào được chọn.']);
         }
-
         $posts = Post::whereIn('id', $ids)->get();
         foreach ($posts as $post) {
             if ($post->thumbnail) {
-                deleteImage($post->thumbnail);
+                FileHelper::deleteImage($post->thumbnail);
             }
             $post->delete();
         }

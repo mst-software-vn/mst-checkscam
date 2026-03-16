@@ -1,3 +1,4 @@
+@use('App\Helpers\StringHelper')
 @extends('layouts.app')
 
 @section('content')
@@ -51,7 +52,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
@@ -142,7 +143,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
@@ -229,7 +230,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-clock mr-1 opacity-70"></i>
@@ -312,7 +313,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
@@ -404,7 +405,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-calendar-check mr-1 opacity-70"></i>
@@ -488,7 +489,7 @@
                         <h3
                           class="text-xs font-bold text-gray-900 transition-colors duration-300 md:text-[15px] dark:text-gray-100"
                         >
-                          {{ mask_name($item->target_name) }}
+                          {{ StringHelper::mask_name($item->target_name) }}
                         </h3>
                         <div class="mt-0.5 text-[10px] font-bold text-gray-400 dark:text-gray-500">
                           <i class="fa-regular fa-clock mr-1 opacity-70"></i>
