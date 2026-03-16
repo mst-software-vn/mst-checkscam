@@ -56,14 +56,13 @@
                                 rows="3"
                                 placeholder="Mô tả ngắn gọn cho SEO..."
                             >
-{{ $settings["site_description"] ?? "" }}</textarea
+    {{ $settings["site_description"] ?? "" }}</textarea
                             >
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         {{-- Thông tin liên hệ --}}
         <div class="card">
             <div class="card-body">
@@ -277,7 +276,7 @@
                         rows="5"
                         placeholder="<!-- Google tag (gtag.js) -->"
                     >
-{{ $settings["header_scripts"] ?? "" }}</textarea
+    {{ $settings["header_scripts"] ?? "" }}</textarea
                     >
                 </div>
             </div>

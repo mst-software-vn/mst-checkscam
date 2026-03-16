@@ -81,7 +81,7 @@
                                 rows="3"
                                 placeholder="Đoạn văn tóm tắt nội dung bài viết..."
                             >
-{{ old("description", $post->description ?? "") }}</textarea
+    {{ old("description", $post->description ?? "") }}</textarea
                             >
                         </div>
 
@@ -97,7 +97,7 @@
                                 rows="15"
                                 placeholder="Soạn thảo nội dung ở đây..."
                             >
-{{ old("content", $post->content ?? "") }}</textarea
+    {{ old("content", $post->content ?? "") }}</textarea
                             >
                         </div>
 
@@ -180,7 +180,7 @@
 @push("scripts")
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // --- Logic: Lightbox for Thumbnail ---
             const lbStyle = `
                 <style>
@@ -247,7 +247,7 @@
             const storageKey = 'post_thumbnail_preview';
 
             // Restore from session storage if validation failed
-            @if($errors->any())
+            @if ($errors->any())
                 const savedPreview = sessionStorage.getItem(storageKey);
                 if (savedPreview) {
                     if (imgElem) imgElem.src = savedPreview;
@@ -259,11 +259,11 @@
             @endif
 
             if (avatarInput) {
-                avatarInput.addEventListener('change', function (e) {
+                avatarInput.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function (e) {
+                        reader.onload = function(e) {
                             const base64 = e.target.result;
                             if (imgElem) imgElem.src = base64;
                             if (previewContainer) previewContainer.style.display = 'block';
@@ -276,12 +276,13 @@
             }
 
             // Clear storage on cancel
-            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(storageKey));
+            document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(
+                storageKey));
 
             // --- Logic: Confirm Modal + AJAX + Spinner delay 1s ---
             const form = document.getElementById('postForm');
             if (form) {
-                form.addEventListener('submit', function (e) {
+                form.addEventListener('submit', function(e) {
                     e.preventDefault();
 
                     Swal.fire({
@@ -316,7 +317,8 @@
                                     },
                                     success: function(res) {
                                         if (res.success) {
-                                            sessionStorage.removeItem(storageKey);
+                                            sessionStorage.removeItem(
+                                                storageKey);
                                             Swal.fire({
                                                 title: 'Thành công!',
                                                 text: res.message,
@@ -324,7 +326,8 @@
                                                 timer: 1500,
                                                 showConfirmButton: false
                                             }).then(() => {
-                                                window.location.href = res.redirect;
+                                                window.location.href =
+                                                    res.redirect;
                                             });
                                         }
                                     },
@@ -333,11 +336,14 @@
                                         btnSubmit.innerHTML = originalText;
 
                                         if (xhr.status === 422) {
-                                            const errors = xhr.responseJSON.errors;
+                                            const errors = xhr.responseJSON
+                                                .errors;
                                             let errorMsg = '';
-                                            Object.values(errors).forEach(err => {
-                                                errorMsg += `• ${err[0]}<br>`;
-                                            });
+                                            Object.values(errors).forEach(
+                                                err => {
+                                                    errorMsg +=
+                                                        `• ${err[0]}<br>`;
+                                                });
 
                                             Swal.fire({
                                                 title: 'Lỗi nhập liệu',

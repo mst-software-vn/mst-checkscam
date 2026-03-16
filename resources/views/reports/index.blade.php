@@ -391,7 +391,7 @@
                                     placeholder="Họ đã lừa đảo bạn bằng cách nào? Số tiền bao nhiêu?..."
                                     class="focus:border-cs_red w-full resize-none rounded-md border border-gray-200 bg-gray-50 px-4 py-4 text-sm leading-relaxed font-medium text-gray-700 transition-all outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                 >
-{{ old("description") }}</textarea
+    {{ old("description") }}</textarea
                                 >
                             </div>
 
@@ -665,7 +665,7 @@
                                     placeholder="Website này lừa đảo bằng cách nào? Số tiền bao nhiêu?..."
                                     class="focus:border-cs_red w-full resize-none rounded-md border border-gray-200 bg-gray-50 px-4 py-4 text-sm leading-relaxed font-medium text-gray-700 transition-all outline-none focus:ring-0 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300"
                                 >
-{{ old("description") }}</textarea
+    {{ old("description") }}</textarea
                                 >
                             </div>
 

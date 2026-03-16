@@ -393,7 +393,9 @@
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                             },
-                            body: JSON.stringify({ ids: selectedIds }),
+                            body: JSON.stringify({
+                                ids: selectedIds,
+                            }),
                         })
                             .then((response) => response.json())
                             .then((data) => {
