@@ -456,7 +456,7 @@
           </section>
 
           <!-- BANNER QUẢNG CÁO 2 -->
-          <x-banner-ads position="home_between" class="my-6" />
+          <x-banner-ads position="home_between" :skip="1" class="my-6" />
 
           <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
           <section>
