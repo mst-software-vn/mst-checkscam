@@ -293,38 +293,20 @@
                   <h4>Kéo thả file hoặc bấm vào đây để tải lên</h4>
                 </div>
               </div>
-            </div>
-
-            <div
-              class="product-list"
-              id="imagePreviewContainer"
-              style="{{ isset($insurance) && $insurance->avatar ? '' : 'display: none;' }}"
-            >
-              <ul class="row">
-                <li class="col-12 pt-3 text-center">
-                  <img
-                    src="{{ isset($insurance) && $insurance->avatar ? asset('storage/' . $insurance->avatar) : '' }}"
-                    alt="avatar"
-                    id="avatarPreview"
-                    class="img-fluid rounded"
-                    style="
-                      max-height: 250px;
-                      cursor: zoom-in;
-                      border: 2px dashed #ff9f43;
-                      padding: 5px;
-                      transition: all 0.3s;
-                    "
-                    title="Click để phóng to ảnh"
-                  />
-                  <div class="mt-2">
-                    <small class="text-muted">
-                      Bấm vào ảnh trên để xem lớn. Bấm vào khu vực
-                      <b>Tải lên</b>
-                      bên trên nếu muốn thay đổi ảnh khác.
-                    </small>
+              <div id="imagePreviewContainer">
+                @if (isset($insurance) && $insurance->avatar)
+                  <div
+                    class="image-preview-item mt-2 position-relative d-inline-block border rounded p-1 existing-image"
+                  >
+                    <img
+                      src="{{ asset('storage/' . $insurance->avatar) }}"
+                      alt="avatar"
+                      style="max-height: 150px; max-width: 100%; display: block"
+                      class="rounded shadow-sm"
+                    />
                   </div>
-                </li>
-              </ul>
+                @endif
+              </div>
             </div>
           </div>
         </div>
@@ -346,269 +328,175 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let contactIdx = {{ count($contacts) }};
-        let paymentIdx = {{ count($payments) }};
-        let serviceIdx = {{ count($services) }};
+    document.addEventListener('DOMContentLoaded', function () {
+      let contactIdx = {{ count($contacts) }};
+      let paymentIdx = {{ count($payments) }};
+      let serviceIdx = {{ count($services) }};
 
-        // --- Logic: Ẩn/hiện icon thùng rác ---
-        function toggleRemoveButtons() {
-            const rowsTypes = [{
-                    id: 'contact-rows',
-                    class: 'contact-row'
-                },
-                {
-                    id: 'payment-rows',
-                    class: 'payment-row'
-                },
-                {
-                    id: 'service-rows',
-                    class: 'service-row'
-                },
-            ];
+      // --- Logic: Ẩn/hiện icon thùng rác ---
+      function toggleRemoveButtons() {
+        const rowsTypes = [
+          {
+            id: 'contact-rows',
+            class: 'contact-row',
+          },
+          {
+            id: 'payment-rows',
+            class: 'payment-row',
+          },
+          {
+            id: 'service-rows',
+            class: 'service-row',
+          },
+        ];
 
-            rowsTypes.forEach((type) => {
-                const container = document.getElementById(type.id);
-                if (!container) return;
-                const rows = container.querySelectorAll('.' + type.class);
-                const showDelete = rows.length > 1;
+        rowsTypes.forEach((type) => {
+          const container = document.getElementById(type.id);
+          if (!container) return;
+          const rows = container.querySelectorAll('.' + type.class);
+          const showDelete = rows.length > 1;
 
-                rows.forEach((row) => {
-                    const btn = row.querySelector('.btn-remove-row');
-                    if (btn) btn.style.display = showDelete ? 'inline-block' : 'none';
-                });
-            });
-        }
+          rows.forEach((row) => {
+            const btn = row.querySelector('.btn-remove-row');
+            if (btn) btn.style.display = showDelete ? 'inline-block' : 'none';
+          });
+        });
+      }
 
-        // Gọi lần đầu để thiết lập trạng thái ẩn hiện icon xóa
-        toggleRemoveButtons();
+      // Gọi lần đầu để thiết lập trạng thái ẩn hiện icon xóa
+      toggleRemoveButtons();
 
-        document.getElementById('add-contact').addEventListener('click', function() {
-            const html = `<div class="row align-items-end mb-3 contact-row">
+      document.getElementById('add-contact').addEventListener('click', function () {
+        const html = `<div class="row align-items-end mb-3 contact-row">
             <div class="col-lg-5"><div class="form-group mb-0"><label>Nền tảng</label><input type="text" name="contact_info[${contactIdx}][platform]" class="form-control" /></div></div>
             <div class="col-lg-6"><div class="form-group mb-0"><label>Giá trị</label><input type="text" name="contact_info[${contactIdx}][link]" class="form-control" /></div></div>
             <div class="col-lg-1 text-end"><a href="javascript:void(0);" class="btn btn-danger btn-sm btn-remove-row"><i data-feather="trash-2"></i></a></div>
         </div>`;
-            document.getElementById('contact-rows').insertAdjacentHTML('beforeend', html);
-            if (typeof feather !== 'undefined') feather.replace();
-            contactIdx++;
-            toggleRemoveButtons();
-        });
+        document.getElementById('contact-rows').insertAdjacentHTML('beforeend', html);
+        if (typeof feather !== 'undefined') feather.replace();
+        contactIdx++;
+        toggleRemoveButtons();
+      });
 
-        document.getElementById('add-payment').addEventListener('click', function() {
-            const html = `<div class="row align-items-end mb-3 payment-row">
+      document.getElementById('add-payment').addEventListener('click', function () {
+        const html = `<div class="row align-items-end mb-3 payment-row">
             <div class="col-lg-4"><div class="form-group mb-0"><label>Ngân hàng/Ví</label><input type="text" name="payment_accounts[${paymentIdx}][bank]" class="form-control" /></div></div>
             <div class="col-lg-4"><div class="form-group mb-0"><label>Số tài khoản</label><input type="text" name="payment_accounts[${paymentIdx}][number]" class="form-control" /></div></div>
             <div class="col-lg-3"><div class="form-group mb-0"><label>Chủ TK</label><input type="text" name="payment_accounts[${paymentIdx}][name]" class="form-control" /></div></div>
             <div class="col-lg-1 text-end"><a href="javascript:void(0);" class="btn btn-danger btn-sm btn-remove-row"><i data-feather="trash-2"></i></a></div>
         </div>`;
-            document.getElementById('payment-rows').insertAdjacentHTML('beforeend', html);
-            if (typeof feather !== 'undefined') feather.replace();
-            paymentIdx++;
-            toggleRemoveButtons();
-        });
+        document.getElementById('payment-rows').insertAdjacentHTML('beforeend', html);
+        if (typeof feather !== 'undefined') feather.replace();
+        paymentIdx++;
+        toggleRemoveButtons();
+      });
 
-        document.getElementById('add-service').addEventListener('click', function() {
-            const html = `<div class="row align-items-end mb-3 service-row">
+      document.getElementById('add-service').addEventListener('click', function () {
+        const html = `<div class="row align-items-end mb-3 service-row">
             <div class="col-lg-11"><div class="form-group mb-0"><label>Tên dịch vụ</label><input type="text" name="services[${serviceIdx}][title]" class="form-control" /></div></div>
             <div class="col-lg-1 text-end"><a href="javascript:void(0);" class="btn btn-danger btn-sm btn-remove-row"><i data-feather="trash-2"></i></a></div>
         </div>`;
-            document.getElementById('service-rows').insertAdjacentHTML('beforeend', html);
-            if (typeof feather !== 'undefined') feather.replace();
-            serviceIdx++;
-            toggleRemoveButtons();
-        });
+        document.getElementById('service-rows').insertAdjacentHTML('beforeend', html);
+        if (typeof feather !== 'undefined') feather.replace();
+        serviceIdx++;
+        toggleRemoveButtons();
+      });
 
-        document.addEventListener('click', function(e) {
-            const removeBtn = e.target.closest('.btn-remove-row');
-            if (removeBtn) {
-                removeBtn.closest('.row').remove();
-                toggleRemoveButtons();
-            }
-        });
-
-        // --- Logic: Lightbox for Avatar ---
-        const lbStyle = `
-            <style>
-                #insurance-lightbox {
-                    display: none;
-                    position: fixed;
-                    inset: 0;
-                    z-index: 9999;
-                    background: rgba(0, 0, 0, .9);
-                    align-items: center;
-                    justify-content: center;
-                    cursor: zoom-out;
-                }
-                #insurance-lightbox.active { display: flex; }
-                #insurance-lightbox img {
-                    max-width: 90vw;
-                    max-height: 90vh;
-                    border-radius: 8px;
-                    box-shadow: 0 0 20px rgba(0,0,0,.5);
-                }
-                #insurance-lightbox .lb-close {
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-                    color: #fff;
-                    font-size: 30px;
-                    cursor: pointer;
-                    background: none;
-                    border: none;
-                }
-            </style>
-        `;
-        document.head.insertAdjacentHTML('beforeend', lbStyle);
-
-        const lbHtml = `
-            <div id="insurance-lightbox">
-                <button class="lb-close">&times;</button>
-                <img src="" alt="preview" />
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', lbHtml);
-
-        const lb = document.getElementById('insurance-lightbox');
-        const lbImg = lb.querySelector('img');
-
-        document.getElementById('avatarPreview').addEventListener('click', function() {
-            lbImg.src = this.src;
-            lb.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        lb.addEventListener('click', function() {
-            lb.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        // --- Logic: Thumbnail Preview & Persistence ---
-        const avatarInput = document.getElementById('avatarInput');
-        const previewContainer = document.getElementById('imagePreviewContainer');
-        const imgElem = document.getElementById('avatarPreview');
-        const storageKey = 'insurance_avatar_preview';
-
-        // Restore from session storage if validation failed
-        @if ($errors->any())
-            const savedPreview = sessionStorage.getItem(storageKey);
-            if (savedPreview) {
-                if (imgElem) imgElem.src = savedPreview;
-                if (previewContainer) previewContainer.style.display = 'block';
-            }
-        @else
-            // Clear storage if no errors (fresh load)
-            sessionStorage.removeItem(storageKey);
-        @endif
-
-        if (avatarInput) {
-            avatarInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const base64 = e.target.result;
-                        if (imgElem) imgElem.src = base64;
-                        if (previewContainer) previewContainer.style.display = 'block';
-                        // Save to session storage
-                        sessionStorage.setItem(storageKey, base64);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
+      document.addEventListener('click', function (e) {
+        const removeBtn = e.target.closest('.btn-remove-row');
+        if (removeBtn) {
+          removeBtn.closest('.row').remove();
+          toggleRemoveButtons();
         }
+      });
 
-        // Clear storage on cancel or successful submit
-        document.querySelector('.btn-cancel').addEventListener('click', () => sessionStorage.removeItem(
-            storageKey));
+      // --- Image Preview ---
+      if (typeof initImagePreview === 'function') {
+        initImagePreview('avatarInput', 'imagePreviewContainer');
+      }
 
-        // --- Logic: Confirm Modal + Spinner delay 1s ---
-        const form = document.getElementById('insuranceForm');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+      // --- Logic: Confirm Modal + Spinner delay 1s ---
+      const form = document.getElementById('insuranceForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
 
-                Swal.fire({
-                    title: 'Xác nhận lưu?',
-                    text: 'Bạn có chắc chắn muốn lưu các thông tin này?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ff9f43',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Đồng ý',
-                    cancelButtonText: 'Hủy',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const btnSubmit = document.getElementById('btnSubmit');
-                        const originalText = btnSubmit.innerHTML;
+          Swal.fire({
+            title: 'Xác nhận lưu?',
+            text: 'Bạn có chắc chắn muốn lưu các thông tin này?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#ff9f43',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const btnSubmit = document.getElementById('btnSubmit');
+              const originalText = btnSubmit.innerHTML;
 
-                        btnSubmit.disabled = true;
-                        btnSubmit.innerHTML =
-                            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
+              btnSubmit.disabled = true;
+              btnSubmit.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
 
-                        setTimeout(() => {
-                            const formData = new FormData(form);
+              setTimeout(() => {
+                const formData = new FormData(form);
 
-                            $.ajax({
-                                url: form.action,
-                                method: 'POST',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                headers: {
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                },
-                                success: function(res) {
-                                    if (res.success) {
-                                        sessionStorage.removeItem(
-                                            storageKey);
-                                        Swal.fire({
-                                            title: 'Thành công!',
-                                            text: res.message,
-                                            icon: 'success',
-                                            timer: 1500,
-                                            showConfirmButton: false
-                                        }).then(() => {
-                                            window.location.href =
-                                                res.redirect;
-                                        });
-                                    }
-                                },
-                                error: function(xhr) {
-                                    btnSubmit.disabled = false;
-                                    btnSubmit.innerHTML = originalText;
-
-                                    if (xhr.status === 422) {
-                                        const errors = xhr.responseJSON
-                                            .errors;
-                                        let errorMsg = '';
-                                        Object.values(errors).forEach(
-                                            err => {
-                                                errorMsg +=
-                                                    `• ${err[0]}<br>`;
-                                            });
-
-                                        Swal.fire({
-                                            title: 'Lỗi nhập liệu',
-                                            html: `<div class="text-start">${errorMsg}</div>`,
-                                            icon: 'error',
-                                            confirmButtonColor: '#ff9f43'
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            title: 'Lỗi!',
-                                            text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
-                                            icon: 'error',
-                                            confirmButtonColor: '#ff9f43'
-                                        });
-                                    }
-                                }
-                            });
-                        }, 1000);
+                $.ajax({
+                  url: form.action,
+                  method: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                  },
+                  success: function (res) {
+                    if (res.success) {
+                      sessionStorage.removeItem(storageKey);
+                      Swal.fire({
+                        title: 'Thành công!',
+                        text: res.message,
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false,
+                      }).then(() => {
+                        window.location.href = res.redirect;
+                      });
                     }
+                  },
+                  error: function (xhr) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = originalText;
+
+                    if (xhr.status === 422) {
+                      const errors = xhr.responseJSON.errors;
+                      let errorMsg = '';
+                      Object.values(errors).forEach((err) => {
+                        errorMsg += `• ${err[0]}<br>`;
+                      });
+
+                      Swal.fire({
+                        title: 'Lỗi nhập liệu',
+                        html: `<div class="text-start">${errorMsg}</div>`,
+                        icon: 'error',
+                        confirmButtonColor: '#ff9f43',
+                      });
+                    } else {
+                      Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+                        icon: 'error',
+                        confirmButtonColor: '#ff9f43',
+                      });
+                    }
+                  },
                 });
-            });
-        }
+              }, 1000);
+            }
+          });
+        });
+      }
     });
   </script>
 @endpush

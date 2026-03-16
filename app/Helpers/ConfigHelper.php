@@ -46,7 +46,8 @@ class ConfigHelper
                 'site_title', 'site_description', 'seo_keywords',
                 'hotline', 'support_email', 'zalo_link',
                 'facebook_link', 'telegram_link',
-                'logo', 'favicon', 'og_image',
+                'logo', 'logo_header_light', 'logo_header_dark', 'logo_footer_light', 'logo_footer_dark',
+                'favicon', 'og_image', 'site_author',
                 'enable_insurance', 'enable_comments', 'maintenance_mode',
                 'header_scripts',
             ];

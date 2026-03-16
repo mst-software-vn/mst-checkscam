@@ -24,8 +24,15 @@ class SettingSeeder extends Seeder
 
             // Images
             'logo' => null,
+            'logo_header_light' => null,
+            'logo_header_dark' => null,
+            'logo_footer_light' => null,
+            'logo_footer_dark' => null,
             'favicon' => null,
             'og_image' => null,
+
+            // SEO Additional
+            'site_author' => 'MST SOFTWARE',
 
             // Modules
             'enable_insurance' => '1',

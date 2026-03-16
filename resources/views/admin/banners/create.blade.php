@@ -144,12 +144,13 @@
           <span class="text-danger">*</span>
         </h5>
         <div class="image-upload">
-          <input type="file" name="image" accept="image/*" required />
+          <input type="file" name="image" id="input_banner_image" accept="image/*" required />
           <div class="image-uploads">
             <img src="/assets/img/icons/upload.svg" alt="img" />
             <h4>Tải hình ảnh banner</h4>
           </div>
         </div>
+        <div id="preview_banner_image"></div>
         <p class="mt-2 text-muted small">
           Định dạng: JPEG, PNG, GIF, WebP. Tối đa: 5MB.
           <br />
@@ -165,4 +166,12 @@
       </div>
     </div>
   </form>
+@endsection
+
+@section('scripts')
+  <script>
+    $(document).ready(function () {
+      initImagePreview('input_banner_image', 'preview_banner_image');
+    });
+  </script>
 @endsection

@@ -24,7 +24,7 @@
       <div class="card-body">
         <h5 class="card-title">SEO & Thông tin website</h5>
         <div class="row">
-          <div class="col-lg-6 col-12">
+          <div class="col-lg-4 col-12">
             <div class="form-group">
               <label>Tiêu đề website (Title)</label>
               <input
@@ -36,7 +36,7 @@
               />
             </div>
           </div>
-          <div class="col-lg-6 col-12">
+          <div class="col-lg-4 col-12">
             <div class="form-group">
               <label>SEO Keywords</label>
               <input
@@ -48,11 +48,23 @@
               />
             </div>
           </div>
+          <div class="col-lg-4 col-12">
+            <div class="form-group">
+              <label>Tác giả (Author)</label>
+              <input
+                type="text"
+                name="site_author"
+                class="form-control"
+                placeholder="MST SOFTWARE"
+                value="{{ $settings['site_author'] ?? '' }}"
+              />
+            </div>
+          </div>
           <div class="col-lg-12 col-12">
             <div class="form-group">
               <label>Mô tả Website (Meta Description)</label>
               <textarea name="site_description" class="form-control" rows="3" placeholder="Mô tả ngắn gọn cho SEO...">
-        {{ $settings['site_description'] ?? '' }}</textarea
+{{ $settings['site_description'] ?? '' }}</textarea
               >
             </div>
           </div>
@@ -190,40 +202,116 @@
       <div class="card-body">
         <h5 class="card-title">Logo & Hình ảnh</h5>
         <div class="row">
-          <div class="col-lg-4 col-12">
+          {{-- Header light --}}
+          <div class="col-lg-3 col-sm-6 col-12">
             <div class="form-group">
-              <label>Logo website</label>
+              <label>Logo Header (Light)</label>
               <div class="image-upload">
-                <input type="file" name="logo" />
+                <input type="file" name="logo_header_light" id="input_logo_header_light" />
                 <div class="image-uploads">
                   <img src="/assets/img/icons/upload.svg" alt="img" />
-                  <h4>Tải Logo</h4>
+                  <h4>Tải lên</h4>
                 </div>
               </div>
-              @if (! empty($settings['logo']))
-                <div class="mt-2 text-center">
+              <div id="preview_logo_header_light"></div>
+              @if (! empty($settings['logo_header_light']))
+                <div class="bg-gray-100 mt-2 rounded p-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo']) }}"
+                    src="{{ asset('storage/' . $settings['logo_header_light']) }}"
                     alt="logo"
                     class="img-fluid"
-                    style="max-height: 60px"
+                    style="max-height: 50px"
                   />
                 </div>
               @endif
             </div>
           </div>
-          <div class="col-lg-4 col-12">
+          {{-- Header dark --}}
+          <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Logo Header (Dark)</label>
+              <div class="image-upload">
+                <input type="file" name="logo_header_dark" id="input_logo_header_dark" />
+                <div class="image-uploads">
+                  <img src="/assets/img/icons/upload.svg" alt="img" />
+                  <h4>Tải lên</h4>
+                </div>
+              </div>
+              <div id="preview_logo_header_dark"></div>
+              @if (! empty($settings['logo_header_dark']))
+                <div class="mt-2 rounded bg-dark p-2 text-center existing-image">
+                  <img
+                    src="{{ asset('storage/' . $settings['logo_header_dark']) }}"
+                    alt="logo"
+                    class="img-fluid"
+                    style="max-height: 50px"
+                  />
+                </div>
+              @endif
+            </div>
+          </div>
+          {{-- Footer light --}}
+          <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Logo Footer (Light)</label>
+              <div class="image-upload">
+                <input type="file" name="logo_footer_light" id="input_logo_footer_light" />
+                <div class="image-uploads">
+                  <img src="/assets/img/icons/upload.svg" alt="img" />
+                  <h4>Tải lên</h4>
+                </div>
+              </div>
+              <div id="preview_logo_footer_light"></div>
+              @if (! empty($settings['logo_footer_light']))
+                <div class="bg-gray-100 mt-2 rounded p-2 text-center existing-image">
+                  <img
+                    src="{{ asset('storage/' . $settings['logo_footer_light']) }}"
+                    alt="logo"
+                    class="img-fluid"
+                    style="max-height: 50px"
+                  />
+                </div>
+              @endif
+            </div>
+          </div>
+          {{-- Footer dark --}}
+          <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Logo Footer (Dark)</label>
+              <div class="image-upload">
+                <input type="file" name="logo_footer_dark" id="input_logo_footer_dark" />
+                <div class="image-uploads">
+                  <img src="/assets/img/icons/upload.svg" alt="img" />
+                  <h4>Tải lên</h4>
+                </div>
+              </div>
+              <div id="preview_logo_footer_dark"></div>
+              @if (! empty($settings['logo_footer_dark']))
+                <div class="mt-2 rounded bg-dark p-2 text-center existing-image">
+                  <img
+                    src="{{ asset('storage/' . $settings['logo_footer_dark']) }}"
+                    alt="logo"
+                    class="img-fluid"
+                    style="max-height: 50px"
+                  />
+                </div>
+              @endif
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-sm-6 col-12">
             <div class="form-group">
               <label>Favicon</label>
               <div class="image-upload">
-                <input type="file" name="favicon" />
+                <input type="file" name="favicon" id="input_favicon" />
                 <div class="image-uploads">
                   <img src="/assets/img/icons/upload.svg" alt="img" />
                   <h4>Tải Favicon</h4>
                 </div>
               </div>
+              <div id="preview_favicon"></div>
               @if (! empty($settings['favicon']))
-                <div class="mt-2 text-center">
+                <div class="mt-2 text-center existing-image">
                   <img
                     src="{{ asset('storage/' . $settings['favicon']) }}"
                     alt="favicon"
@@ -234,23 +322,48 @@
               @endif
             </div>
           </div>
-          <div class="col-lg-4 col-12">
+          <div class="col-lg-4 col-sm-6 col-12">
             <div class="form-group">
               <label>OG Image (ảnh share)</label>
               <div class="image-upload">
-                <input type="file" name="og_image" />
+                <input type="file" name="og_image" id="input_og_image" />
                 <div class="image-uploads">
                   <img src="/assets/img/icons/upload.svg" alt="img" />
                   <h4>Tải OG Image</h4>
                 </div>
               </div>
+              <div id="preview_og_image"></div>
               @if (! empty($settings['og_image']))
-                <div class="mt-2 text-center">
+                <div class="mt-2 text-center existing-image">
                   <img
                     src="{{ asset('storage/' . $settings['og_image']) }}"
                     alt="og"
                     class="img-fluid"
                     style="max-height: 80px"
+                  />
+                </div>
+              @endif
+            </div>
+          </div>
+          {{-- Old Logo website (keep for compatibility or remove if not needed) --}}
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Logo website (Mặc định)</label>
+              <div class="image-upload">
+                <input type="file" name="logo" id="input_logo" />
+                <div class="image-uploads">
+                  <img src="/assets/img/icons/upload.svg" alt="img" />
+                  <h4>Tải Logo</h4>
+                </div>
+              </div>
+              <div id="preview_logo"></div>
+              @if (! empty($settings['logo']))
+                <div class="mt-2 text-center border p-2 rounded existing-image">
+                  <img
+                    src="{{ asset('storage/' . $settings['logo']) }}"
+                    alt="logo"
+                    class="img-fluid"
+                    style="max-height: 60px"
                   />
                 </div>
               @endif
@@ -280,3 +393,17 @@
     </div>
   </form>
 @endsection
+
+@push('scripts')
+  <script>
+    $(document).ready(function () {
+      initImagePreview('input_logo_header_light', 'preview_logo_header_light');
+      initImagePreview('input_logo_header_dark', 'preview_logo_header_dark');
+      initImagePreview('input_logo_footer_light', 'preview_logo_footer_light');
+      initImagePreview('input_logo_footer_dark', 'preview_logo_footer_dark');
+      initImagePreview('input_favicon', 'preview_favicon');
+      initImagePreview('input_og_image', 'preview_og_image');
+      initImagePreview('input_logo', 'preview_logo');
+    });
+  </script>
+@endpush
