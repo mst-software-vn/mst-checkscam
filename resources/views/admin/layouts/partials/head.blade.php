@@ -20,12 +20,14 @@
 
   <link rel="stylesheet" href="/assets/css/animate.css" />
   <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css" />
-  <link rel="stylesheet" href="/assets/css/customs.css" />
 
   <link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css" />
 
   <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css" />
   <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/customs.css" />
 </head>

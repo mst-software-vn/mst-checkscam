@@ -1,7 +1,178 @@
+* {
+  font-family: 'Inter', sans-serif !important;
+}
+
 .alert-notication-custom {
   background-color: #fff !important;
   border-radius: 10px !important;
   border-left: 5px solid rgba(35, 183, 229) !important;
   font-size: 0.9rem !important;
   box-shadow: -6px 4px 10px #cccccc87;
+}
+
+.upgrade-container {
+  padding: 20px 0 50px;
+}
+
+.upgrade-header {
+  margin-bottom: 50px;
+}
+
+.upgrade-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1b2950;
+}
+
+.pricing-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid #edf2f9;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.popular {
+  border: 2px solid #ff9f43;
+  box-shadow: 0 10px 30px rgba(255, 159, 67, 0.1);
+}
+
+.pricing-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.pricing-card .price {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 25px;
+  color: #1b2950;
+}
+
+.pricing-card .features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  flex-grow: 1;
+}
+
+.pricing-card .features-list li {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #516173;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.pricing-card .features-list li:last-child {
+  border-bottom: none;
+}
+
+.pricing-card .features-list li i {
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.pricing-card .features-list li.not-included {
+  color: #aeb1b9;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.btn-pricing {
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff9f43;
+  color: #fff;
+  padding: 5px 20px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Specific button styles for the contact */
+.btn-contact-zalo {
+  background-color: #0068ff;
+  color: #fff !important;
+}
+.btn-contact-fb {
+  background-color: #1877f2;
+  color: #fff !important;
+}
+
+.badge-pro-sm {
+  background: #ff9f43;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* Sidebar Menu Titles Custom */
+.sidebar-menu .menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.sidebar-upgrade-banner {
+  background: #1b2950;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-upgrade-banner h6 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.sidebar-upgrade-banner p {
+  font-size: 11px;
+  color: #aeb1b9;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.sidebar-upgrade-banner .btn-upgrade {
+  background: #ff9f43;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s;
 }
