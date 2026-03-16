@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -46,19 +47,19 @@ class AdminSettingController extends Controller
 
         if ($request->hasFile('logo')) {
             $request->validate(['logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']);
-            $path = uploadImage($request->file('logo'), 'settings');
+            $path = FileHelper::uploadImage($request->file('logo'), 'settings');
             Setting::setValue('logo', $path);
         }
 
         if ($request->hasFile('favicon')) {
             $request->validate(['favicon' => 'image|mimes:jpeg,png,jpg,gif,svg,ico|max:1024']);
-            $path = uploadImage($request->file('favicon'), 'settings');
+            $path = FileHelper::uploadImage($request->file('favicon'), 'settings');
             Setting::setValue('favicon', $path);
         }
 
         if ($request->hasFile('og_image')) {
             $request->validate(['og_image' => 'image|mimes:jpeg,png,jpg|max:2048']);
-            $path = uploadImage($request->file('og_image'), 'settings');
+            $path = FileHelper::uploadImage($request->file('og_image'), 'settings');
             Setting::setValue('og_image', $path);
         }
 

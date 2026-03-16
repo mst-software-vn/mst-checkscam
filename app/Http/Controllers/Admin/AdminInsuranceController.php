@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Insurance;
 use Illuminate\Http\Request;
@@ -88,7 +89,7 @@ class AdminInsuranceController extends Controller
             'services.*.title.required' => 'Tên dịch vụ không được để trống.',
         ]);
 
-        $avatarPath = uploadImage($request->file('avatar'), 'insurances');
+        $avatarPath = FileHelper::uploadImage($request->file('avatar'), 'insurances');
 
         $contactInfo = $this->filterEmptyArrayItems($validated['contact_info'] ?? [], ['platform', 'link']);
         $paymentAccounts = $this->filterEmptyArrayItems($validated['payment_accounts'] ?? [], ['bank', 'number']);
@@ -172,9 +173,9 @@ class AdminInsuranceController extends Controller
 
         if ($request->hasFile('avatar')) {
             if ($insurance->avatar) {
-                deleteImage($insurance->avatar);
+                FileHelper::deleteImage($insurance->avatar);
             }
-            $validated['avatar'] = uploadImage($request->file('avatar'), 'insurances');
+            $validated['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'insurances');
         }
 
         $contactInfo = $this->filterEmptyArrayItems($validated['contact_info'] ?? [], ['platform', 'link']);
@@ -230,7 +231,7 @@ class AdminInsuranceController extends Controller
         $insurance = Insurance::findOrFail($id);
 
         if ($insurance->avatar) {
-            deleteImage($insurance->avatar);
+            FileHelper::deleteImage($insurance->avatar);
         }
 
         $insurance->delete();
@@ -269,7 +270,7 @@ class AdminInsuranceController extends Controller
         $insurances = Insurance::whereIn('id', $ids)->get();
         foreach ($insurances as $insurance) {
             if ($insurance->avatar) {
-                deleteImage($insurance->avatar);
+                FileHelper::deleteImage($insurance->avatar);
             }
             $insurance->delete();
         }

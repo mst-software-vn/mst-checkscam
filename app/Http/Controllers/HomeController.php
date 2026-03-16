@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StatsHelper;
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class HomeController extends Controller
     {
         $stats = $this->getHomeStats();
         $latestReports = $this->getLatestReports();
-        $topWeeklyReports = getTopWeeklyReports();
-        $topDailySearches = getTopDailySearches();
+        $topWeeklyReports = StatsHelper::getTopWeeklyReports();
+        $topDailySearches = StatsHelper::getTopDailySearches();
 
         $recentSearches = SearchLog::where('ip_address', $request->ip())
             ->orderByDesc('created_at')

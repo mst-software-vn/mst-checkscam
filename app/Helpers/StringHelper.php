@@ -1,19 +1,28 @@
 <?php
 
+namespace App\Helpers;
+
+use App\Models\Insurance;
+use App\Models\Post;
 use Illuminate\Support\Str;
 
-if (! function_exists('normalizeString')) {
-    function normalizeString(string $str): string
+class StringHelper
+{
+    /**
+     * Chuẩn hóa chuỗi
+     */
+    public static function normalizeString(string $str): string
     {
         $str = mb_strtolower(trim($str), 'UTF-8');
         $str = preg_replace('/\s+/', ' ', $str);
 
         return $str;
     }
-}
 
-if (! function_exists('detectQueryType')) {
-    function detectQueryType(string $query): array
+    /**
+     * Nhận diện loại Query
+     */
+    public static function detectQueryType(string $query): array
     {
         $formattedQuery = $query;
 
@@ -62,25 +71,22 @@ if (! function_exists('detectQueryType')) {
 
         return ['name', $formattedQuery];
     }
-}
 
-if (! function_exists('generateGlobalUniqueSlug')) {
     /**
-     * Tạo slug độc nhất toàn hệ thống (không trùng giữa Insurances và Posts)
-     * Ưu tiên dùng Str::slug() cơ bản để chuẩn hóa tiếng Việt, chữ thường, thay khoảng trắng bằng '-'
+     * Tạo slug độc nhất toàn hệ thống
      */
-    function generateGlobalUniqueSlug(string $title, ?int $ignoreInsuranceId = null, ?int $ignorePostId = null): string
+    public static function generateGlobalUniqueSlug(string $title, ?int $ignoreInsuranceId = null, ?int $ignorePostId = null): string
     {
         $originalSlug = Str::slug($title, '-', 'vi');
         $slug = $originalSlug;
         $counter = 2;
 
         while (true) {
-            $existsInInsurance = \App\Models\Insurance::where('slug', $slug)
+            $existsInInsurance = Insurance::where('slug', $slug)
                 ->when($ignoreInsuranceId, fn ($q) => $q->where('id', '!=', $ignoreInsuranceId))
                 ->exists();
 
-            $existsInPost = \App\Models\Post::where('slug', $slug)
+            $existsInPost = Post::where('slug', $slug)
                 ->when($ignorePostId, fn ($q) => $q->where('id', '!=', $ignorePostId))
                 ->exists();
 
@@ -94,13 +100,11 @@ if (! function_exists('generateGlobalUniqueSlug')) {
 
         return $slug;
     }
-}
 
-if (! function_exists('mask_name')) {
     /**
-     * Che giấu một phần tên (ví dụ: Mai Trung Hậu -> Mai Trung H.)
+     * Che giấu một phần tên
      */
-    function mask_name(?string $name): string
+    public static function mask_name(?string $name): string
     {
         if (! $name || mb_strtolower($name) === 'không rõ tên' || mb_strtolower($name) === 'chưa rõ thông tin' || mb_strtolower($name) === 'người dùng') {
             return 'Chưa rõ tên';
@@ -121,15 +125,11 @@ if (! function_exists('mask_name')) {
 
         return implode(' ', $parts).' '.$maskedLastPart;
     }
-}
 
-if (! function_exists('mask_id')) {
     /**
-     * Che giấu ID (SĐT/STK/Website)
-     * - SĐT/STK: Chừa 3 số đầu & 3 số cuối (ví dụ: 098***093)
-     * - Website: Che giấu phần sau domain tương tự mask_name
+     * Che giấu ID
      */
-    function mask_id(?string $id, string $type = 'bank'): string
+    public static function mask_id(?string $id, string $type = 'bank'): string
     {
         if (! $id) {
             return 'Đang cập nhật';
@@ -143,10 +143,10 @@ if (! function_exists('mask_id')) {
                     $lastPart = array_pop($parts);
                 }
 
-                return implode('/', $parts).'/'.mask_name($lastPart);
+                return implode('/', $parts).'/'.self::mask_name($lastPart);
             }
 
-            return mask_name($id);
+            return self::mask_name($id);
         }
 
         $id = preg_replace('/\D/', '', $id);
@@ -156,13 +156,11 @@ if (! function_exists('mask_id')) {
 
         return substr($id, 0, 3).'***'.substr($id, -3);
     }
-}
 
-if (! function_exists('mask_reporter_name')) {
     /**
-     * Che giấu tên người báo cáo (ví dụ: Nguyen Van Khoa -> Nguyen Van K******)
+     * Che giấu tên người báo cáo
      */
-    function mask_reporter_name(?string $name): string
+    public static function mask_reporter_name(?string $name): string
     {
         if (! $name || mb_strtolower($name) === 'người dùng') {
             return 'Người dùng';
@@ -181,13 +179,11 @@ if (! function_exists('mask_reporter_name')) {
 
         return implode(' ', $parts).' '.$maskedLastPart;
     }
-}
 
-if (! function_exists('mask_phone')) {
     /**
-     * Che giấu số điện thoại (ví dụ: 09380003345 -> 0938000****)
+     * Che giấu số điện thoại
      */
-    function mask_phone(?string $phone): string
+    public static function mask_phone(?string $phone): string
     {
         if (! $phone) {
             return '';
