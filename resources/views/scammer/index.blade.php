@@ -660,6 +660,9 @@
 
       <!-- Right Column: Stats & Sidebar (4/12) -->
       <div class="w-full space-y-6 lg:w-4/12">
+        <!-- Sidebar Banner -->
+        <x-banner-ads position="scammer" class="mb-4" />
+
         <!-- Quick Stats Box -->
         <div class="dark:bg-dark_card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm dark:border-gray-800">
           <div class="space-y-6">

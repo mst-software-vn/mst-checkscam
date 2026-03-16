@@ -64,6 +64,15 @@ class BannerSeeder extends Seeder
                 'type' => 'square',
                 'sort_order' => 0,
             ],
+            // Scammer Detail Sidebar
+            [
+                'title' => 'Scammer Detail Ads',
+                'image_path' => 'https://i.ibb.co/kgwtn4vF/fpayment.jpg',
+                'redirect_url' => '#',
+                'position' => 'scammer',
+                'type' => 'square',
+                'sort_order' => 0,
+            ],
         ];
 
         foreach ($banners as $banner) {
