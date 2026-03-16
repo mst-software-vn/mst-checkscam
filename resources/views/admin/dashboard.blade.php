@@ -1,5 +1,6 @@
 @use('App\Helpers\Helpers')
 @extends('admin.layouts.master')
+@section('title', 'Bảng điều khiển hệ thống')
 @section('content')
   <div class="page-header">
     <div class="page-title">

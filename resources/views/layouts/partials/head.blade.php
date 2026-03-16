@@ -3,46 +3,34 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
   <!-- SEO Optimization (Dynamic from DB) -->
-  @hasSection('title')
-    <title>@yield('title')</title>
-  @else
-    <title>{{ $siteConfig['title'] ?? 'CheckScam.vn — Tra cứu lừa đảo' }}</title>
-  @endif
-  @hasSection('description')
-    <meta name="description" content="@yield('description')" />
-  @else
-    <meta
-      name="description"
-      content="{{ $siteConfig['description'] ?? 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.' }}"
-    />
-  @endif
-  @hasSection('keywords')
-    <meta name="keywords" content="@yield('keywords')" />
-  @else
-    <meta name="keywords" content="{{ $siteConfig['keywords'] ?? 'check scam, tố cáo lừa đảo' }}" />
-  @endif
+  <title>@yield('title', $meta['title'] ?? ($siteConfig['title'] ?? 'Tra cứu lừa đảo'))</title>
+
+  <meta
+    name="description"
+    content="@yield('description', $meta['description'] ?? ($siteConfig['description'] ?? 'Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.'))"
+  />
+
+  <meta
+    name="keywords"
+    content="@yield('keywords', $meta['keywords'] ?? ($siteConfig['keywords'] ?? 'check scam, tố cáo lừa đảo'))"
+  />
+
   <link rel="canonical" href="{{ url()->current() }}" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
-  @hasSection('og_title')
-    <meta property="og:title" content="@yield('og_title')" />
-  @else
-    <meta
-      property="og:title"
-      content="{{ $siteConfig['title'] ?? 'CheckScam - Hệ thống kiểm tra và tố giác scam' }}"
-    />
-  @endif
-  @hasSection('og_description')
-    <meta property="og:description" content="@yield('og_description')" />
-  @else
-    <meta
-      property="og:description"
-      content="{{ $siteConfig['description'] ?? 'Tra cứu thông tin kẻ lừa đảo ngay lập tức.' }}"
-    />
-  @endif
+  <meta
+    property="og:title"
+    content="@yield('og_title', $meta['title'] ?? ($siteConfig['title'] ?? 'Hệ thống kiểm tra và tố giác lừa đảo'))"
+  />
+  <meta
+    property="og:description"
+    content="@yield('og_description', $meta['description'] ?? ($siteConfig['description'] ?? 'Tra cứu thông tin kẻ lừa đảo ngay lập tức.'))"
+  />
 
-  @if (! empty($siteConfig['og_image']))
+  @if (! empty($meta['og_image']))
+    <meta property="og:image" content="{{ $meta['og_image'] }}" />
+  @elseif (! empty($siteConfig['og_image']))
     <meta property="og:image" content="{{ asset('storage/' . $siteConfig['og_image']) }}" />
   @else
     <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png" />
@@ -89,6 +77,17 @@
       $('html').removeClass('dark');
     }
   </script>
+
+  @hasSection('structured_data')
+    @yield('structured_data')
+  @endif
+
+  @stack('styles')
+
+  {{-- Header Scripts from Admin Settings (Google Analytics, Facebook Pixel, etc.) --}}
+  @if (! empty($siteConfig['header_scripts']))
+    {!! $siteConfig['header_scripts'] !!}
+  @endif
 
   <style>
     * {
@@ -179,10 +178,4 @@
       }
     }
   </style>
-  @stack('styles')
-
-  {{-- Header Scripts from Admin Settings (Google Analytics, Facebook Pixel, etc.) --}}
-  @if (! empty($siteConfig['header_scripts']))
-    {!! $siteConfig['header_scripts'] !!}
-  @endif
 </head>

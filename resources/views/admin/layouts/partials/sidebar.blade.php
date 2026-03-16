@@ -143,38 +143,47 @@
           <span>TÍNH NĂNG PRO</span>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
+            <i data-feather="zap"></i>
+            <span>
+              <span class="pro-feature-text">Telegram Hub</span>
+              <i class="fas fa-crown"></i>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
+            <i data-feather="share-2"></i>
+            <span>
+              <span class="pro-feature-text">Auto Bot & Channel</span>
+              <i class="fas fa-crown"></i>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="code"></i>
             <span>
-              Quản lý API
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Public API</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="alert-triangle"></i>
             <span>
-              Khiếu nại
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Tranh chấp</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('admin.upgrade') }}">
-            <i data-feather="shield-off"></i>
-            <span>
-              Blacklist
-              <span class="badge-pro-sm">PRO</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('admin.upgrade') }}">
+          <a href="{{ route('admin.upgrade') }}" class="pro-feature-link">
             <i data-feather="activity"></i>
             <span>
-              Activity Logs
-              <span class="badge-pro-sm">PRO</span>
+              <span class="pro-feature-text">Logs Audit & Bảo mật</span>
+              <i class="fas fa-crown"></i>
             </span>
           </a>
         </li>

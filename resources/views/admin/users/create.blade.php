@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Thêm Người dùng mới')
 @section('content')
   @include(
     'admin.components.page-header',
@@ -64,7 +65,7 @@
                     placeholder="{{
                       isset($user)
                         ? "
-                                                                                                                                                                                                                                                                                                                                            Để trống nếu không đổi mật khẩu"
+                                                                                                                                                                                                                                                                                                                                                                  Để trống nếu không đổi mật khẩu"
                         : 'Nhập mật khẩu'
                     }}"
                   />

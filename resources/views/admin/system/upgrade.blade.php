@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('title', 'Nâng cấp phiên bản Pro - MST CheckScam')
 
 @section('content')
@@ -84,43 +83,42 @@
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Hệ thống Public API:</strong>
-              Kết nối Website khác
+              Mở cổng tra cứu & bán KEY API tích hợp.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Telegram Hub:</strong>
-              Duyệt & Từ chối ngay trên Chat
-            </li>
-            <li>
-              <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Telegram Bot:</strong>
-              Lệnh /check
+              Duyệt bài & nhận thông báo qua Bot Telegram.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
               <strong>Auto Push Channel:</strong>
-              Tự động kéo traffic 24/7
+              Tự động đẩy bài lên Telegram Channel kéo traffic.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Tranh Chấp:</strong>
-              Quy trình đối chất chuyên nghiệp
+              <strong>Hệ thống Tranh Chấp:</strong>
+              Quy trình xử lý đối chất người dùng chuyên nghiệp.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Activity Logs:</strong>
-              Giám sát mọi hành động Admin
-            </li>
-
-            <li>
-              <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Phân quyền Pro:</strong>
-              Tạo Admin, Mod, Editor
+              <strong>Logs Audit & Security:</strong>
+              Theo dõi chi tiết lịch sử thao tác của Admin.
             </li>
             <li>
               <i class="fas fa-star text-warning mt-1"></i>
-              <strong>Support 24/7:</strong>
-              Cài đặt & Hỗ trợ kỹ thuật VIP
+              <strong>Phân quyền Nâng cao:</strong>
+              Tạo không giới hạn nhóm & quyền hạn Moderation.
+            </li>
+            <li>
+              <i class="fas fa-star text-warning mt-1"></i>
+              <strong>Module SEO Max:</strong>
+              Tối ưu Schema, Sitemap & SEO chi tiết tự động.
+            </li>
+            <li>
+              <i class="fas fa-star text-warning mt-1"></i>
+              <strong>Support VIP 24/7:</strong>
+              Hỗ trợ kỹ thuật trực tiếp qua Zalo/Telegram.
             </li>
           </ul>
 

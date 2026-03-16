@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Chỉnh sửa Banner')
 @section('content')
   @include(
     'admin.components.page-header',
