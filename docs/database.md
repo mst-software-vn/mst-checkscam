@@ -153,8 +153,30 @@ Lưu lại vết mỗi khi người dùng tìm kiếm để phân tích xu hư�
 
 ---
 
+## 8. Bảng `banners` (Banner quảng cáo)
+
+Lưu trữ thông tin các banner quảng cáo hiển thị trên website.
+
+| Key            | Type        | Nullable | Mô tả                                                  |
+| :------------- | :---------- | :------- | :----------------------------------------------------- |
+| `id`           | BigInt (PK) | No       |                                                         |
+| `title`        | String      | No       | Tên nội bộ của banner                                   |
+| `image_path`   | String      | No       | Đường dẫn ảnh banner (storage hoặc URL)                 |
+| `redirect_url` | String      | Yes      | Link chuyển hướng khi click                             |
+| `position`     | Enum        | No       | Vị trí: `home_top`, `home_between`, `home_sidebar`, `scammer`, `blog` |
+| `type`         | Enum        | No       | Loại: `horizontal` (ngang), `square` (vuông)            |
+| `start_date`   | Date        | Yes      | Ngày bắt đầu hiển thị                                  |
+| `end_date`     | Date        | Yes      | Ngày kết thúc hiển thị                                  |
+| `status`       | Boolean     | No       | `true`: Đang chạy, `false`: Tạm dừng                   |
+| `sort_order`   | Int         | No       | Thứ tự sắp xếp (càng nhỏ càng ưu tiên)                |
+| `created_at`   | Timestamp   | Yes      |                                                         |
+| `updated_at`   | Timestamp   | Yes      |                                                         |
+
+---
+
 ## Gói đề xuất bổ sung:
 
 1.  **Trường `slug` trong `reports`**: Nên thêm để bài viết tố cáo có đường dẫn đẹp chuẩn SEO (`/to-cao/nguyen-van-a-lua-dao-123456`).
 2.  **Bảng `banks`**: (Phụ) để admin quản lý danh sách các ngân hàng/ví điện tử hỗ trợ (Tên, Logo) phục vụ việc hiển thị ở phần "Tài khoản thanh toán" cho đồng bộ.
 3.  **Logs Audit**: Thêm bảng ghi lại hoạt động của các `users` (Admin/Mod) như: Ai đã xóa bài, ai đã sửa thông tin cấu hình... để tăng tính bảo mật nội bộ.
+
