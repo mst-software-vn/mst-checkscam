@@ -3,10 +3,10 @@
 
 @section('content')
   <!-- Hero Section -->
-  <section class="dark:bg-dark_bg md:pb-24 pb-12">
+  <section class="dark:bg-dark_bg">
     <x-breadcrumb :links="[['name' => 'Chi tiết: ' . StringHelper::mask_id($report->target_id, $report->type)]]" />
 
-    <x-hero :stats="$stats" />
+    <x-hero :stats="$stats" :is-action="false" />
   </section>
   <main class="relative z-30 mx-auto -mt-4 w-full max-w-6xl grow px-4 pb-16 sm:px-6 md:mt-0">
     <div class="flex flex-col gap-6 lg:flex-row">

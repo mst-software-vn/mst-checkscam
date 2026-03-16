@@ -1628,6 +1628,10 @@
   .rounded-xl {
     border-radius: var(--radius-xl);
   }
+  .rounded-t-2xl {
+    border-top-left-radius: var(--radius-2xl);
+    border-top-right-radius: var(--radius-2xl);
+  }
   .rounded-t-lg {
     border-top-left-radius: var(--radius-lg);
     border-top-right-radius: var(--radius-lg);
@@ -3245,6 +3249,13 @@
       }
     }
   }
+  .group-hover\:text-gray-800 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-gray-800);
+      }
+    }
+  }
   .group-hover\:opacity-10 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -4387,6 +4398,11 @@
   .md\:pb-12 {
     @media (width >= 48rem) {
       padding-bottom: calc(var(--spacing) * 12);
+    }
+  }
+  .md\:pb-20 {
+    @media (width >= 48rem) {
+      padding-bottom: calc(var(--spacing) * 20);
     }
   }
   .md\:pb-24 {
