@@ -893,6 +893,9 @@
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
+  .mr-2\! {
+    margin-right: calc(var(--spacing) * 2) !important;
+  }
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
   }

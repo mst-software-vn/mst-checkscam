@@ -138,7 +138,7 @@
               class="btn btn-contact-fb btn-pricing d-flex align-items-center justify-content-center"
             >
               <i class="fab fa-facebook-messenger me-2"></i>
-              Liên hệ qua Facebook
+              Liên hệ qua Fanpage
             </a>
           </div>
         </div>
