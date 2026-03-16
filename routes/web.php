@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBannerController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminInsuranceController;
 use App\Http\Controllers\Admin\AdminPostController;
@@ -143,6 +144,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/', [AdminSettingController::class, 'index'])->name('index');
             Route::post('/', [AdminSettingController::class, 'update'])->name('update');
+        });
+
+        /**
+         * ------------------------------------------
+         * ---            Banners                 ---
+         * ------------------------------------------
+         */
+        Route::post('/banners/bulk-delete', [AdminBannerController::class, 'bulkDestroy'])->name('banners.bulk-delete');
+        Route::prefix('banners')->name('banners.')->group(function () {
+            Route::get('/', [AdminBannerController::class, 'index'])->name('index');
+            Route::get('/create', [AdminBannerController::class, 'create'])->name('create');
+            Route::post('/', [AdminBannerController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [AdminBannerController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [AdminBannerController::class, 'update'])->name('update');
+            Route::delete('/{id}', [AdminBannerController::class, 'destroy'])->name('destroy');
+            Route::post('/{id}/toggle', [AdminBannerController::class, 'toggleStatus'])->name('toggle');
         });
 
         Route::get('/upgrade', function () {
