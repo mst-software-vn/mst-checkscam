@@ -1,34 +1,14 @@
 <?php
 
+namespace App\Helpers;
+
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Support\Facades\DB;
 
-if (! function_exists('getTopWeeklyReports')) {
-    function getTopWeeklyReports()
-    {
-        return Report::where('status', 'approved')
-            ->where('created_at', '>=', now()->subDays(7))
-            ->select(
-                'target_id',
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(slug ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as slug"),
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(target_name ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as target_name"),
-                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(type ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as type"),
-                DB::raw('MAX(created_at) as last_reported_at'),
-                DB::raw('SUM(view_count) as total_views'),
-                DB::raw('MAX(search_count) as total_searches'),
-                DB::raw('(SELECT COUNT(*) FROM reports r2 WHERE r2.target_id = reports.target_id AND r2.status = "approved") as report_count'),
-                DB::raw('(SUM(view_count) + MAX(search_count) + (COUNT(*) * 10)) as heat_index')
-            )
-            ->groupBy('target_id')
-            ->orderByDesc('heat_index')
-            ->limit(7)
-            ->get();
-    }
-}
-
-if (! function_exists('getTopDailySearches')) {
-    function getTopDailySearches()
+class StatsHelper
+{
+    public static function getTopDailySearches()
     {
         $topSearches = SearchLog::whereDate('created_at', today())
             ->select('search_query', DB::raw('COUNT(*) as count'))
@@ -59,5 +39,26 @@ if (! function_exists('getTopDailySearches')) {
                 'slug' => $scamInfo->slug ?? '#',
             ];
         });
+    }
+
+    public static function getTopWeeklyReports()
+    {
+        return Report::where('status', 'approved')
+            ->where('created_at', '>=', now()->subDays(7))
+            ->select(
+                'target_id',
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(slug ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as slug"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(target_name ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as target_name"),
+                DB::raw("SUBSTRING_INDEX(GROUP_CONCAT(type ORDER BY created_at DESC SEPARATOR '|||'), '|||', 1) as type"),
+                DB::raw('MAX(created_at) as last_reported_at'),
+                DB::raw('SUM(view_count) as total_views'),
+                DB::raw('MAX(search_count) as total_searches'),
+                DB::raw('(SELECT COUNT(*) FROM reports r2 WHERE r2.target_id = reports.target_id AND r2.status = "approved") as report_count'),
+                DB::raw('(SUM(view_count) + MAX(search_count) + (COUNT(*) * 10)) as heat_index'),
+            )
+            ->groupBy('target_id')
+            ->orderByDesc('heat_index')
+            ->limit(7)
+            ->get();
     }
 }
