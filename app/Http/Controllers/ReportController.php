@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StringHelper;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -95,7 +96,7 @@ class ReportController extends Controller
             Cache::put($cacheKey, true, now()->addHours(24));
         }
 
-        $displayReporterName = mask_reporter_name($report->reporter_name);
+        $displayReporterName = StringHelper::mask_reporter_name($report->reporter_name);
 
         $reportsCount = Report::where('target_id', $report->target_id)
             ->where('status', 'approved')

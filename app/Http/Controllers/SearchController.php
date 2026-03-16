@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\StatsHelper;
+use App\Helpers\StringHelper;
 use App\Models\Report;
 use App\Models\SearchLog;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class SearchController extends Controller
         $type = null;
 
         if ($query !== '') {
-            [$type, $formattedQuery] = detectQueryType($query);
-            $normalizedQuery = normalizeString($formattedQuery);
+            [$type, $formattedQuery] = StringHelper::detectQueryType($query);
+            $normalizedQuery = StringHelper::normalizeString($formattedQuery);
 
             $dbQuery = Report::where('status', 'approved')
                 ->with('comments')
@@ -131,7 +132,7 @@ class SearchController extends Controller
             return response()->json([]);
         }
 
-        [$type, $formattedQuery] = detectQueryType($query);
+        [$type, $formattedQuery] = StringHelper::detectQueryType($query);
 
         $suggestions = Report::where('status', 'approved')
             ->where(function ($q) use ($query, $formattedQuery) {
@@ -145,10 +146,10 @@ class SearchController extends Controller
             ->take(8)
             ->values()
             ->map(fn ($r) => [
-                'label' => $r->target_id.($r->target_name ? ' — '.mask_name($r->target_name) : ''),
+                'label' => $r->target_id.($r->target_name ? ' — '.StringHelper::mask_name($r->target_name) : ''),
                 'value' => $r->target_id,
                 'type' => $r->type,
-                'target_name' => mask_name($r->target_name),
+                'target_name' => StringHelper::mask_name($r->target_name),
                 'slug' => $r->slug,
             ]);
 
