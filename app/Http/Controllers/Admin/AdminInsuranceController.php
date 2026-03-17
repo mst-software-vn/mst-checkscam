@@ -91,14 +91,6 @@ class AdminInsuranceController extends Controller
             $insurance->update(['avatar' => $path]);
         }
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã thêm thành viên bảo hiểm thành công.',
-                'redirect' => route('admin.insurances.index'),
-            ]);
-        }
-
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã thêm thành viên bảo hiểm thành công.');
     }
@@ -162,14 +154,6 @@ class AdminInsuranceController extends Controller
 
         $insurance->update($data);
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã cập nhật thông tin bảo hiểm thành công.',
-                'redirect' => route('admin.insurances.index'),
-            ]);
-        }
-
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã cập nhật thông tin bảo hiểm thành công.');
     }
@@ -197,13 +181,6 @@ class AdminInsuranceController extends Controller
         }
 
         $insurance->delete();
-
-        if (request()->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã xóa thành viên bảo hiểm thành công.',
-            ]);
-        }
 
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã xóa thành viên bảo hiểm.');

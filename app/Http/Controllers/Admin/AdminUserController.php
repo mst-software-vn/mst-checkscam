@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
 {
@@ -87,15 +86,7 @@ class AdminUserController extends Controller
             'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
         ];
 
-        if ($request->ajax()) {
-            $validator = Validator::make($request->all(), $rules, $messages);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-            $validated = $validator->validated();
-        } else {
-            $validated = $request->validate($rules, $messages);
-        }
+        $validated = $request->validate($rules, $messages);
 
         $user = User::create([
             'username' => $validated['username'],
@@ -109,14 +100,6 @@ class AdminUserController extends Controller
         if ($request->hasFile('avatar')) {
             $path = FileHelper::uploadImage($request->file('avatar'), 'avatars');
             $user->update(['avatar' => $path]);
-        }
-
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã tạo tài khoản người dùng thành công.',
-                'redirect' => route('admin.users.index'),
-            ]);
         }
 
         return redirect()->route('admin.users.index')
@@ -159,15 +142,7 @@ class AdminUserController extends Controller
             'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
         ];
 
-        if ($request->ajax()) {
-            $validator = Validator::make($request->all(), $rules, $messages);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-            $validated = $validator->validated();
-        } else {
-            $validated = $request->validate($rules, $messages);
-        }
+        $validated = $request->validate($rules, $messages);
 
         $data = [
             'username' => $validated['username'],
@@ -190,14 +165,6 @@ class AdminUserController extends Controller
 
         $user->update($data);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã cập nhật thông tin người dùng thành công.',
-                'redirect' => route('admin.users.index'),
-            ]);
-        }
-
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã cập nhật thông tin tài khoản.');
     }
@@ -207,10 +174,6 @@ class AdminUserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->id === auth()->id()) {
-            if ($request->ajax()) {
-                return response()->json(['success' => false, 'message' => 'Bạn không thể xóa chính mình.'], 403);
-            }
-
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 
@@ -219,10 +182,6 @@ class AdminUserController extends Controller
         }
 
         $user->delete();
-
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Đã xóa người dùng thành công.']);
-        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã xóa người dùng thành công.');

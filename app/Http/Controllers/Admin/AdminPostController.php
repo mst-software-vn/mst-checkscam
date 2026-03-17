@@ -86,14 +86,6 @@ class AdminPostController extends Controller
             $post->update(['thumbnail' => $path]);
         }
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã tạo bài viết thành công.',
-                'redirect' => route('admin.posts.index'),
-            ]);
-        }
-
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã tạo bài viết thành công.');
     }
@@ -133,14 +125,6 @@ class AdminPostController extends Controller
 
         $post->update($data);
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã cập nhật bài viết thành công.',
-                'redirect' => route('admin.posts.index'),
-            ]);
-        }
-
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã cập nhật bài viết thành công.');
     }
@@ -155,13 +139,6 @@ class AdminPostController extends Controller
         }
 
         $post->delete();
-
-        if (request()->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã xóa bài viết thành công.',
-            ]);
-        }
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã xóa bài viết.');

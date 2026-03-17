@@ -20,5 +20,6 @@
 <script src="/assets/plugins/apexchart/chart-data.js"></script>
 
 <script src="/assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @stack('scripts')
