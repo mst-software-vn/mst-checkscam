@@ -140,6 +140,35 @@
       </div>
     </div>
 
+    {{-- Thông báo & Cảnh báo --}}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-warning">
+          <i class="fas fa-bullhorn me-2"></i>
+          Thông báo & Cảnh báo (Popup Home)
+        </h5>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Nội dung thông báo (Hỗ trợ HTML)</label>
+              <textarea
+                name="site_notification_text"
+                class="form-control"
+                rows="3"
+                placeholder="Nhập nội dung hiển thị trong popup cảnh báo..."
+              >
+{{ $settings['site_notification_text'] ?? '' }}</textarea
+              >
+              <small class="text-muted">
+                Dùng thẻ &lt;span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase
+                italic"&gt;...&lt;/span&gt; để làm nổi bật từ khóa.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {{-- Toggle Modules --}}
     <div class="card">
       <div class="card-body">
@@ -511,7 +540,7 @@
         <div class="form-group">
           <label>Chèn mã vào &lt;head&gt; (VD: Google Analytics, Facebook Pixel...)</label>
           <textarea name="header_scripts" class="form-control" rows="5" placeholder="<!-- Google tag (gtag.js) -->">
-        {{ $settings['header_scripts'] ?? '' }}</textarea
+{{ $settings['header_scripts'] ?? '' }}</textarea
           >
         </div>
       </div>

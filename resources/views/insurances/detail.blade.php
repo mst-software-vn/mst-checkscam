@@ -1,35 +1,26 @@
 @extends('layouts.app')
 
 @section('structured_data')
-
-{{-- prettier-ignore-start --}}
-@verbatim
-<script type="application/ld+json">
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfilePage",
       "mainEntity": {
         "@type": "Person",
-@endverbatim
         "name": "{{ $insurance->full_name }}",
         "description": "Thành viên bảo hiểm uy tín trên hệ thống",
         "image": "{{ $insurance->avatar_url }}"
-@verbatim
       },
       "publisher": {
         "@type": "Organization",
-@endverbatim
         "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
         "logo": {
           "@type": "ImageObject",
           "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
         }
-@verbatim
       }
     }
-</script>
-@endverbatim
-{{-- prettier-ignore-end --}}
+  </script>
 @endsection
 
 @section('content')
@@ -327,7 +318,7 @@
                 </p>
                 <p>
                   3. Luôn kiểm tra con dấu chứng nhận và địa chỉ website
-                  <span class="bg-cs_red rounded px-2 py-0.5 text-white">MSTSoftware.VN</span>
+                  <span class="bg-cs_red rounded px-2 py-0.5 text-white">{{ $siteConfig['og_site_name'] }}</span>
                   trước khi bắt đầu giao dịch.
                 </p>
               </div>

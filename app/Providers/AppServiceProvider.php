@@ -46,10 +46,10 @@ class AppServiceProvider extends ServiceProvider
                     'description' => ConfigHelper::getConfig('site_description', 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.'),
                     'keywords' => ConfigHelper::getConfig('seo_keywords', 'check scam, tố cáo lừa đảo'),
                     'hotline' => ConfigHelper::getConfig('hotline', '0812.665.001'),
-                    'support_email' => ConfigHelper::getConfig('support_email', 'support@checkscam.vn'),
+                    'support_email' => ConfigHelper::getConfig('support_email', 'support@mstsoftware.vn'),
                     'zalo_link' => ConfigHelper::getConfig('zalo_link', 'https://zalo.me/0812665001'),
                     'facebook_link' => ConfigHelper::getConfig('facebook_link', 'https://www.facebook.com/mstsoftware.vn'),
-                    'telegram_link' => ConfigHelper::getConfig('telegram_link', 'https://t.me/checkscam'),
+                    'telegram_link' => ConfigHelper::getConfig('telegram_link', 'https://t.me/mstsoftware'),
                     'logo' => ConfigHelper::getConfig('logo'),
                     'logo_header_light' => ConfigHelper::getConfig('logo_header_light'),
                     'logo_header_dark' => ConfigHelper::getConfig('logo_header_dark'),
@@ -62,9 +62,10 @@ class AppServiceProvider extends ServiceProvider
                     'google_site_verification' => ConfigHelper::getConfig('google_site_verification'),
                     'bing_site_verification' => ConfigHelper::getConfig('bing_site_verification'),
                     'site_index' => ConfigHelper::getConfig('site_index', 'index, follow'),
-                    'og_site_name' => ConfigHelper::getConfig('og_site_name', 'CheckScam.VN'),
-                    'twitter_username' => ConfigHelper::getConfig('twitter_username', '@checkscam_vn'),
+                    'og_site_name' => ConfigHelper::getConfig('og_site_name', 'MSTSOFTWARE.vn'),
+                    'twitter_username' => ConfigHelper::getConfig('twitter_username', '@mstsoftware'),
                     'meta_extra' => ConfigHelper::getConfig('meta_extra'),
+                    'site_notification_text' => ConfigHelper::getConfig('site_notification_text'),
                 ];
                 $siteConfig = $config;
                 View::share('siteConfig', $siteConfig);

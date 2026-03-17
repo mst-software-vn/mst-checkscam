@@ -43,6 +43,7 @@ class AdminSettingController extends Controller
             'schema_organization_url',
             'schema_organization_contact',
             'meta_extra',
+            'site_notification_text',
         ];
 
         foreach ($keys as $key) {

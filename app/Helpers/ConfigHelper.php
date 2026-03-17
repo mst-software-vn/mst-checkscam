@@ -53,7 +53,7 @@ class ConfigHelper
                 'google_site_verification', 'bing_site_verification', 'site_index',
                 'og_site_name', 'twitter_username', 'schema_organization_name',
                 'schema_organization_logo', 'schema_organization_url', 'schema_organization_contact',
-                'meta_extra',
+                'meta_extra', 'site_notification_text',
             ];
 
             foreach ($keys as $key) {
