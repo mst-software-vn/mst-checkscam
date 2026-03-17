@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class FileHelper
 {
@@ -25,7 +27,7 @@ class FileHelper
                 $fullPath = Storage::disk('public')->path($storePath);
 
                 // Use Intervention Image Version 3 wrapper
-                $manager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Gd\Driver);
+                $manager = new ImageManager(new Driver);
 
                 // Mute libpng warning for iCCP incorrect profiles temporarily via custom error handler
                 set_error_handler(function ($errno, $errstr) {

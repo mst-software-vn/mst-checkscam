@@ -492,7 +492,9 @@
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
 
-              <small class="text-muted d-block mt-1">Lý do sẽ hiển thị trên trang chi tiết báo cáo.</small>
+              <small class="text-muted d-block mt-1">
+                Lý do sẽ lưu lại cho Admin biết vì sao hủy, để đối chứng sau này với người gửi.
+              </small>
             </div>
           </div>
           <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
