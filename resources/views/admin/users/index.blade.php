@@ -161,7 +161,7 @@
 
       {{-- Table --}}
       <div class="table-responsive">
-        <table class="datanew table">
+        <table class="table hover-table">
           <thead>
             <tr>
               <th>
