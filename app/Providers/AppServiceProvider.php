@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
                     'google_site_verification' => ConfigHelper::getConfig('google_site_verification'),
                     'bing_site_verification' => ConfigHelper::getConfig('bing_site_verification'),
                     'site_index' => ConfigHelper::getConfig('site_index', 'index, follow'),
-                    'og_site_name' => ConfigHelper::getConfig('og_site_name', 'CheckScam.vn'),
+                    'og_site_name' => ConfigHelper::getConfig('og_site_name', 'CheckScam.VN'),
                     'twitter_username' => ConfigHelper::getConfig('twitter_username', '@checkscam_vn'),
                     'meta_extra' => ConfigHelper::getConfig('meta_extra'),
                 ];
