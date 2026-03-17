@@ -483,7 +483,7 @@
                 name="rejection_reason"
                 class="form-control @error('rejection_reason') is-invalid @enderror"
                 rows="3"
-                placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
+                placeholder="Mô tả lý do từ chối"
                 style="resize: none; font-size: 13px"
               >
     {{ old('rejection_reason') }}</textarea

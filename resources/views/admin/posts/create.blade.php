@@ -94,7 +94,7 @@
               <textarea
                 name="content"
                 id="editor"
-                class="form-control"
+                class="form-control editor"
                 rows="15"
                 placeholder="Soạn thảo nội dung ở đây..."
               >
