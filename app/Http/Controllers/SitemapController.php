@@ -27,7 +27,7 @@ class SitemapController extends Controller
         // Thêm các bài viết
         Post::chunk(100, function ($posts) use ($sitemap) {
             foreach ($posts as $post) {
-                $sitemap->add(Url::create(route('posts.show', $post->slug))
+                $sitemap->add(Url::create(route('posts.frontend.show', $post->slug))
                     ->setLastModificationDate($post->updated_at)
                     ->setPriority(0.7)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
@@ -37,7 +37,7 @@ class SitemapController extends Controller
         // Thêm các vụ tố cáo
         Report::active()->chunk(100, function ($reports) use ($sitemap) {
             foreach ($reports as $report) {
-                $sitemap->add(Url::create(route('reports.show', $report->slug))
+                $sitemap->add(Url::create(route('scammer.show', $report->slug))
                     ->setLastModificationDate($report->updated_at)
                     ->setPriority(0.6)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
@@ -47,7 +47,7 @@ class SitemapController extends Controller
         // Thêm các hồ sơ bảo hiểm
         Insurance::chunk(100, function ($insurances) use ($sitemap) {
             foreach ($insurances as $insurance) {
-                $sitemap->add(Url::create(route('insurances.show', $insurance->slug))
+                $sitemap->add(Url::create(route('insurances.frontend.show', $insurance->slug))
                     ->setLastModificationDate($insurance->updated_at)
                     ->setPriority(0.7)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));

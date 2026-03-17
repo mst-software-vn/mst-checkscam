@@ -1,7 +1,11 @@
+<?php
+
+namespace App\Http\Controllers;
+
 use App\Helpers\ConfigHelper;
 use App\Models\Insurance;
-use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
 
 class InsuranceController extends Controller
 {

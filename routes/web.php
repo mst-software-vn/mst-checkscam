@@ -12,8 +12,11 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -23,11 +26,11 @@ Route::get('/to-cao-lua-dao', function () {
 
 Route::post('/to-cao-lua-dao', [ReportController::class, 'store'])->name('report.store');
 
-Route::get('/bao-hiem-cs', [\App\Http\Controllers\InsuranceController::class, 'index'])->name('insurances.frontend.index');
-Route::get('/bao-hiem-cs/{slug}', [\App\Http\Controllers\InsuranceController::class, 'show'])->name('insurances.frontend.show');
+Route::get('/bao-hiem-cs', [InsuranceController::class, 'index'])->name('insurances.frontend.index');
+Route::get('/bao-hiem-cs/{slug}', [InsuranceController::class, 'show'])->name('insurances.frontend.show');
 
-Route::get('/bai-viet', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.frontend.index');
-Route::get('/bai-viet/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.frontend.show');
+Route::get('/bai-viet', [PostController::class, 'index'])->name('posts.frontend.index');
+Route::get('/bai-viet/{slug}', [PostController::class, 'show'])->name('posts.frontend.show');
 
 Route::get('/api-checkscam', function () {
     return view('system.api');
@@ -199,12 +202,12 @@ Route::patch('/comments/{id}', [CommentController::class, 'update'])
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])
     ->name('comment.destroy');
 
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
 /**
  * ------------------------------------------
  * ---             Slug URL               ---
  * ------------------------------------------
  */
-Route::get('/{slug}', [App\Http\Controllers\ReportController::class, 'show'])->name('scammer.show');
-
-// Sitemap
-Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/{slug}', [ReportController::class, 'show'])->name('scammer.show');
