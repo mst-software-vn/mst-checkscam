@@ -65,9 +65,19 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('siteConfig', $siteConfig);
 
-            // Set default SEOTools
-            \Artesaos\SEOTools\Facades\SEOTools::setTitle($siteConfig['title']);
-            \Artesaos\SEOTools\Facades\SEOTools::setDescription($siteConfig['description']);
+            // Set default SEOTools ONLY if not a sub-page or if home page
+            // This prevents overwriting specific titles from Controllers
+            if (request()->is('/') || request()->is('home')) {
+                \Artesaos\SEOTools\Facades\SEOTools::setTitle($siteConfig['title']);
+                \Artesaos\SEOTools\Facades\SEOTools::setDescription($siteConfig['description']);
+                \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setTitle($siteConfig['title']);
+                \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setDescription($siteConfig['description']);
+                \Artesaos\SEOTools\Facades\SEOTools::twitter()->setTitle($siteConfig['title']);
+                \Artesaos\SEOTools\Facades\SEOTools::twitter()->setDescription($siteConfig['description']);
+                \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setTitle($siteConfig['title']);
+                \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setDescription($siteConfig['description']);
+            }
+
             \Artesaos\SEOTools\Facades\SEOTools::metatags()->addKeyword($siteConfig['keywords']);
             \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('author', $siteConfig['site_author']);
             \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('robots', $siteConfig['site_index']);
@@ -80,28 +90,21 @@ class AppServiceProvider extends ServiceProvider
                 \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('msvalidate.01', $siteConfig['bing_site_verification']);
             }
 
-            // OpenGraph
-            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setTitle($siteConfig['title']);
-            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setDescription($siteConfig['description']);
-            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setUrl(url()->current());
-            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addProperty('type', 'website');
+            // OpenGraph Global
             \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setSiteName($siteConfig['og_site_name']);
 
             if ($siteConfig['og_image']) {
-                \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addImage(asset('storage/'.$siteConfig['og_image']));
+                $og_img = filter_var($siteConfig['og_image'], FILTER_VALIDATE_URL)
+                            ? $siteConfig['og_image']
+                            : asset('storage/'.$siteConfig['og_image']);
+                \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addImage($og_img);
+                \Artesaos\SEOTools\Facades\SEOTools::twitter()->setImage($og_img);
             }
 
-            // Twitter
+            // Twitter Global
             \Artesaos\SEOTools\Facades\SEOTools::twitter()->setSite($siteConfig['twitter_username']);
-            \Artesaos\SEOTools\Facades\SEOTools::twitter()->setTitle($siteConfig['title']);
-            \Artesaos\SEOTools\Facades\SEOTools::twitter()->setDescription($siteConfig['description']);
-            if ($siteConfig['og_image']) {
-                \Artesaos\SEOTools\Facades\SEOTools::twitter()->setImage(asset('storage/'.$siteConfig['og_image']));
-            }
 
             // Json-Ld Default Schema
-            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setTitle($siteConfig['title']);
-            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setDescription($siteConfig['description']);
             \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setType('WebSite');
             \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setUrl(url('/'));
 
@@ -113,7 +116,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
 
             // Organization / Business Schema for Home
-            if (request()->is('/')) {
+            if (request()->is('/') || request()->is('home')) {
                 $orgName = ConfigHelper::getConfig('schema_organization_name', 'CheckScam');
                 $orgLogo = ConfigHelper::getConfig('schema_organization_logo');
 

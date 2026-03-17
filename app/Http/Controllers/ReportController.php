@@ -145,14 +145,13 @@ class ReportController extends Controller
         SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDesc);
         SEOTools::metatags()->addKeyword("{$targetId}, {$targetName}, lừa đảo, scammer, {$category}, check scam");
-        SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->addProperty('type', 'article');
-        SEOTools::opengraph()->setTitle($metaTitle);
-        SEOTools::opengraph()->setDescription($metaDesc);
 
         if (! empty($report->evidence_images)) {
-            SEOTools::opengraph()->addImage(asset('storage/'.$report->evidence_images[0]));
-            SEOTools::jsonLd()->addImage(asset('storage/'.$report->evidence_images[0]));
+            $firstImg = $report->evidence_images[0];
+            $imgUrl = filter_var($firstImg, FILTER_VALIDATE_URL) ? $firstImg : asset('storage/'.$firstImg);
+            SEOTools::opengraph()->addImage($imgUrl);
+            SEOTools::jsonLd()->addImage($imgUrl);
         }
 
         // Structured Data for Scam Report (using Review/Article hybrid)
@@ -168,7 +167,7 @@ class ReportController extends Controller
             'name' => 'CheckScam.vn',
             'logo' => [
                 '@type' => 'ImageObject',
-                'url' => asset('storage/'.ConfigHelper::getConfig('logo')),
+                'url' => filter_var(ConfigHelper::getConfig('logo'), FILTER_VALIDATE_URL) ? ConfigHelper::getConfig('logo') : asset('storage/'.ConfigHelper::getConfig('logo')),
             ],
         ]);
         SEOTools::jsonLd()->addValue('datePublished', $report->created_at->toIso8601String());

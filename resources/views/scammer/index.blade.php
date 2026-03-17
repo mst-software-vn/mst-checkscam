@@ -1,5 +1,11 @@
 @use('App\Helpers\StringHelper')
 @extends('layouts.app')
+
+@php
+  $siteTitle = $siteConfig['title'] ?? 'CheckScam';
+  $logoUrl = filter_var($siteConfig['logo'] ?? '', FILTER_VALIDATE_URL) ? $siteConfig['logo'] ?? '' : asset('storage/' . ($siteConfig['logo'] ?? ''));
+@endphp
+
 @section('structured_data')
   <script type="application/ld+json">
     @verbatim
@@ -20,23 +26,23 @@
       "author": {
         "@type": "Organization",
     @endverbatim
-        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}"
+        "name": "{{ $siteTitle }}"
     @verbatim
       },
       "publisher": {
         "@type": "Organization",
     @endverbatim
-        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
+        "name": "{{ $siteTitle }}",
     @verbatim
         "logo": {
           "@type": "ImageObject",
     @endverbatim
-          "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
+          "url": "{{ $logoUrl }}"
     @verbatim
         }
       },
     @endverbatim
-      "description": "{{ $meta['description'] ?? '' }}",
+      "description": "{{ $report->description ?? '' }}",
       "datePublished": "{{ $report->created_at->toIso8601String() }}"
     @verbatim
     }
