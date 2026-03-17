@@ -71,6 +71,7 @@ class AdminUserController extends Controller
             'status' => 'nullable|boolean',
         ];
 
+        // ... messages ...
         $messages = [
             'username.required' => 'Tên đăng nhập không được để trống.',
             'username.unique' => 'Tên đăng nhập đã tồn tại.',
@@ -96,20 +97,20 @@ class AdminUserController extends Controller
             $validated = $request->validate($rules, $messages);
         }
 
-        $avatarPath = null;
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('users', 'public');
-        }
-
-        User::create([
+        $user = User::create([
             'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'full_name' => $validated['full_name'],
-            'avatar' => $avatarPath,
             'role' => $validated['role'],
             'status' => $request->boolean('status', true) ? 1 : 0,
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+            // Legacy support
+            $user->update(['avatar' => $user->getFirstMedia('avatar')->file_name]);
+        }
 
         if ($request->ajax()) {
             return response()->json([
@@ -144,6 +145,7 @@ class AdminUserController extends Controller
             'status' => 'nullable|boolean',
         ];
 
+        // ... messages ...
         $messages = [
             'username.required' => 'Tên đăng nhập không được để trống.',
             'username.unique' => 'Tên đăng nhập đã tồn tại.',
@@ -180,14 +182,13 @@ class AdminUserController extends Controller
             $data['password'] = Hash::make($validated['password']);
         }
 
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
-            }
-            $data['avatar'] = $request->file('avatar')->store('users', 'public');
-        }
-
         $user->update($data);
+
+        if ($request->hasFile('avatar')) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+            // Legacy support
+            $user->update(['avatar' => $user->getFirstMedia('avatar')->file_name]);
+        }
 
         if ($request->ajax()) {
             return response()->json([
@@ -212,6 +213,8 @@ class AdminUserController extends Controller
 
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
+
+        $user->clearMediaCollection('avatar');
 
         if ($user->avatar) {
             Storage::disk('public')->delete($user->avatar);
@@ -242,6 +245,7 @@ class AdminUserController extends Controller
                 continue;
             }
 
+            $user->clearMediaCollection('avatar');
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }

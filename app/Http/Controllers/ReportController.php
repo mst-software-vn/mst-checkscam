@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ConfigHelper;
-use App\Helpers\FileHelper;
 use App\Helpers\StringHelper;
 use App\Models\Report;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -54,14 +54,9 @@ class ReportController extends Controller
             'evidence_images.*.max' => 'Mỗi hình ảnh không được vượt quá 5MB.',
         ]);
 
-        $evidencePaths = [];
-        if ($request->hasFile('evidence_images')) {
-            $evidencePaths = FileHelper::uploadMultipleImages($request->file('evidence_images'), 'reports');
-        }
-
         $slug = Str::slug(($validated['target_name'] ?? 'scammer').'-'.Str::random(8));
 
-        Report::create([
+        $report = Report::create([
             'type' => $validated['type'],
             'reporter_name' => $validated['reporter_name'] ?? 'Người dùng',
             'reporter_contact' => $validated['reporter_contact'] ?? '',
@@ -72,11 +67,23 @@ class ReportController extends Controller
             'category' => $validated['category'] ?? null,
             'damage_amount' => $validated['damage_amount'] ?? null,
             'description' => $validated['description'],
-            'evidence_images' => $evidencePaths,
             'status' => 'pending',
             'ip_address' => $ip,
             'slug' => $slug,
         ]);
+
+        if ($request->hasFile('evidence_images')) {
+            foreach ($request->file('evidence_images') as $file) {
+                $report->addMedia($file)->toMediaCollection('evidence');
+            }
+
+            // Legacy support for Old evidence_images column (array)
+            $paths = [];
+            foreach ($report->getMedia('evidence') as $media) {
+                $paths[] = $media->file_name;
+            }
+            $report->update(['evidence_images' => $paths]);
+        }
 
         if ($request->ajax()) {
             return response()->json(['redirect' => route('home')]);
@@ -138,21 +145,15 @@ class ReportController extends Controller
         $metaTitle = ($report->target_id ? $report->target_id.' - ' : '').($report->target_name ? $report->target_name.' ' : '').'Bị tố cáo lừa đảo trên '.$siteTitle;
         $metaDesc = 'Cảnh báo lừa đảo: '.($report->target_name ? $report->target_name.' ' : '').'('.$report->target_id.'). Hình thức: '.$report->category.'. '.Str::limit($report->description, 160);
 
-        $meta = [
-            'title' => $metaTitle,
-            'description' => $metaDesc,
-            'keywords' => implode(', ', array_filter([
-                $report->target_id,
-                $report->target_name,
-                $report->category,
-                'lừa đảo',
-                'scammer',
-                'tài khoản lừa đảo',
-                'kiểm tra lừa đảo',
-                $siteTitle,
-            ])),
-            'og_image' => ! empty($report->evidence_images) ? asset('storage/'.$report->evidence_images[0]) : ConfigHelper::getConfig('og_image'),
-        ];
+        SEOTools::setTitle($metaTitle);
+        SEOTools::setDescription($metaDesc);
+        SEOTools::metatags()->addKeyword($report->target_id.', '.$report->target_name.', scammer, lừa đảo, '.$report->category);
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->addProperty('type', 'article');
+
+        if (! empty($report->evidence_images)) {
+            SEOTools::opengraph()->addImage(asset('storage/'.$report->evidence_images[0]));
+        }
 
         return view('scammer.index', compact(
             'report',
@@ -163,7 +164,6 @@ class ReportController extends Controller
             'latestReports',
             'stats',
             'comments',
-            'meta',
         ));
     }
 }

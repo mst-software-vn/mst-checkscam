@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
@@ -44,11 +43,8 @@ class AdminBannerController extends Controller
             'sort_order' => 'nullable|integer|min:0',
         ]);
 
-        $imagePath = FileHelper::uploadImage($request->file('image'), 'banners');
-
-        Banner::create([
+        $banner = Banner::create([
             'title' => $request->title,
-            'image_path' => $imagePath,
             'redirect_url' => $request->redirect_url,
             'position' => $request->position,
             'type' => $request->type,
@@ -57,6 +53,12 @@ class AdminBannerController extends Controller
             'status' => $request->has('status'),
             'sort_order' => $request->sort_order ?? 0,
         ]);
+
+        if ($request->hasFile('image')) {
+            $banner->addMediaFromRequest('image')->toMediaCollection('banner');
+            // Legacy support
+            $banner->update(['image_path' => $banner->getFirstMedia('banner')->file_name]);
+        }
 
         return redirect()->route('admin.banners.index')->with('success', 'Đã tạo banner thành công.');
     }
@@ -83,7 +85,7 @@ class AdminBannerController extends Controller
             'sort_order' => 'nullable|integer|min:0',
         ]);
 
-        $data = [
+        $banner->update([
             'title' => $request->title,
             'redirect_url' => $request->redirect_url,
             'position' => $request->position,
@@ -92,20 +94,22 @@ class AdminBannerController extends Controller
             'end_date' => $request->end_date,
             'status' => $request->has('status'),
             'sort_order' => $request->sort_order ?? 0,
-        ];
+        ]);
 
         if ($request->hasFile('image')) {
-            $data['image_path'] = FileHelper::uploadImage($request->file('image'), 'banners');
+            $banner->addMediaFromRequest('image')->toMediaCollection('banner');
+            // Legacy support
+            $banner->update(['image_path' => $banner->getFirstMedia('banner')->file_name]);
         }
-
-        $banner->update($data);
 
         return redirect()->route('admin.banners.index')->with('success', 'Đã cập nhật banner thành công.');
     }
 
     public function destroy($id)
     {
-        Banner::findOrFail($id)->delete();
+        $banner = Banner::findOrFail($id);
+        $banner->clearMediaCollection('banner');
+        $banner->delete();
 
         return back()->with('success', 'Đã xóa banner.');
     }
@@ -113,7 +117,11 @@ class AdminBannerController extends Controller
     public function bulkDestroy(Request $request)
     {
         $ids = $request->input('ids', []);
-        Banner::whereIn('id', $ids)->delete();
+        $banners = Banner::whereIn('id', $ids)->get();
+        foreach ($banners as $banner) {
+            $banner->clearMediaCollection('banner');
+            $banner->delete();
+        }
 
         return back()->with('success', 'Đã xóa '.count($ids).' banner.');
     }

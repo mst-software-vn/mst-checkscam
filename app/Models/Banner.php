@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Banner extends Model
+class Banner extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -49,8 +53,19 @@ class Banner extends Model
         return $query->orderBy('sort_order')->orderByDesc('created_at');
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Fit::Contain, 300, 150)
+            ->nonQueued();
+
+        $this->addMediaConversion('optimized')
+            ->fit(Fit::Max, 1200, 600)
+            ->nonQueued();
+    }
+
     public function isExpired(): bool
     {
-        return $this->end_date !== null && $this->end_date->isPast();
+        return $this->end_date !== null && now()->greaterThan($this->end_date);
     }
 }

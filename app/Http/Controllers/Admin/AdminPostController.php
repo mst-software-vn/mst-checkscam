@@ -49,6 +49,13 @@ class AdminPostController extends Controller
         return view('admin.posts.create');
     }
 
+    public function edit(int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.create', compact('post'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -59,37 +66,27 @@ class AdminPostController extends Controller
             'is_featured' => 'nullable|boolean',
             'hashtags' => 'nullable|string|max:500',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
-        ], [
-            'title.required' => 'Tiêu đề bài viết không được để trống.',
-            'title.max' => 'Tiêu đề bài viết không quá 255 ký tự.',
-            'description.required' => 'Mô tả ngắn không được để trống.',
-            'description.max' => 'Mô tả ngắn không quá 500 ký tự.',
-            'content.required' => 'Nội dung bài viết không được để trống.',
-            'content.min' => 'Nội dung bài viết phải có ít nhất 50 ký tự.',
-            'thumbnail.required' => 'Thumbnail / Ảnh đại diện là bắt buộc.',
-            'thumbnail.image' => 'File tải lên phải là hình ảnh.',
-            'thumbnail.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
-            'thumbnail.max' => 'Dung lượng ảnh tối đa 5MB.',
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
         $globalSlug = StringHelper::generateGlobalUniqueSlug($slugSource);
 
-        $thumbnailPath = null;
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
-        }
-
-        Post::create([
+        $post = Post::create([
             'title' => $validated['title'],
             'slug' => $globalSlug,
             'description' => $validated['description'],
             'content' => $validated['content'],
             'is_featured' => $request->boolean('is_featured'),
             'hashtags' => $validated['hashtags'] ?? null,
-            'thumbnail' => $thumbnailPath,
             'author_id' => auth()->id(),
         ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $post->addMediaFromRequest('thumbnail')->toMediaCollection('thumbnail');
+
+            // Legacy support
+            $post->update(['thumbnail' => $post->getFirstMedia('thumbnail')->file_name]);
+        }
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -101,13 +98,6 @@ class AdminPostController extends Controller
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Đã tạo bài viết thành công.');
-    }
-
-    public function edit(int $id)
-    {
-        $post = Post::findOrFail($id);
-
-        return view('admin.posts.create', compact('post'));
     }
 
     public function update(Request $request, int $id)
@@ -122,27 +112,10 @@ class AdminPostController extends Controller
             'is_featured' => 'nullable|boolean',
             'hashtags' => 'nullable|string|max:500',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-        ], [
-            'title.required' => 'Tiêu đề bài viết không được để trống.',
-            'title.max' => 'Tiêu đề bài viết không quá 255 ký tự.',
-            'description.required' => 'Mô tả ngắn không được để trống.',
-            'description.max' => 'Mô tả ngắn không quá 500 ký tự.',
-            'content.required' => 'Nội dung bài viết không được để trống.',
-            'content.min' => 'Nội dung bài viết phải có ít nhất 50 ký tự.',
-            'thumbnail.image' => 'File tải lên phải là hình ảnh.',
-            'thumbnail.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
-            'thumbnail.max' => 'Dung lượng ảnh tối đa 5MB.',
         ]);
 
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
         $globalSlug = StringHelper::generateGlobalUniqueSlug($slugSource, null, $post->id);
-
-        if ($request->hasFile('thumbnail')) {
-            if ($post->thumbnail) {
-                FileHelper::deleteImage($post->thumbnail);
-            }
-            $validated['thumbnail'] = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
-        }
 
         $post->update([
             'title' => $validated['title'],
@@ -151,8 +124,13 @@ class AdminPostController extends Controller
             'content' => $validated['content'],
             'is_featured' => $request->boolean('is_featured'),
             'hashtags' => $validated['hashtags'] ?? null,
-            'thumbnail' => $validated['thumbnail'] ?? $post->thumbnail,
         ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $post->addMediaFromRequest('thumbnail')->toMediaCollection('thumbnail');
+            // Legacy support
+            $post->update(['thumbnail' => $post->getFirstMedia('thumbnail')->file_name]);
+        }
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -166,9 +144,13 @@ class AdminPostController extends Controller
             ->with('success', 'Đã cập nhật bài viết thành công.');
     }
 
+    // ... destroy methods ...
     public function destroy(int $id)
     {
         $post = Post::findOrFail($id);
+
+        // Delete media library thumbnail if exists
+        $post->clearMediaCollection('thumbnail');
 
         if ($post->thumbnail) {
             FileHelper::deleteImage($post->thumbnail);
@@ -195,6 +177,7 @@ class AdminPostController extends Controller
         }
         $posts = Post::whereIn('id', $ids)->get();
         foreach ($posts as $post) {
+            $post->clearMediaCollection('thumbnail');
             if ($post->thumbnail) {
                 FileHelper::deleteImage($post->thumbnail);
             }

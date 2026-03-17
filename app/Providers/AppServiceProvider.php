@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Share site config to all views
         View::composer('*', function ($view) {
-            $view->with('siteConfig', [
+            $siteConfig = [
                 'title' => ConfigHelper::getConfig('site_title', 'CheckScam.vn — Tra cứu lừa đảo'),
                 'description' => ConfigHelper::getConfig('site_description', 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.'),
                 'keywords' => ConfigHelper::getConfig('seo_keywords', 'check scam, tố cáo lừa đảo'),
@@ -55,7 +55,22 @@ class AppServiceProvider extends ServiceProvider
                 'og_image' => ConfigHelper::getConfig('og_image'),
                 'site_author' => ConfigHelper::getConfig('site_author', 'MST SOFTWARE'),
                 'header_scripts' => ConfigHelper::getConfig('header_scripts'),
-            ]);
+            ];
+
+            $view->with('siteConfig', $siteConfig);
+
+            // Set default SEOTools
+            \Artesaos\SEOTools\Facades\SEOTools::setTitle($siteConfig['title']);
+            \Artesaos\SEOTools\Facades\SEOTools::setDescription($siteConfig['description']);
+            \Artesaos\SEOTools\Facades\SEOTools::metatags()->addKeyword($siteConfig['keywords']);
+            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setTitle($siteConfig['title']);
+            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setDescription($siteConfig['description']);
+            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setUrl(url()->current());
+            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addProperty('type', 'website');
+
+            if ($siteConfig['og_image']) {
+                \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addImage(asset('storage/'.$siteConfig['og_image']));
+            }
         });
     }
 }

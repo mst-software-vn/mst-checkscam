@@ -205,3 +205,6 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])
  * ------------------------------------------
  */
 Route::get('/{slug}', [App\Http\Controllers\ReportController::class, 'show'])->name('scammer.show');
+
+// Sitemap
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
