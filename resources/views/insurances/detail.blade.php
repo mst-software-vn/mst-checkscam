@@ -1,37 +1,5 @@
 @extends('layouts.app')
 
-@section('structured_data')
-
-{{-- prettier-ignore-start --}}
-@verbatim
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      "mainEntity": {
-        "@type": "Person",
-@endverbatim
-        "name": "{{ $insurance->full_name }}",
-        "description": "Thành viên bảo hiểm uy tín trên hệ thống",
-        "image": "{{ $insurance->avatar_url }}"
-@verbatim
-      },
-      "publisher": {
-        "@type": "Organization",
-@endverbatim
-        "name": "{{ $siteConfig['title'] ?? 'CheckScam' }}",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "{{ asset('storage/' . ($siteConfig['logo'] ?? '')) }}"
-        }
-@verbatim
-      }
-    }
-</script>
-@endverbatim
-{{-- prettier-ignore-end --}}
-@endsection
-
 @section('content')
   <main class="pb-24">
     <x-breadcrumb
@@ -187,7 +155,7 @@
             <span class="text-cs_green font-black">
               {{ $insurance->insurance_date ? \Carbon\Carbon::parse($insurance->insurance_date)->format('d/m/Y') : 'N/A' }}
             </span>
-            MSTSoftware.VN đứng ra
+            {{ $siteConfig['og_site_name'] }} đứng ra
             <span class="bg-cs_green px-1 font-bold text-white">bảo lãnh 100%</span>
             cho thành viên
             <span class="text-cs_green font-black">{{ $insurance->full_name }}</span>
@@ -280,7 +248,7 @@
               class="border-cs_red text-cs_red flex scale-110 flex-col items-center justify-center rounded-full border-8 p-6"
             >
               <i class="fa-solid fa-shield-check text-6xl"></i>
-              <span class="mt-3 text-2xl font-black tracking-widest uppercase">MSTSoftware.VN</span>
+              <span class="mt-3 text-2xl font-black tracking-widest uppercase">{{ $siteConfig['og_site_name'] }}</span>
               <span class="mt-1 text-sm font-bold uppercase">BẢO HIỂM GIỮ QUỸ</span>
             </div>
           </div>
@@ -292,7 +260,7 @@
                 <i class="fa-solid fa-lock text-2xl"></i>
                 <div>
                   <p class="mb-1 text-[10px] leading-none font-black tracking-[0.2em]">QUỸ BẢO HIỂM MMO</p>
-                  <p class="text-xl font-black tracking-tight">MSTSoftware.VN</p>
+                  <p class="text-xl font-black tracking-tight">{{ $siteConfig['og_site_name'] }}</p>
                 </div>
               </div>
             </div>
@@ -327,7 +295,7 @@
                 </p>
                 <p>
                   3. Luôn kiểm tra con dấu chứng nhận và địa chỉ website
-                  <span class="bg-cs_red rounded px-2 py-0.5 text-white">MSTSoftware.VN</span>
+                  <span class="bg-cs_red rounded px-2 py-0.5 text-white">{{ $siteConfig['og_site_name'] }}</span>
                   trước khi bắt đầu giao dịch.
                 </p>
               </div>

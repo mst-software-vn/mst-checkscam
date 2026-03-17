@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ConfigHelper;
 use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -52,11 +54,31 @@ class PostController extends Controller
         $post->incrementViewCount();
 
         // SEO
-        SEOTools::setTitle($post->title);
-        SEOTools::setDescription($post->description);
+        $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
+        $metaTitle = $post->title.' | '.$siteTitle;
+        $metaDesc = $post->description ?? Str::limit(strip_tags($post->content), 160);
+
+        SEOTools::setTitle($metaTitle);
+        SEOTools::setDescription($metaDesc);
+        SEOTools::metatags()->addKeyword($post->hashtags.', cẩm nang mmo, kiến thức lừa đảo, check scam');
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->addProperty('type', 'article');
+        SEOTools::opengraph()->setTitle($metaTitle);
+        SEOTools::opengraph()->setDescription($metaDesc);
         SEOTools::opengraph()->addImage($post->thumbnail_url);
+
+        // Structured Data for Blog Post
+        SEOTools::jsonLd()->setTitle($metaTitle);
+        SEOTools::jsonLd()->setDescription($metaDesc);
+        SEOTools::jsonLd()->setType('BlogPosting');
+        SEOTools::jsonLd()->addImage($post->thumbnail_url);
+        SEOTools::jsonLd()->addValue('datePublished', $post->created_at->toIso8601String());
+        SEOTools::jsonLd()->addValue('dateModified', $post->updated_at->toIso8601String());
+        SEOTools::jsonLd()->addValue('author', [
+            '@type' => 'Person',
+            'name' => $post->author->name ?? 'Admin',
+        ]);
+        SEOTools::jsonLd()->addValue('headline', $post->title);
 
         $relatedPosts = Post::query()->where('id', '!=', $post->id)
             ->orderBy('id', 'desc')

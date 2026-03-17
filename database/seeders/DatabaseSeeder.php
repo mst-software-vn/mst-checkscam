@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BannerSeeder::class);
         User::factory()->create([
             'username' => 'admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@mstsoftware.vn',
             'password' => Hash::make('123456'),
             'full_name' => 'Quản trị viên',
             'role' => 'admin',

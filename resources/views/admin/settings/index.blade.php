@@ -140,6 +140,35 @@
       </div>
     </div>
 
+    {{-- Thông báo & Cảnh báo --}}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-warning">
+          <i class="fas fa-bullhorn me-2"></i>
+          Thông báo & Cảnh báo (Popup Home)
+        </h5>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Nội dung thông báo (Hỗ trợ HTML)</label>
+              <textarea
+                name="site_notification_text"
+                class="form-control"
+                rows="3"
+                placeholder="Nhập nội dung hiển thị trong popup cảnh báo..."
+              >
+{{ $settings['site_notification_text'] ?? '' }}</textarea
+              >
+              <small class="text-muted">
+                Dùng thẻ &lt;span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase
+                italic"&gt;...&lt;/span&gt; để làm nổi bật từ khóa.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {{-- Toggle Modules --}}
     <div class="card">
       <div class="card-body">
@@ -373,14 +402,145 @@
       </div>
     </div>
 
+    {{-- SEO Nâng cao --}}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-primary">
+          <i class="fas fa-search-plus me-2"></i>
+          Cấu hình SEO Nâng cao
+        </h5>
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <div class="form-group">
+              <label>Google Site Verification</label>
+              <input
+                type="text"
+                name="google_site_verification"
+                class="form-control"
+                placeholder="Mã xác minh Google Search Console"
+                value="{{ $settings['google_site_verification'] ?? '' }}"
+              />
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="form-group">
+              <label>Bing Site Verification</label>
+              <input
+                type="text"
+                name="bing_site_verification"
+                class="form-control"
+                placeholder="Mã xác minh Bing Webmaster Tools"
+                value="{{ $settings['bing_site_verification'] ?? '' }}"
+              />
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="form-group">
+              <label>Trạng thái Index (Robots)</label>
+              <select name="site_index" class="form-control">
+                <option
+                  value="index, follow"
+                  {{ ($settings['site_index'] ?? '') == 'index, follow' ? 'selected' : '' }}
+                >
+                  Index, Follow (Khuyên dùng)
+                </option>
+                <option
+                  value="noindex, follow"
+                  {{ ($settings['site_index'] ?? '') == 'noindex, follow' ? 'selected' : '' }}
+                >
+                  Noindex, Follow
+                </option>
+                <option
+                  value="noindex, nofollow"
+                  {{ ($settings['site_index'] ?? '') == 'noindex, nofollow' ? 'selected' : '' }}
+                >
+                  Noindex, Nofollow (Bảo trì)
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label>OG Site Name (Facebook)</label>
+              <input
+                type="text"
+                name="og_site_name"
+                class="form-control"
+                placeholder="CheckScam.vn"
+                value="{{ $settings['og_site_name'] ?? '' }}"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label>Twitter Username (X)</label>
+              <input
+                type="text"
+                name="twitter_username"
+                class="form-control"
+                placeholder="@checkscam_vn"
+                value="{{ $settings['twitter_username'] ?? '' }}"
+              />
+            </div>
+          </div>
+          <div class="col-lg-12 col-12">
+            <div class="form-group">
+              <label>Meta Extra (Thẻ meta bổ sung)</label>
+              <textarea
+                name="meta_extra"
+                class="form-control"
+                rows="2"
+                placeholder='<meta name="example" content="value">'
+              >
+{{ $settings['meta_extra'] ?? '' }}</textarea
+              >
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4" />
+        <h6 class="fw-bold mb-3">
+          <i class="fas fa-sitemap me-2"></i>
+          Schema.org Organization (Dữ liệu có cấu trúc)
+        </h6>
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label>Tên tổ chức</label>
+              <input
+                type="text"
+                name="schema_organization_name"
+                class="form-control"
+                value="{{ $settings['schema_organization_name'] ?? '' }}"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label>URL Logo Organization</label>
+              <input
+                type="text"
+                name="schema_organization_logo"
+                class="form-control"
+                value="{{ $settings['schema_organization_logo'] ?? '' }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {{-- Header Scripts --}}
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Script tùy chỉnh (Header)</h5>
+        <h5 class="card-title text-danger">
+          <i class="fas fa-code me-2"></i>
+          Script tùy chỉnh (Header)
+        </h5>
         <div class="form-group">
           <label>Chèn mã vào &lt;head&gt; (VD: Google Analytics, Facebook Pixel...)</label>
           <textarea name="header_scripts" class="form-control" rows="5" placeholder="<!-- Google tag (gtag.js) -->">
-        {{ $settings['header_scripts'] ?? '' }}</textarea
+{{ $settings['header_scripts'] ?? '' }}</textarea
           >
         </div>
       </div>

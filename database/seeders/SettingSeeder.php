@@ -41,6 +41,19 @@ class SettingSeeder extends Seeder
 
             // Scripts
             'header_scripts' => null,
+
+            // Advanced SEO
+            'google_site_verification' => null,
+            'bing_site_verification' => null,
+            'site_index' => 'index, follow',
+            'og_site_name' => 'CheckScam.vn',
+            'twitter_username' => '@checkscam_vn',
+            'meta_extra' => null,
+            'schema_organization_name' => 'MST CheckScam Ecosystem',
+            'schema_organization_logo' => 'https://i.ibb.co/7xfz0v3K/black.png',
+            'schema_organization_url' => 'https://checkscam.vn',
+            'schema_organization_contact' => '0812.665.001',
+            'site_notification_text' => 'Hiện nay có rất nhiều tài khoản FB, TK ngân hàng, website, group và bot giả mạo <span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase italic">Admin/Gdv CS</span> nhằm lừa đảo người dùng.',
         ];
 
         foreach ($settings as $name => $value) {

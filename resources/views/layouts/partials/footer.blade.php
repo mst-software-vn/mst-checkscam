@@ -87,7 +87,11 @@
             </a>
           </li>
           <li>
-            <a href="/lien-he-admin" class="hover:text-cs_red text-sm font-bold text-gray-400 transition-colors">
+            <a
+              href="{{ $siteConfig['zalo_link'] ?? '#' }}"
+              target="_blank"
+              class="hover:text-cs_red text-sm font-bold text-gray-400 transition-colors"
+            >
               Liên hệ Admin
             </a>
           </li>
@@ -248,10 +252,14 @@
     <span class="text-[9px] font-black tracking-tighter uppercase">Kiến thức</span>
   </a>
 
-  <button id="mobile-more-menu" class="flex flex-col items-center gap-1 text-gray-400">
+  <a
+    href="{{ $siteConfig['zalo_link'] ?? '#' }}"
+    target="_blank"
+    class="flex flex-col items-center gap-1 text-gray-400"
+  >
     <i class="fa-solid fa-envelope text-lg"></i>
     <span class="text-[9px] font-black tracking-tighter uppercase">Liên hệ</span>
-  </button>
+  </a>
 </nav>
 
 <script>

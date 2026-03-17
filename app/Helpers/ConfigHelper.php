@@ -50,6 +50,10 @@ class ConfigHelper
                 'favicon', 'og_image', 'site_author',
                 'enable_insurance', 'enable_comments', 'maintenance_mode',
                 'header_scripts',
+                'google_site_verification', 'bing_site_verification', 'site_index',
+                'og_site_name', 'twitter_username', 'schema_organization_name',
+                'schema_organization_logo', 'schema_organization_url', 'schema_organization_contact',
+                'meta_extra', 'site_notification_text',
             ];
 
             foreach ($keys as $key) {
