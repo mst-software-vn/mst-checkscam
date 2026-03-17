@@ -40,15 +40,30 @@ class InsuranceController extends Controller
 
         // Advanced SEO
         $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
-        $metaTitle = $insurance->full_name.' | Xác minh Quỹ bảo hiểm uy tín - '.$siteTitle;
-        $metaDesc = $insurance->full_name.' đã tham gia đóng quỹ bảo hiểm với số tiền '.number_format($insurance->amount).' VNĐ. Đây là thành viên đã được '.$siteTitle.' xác minh tín nhiệm, đảm bảo an toàn tuyệt đối khi giao dịch.';
+        $metaTitle = "Xác Minh Tín Nhiệm: {$insurance->full_name} | Bảo Hiểm {$siteTitle}";
+        $metaDesc = "{$insurance->full_name} đã tham gia quỹ bảo hiểm CheckScam với số tiền ".number_format($insurance->amount).' VNĐ. Đã được MST CheckScam xác minh danh tính và uy tín. An tâm tuyệt đối khi giao dịch.';
 
         SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDesc);
-        SEOTools::metatags()->addKeyword('bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín giao dịch, check tín nhiệm, '.$siteTitle);
+        SEOTools::metatags()->addKeyword("bảo hiểm, tín nhiệm, {$insurance->full_name}, uy tín giao dịch, check scam, quỹ bảo hiểm mmo");
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->addProperty('type', 'profile');
+        SEOTools::opengraph()->setTitle($metaTitle);
+        SEOTools::opengraph()->setDescription($metaDesc);
         SEOTools::opengraph()->addImage($insurance->avatar_url);
+
+        // Structured Data for Trust/Insurance Member
+        SEOTools::jsonLd()->setTitle($metaTitle);
+        SEOTools::jsonLd()->setDescription($metaDesc);
+        SEOTools::jsonLd()->setType('ProfessionalService');
+        SEOTools::jsonLd()->addImage($insurance->avatar_url);
+        SEOTools::jsonLd()->addValue('name', $insurance->full_name);
+        SEOTools::jsonLd()->addValue('priceRange', '$$$');
+        SEOTools::jsonLd()->addValue('address', [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Vietnam',
+            'addressCountry' => 'VN',
+        ]);
 
         return view('insurances.detail', compact('insurance'));
     }
