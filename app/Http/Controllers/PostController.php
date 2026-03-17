@@ -26,7 +26,24 @@ class PostController extends Controller
 
         $posts = $query->paginate(9);
 
-        return view('posts.index', compact('posts'));
+        $featuredPost = null;
+        if ($posts->currentPage() == 1 && ! $request->filled('search')) {
+            $featuredPost = Post::query()
+                ->where('is_featured', true)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($featuredPost) {
+                // Re-fetch regular posts excluding the featured one
+                $posts = Post::query()
+                    ->with('author')
+                    ->where('id', '!=', $featuredPost->id)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(9);
+            }
+        }
+
+        return view('posts.index', compact('posts', 'featuredPost'));
     }
 
     public function show($slug)
