@@ -1,13 +1,7 @@
 @extends('admin.layouts.master')
 @section('title', 'Phân tích tìm kiếm')
+
 @section('content')
-  <style>
-    .dataTables_paginate,
-    .dataTables_info,
-    .dataTables_length {
-      display: none !important;
-    }
-  </style>
   @include(
     'admin.components.page-header',
     [
@@ -58,7 +52,7 @@
     <div class="card-body">
       <h5 class="card-title">Đối tượng được tìm nhiều nhất (30 ngày)</h5>
       <div class="table-responsive">
-        <table class="datanew table">
+        <table class="table hover-table">
           <thead>
             <tr>
               <th>STT</th>

@@ -154,6 +154,7 @@
                     <img
                       src="{{ $insurance->avatar ? (str_starts_with($insurance->avatar, 'http') ? $insurance->avatar : asset('storage/' . $insurance->avatar)) : '/assets/img/customer/customer1.jpg' }}"
                       alt="product"
+                      class="rounded-circle"
                     />
                   </a>
                   <a href="{{ route('admin.insurances.edit', $insurance->id) }}">
