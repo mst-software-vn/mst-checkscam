@@ -99,10 +99,43 @@ class AppServiceProvider extends ServiceProvider
                 \Artesaos\SEOTools\Facades\SEOTools::twitter()->setImage(asset('storage/'.$siteConfig['og_image']));
             }
 
-            // Json-Ld Default Organization Schema
+            // Json-Ld Default Schema
             \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setTitle($siteConfig['title']);
             \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setDescription($siteConfig['description']);
             \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setType('WebSite');
+            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setUrl(url('/'));
+
+            // Site Search Schema
+            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->addValue('potentialAction', [
+                '@type' => 'SearchAction',
+                'target' => url('/search?q={search_term_string}'),
+                'query-input' => 'required name=search_term_string',
+            ]);
+
+            // Organization / Business Schema for Home
+            if (request()->is('/')) {
+                $orgName = ConfigHelper::getConfig('schema_organization_name', 'CheckScam');
+                $orgLogo = ConfigHelper::getConfig('schema_organization_logo');
+
+                \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->addValue('@graph', [
+                    [
+                        '@type' => 'Organization',
+                        'name' => $orgName,
+                        'url' => url('/'),
+                        'logo' => $orgLogo ? asset('storage/'.$orgLogo) : asset('assets/img/logo.png'),
+                        'contactPoint' => [
+                            '@type' => 'ContactPoint',
+                            'telephone' => $siteConfig['hotline'],
+                            'contactType' => 'customer service',
+                        ],
+                        'sameAs' => array_filter([
+                            $siteConfig['facebook_link'],
+                            $siteConfig['zalo_link'],
+                            $siteConfig['telegram_link'],
+                        ]),
+                    ],
+                ]);
+            }
         });
     }
 }
