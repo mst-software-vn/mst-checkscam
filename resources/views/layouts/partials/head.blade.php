@@ -2,40 +2,8 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <!-- SEO Optimization (Dynamic from DB) -->
-  <title>@yield('title', $meta['title'] ?? ($siteConfig['title'] ?? 'Tra cứu lừa đảo'))</title>
-
-  <meta
-    name="description"
-    content="@yield('description', $meta['description'] ?? ($siteConfig['description'] ?? 'Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.'))"
-  />
-
-  <meta
-    name="keywords"
-    content="@yield('keywords', $meta['keywords'] ?? ($siteConfig['keywords'] ?? 'check scam, tố cáo lừa đảo'))"
-  />
-  <meta name="author" content="{{ $siteConfig['site_author'] ?? 'MST SOFTWARE' }}" />
-
-  <link rel="canonical" href="{{ url()->current() }}" />
-
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:title"
-    content="@yield('og_title', $meta['title'] ?? ($siteConfig['title'] ?? 'Hệ thống kiểm tra và tố giác lừa đảo'))"
-  />
-  <meta
-    property="og:description"
-    content="@yield('og_description', $meta['description'] ?? ($siteConfig['description'] ?? 'Tra cứu thông tin kẻ lừa đảo ngay lập tức.'))"
-  />
-
-  @if (! empty($meta['og_image']))
-    <meta property="og:image" content="{{ $meta['og_image'] }}" />
-  @elseif (! empty($siteConfig['og_image']))
-    <meta property="og:image" content="{{ asset('storage/' . $siteConfig['og_image']) }}" />
-  @else
-    <meta property="og:image" content="https://i.ibb.co/Rkdy02SQ/output-lin-removebg-preview.png" />
-  @endif
+  <!-- SEO Optimization using SEOTools -->
+  {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
 
   <!-- Preconnect để tăng tốc kết nối CDN -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />

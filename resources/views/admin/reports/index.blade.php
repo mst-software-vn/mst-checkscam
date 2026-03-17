@@ -121,7 +121,7 @@
 
       {{-- Table --}}
       <div class="table-responsive">
-        <table class="datanew table">
+        <table class="table hover-table">
           <thead>
             <tr>
               <th>
@@ -168,7 +168,7 @@
                   @endif
                 </td>
                 <td>
-                  {{ $report->reporter_name ?? '—' }}
+                  {{ $report->reporter_name ?? '-' }}
                 </td>
                 <td>{{ count($report->evidence_images ?? []) }} ảnh</td>
                 <td>

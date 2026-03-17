@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ConfigHelper;
 use App\Models\Insurance;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class InsuranceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Insurance::where('status', 1);
+        SEOTools::setTitle('Quỹ bảo hiểm uy tín - Tra cứu lừa đảo');
+        SEOTools::setDescription('Danh sách các thành viên, đơn vị đã tham gia đóng quỹ bảo hiểm tín nhiệm, đảm bảo an toàn khi giao dịch.');
 
+        $query = Insurance::where('status', 1);
+        // ... rest of index ...
         if ($request->has('search') && ! empty($request->search)) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -36,13 +40,16 @@ class InsuranceController extends Controller
 
         // Advanced SEO
         $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
-        $meta = [
-            'title' => $insurance->full_name.' | Xác minh Quỹ bảo hiểm uy tín - '.$siteTitle,
-            'description' => $insurance->full_name.' đã tham gia đóng quỹ bảo hiểm với số tiền '.number_format($insurance->amount).' VNĐ. Đây là thành viên đã được '.$siteTitle.' xác minh tín nhiệm, đảm bảo an toàn tuyệt đối khi giao dịch.',
-            'keywords' => 'bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín giao dịch, check tín nhiệm, '.$siteTitle,
-            'og_image' => $insurance->avatar ? asset('storage/'.$insurance->avatar) : ConfigHelper::getConfig('og_image'),
-        ];
+        $metaTitle = $insurance->full_name.' | Xác minh Quỹ bảo hiểm uy tín - '.$siteTitle;
+        $metaDesc = $insurance->full_name.' đã tham gia đóng quỹ bảo hiểm với số tiền '.number_format($insurance->amount).' VNĐ. Đây là thành viên đã được '.$siteTitle.' xác minh tín nhiệm, đảm bảo an toàn tuyệt đối khi giao dịch.';
 
-        return view('insurances.detail', compact('insurance', 'meta'));
+        SEOTools::setTitle($metaTitle);
+        SEOTools::setDescription($metaDesc);
+        SEOTools::metatags()->addKeyword('bảo hiểm, tín nhiệm, '.$insurance->full_name.', uy tín giao dịch, check tín nhiệm, '.$siteTitle);
+        SEOTools::opengraph()->setUrl(url()->current());
+        SEOTools::opengraph()->addProperty('type', 'profile');
+        SEOTools::opengraph()->addImage($insurance->avatar_url);
+
+        return view('insurances.detail', compact('insurance'));
     }
 }

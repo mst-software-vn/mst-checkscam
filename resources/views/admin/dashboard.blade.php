@@ -213,12 +213,12 @@
                 <td>
                   {{ $report->target_id }}
                   @if ($report->target_name)
-                    — {{ $report->target_name }}
+                    - {{ $report->target_name }}
                   @endif
                 </td>
                 <td>{{ $report->is_anonymous ? 'Ẩn danh' : $report->reporter_name }}</td>
                 <td>
-                  {{ $report->damage_amount ? Helpers::formatCurrency($report->damage_amount) . ' ₫' : '—' }}
+                  {{ $report->damage_amount ? Helpers::formatCurrency($report->damage_amount) . ' ₫' : '-' }}
                 </td>
                 <td>
                   @if ($report->status === 'pending')

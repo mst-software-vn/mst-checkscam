@@ -25,6 +25,7 @@
       <form
         method="POST"
         id="userForm"
+        enctype="multipart/form-data"
         action="{{ isset($user) ? route('admin.users.update', $user->id) : route('admin.users.store') }}"
       >
         @csrf
@@ -65,7 +66,7 @@
                     placeholder="{{
                       isset($user)
                         ? "
-                                                                                                                                                                                                                                                                                                                                                                                        Để trống nếu không đổi mật khẩu"
+                                                                                                                                                                                                                                                                                                                                                                                                              Để trống nếu không đổi mật khẩu"
                         : 'Nhập mật khẩu'
                     }}"
                   />
@@ -176,7 +177,6 @@
 @endsection
 
 @push('scripts')
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // --- Image Preview ---
@@ -184,7 +184,7 @@
         initImagePreview('avatarInput', 'imagePreviewContainer');
       }
 
-      // --- Logic: Confirm Modal + AJax Submit + Spinner ---
+      // --- Logic: Confirm Modal + Submit ---
       const form = document.getElementById('userForm');
       if (form) {
         form.addEventListener('submit', function (e) {
@@ -192,7 +192,7 @@
 
           Swal.fire({
             title: 'Xác nhận lưu?',
-            text: 'Bạn có chắc chắn muốn lưu thông tin tài khoản này?',
+            text: 'Bạn có chắc chắn muốn lưu thông tin này?',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#ff9f43',
@@ -202,66 +202,11 @@
           }).then((result) => {
             if (result.isConfirmed) {
               const btnSubmit = document.getElementById('btnSubmit');
-              const originalText = btnSubmit.innerHTML;
-
               btnSubmit.disabled = true;
               btnSubmit.innerHTML =
                 '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
 
-              setTimeout(() => {
-                const formData = new FormData(form);
-
-                $.ajax({
-                  url: form.action,
-                  method: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                  },
-                  success: function (res) {
-                    if (res.success) {
-                      sessionStorage.removeItem(storageKey);
-                      Swal.fire({
-                        title: 'Thành công!',
-                        text: res.message,
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false,
-                      }).then(() => {
-                        window.location.href = res.redirect;
-                      });
-                    }
-                  },
-                  error: function (xhr) {
-                    btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = originalText;
-
-                    if (xhr.status === 422) {
-                      const errors = xhr.responseJSON.errors;
-                      let errorMsg = '';
-                      Object.values(errors).forEach((err) => {
-                        errorMsg += `• ${err[0]}<br>`;
-                      });
-
-                      Swal.fire({
-                        title: 'Lỗi nhập liệu',
-                        html: `<div class="text-start">${errorMsg}</div>`,
-                        icon: 'error',
-                        confirmButtonColor: '#ff9f43',
-                      });
-                    } else {
-                      Swal.fire({
-                        title: 'Lỗi!',
-                        text: 'Có lỗi xảy ra, vui lòng thử lại sau.',
-                        icon: 'error',
-                        confirmButtonColor: '#ff9f43',
-                      });
-                    }
-                  },
-                });
-              }, 1000);
+              form.submit();
             }
           });
         });

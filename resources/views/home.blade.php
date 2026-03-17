@@ -16,7 +16,7 @@
         {{ date('d/m/Y') }} CÓ {{ isset($stats) ? number_format($stats['total_reports']) : 0 }} CẢNH BÁO
       </h2>
     @else
-      <h2 class="text-cs_blue mt-6 mb-6 text-center text-lg font-black uppercase md:text-xl">
+      <h2 class="text-cs_blue mt-6 mb-6 text-center text-lg md:text-xl">
         <i class="fa-solid fa-magnifying-glass mr-2"></i>
         Có {{ isset($results) ? number_format($results->total()) : 0 }} vụ lừa đảo liên quan đến:
         <br />
@@ -456,7 +456,7 @@
           </section>
 
           <!-- BANNER QUẢNG CÁO 2 -->
-          <x-banner-ads position="home_between" class="my-6" />
+          <x-banner-ads position="home_between" :skip="1" class="my-6" />
 
           <!-- PHẦN 3: TOP 3 TÌM KIẾM NGÀY -->
           <section>
@@ -550,7 +550,7 @@
         <!-- Khu Vực Phải: Sidebar Widget -->
         <aside class="w-full space-y-3 lg:w-3/12">
           <!-- Right Sidebar Banner -->
-          <x-banner-ads position="home_sidebar" class="mb-4" />
+          <x-banner-ads position="home_sidebar" class="mb-4" :limit="3" />
 
           <!-- Action Button -->
           <div

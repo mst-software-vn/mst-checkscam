@@ -24,16 +24,16 @@ Người dùng vào trang chủ → nhập thông tin → hệ thống tìm tron
 - SĐT: Cho phép nhập cả `0xxx` lẫn `84xxx`, tìm match với cả hai dạng.
 - Facebook: Nếu nhập URL dạng `facebook.com/tennguoi` thì tách lấy phần `tengruoi` để tìm. Nếu nhập UID số thì tìm thẳng.
 
-**Kết quả trả về — 2 trường hợp:**
+**Kết quả trả về - 2 trường hợp:**
 
-**Trường hợp 1 — Tìm thấy (có phốt đã duyệt):**
+**Trường hợp 1 - Tìm thấy (có phốt đã duyệt):**
 
 - Hiện banner đỏ: _"⚠️ CẢNH BÁO: Đối tượng này đã bị tố cáo lừa đảo"_
 - Hiện số lượt tố cáo + tổng tiền thiệt hại (nếu có)
 - Hiện danh sách các bài phốt công khai bên dưới
 - Nút: "Tôi cũng bị lừa bởi đối tượng này" → dẫn sang trang gửi tố cáo với giá trị đã điền sẵn
 
-**Trường hợp 2 — Không tìm thấy:**
+**Trường hợp 2 - Không tìm thấy:**
 
 - Hiện banner xanh/xám: _"Không tìm thấy thông tin tố cáo nào về đối tượng này"_
 - Ghi chú nhỏ: _"Không có nghĩa là an toàn tuyệt đối. Hãy cẩn thận khi giao dịch."_
@@ -128,9 +128,9 @@ Tính năng cốt lõi giúp người dùng MMO check nhanh mà không cần và
 
 - `/check [STK hoặc SĐT hoặc link FB]`
 
-    Bot trả về: Trạng thái (Scam / Không có dữ liệu) + số lượt tố cáo + link xem chi tiết trên web
+  Bot trả về: Trạng thái (Scam / Không có dữ liệu) + số lượt tố cáo + link xem chi tiết trên web
 
-- `/report` — Bot gửi link trang tố cáo trên web
+- `/report` - Bot gửi link trang tố cáo trên web
 
 ### Tự động push thông báo
 
@@ -162,7 +162,7 @@ Người dùng nộp tiền vào quỹ của web → được gắn badge **"Đ�
 
 > ✅ _"Người dùng này đã đóng quỹ bảo hiểm [số tiền]. Liên hệ Admin để được hỗ trợ nếu xảy ra tranh chấp."_
 
-**Không cần tự động hóa thanh toán trong v1** — Admin xác nhận thủ công là đủ.
+**Không cần tự động hóa thanh toán trong v1** - Admin xác nhận thủ công là đủ.
 
 ### Bảng gói bảo hiểm (chủ web tự set trong Admin panel)
 
@@ -174,17 +174,17 @@ Chủ web cấu hình được: tên gói, mức tiền, phí duy trì/tháng. M
 
 Trang chủ gồm 3 phần chính:
 
-**Phần 1 — Ô tìm kiếm to, nằm giữa trang:**
+**Phần 1 - Ô tìm kiếm to, nằm giữa trang:**
 
 Dropdown chọn loại (STK / SĐT / Facebook) + input + nút "Kiểm tra ngay".
 
-**Phần 2 — Số liệu thống kê (lấy real-time từ DB):**
+**Phần 2 - Số liệu thống kê (lấy real-time từ DB):**
 
 - Tổng đối tượng scam trong hệ thống
 - Tổng lượt tố cáo
 - Tổng tiền thiệt hại cộng đồng
 
-**Phần 3 — Danh sách bài phốt mới nhất:**
+**Phần 3 - Danh sách bài phốt mới nhất:**
 
 10 bài phốt được duyệt gần nhất, hiển thị dạng card/list. Click vào để xem chi tiết.
 
@@ -210,7 +210,7 @@ Nếu có nhu cầu, bán quyền truy cập API cho bên thứ 3. Nhưng không
 
 ## VIII. PHẠM VI MVP (CÁI GÌ LÀM TRƯỚC)
 
-**Làm trước — Core (bắt buộc có):**
+**Làm trước - Core (bắt buộc có):**
 
 - ✅ Trang chủ + ô search
 - ✅ Trang kết quả tìm kiếm
@@ -219,7 +219,7 @@ Nếu có nhu cầu, bán quyền truy cập API cho bên thứ 3. Nhưng không
 - ✅ Admin panel: duyệt/từ chối báo cáo, quản lý scam records, xóa comment
 - ✅ Telegram Bot: `/check`
 
-**Làm sau — Nâng cao (tùy chọn):**
+**Làm sau - Nâng cao (tùy chọn):**
 
 - Module quỹ bảo hiểm + badge Trust
 - Quản lý banner quảng cáo trong admin

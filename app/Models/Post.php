@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $table = 'posts';
 
@@ -64,8 +68,23 @@ class Post extends Model
         $this->increment('view_count');
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Fit::Contain, 300, 300)
+            ->nonQueued();
+
+        $this->addMediaConversion('optimized')
+            ->fit(Fit::Max, 1200, 1200)
+            ->nonQueued();
+    }
+
     public function getThumbnailUrlAttribute(): ?string
     {
+        if ($this->hasMedia('thumbnail')) {
+            return $this->getFirstMediaUrl('thumbnail', 'optimized');
+        }
+
         if (! $this->thumbnail) {
             return null;
         }

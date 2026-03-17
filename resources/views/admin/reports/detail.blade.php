@@ -51,13 +51,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Tên chủ tài khoản</label>
-                <p class="mb-0"><strong>{{ $report->target_name ?? '—' }}</strong></p>
+                <p class="mb-0"><strong>{{ $report->target_name ?? '-' }}</strong></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Ngân hàng</label>
-                <p class="mb-0"><strong>{{ $report->target_bank ?? '—' }}</strong></p>
+                <p class="mb-0"><strong>{{ $report->target_bank ?? '-' }}</strong></p>
               </div>
             </div>
           </div>
@@ -133,7 +133,7 @@
               <div class="form-group">
                 <label>Họ tên</label>
                 <p class="mb-0">
-                  <strong>{{ $report->reporter_name ?? '—' }}</strong>
+                  <strong>{{ $report->reporter_name ?? '-' }}</strong>
                 </p>
               </div>
             </div>
@@ -483,7 +483,7 @@
                 name="rejection_reason"
                 class="form-control @error('rejection_reason') is-invalid @enderror"
                 rows="3"
-                placeholder="Mô tả lý do từ chối để người dùng hiểu và có thể gửi lại đúng hơn..."
+                placeholder="Mô tả lý do từ chối"
                 style="resize: none; font-size: 13px"
               >
     {{ old('rejection_reason') }}</textarea
@@ -492,7 +492,9 @@
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
 
-              <small class="text-muted d-block mt-1">Lý do sẽ hiển thị trên trang chi tiết báo cáo.</small>
+              <small class="text-muted d-block mt-1">
+                Lý do sẽ lưu lại cho Admin biết vì sao hủy, để đối chứng sau này với người gửi.
+              </small>
             </div>
           </div>
           <div class="modal-footer gap-2 border-0 px-4 pt-0 pb-4">
