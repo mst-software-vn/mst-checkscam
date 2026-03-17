@@ -24,12 +24,12 @@ class SettingSeeder extends Seeder
 
             // Images
             'logo' => null,
-            'logo_header_light' => 'https://i.ibb.co/7xfz0v3K/black.png',
-            'logo_header_dark' => 'https://i.ibb.co/wFZsnJBR/white.png',
-            'logo_footer_light' => 'https://i.ibb.co/wFZsnJBR/white.png',
-            'logo_footer_dark' => 'https://i.ibb.co/wFZsnJBR/white.png',
-            'favicon' => 'https://i.ibb.co/fV1xYHVS/favicon.png',
-            'og_image' => 'https://i.ibb.co/kZRWpmK/Cover-photo.jpg',
+            'logo_header_light' => null,
+            'logo_header_dark' => null,
+            'logo_footer_light' => null,
+            'logo_footer_dark' => null,
+            'favicon' => null,
+            'og_image' => null,
 
             // SEO Additional
             'site_author' => 'MST SOFTWARE',

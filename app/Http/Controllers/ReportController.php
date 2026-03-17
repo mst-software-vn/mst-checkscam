@@ -150,7 +150,9 @@ class ReportController extends Controller
         if (! empty($report->evidence_images)) {
             $firstImg = $report->evidence_images[0];
             $imgUrl = filter_var($firstImg, FILTER_VALIDATE_URL) ? $firstImg : asset('storage/'.$firstImg);
-            SEOTools::opengraph()->addImage($imgUrl);
+
+            // For OpenGraph, we use addImages to replace/set the list
+            SEOTools::opengraph()->addImages([$imgUrl]);
             SEOTools::jsonLd()->addImage($imgUrl);
         }
 
