@@ -10,7 +10,7 @@ use Spatie\Sitemap\Tags\Url;
 
 class SitemapController extends Controller
 {
-    public function index()
+    public function generate()
     {
         $sitemap = Sitemap::create();
 
@@ -54,7 +54,12 @@ class SitemapController extends Controller
             }
         });
 
-        // Trả về response sitemap
-        return $sitemap->toResponse(request());
+        // Lưu file sitemap.xml vào thư mục public
+        $sitemap->writeToFile(public_path('sitemap.xml'));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sitemap has been generated successfully.',
+        ]);
     }
 }

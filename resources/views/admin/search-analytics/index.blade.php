@@ -114,7 +114,7 @@
               <tr>
                 <td>{{ $search->created_at->format('d/m/Y H:i') }}</td>
                 <td><strong>{{ $search->search_query }}</strong></td>
-                <td>{{ $search->ip_address ?? '—' }}</td>
+                <td>{{ $search->ip_address ?? '-' }}</td>
                 <td>
                   @if ($search->is_found)
                     <span class="badges bg-lightred">Tìm thấy scammer</span>

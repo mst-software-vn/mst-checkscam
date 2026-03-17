@@ -31,7 +31,7 @@
                 type="text"
                 name="site_title"
                 class="form-control"
-                placeholder="CheckScam.vn — Tra cứu lừa đảo"
+                placeholder="CheckScam.vn - Tra cứu lừa đảo"
                 value="{{ $settings['site_title'] ?? '' }}"
               />
             </div>

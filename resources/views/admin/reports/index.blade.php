@@ -168,7 +168,7 @@
                   @endif
                 </td>
                 <td>
-                  {{ $report->reporter_name ?? '—' }}
+                  {{ $report->reporter_name ?? '-' }}
                 </td>
                 <td>{{ count($report->evidence_images ?? []) }} ảnh</td>
                 <td>

@@ -1302,21 +1302,21 @@
         });
       });
 
-      // Edit — mở
+      // Edit - mở
       $(document).on('click', '.edit-comment-btn', function () {
         const $item = $(this).closest('.comment-item');
         $item.find('.comment-content').addClass('hidden');
         $item.find('.edit-form').removeClass('hidden');
       });
 
-      // Edit — huỷ
+      // Edit - huỷ
       $(document).on('click', '.cancel-edit-btn', function () {
         const $item = $(this).closest('.comment-item');
         $item.find('.comment-content').removeClass('hidden');
         $item.find('.edit-form').addClass('hidden');
       });
 
-      // Edit — lưu
+      // Edit - lưu
       $(document).on('click', '.save-edit-btn', function () {
         const $btn = $(this);
         const commentId = $btn.data('comment-id');

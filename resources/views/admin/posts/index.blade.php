@@ -194,7 +194,7 @@
     </div>
   </div>
 
-  {{-- — Modal: Xác nhận Xóa Hàng Loạt —— --}}
+  {{-- - Modal: Xác nhận Xóa Hàng Loạt -- --}}
   <div class="modal fade" id="modalBulkDestroy" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">
@@ -244,7 +244,7 @@
     </div>
   </div>
 
-  {{-- — Modal: Xác nhận Xóa Một Bản Ghi —— --}}
+  {{-- - Modal: Xác nhận Xóa Một Bản Ghi -- --}}
   <div class="modal fade" id="modalDestroySingle" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">

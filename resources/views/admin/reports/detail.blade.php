@@ -51,13 +51,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Tên chủ tài khoản</label>
-                <p class="mb-0"><strong>{{ $report->target_name ?? '—' }}</strong></p>
+                <p class="mb-0"><strong>{{ $report->target_name ?? '-' }}</strong></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Ngân hàng</label>
-                <p class="mb-0"><strong>{{ $report->target_bank ?? '—' }}</strong></p>
+                <p class="mb-0"><strong>{{ $report->target_bank ?? '-' }}</strong></p>
               </div>
             </div>
           </div>
@@ -133,7 +133,7 @@
               <div class="form-group">
                 <label>Họ tên</label>
                 <p class="mb-0">
-                  <strong>{{ $report->reporter_name ?? '—' }}</strong>
+                  <strong>{{ $report->reporter_name ?? '-' }}</strong>
                 </p>
               </div>
             </div>

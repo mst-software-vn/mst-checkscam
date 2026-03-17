@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         // Share site config to all views
         View::composer('*', function ($view) {
             $siteConfig = [
-                'title' => ConfigHelper::getConfig('site_title', 'CheckScam.vn — Tra cứu lừa đảo'),
+                'title' => ConfigHelper::getConfig('site_title', 'CheckScam.vn - Tra cứu lừa đảo'),
                 'description' => ConfigHelper::getConfig('site_description', 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.'),
                 'keywords' => ConfigHelper::getConfig('seo_keywords', 'check scam, tố cáo lừa đảo'),
                 'hotline' => ConfigHelper::getConfig('hotline', '0812.665.001'),

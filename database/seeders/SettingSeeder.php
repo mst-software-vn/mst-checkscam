@@ -11,7 +11,7 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             // SEO & Website
-            'site_title' => 'Check Scam — Tra cứu lừa đảo',
+            'site_title' => 'Check Scam - Tra cứu lừa đảo',
             'site_description' => 'CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Tra cứu số điện thoại, số tài khoản, link Facebook lừa đảo để bảo vệ túi tiền của bạn.',
             'seo_keywords' => 'check scam, tố cáo lừa đảo, kiểm tra stk lừa đảo, kiểm tra sdt lừa đảo, quỹ bảo đảm, checkscam',
 

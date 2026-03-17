@@ -216,7 +216,7 @@
                   </div>
                 </td>
                 <td>{{ $user->username }}</td>
-                <td>{{ $user->full_name ?? '—' }}</td>
+                <td>{{ $user->full_name ?? '-' }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                   @if ($user->role === 'admin')

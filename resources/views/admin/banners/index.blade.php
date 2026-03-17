@@ -172,7 +172,7 @@
                 <td>
                   @if ($banner->start_date || $banner->end_date)
                     <small>
-                      {{ $banner->start_date?->format('d/m/Y') ?? '—' }}
+                      {{ $banner->start_date?->format('d/m/Y') ?? '-' }}
                       →
                       {{ $banner->end_date?->format('d/m/Y') ?? '∞' }}
                     </small>
