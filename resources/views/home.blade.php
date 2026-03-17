@@ -16,7 +16,7 @@
         {{ date('d/m/Y') }} CÓ {{ isset($stats) ? number_format($stats['total_reports']) : 0 }} CẢNH BÁO
       </h2>
     @else
-      <h2 class="text-cs_blue mt-6 mb-6 text-center text-lg font-black uppercase md:text-xl">
+      <h2 class="text-cs_blue mt-6 mb-6 text-center text-lg md:text-xl">
         <i class="fa-solid fa-magnifying-glass mr-2"></i>
         Có {{ isset($results) ? number_format($results->total()) : 0 }} vụ lừa đảo liên quan đến:
         <br />

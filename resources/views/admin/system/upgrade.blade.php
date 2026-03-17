@@ -126,7 +126,7 @@
                     </li>
                     <li class="d-flex align-items-center mb-3">
                       <i class="fas fa-check-circle text-amber me-3 glow-amber"></i>
-                      <span>Hệ thống quản lý **Tranh chấp** nâng cao</span>
+                      <span>Hệ thống quản lý Tranh chấp nâng cao</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                       <i class="fas fa-check-circle text-amber me-3 glow-amber"></i>
