@@ -87,9 +87,8 @@ class AdminInsuranceController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            $insurance->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-            // Legacy support
-            $insurance->update(['avatar' => $insurance->getFirstMedia('avatar')->file_name]);
+            $path = FileHelper::uploadImage($request->file('avatar'), 'insurances');
+            $insurance->update(['avatar' => $path]);
         }
 
         if ($request->expectsJson()) {
@@ -142,7 +141,7 @@ class AdminInsuranceController extends Controller
             $globalSlug = $this->generateInsuranceSlug($validated['full_name'], $insurance->id);
         }
 
-        $insurance->update([
+        $data = [
             'full_name' => $validated['full_name'],
             'slug' => $globalSlug,
             'amount' => $validated['amount'],
@@ -152,13 +151,16 @@ class AdminInsuranceController extends Controller
             'contact_info' => $contactInfo ?: null,
             'payment_accounts' => $paymentAccounts ?: null,
             'services' => $services ?: null,
-        ]);
+        ];
 
         if ($request->hasFile('avatar')) {
-            $insurance->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-            // Legacy support
-            $insurance->update(['avatar' => $insurance->getFirstMedia('avatar')->file_name]);
+            if ($insurance->avatar) {
+                FileHelper::deleteImage($insurance->avatar);
+            }
+            $data['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'insurances');
         }
+
+        $insurance->update($data);
 
         if ($request->expectsJson()) {
             return response()->json([

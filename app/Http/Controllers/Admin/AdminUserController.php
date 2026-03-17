@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
@@ -107,9 +107,8 @@ class AdminUserController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-            // Legacy support
-            $user->update(['avatar' => $user->getFirstMedia('avatar')->file_name]);
+            $path = FileHelper::uploadImage($request->file('avatar'), 'avatars');
+            $user->update(['avatar' => $path]);
         }
 
         if ($request->ajax()) {
@@ -182,13 +181,14 @@ class AdminUserController extends Controller
             $data['password'] = Hash::make($validated['password']);
         }
 
-        $user->update($data);
-
         if ($request->hasFile('avatar')) {
-            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-            // Legacy support
-            $user->update(['avatar' => $user->getFirstMedia('avatar')->file_name]);
+            if ($user->avatar) {
+                FileHelper::deleteImage($user->avatar);
+            }
+            $data['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'avatars');
         }
+
+        $user->update($data);
 
         if ($request->ajax()) {
             return response()->json([
@@ -214,10 +214,8 @@ class AdminUserController extends Controller
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 
-        $user->clearMediaCollection('avatar');
-
         if ($user->avatar) {
-            Storage::disk('public')->delete($user->avatar);
+            FileHelper::deleteImage($user->avatar);
         }
 
         $user->delete();
@@ -245,9 +243,8 @@ class AdminUserController extends Controller
                 continue;
             }
 
-            $user->clearMediaCollection('avatar');
             if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
+                FileHelper::deleteImage($user->avatar);
             }
             $user->delete();
             $count++;

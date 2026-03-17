@@ -946,7 +946,7 @@
       </section>
     </div>
   </main>
-    <div id="lightbox">
+  <div id="lightbox">
     <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
     <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
     <img src="" id="lb-img" alt="evidence" />
@@ -954,8 +954,6 @@
     <span class="lb-counter" id="lb-counter"></span>
   </div>
 @endsection
-
-
 
 @push('styles')
   <style>
@@ -1393,4 +1391,4 @@
       });
     });
   </script>
-@endpush  
+@endpush

@@ -73,15 +73,7 @@ class ReportController extends Controller
         ]);
 
         if ($request->hasFile('evidence_images')) {
-            foreach ($request->file('evidence_images') as $file) {
-                $report->addMedia($file)->toMediaCollection('evidence');
-            }
-
-            // Legacy support for Old evidence_images column (array)
-            $paths = [];
-            foreach ($report->getMedia('evidence') as $media) {
-                $paths[] = $media->file_name;
-            }
+            $paths = \App\Helpers\FileHelper::uploadMultipleImages($request->file('evidence_images'), 'reports');
             $report->update(['evidence_images' => $paths]);
         }
 

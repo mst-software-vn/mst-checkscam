@@ -82,10 +82,8 @@ class AdminPostController extends Controller
         ]);
 
         if ($request->hasFile('thumbnail')) {
-            $post->addMediaFromRequest('thumbnail')->toMediaCollection('thumbnail');
-
-            // Legacy support
-            $post->update(['thumbnail' => $post->getFirstMedia('thumbnail')->file_name]);
+            $path = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
+            $post->update(['thumbnail' => $path]);
         }
 
         if ($request->expectsJson()) {
@@ -117,20 +115,23 @@ class AdminPostController extends Controller
         $slugSource = ! empty($validated['slug']) ? $validated['slug'] : $validated['title'];
         $globalSlug = StringHelper::generateGlobalUniqueSlug($slugSource, null, $post->id);
 
-        $post->update([
+        $data = [
             'title' => $validated['title'],
             'slug' => $globalSlug,
             'description' => $validated['description'],
             'content' => $validated['content'],
             'is_featured' => $request->boolean('is_featured'),
             'hashtags' => $validated['hashtags'] ?? null,
-        ]);
+        ];
 
         if ($request->hasFile('thumbnail')) {
-            $post->addMediaFromRequest('thumbnail')->toMediaCollection('thumbnail');
-            // Legacy support
-            $post->update(['thumbnail' => $post->getFirstMedia('thumbnail')->file_name]);
+            if ($post->thumbnail) {
+                FileHelper::deleteImage($post->thumbnail);
+            }
+            $data['thumbnail'] = FileHelper::uploadImage($request->file('thumbnail'), 'posts');
         }
+
+        $post->update($data);
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -148,9 +149,6 @@ class AdminPostController extends Controller
     public function destroy(int $id)
     {
         $post = Post::findOrFail($id);
-
-        // Delete media library thumbnail if exists
-        $post->clearMediaCollection('thumbnail');
 
         if ($post->thumbnail) {
             FileHelper::deleteImage($post->thumbnail);
@@ -177,7 +175,6 @@ class AdminPostController extends Controller
         }
         $posts = Post::whereIn('id', $ids)->get();
         foreach ($posts as $post) {
-            $post->clearMediaCollection('thumbnail');
             if ($post->thumbnail) {
                 FileHelper::deleteImage($post->thumbnail);
             }
