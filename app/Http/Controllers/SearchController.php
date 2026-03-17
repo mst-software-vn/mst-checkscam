@@ -17,10 +17,15 @@ class SearchController extends Controller
         $query = trim($request->query('q', ''));
 
         if ($query !== '') {
-            SEOTools::setTitle('Kết quả tìm kiếm cho: '.$query);
-            SEOTools::setDescription('Xem kết quả tìm kiếm cho '.$query.' trên hệ thống CheckScam. Cảnh báo và phòng chống lừa đảo trực tuyến.');
+            $metaTitle = "Kết quả check scam: {$query} | Tra cứu lừa đảo";
+            $metaDesc = "Dữ liệu mới nhất về {$query}. Xem đối tượng này có trong danh sách đen lừa đảo hay không. Tra cứu STK, SĐT, Link FB tại CheckScam.vn.";
+            SEOTools::setTitle($metaTitle);
+            SEOTools::setDescription($metaDesc);
+            SEOTools::opengraph()->setUrl(url()->current());
+            SEOTools::metatags()->setCanonical(url()->current());
         } else {
-            SEOTools::setTitle('Tìm kiếm nội dung - CheckScam');
+            SEOTools::setTitle('Tìm kiếm đối tượng lừa đảo - CheckScam.vn');
+            SEOTools::metatags()->addMeta('robots', 'noindex, follow');
         }
 
         $results = collect();
