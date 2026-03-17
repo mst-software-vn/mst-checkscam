@@ -3,7 +3,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
   <!-- SEO Optimization using SEOTools -->
-  {!! SEO::generate() !!}
+  {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
 
   <!-- Preconnect để tăng tốc kết nối CDN -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
