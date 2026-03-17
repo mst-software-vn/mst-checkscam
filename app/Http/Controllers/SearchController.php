@@ -6,6 +6,7 @@ use App\Helpers\StatsHelper;
 use App\Helpers\StringHelper;
 use App\Models\Report;
 use App\Models\SearchLog;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -14,6 +15,14 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $query = trim($request->query('q', ''));
+
+        if ($query !== '') {
+            SEOTools::setTitle('Kết quả tìm kiếm cho: '.$query);
+            SEOTools::setDescription('Xem kết quả tìm kiếm cho '.$query.' trên hệ thống CheckScam. Cảnh báo và phòng chống lừa đảo trực tuyến.');
+        } else {
+            SEOTools::setTitle('Tìm kiếm nội dung - CheckScam');
+        }
+
         $results = collect();
         $isFound = false;
         $type = null;
@@ -146,7 +155,7 @@ class SearchController extends Controller
             ->take(8)
             ->values()
             ->map(fn ($r) => [
-                'label' => $r->target_id.($r->target_name ? ' — '.StringHelper::mask_name($r->target_name) : ''),
+                'label' => $r->target_id.($r->target_name ? ' - '.StringHelper::mask_name($r->target_name) : ''),
                 'value' => $r->target_id,
                 'type' => $r->type,
                 'target_name' => StringHelper::mask_name($r->target_name),

@@ -946,7 +946,7 @@
       </section>
     </div>
   </main>
-    <div id="lightbox">
+  <div id="lightbox">
     <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
     <button class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
     <img src="" id="lb-img" alt="evidence" />
@@ -954,8 +954,6 @@
     <span class="lb-counter" id="lb-counter"></span>
   </div>
 @endsection
-
-
 
 @push('styles')
   <style>
@@ -1304,21 +1302,21 @@
         });
       });
 
-      // Edit — mở
+      // Edit - mở
       $(document).on('click', '.edit-comment-btn', function () {
         const $item = $(this).closest('.comment-item');
         $item.find('.comment-content').addClass('hidden');
         $item.find('.edit-form').removeClass('hidden');
       });
 
-      // Edit — huỷ
+      // Edit - huỷ
       $(document).on('click', '.cancel-edit-btn', function () {
         const $item = $(this).closest('.comment-item');
         $item.find('.comment-content').removeClass('hidden');
         $item.find('.edit-form').addClass('hidden');
       });
 
-      // Edit — lưu
+      // Edit - lưu
       $(document).on('click', '.save-edit-btn', function () {
         const $btn = $(this);
         const commentId = $btn.data('comment-id');
@@ -1393,4 +1391,4 @@
       });
     });
   </script>
-@endpush  
+@endpush

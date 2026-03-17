@@ -23,18 +23,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingSeeder::class);
         $this->call(BannerSeeder::class);
         User::factory()->create([
-            'username' => 'htuanqn',
-            'email' => 'tuan@mstsoftware.vn',
-            'password' => Hash::make('tuan@mstsoftware.vn'),
-            'full_name' => 'Phạm Hoàng Tuấn',
-            'role' => 'admin',
-            'status' => 1,
-        ]);
-        User::factory()->create([
-            'username' => 'maaitlunghau',
-            'email' => 'trunghau@mstsoftware.vn',
-            'password' => Hash::make('admin@123'),
-            'full_name' => 'Mai Trung Hậu',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123456'),
+            'full_name' => 'Quản trị viên',
             'role' => 'admin',
             'status' => 1,
         ]);

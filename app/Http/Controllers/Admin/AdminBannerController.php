@@ -44,11 +44,8 @@ class AdminBannerController extends Controller
             'sort_order' => 'nullable|integer|min:0',
         ]);
 
-        $imagePath = FileHelper::uploadImage($request->file('image'), 'banners');
-
-        Banner::create([
+        $banner = Banner::create([
             'title' => $request->title,
-            'image_path' => $imagePath,
             'redirect_url' => $request->redirect_url,
             'position' => $request->position,
             'type' => $request->type,
@@ -57,6 +54,11 @@ class AdminBannerController extends Controller
             'status' => $request->has('status'),
             'sort_order' => $request->sort_order ?? 0,
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = FileHelper::uploadImage($request->file('image'), 'banners');
+            $banner->update(['image_path' => $path]);
+        }
 
         return redirect()->route('admin.banners.index')->with('success', 'Đã tạo banner thành công.');
     }
@@ -95,6 +97,9 @@ class AdminBannerController extends Controller
         ];
 
         if ($request->hasFile('image')) {
+            if ($banner->image_path) {
+                FileHelper::deleteImage($banner->image_path);
+            }
             $data['image_path'] = FileHelper::uploadImage($request->file('image'), 'banners');
         }
 
@@ -105,7 +110,13 @@ class AdminBannerController extends Controller
 
     public function destroy($id)
     {
-        Banner::findOrFail($id)->delete();
+        $banner = Banner::findOrFail($id);
+
+        if ($banner->image_path) {
+            FileHelper::deleteImage($banner->image_path);
+        }
+
+        $banner->delete();
 
         return back()->with('success', 'Đã xóa banner.');
     }
@@ -113,7 +124,13 @@ class AdminBannerController extends Controller
     public function bulkDestroy(Request $request)
     {
         $ids = $request->input('ids', []);
-        Banner::whereIn('id', $ids)->delete();
+        $banners = Banner::whereIn('id', $ids)->get();
+        foreach ($banners as $banner) {
+            if ($banner->image_path) {
+                FileHelper::deleteImage($banner->image_path);
+            }
+            $banner->delete();
+        }
 
         return back()->with('success', 'Đã xóa '.count($ids).' banner.');
     }

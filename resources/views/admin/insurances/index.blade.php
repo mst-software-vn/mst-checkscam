@@ -123,7 +123,7 @@
 
       {{-- Table --}}
       <div class="table-responsive">
-        <table class="datanew table">
+        <table class="table hover-table">
           <thead>
             <tr>
               <th>
@@ -154,6 +154,7 @@
                     <img
                       src="{{ $insurance->avatar ? (str_starts_with($insurance->avatar, 'http') ? $insurance->avatar : asset('storage/' . $insurance->avatar)) : '/assets/img/customer/customer1.jpg' }}"
                       alt="product"
+                      class="rounded-circle"
                     />
                   </a>
                   <a href="{{ route('admin.insurances.edit', $insurance->id) }}">
@@ -162,7 +163,7 @@
                 </td>
                 <td>{{ number_format($insurance->amount, 0, ',', ',') }} ₫</td>
                 <td>{{ $insurance->insurance_date->format('d/m/Y') }}</td>
-                <td>{{ $insurance->expired_at ? $insurance->expired_at->format('d/m/Y') : '—' }}</td>
+                <td>{{ $insurance->expired_at ? $insurance->expired_at->format('d/m/Y') : '-' }}</td>
                 <td>
                   @if (! $insurance->isActive())
                     <span class="badges bg-lightgrey">Tạm ngừng</span>
@@ -210,7 +211,7 @@
     </div>
   </div>
 
-  {{-- — Modal: Xác nhận Xóa Hàng Loạt —— --}}
+  {{-- - Modal: Xác nhận Xóa Hàng Loạt -- --}}
   <div class="modal fade" id="modalBulkDestroy" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">
@@ -260,7 +261,7 @@
     </div>
   </div>
 
-  {{-- — Modal: Xác nhận Xóa Một Bản Ghi —— --}}
+  {{-- - Modal: Xác nhận Xóa Một Bản Ghi -- --}}
   <div class="modal fade" id="modalDestroySingle" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 16px; border: none; overflow: hidden">

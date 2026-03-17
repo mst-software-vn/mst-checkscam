@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Insurance extends Model
+class Insurance extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $table = 'insurances';
 
@@ -72,8 +76,23 @@ class Insurance extends Model
         return 'Hoạt động';
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Fit::Contain, 200, 200)
+            ->nonQueued();
+
+        $this->addMediaConversion('optimized')
+            ->fit(Fit::Max, 800, 800)
+            ->nonQueued();
+    }
+
     public function getAvatarUrlAttribute(): ?string
     {
+        if ($this->hasMedia('avatar')) {
+            return $this->getFirstMediaUrl('avatar', 'thumb');
+        }
+
         if (! $this->avatar) {
             return null;
         }

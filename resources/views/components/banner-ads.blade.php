@@ -1,6 +1,7 @@
 @props([
   'position',
-  'limit' => null,
+  'limit' => 1,
+  'skip' => 0,
   'class' => 'mb-6',
 ])
 
@@ -9,8 +10,12 @@
     ->forPosition($position)
     ->ordered();
 
+  if ($skip > 0) {
+    $query->skip($skip);
+  }
+
   if ($limit) {
-    $query->limit($limit);
+    $query->take($limit);
   }
 
   $banners = $query->get();

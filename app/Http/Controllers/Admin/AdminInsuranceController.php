@@ -66,30 +66,7 @@ class AdminInsuranceController extends Controller
             'payment_accounts.*.name' => 'required|string|max:255',
             'services' => 'required|array|min:1',
             'services.*.title' => 'required|string|max:255',
-        ], [
-            'full_name.required' => 'Họ tên không được để trống.',
-            'amount.required' => 'Số tiền đóng không được để trống.',
-            'amount.numeric' => 'Số tiền đóng phải là con số.',
-            'amount.min' => 'Số tiền đóng không được âm.',
-            'insurance_date.required' => 'Ngày tham gia không được để trống.',
-            'expired_at.required' => 'Ngày hết hạn không được để trống.',
-            'expired_at.after_or_equal' => 'Ngày hết hạn phải từ ngày tham gia trở đi.',
-            'status.required' => 'Trạng thái không được để trống.',
-            'avatar.required' => 'Ảnh đại diện là bắt buộc.',
-            'avatar.image' => 'File tải lên phải là hình ảnh.',
-            'avatar.max' => 'Dung lượng ảnh tối đa 5MB.',
-            'contact_info.required' => 'Cần ít nhất một thông tin liên hệ.',
-            'contact_info.*.platform.required' => 'Nền tảng liên hệ không được để trống.',
-            'contact_info.*.link.required' => 'Link liên hệ không được để trống.',
-            'payment_accounts.required' => 'Cần ít nhất một tài khoản thanh toán.',
-            'payment_accounts.*.bank.required' => 'Ngân hàng/Ví không được để trống.',
-            'payment_accounts.*.number.required' => 'Số tài khoản không được để trống.',
-            'payment_accounts.*.name.required' => 'Chủ tài khoản không được để trống.',
-            'services.required' => 'Cần ít nhất một dịch vụ cung cấp.',
-            'services.*.title.required' => 'Tên dịch vụ không được để trống.',
         ]);
-
-        $avatarPath = FileHelper::uploadImage($request->file('avatar'), 'insurances');
 
         $contactInfo = $this->filterEmptyArrayItems($validated['contact_info'] ?? [], ['platform', 'link']);
         $paymentAccounts = $this->filterEmptyArrayItems($validated['payment_accounts'] ?? [], ['bank', 'number']);
@@ -97,25 +74,21 @@ class AdminInsuranceController extends Controller
 
         $globalSlug = $this->generateInsuranceSlug($validated['full_name']);
 
-        Insurance::create([
+        $insurance = Insurance::create([
             'full_name' => $validated['full_name'],
             'slug' => $globalSlug,
             'amount' => $validated['amount'],
             'insurance_date' => $validated['insurance_date'],
             'expired_at' => $validated['expired_at'],
             'status' => $validated['status'],
-            'avatar' => $avatarPath,
             'contact_info' => $contactInfo ?: null,
             'payment_accounts' => $paymentAccounts ?: null,
             'services' => $services ?: null,
         ]);
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã thêm thành viên bảo hiểm thành công.',
-                'redirect' => route('admin.insurances.index'),
-            ]);
+        if ($request->hasFile('avatar')) {
+            $path = FileHelper::uploadImage($request->file('avatar'), 'insurances');
+            $insurance->update(['avatar' => $path]);
         }
 
         return redirect()->route('admin.insurances.index')
@@ -149,34 +122,7 @@ class AdminInsuranceController extends Controller
             'payment_accounts.*.name' => 'required|string|max:255',
             'services' => 'required|array|min:1',
             'services.*.title' => 'required|string|max:255',
-        ], [
-            'full_name.required' => 'Họ tên không được để trống.',
-            'amount.required' => 'Số tiền đóng không được để trống.',
-            'amount.numeric' => 'Số tiền đóng phải là con số.',
-            'amount.min' => 'Số tiền đóng không được âm.',
-            'insurance_date.required' => 'Ngày tham gia không được để trống.',
-            'expired_at.required' => 'Ngày hết hạn không được để trống.',
-            'expired_at.after_or_equal' => 'Ngày hết hạn phải từ ngày tham gia trở đi.',
-            'status.required' => 'Trạng thái không được để trống.',
-            'avatar.image' => 'File tải lên phải là hình ảnh.',
-            'avatar.max' => 'Dung lượng ảnh tối đa 5MB.',
-            'contact_info.required' => 'Cần ít nhất một thông tin liên hệ.',
-            'contact_info.*.platform.required' => 'Nền tảng liên hệ không được để trống.',
-            'contact_info.*.link.required' => 'Link liên hệ không được để trống.',
-            'payment_accounts.required' => 'Cần ít nhất một tài khoản thanh toán.',
-            'payment_accounts.*.bank.required' => 'Ngân hàng/Ví không được để trống.',
-            'payment_accounts.*.number.required' => 'Số tài khoản không được để trống.',
-            'payment_accounts.*.name.required' => 'Chủ tài khoản không được để trống.',
-            'services.required' => 'Cần ít nhất một dịch vụ cung cấp.',
-            'services.*.title.required' => 'Tên dịch vụ không được để trống.',
         ]);
-
-        if ($request->hasFile('avatar')) {
-            if ($insurance->avatar) {
-                FileHelper::deleteImage($insurance->avatar);
-            }
-            $validated['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'insurances');
-        }
 
         $contactInfo = $this->filterEmptyArrayItems($validated['contact_info'] ?? [], ['platform', 'link']);
         $paymentAccounts = $this->filterEmptyArrayItems($validated['payment_accounts'] ?? [], ['bank', 'number']);
@@ -187,26 +133,26 @@ class AdminInsuranceController extends Controller
             $globalSlug = $this->generateInsuranceSlug($validated['full_name'], $insurance->id);
         }
 
-        $insurance->update([
+        $data = [
             'full_name' => $validated['full_name'],
             'slug' => $globalSlug,
             'amount' => $validated['amount'],
             'insurance_date' => $validated['insurance_date'],
             'expired_at' => $validated['expired_at'],
             'status' => $validated['status'],
-            'avatar' => $validated['avatar'] ?? $insurance->avatar,
             'contact_info' => $contactInfo ?: null,
             'payment_accounts' => $paymentAccounts ?: null,
             'services' => $services ?: null,
-        ]);
+        ];
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã cập nhật thông tin bảo hiểm thành công.',
-                'redirect' => route('admin.insurances.index'),
-            ]);
+        if ($request->hasFile('avatar')) {
+            if ($insurance->avatar) {
+                FileHelper::deleteImage($insurance->avatar);
+            }
+            $data['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'insurances');
         }
+
+        $insurance->update($data);
 
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã cập nhật thông tin bảo hiểm thành công.');
@@ -235,13 +181,6 @@ class AdminInsuranceController extends Controller
         }
 
         $insurance->delete();
-
-        if (request()->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã xóa thành viên bảo hiểm thành công.',
-            ]);
-        }
 
         return redirect()->route('admin.insurances.index')
             ->with('success', 'Đã xóa thành viên bảo hiểm.');

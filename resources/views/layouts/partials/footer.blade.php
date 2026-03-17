@@ -10,7 +10,19 @@
       <!-- Brand Column -->
       <div class="space-y-6 md:col-span-4">
         <a href="/" class="inline-block transform transition-transform hover:scale-105">
-          <img src="https://i.ibb.co/wFZsnJBR/white.png" alt="Footer Logo" class="h-16 w-auto" />
+          @php
+            $logoFooterLight = ! empty($siteConfig['logo_footer_light']) ? asset('storage/' . $siteConfig['logo_footer_light']) : 'https://i.ibb.co/7xfz0v3K/black.png';
+            $logoFooterDark = ! empty($siteConfig['logo_footer_dark']) ? asset('storage/' . $siteConfig['logo_footer_dark']) : 'https://i.ibb.co/wFZsnJBR/white.png';
+          @endphp
+
+          <img
+            src="{{ $logoFooterDark }}"
+            alt="Footer Logo"
+            class="h-16 w-auto"
+            id="logo_footer"
+            data-light="{{ $logoFooterLight }}"
+            data-dark="{{ $logoFooterDark }}"
+          />
         </a>
         <p class="max-w-md text-sm leading-relaxed text-gray-400 md:text-base">
           {{ $siteConfig['description'] ?? 'Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam.' }}
@@ -245,6 +257,7 @@
 <script>
   $(document).ready(function () {
     const $logoHeader = $('#logo_header');
+    const $logoFooter = $('#logo_footer');
     const $backToTop = $('#back-to-top');
 
     // Theme Switch Management
@@ -254,7 +267,13 @@
       localStorage.setItem('theme', theme);
 
       if ($logoHeader.length) {
-        $logoHeader.attr('src', isDark ? 'https://i.ibb.co/wFZsnJBR/white.png' : 'https://i.ibb.co/7xfz0v3K/black.png');
+        const src = isDark ? $logoHeader.data('dark') : $logoHeader.data('light');
+        if (src) $logoHeader.attr('src', src);
+      }
+
+      if ($logoFooter.length) {
+        const src = isDark ? $logoFooter.data('dark') : $logoFooter.data('light');
+        if (src) $logoFooter.attr('src', src);
       }
     }
 

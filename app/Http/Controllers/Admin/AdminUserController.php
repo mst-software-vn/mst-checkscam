@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
 {
@@ -71,6 +70,7 @@ class AdminUserController extends Controller
             'status' => 'nullable|boolean',
         ];
 
+        // ... messages ...
         $messages = [
             'username.required' => 'Tên đăng nhập không được để trống.',
             'username.unique' => 'Tên đăng nhập đã tồn tại.',
@@ -86,37 +86,20 @@ class AdminUserController extends Controller
             'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
         ];
 
-        if ($request->ajax()) {
-            $validator = Validator::make($request->all(), $rules, $messages);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-            $validated = $validator->validated();
-        } else {
-            $validated = $request->validate($rules, $messages);
-        }
+        $validated = $request->validate($rules, $messages);
 
-        $avatarPath = null;
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('users', 'public');
-        }
-
-        User::create([
+        $user = User::create([
             'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'full_name' => $validated['full_name'],
-            'avatar' => $avatarPath,
             'role' => $validated['role'],
             'status' => $request->boolean('status', true) ? 1 : 0,
         ]);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã tạo tài khoản người dùng thành công.',
-                'redirect' => route('admin.users.index'),
-            ]);
+        if ($request->hasFile('avatar')) {
+            $path = FileHelper::uploadImage($request->file('avatar'), 'avatars');
+            $user->update(['avatar' => $path]);
         }
 
         return redirect()->route('admin.users.index')
@@ -144,6 +127,7 @@ class AdminUserController extends Controller
             'status' => 'nullable|boolean',
         ];
 
+        // ... messages ...
         $messages = [
             'username.required' => 'Tên đăng nhập không được để trống.',
             'username.unique' => 'Tên đăng nhập đã tồn tại.',
@@ -158,15 +142,7 @@ class AdminUserController extends Controller
             'avatar.max' => 'Dung lượng ảnh tối đa là 2MB.',
         ];
 
-        if ($request->ajax()) {
-            $validator = Validator::make($request->all(), $rules, $messages);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-            $validated = $validator->validated();
-        } else {
-            $validated = $request->validate($rules, $messages);
-        }
+        $validated = $request->validate($rules, $messages);
 
         $data = [
             'username' => $validated['username'],
@@ -182,20 +158,12 @@ class AdminUserController extends Controller
 
         if ($request->hasFile('avatar')) {
             if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
+                FileHelper::deleteImage($user->avatar);
             }
-            $data['avatar'] = $request->file('avatar')->store('users', 'public');
+            $data['avatar'] = FileHelper::uploadImage($request->file('avatar'), 'avatars');
         }
 
         $user->update($data);
-
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Đã cập nhật thông tin người dùng thành công.',
-                'redirect' => route('admin.users.index'),
-            ]);
-        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã cập nhật thông tin tài khoản.');
@@ -206,22 +174,14 @@ class AdminUserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->id === auth()->id()) {
-            if ($request->ajax()) {
-                return response()->json(['success' => false, 'message' => 'Bạn không thể xóa chính mình.'], 403);
-            }
-
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 
         if ($user->avatar) {
-            Storage::disk('public')->delete($user->avatar);
+            FileHelper::deleteImage($user->avatar);
         }
 
         $user->delete();
-
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Đã xóa người dùng thành công.']);
-        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Đã xóa người dùng thành công.');
@@ -243,7 +203,7 @@ class AdminUserController extends Controller
             }
 
             if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
+                FileHelper::deleteImage($user->avatar);
             }
             $user->delete();
             $count++;

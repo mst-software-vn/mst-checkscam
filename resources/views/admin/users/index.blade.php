@@ -161,7 +161,7 @@
 
       {{-- Table --}}
       <div class="table-responsive">
-        <table class="datanew table">
+        <table class="table hover-table">
           <thead>
             <tr>
               <th>
@@ -216,7 +216,7 @@
                   </div>
                 </td>
                 <td>{{ $user->username }}</td>
-                <td>{{ $user->full_name ?? '—' }}</td>
+                <td>{{ $user->full_name ?? '-' }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                   @if ($user->role === 'admin')
@@ -273,7 +273,6 @@
 @endsection
 
 @push('scripts')
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // --- Logic Checkbox & Bulk Delete UI ---
