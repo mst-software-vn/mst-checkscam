@@ -134,18 +134,45 @@ class ReportController extends Controller
 
         // Advanced SEO
         $siteTitle = ConfigHelper::getConfig('site_title', 'CheckScam');
-        $metaTitle = ($report->target_id ? $report->target_id.' - ' : '').($report->target_name ? $report->target_name.' ' : '').'Bị tố cáo lừa đảo trên '.$siteTitle;
-        $metaDesc = 'Cảnh báo lừa đảo: '.($report->target_name ? $report->target_name.' ' : '').'('.$report->target_id.'). Hình thức: '.$report->category.'. '.Str::limit($report->description, 160);
+        $targetId = $report->target_id;
+        $targetName = $report->target_name ?? 'Đối tượng';
+        $category = $report->category ?? 'Lừa đảo';
+
+        // Optimize Title: STK/SĐT/FB - Name - Lừa đảo | SiteTitle
+        $metaTitle = "{$targetId} - {$targetName} - {$category} Lừa Đảo | {$siteTitle}";
+        $metaDesc = "Cảnh báo: {$targetName} ({$targetId}) bị tố cáo lừa đảo với hình thức {$category}. ".Str::limit($report->description, 150).' Xem bằng chứng và cảnh báo tại CheckScam.';
 
         SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDesc);
-        SEOTools::metatags()->addKeyword($report->target_id.', '.$report->target_name.', scammer, lừa đảo, '.$report->category);
+        SEOTools::metatags()->addKeyword("{$targetId}, {$targetName}, lừa đảo, scammer, {$category}, check scam");
         SEOTools::opengraph()->setUrl(url()->current());
         SEOTools::opengraph()->addProperty('type', 'article');
+        SEOTools::opengraph()->setTitle($metaTitle);
+        SEOTools::opengraph()->setDescription($metaDesc);
 
         if (! empty($report->evidence_images)) {
             SEOTools::opengraph()->addImage(asset('storage/'.$report->evidence_images[0]));
+            SEOTools::jsonLd()->addImage(asset('storage/'.$report->evidence_images[0]));
         }
+
+        // Structured Data for Scam Report (using Review/Article hybrid)
+        SEOTools::jsonLd()->setTitle($metaTitle);
+        SEOTools::jsonLd()->setDescription($metaDesc);
+        SEOTools::jsonLd()->setType('Article');
+        SEOTools::jsonLd()->addValue('author', [
+            '@type' => 'Organization',
+            'name' => 'CheckScam.vn',
+        ]);
+        SEOTools::jsonLd()->addValue('publisher', [
+            '@type' => 'Organization',
+            'name' => 'CheckScam.vn',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => asset('storage/'.ConfigHelper::getConfig('logo')),
+            ],
+        ]);
+        SEOTools::jsonLd()->addValue('datePublished', $report->created_at->toIso8601String());
+        SEOTools::jsonLd()->addValue('headline', "Cảnh báo lừa đảo: {$targetName} - {$targetId}");
 
         return view('scammer.index', compact(
             'report',

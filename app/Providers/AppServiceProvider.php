@@ -55,6 +55,12 @@ class AppServiceProvider extends ServiceProvider
                 'og_image' => ConfigHelper::getConfig('og_image'),
                 'site_author' => ConfigHelper::getConfig('site_author', 'MST SOFTWARE'),
                 'header_scripts' => ConfigHelper::getConfig('header_scripts'),
+                'google_site_verification' => ConfigHelper::getConfig('google_site_verification'),
+                'bing_site_verification' => ConfigHelper::getConfig('bing_site_verification'),
+                'site_index' => ConfigHelper::getConfig('site_index', 'index, follow'),
+                'og_site_name' => ConfigHelper::getConfig('og_site_name', 'CheckScam.vn'),
+                'twitter_username' => ConfigHelper::getConfig('twitter_username', '@checkscam_vn'),
+                'meta_extra' => ConfigHelper::getConfig('meta_extra'),
             ];
 
             $view->with('siteConfig', $siteConfig);
@@ -63,14 +69,40 @@ class AppServiceProvider extends ServiceProvider
             \Artesaos\SEOTools\Facades\SEOTools::setTitle($siteConfig['title']);
             \Artesaos\SEOTools\Facades\SEOTools::setDescription($siteConfig['description']);
             \Artesaos\SEOTools\Facades\SEOTools::metatags()->addKeyword($siteConfig['keywords']);
+            \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('author', $siteConfig['site_author']);
+            \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('robots', $siteConfig['site_index']);
+
+            // Site Verifications
+            if ($siteConfig['google_site_verification']) {
+                \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('google-site-verification', $siteConfig['google_site_verification']);
+            }
+            if ($siteConfig['bing_site_verification']) {
+                \Artesaos\SEOTools\Facades\SEOTools::metatags()->addMeta('msvalidate.01', $siteConfig['bing_site_verification']);
+            }
+
+            // OpenGraph
             \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setTitle($siteConfig['title']);
             \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setDescription($siteConfig['description']);
             \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setUrl(url()->current());
             \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addProperty('type', 'website');
+            \Artesaos\SEOTools\Facades\SEOTools::opengraph()->setSiteName($siteConfig['og_site_name']);
 
             if ($siteConfig['og_image']) {
                 \Artesaos\SEOTools\Facades\SEOTools::opengraph()->addImage(asset('storage/'.$siteConfig['og_image']));
             }
+
+            // Twitter
+            \Artesaos\SEOTools\Facades\SEOTools::twitter()->setSite($siteConfig['twitter_username']);
+            \Artesaos\SEOTools\Facades\SEOTools::twitter()->setTitle($siteConfig['title']);
+            \Artesaos\SEOTools\Facades\SEOTools::twitter()->setDescription($siteConfig['description']);
+            if ($siteConfig['og_image']) {
+                \Artesaos\SEOTools\Facades\SEOTools::twitter()->setImage(asset('storage/'.$siteConfig['og_image']));
+            }
+
+            // Json-Ld Default Organization Schema
+            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setTitle($siteConfig['title']);
+            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setDescription($siteConfig['description']);
+            \Artesaos\SEOTools\Facades\SEOTools::jsonLd()->setType('WebSite');
         });
     }
 }
