@@ -67,8 +67,8 @@ class AppServiceProvider extends ServiceProvider
                     'meta_extra' => ConfigHelper::getConfig('meta_extra'),
                 ];
                 $siteConfig = $config;
+                View::share('siteConfig', $siteConfig);
             }
-            $view->with('siteConfig', $siteConfig);
         });
 
         // 2. Set SEO Tools ONLY when rendering the Head component
