@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         // 1. Share site config to ALL views (Header, Footer, Sidebar, etc. need this)
         View::composer('*', function ($view) {
             static $siteConfig = null;
-            if ($siteConfig === null) {
+            if ($siteConfig == null) {
                 // We use a local variable to build the config, then assign to static
                 $config = [
                     'title' => ConfigHelper::getConfig('site_title', 'CheckScam.vn - Tra cứu lừa đảo'),

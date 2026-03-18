@@ -106,7 +106,7 @@ class StringHelper
      */
     public static function mask_name(?string $name): string
     {
-        if (! $name || mb_strtolower($name) === 'không rõ tên' || mb_strtolower($name) === 'chưa rõ thông tin' || mb_strtolower($name) === 'người dùng') {
+        if (! $name || mb_strtolower($name) == 'không rõ tên' || mb_strtolower($name) == 'chưa rõ thông tin' || mb_strtolower($name) == 'người dùng') {
             return 'Chưa rõ tên';
         }
 
@@ -135,7 +135,7 @@ class StringHelper
             return 'Đang cập nhật';
         }
 
-        if ($type === 'website' || str_contains($id, '/')) {
+        if ($type == 'website' || str_contains($id, '/')) {
             if (str_contains($id, '/')) {
                 $parts = explode('/', $id);
                 $lastPart = array_pop($parts);
@@ -162,7 +162,7 @@ class StringHelper
      */
     public static function mask_reporter_name(?string $name): string
     {
-        if (! $name || mb_strtolower($name) === 'người dùng') {
+        if (! $name || mb_strtolower($name) == 'người dùng') {
             return 'Người dùng';
         }
 

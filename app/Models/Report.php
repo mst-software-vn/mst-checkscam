@@ -83,17 +83,17 @@ class Report extends Model implements HasMedia
      */
     public function isPending(): bool
     {
-        return $this->status === 'pending';
+        return $this->status == 'pending';
     }
 
     public function isApproved(): bool
     {
-        return $this->status === 'approved';
+        return $this->status == 'approved';
     }
 
     public function isRejected(): bool
     {
-        return $this->status === 'rejected';
+        return $this->status == 'rejected';
     }
 
     public function registerMediaConversions(?Media $media = null): void

@@ -173,7 +173,7 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user->id === auth()->id()) {
+        if ($user->id == auth()->id()) {
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 

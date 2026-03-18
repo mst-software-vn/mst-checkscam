@@ -60,7 +60,7 @@ class Post extends Model implements HasMedia
      */
     public function isFeatured(): bool
     {
-        return $this->is_featured === true;
+        return $this->is_featured == true;
     }
 
     public function incrementViewCount(): void

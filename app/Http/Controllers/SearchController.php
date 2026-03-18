@@ -41,17 +41,17 @@ class SearchController extends Controller
                 ->when(in_array($type, ['phone', 'bank']), function ($q) use ($formattedQuery) {
                     $q->whereRaw("REGEXP_REPLACE(target_id, '[^0-9]', '') = ?", [$formattedQuery]);
                 })
-                ->when($type === 'facebook', function ($q) use ($formattedQuery, $query) {
+                ->when($type == 'facebook', function ($q) use ($formattedQuery, $query) {
                     $q->where(function ($sub) use ($formattedQuery, $query) {
                         $sub->where('target_id', 'LIKE', "%{$formattedQuery}%")
                             ->orWhere('slug', 'LIKE', "%{$formattedQuery}%")
                             ->orWhere('target_name', 'LIKE', "%{$query}%");
                     });
                 })
-                ->when($type === 'uuid', function ($q) use ($formattedQuery) {
+                ->when($type == 'uuid', function ($q) use ($formattedQuery) {
                     $q->where('slug', $formattedQuery);
                 })
-                ->when($type === 'name', function ($q) use ($normalizedQuery) {
+                ->when($type == 'name', function ($q) use ($normalizedQuery) {
                     $q->whereRaw(
                         "LOWER(TRIM(REGEXP_REPLACE(target_name, '\\\\s+', ' '))) = ?",
                         [$normalizedQuery],

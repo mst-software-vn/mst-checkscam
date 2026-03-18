@@ -157,7 +157,7 @@ class AdminReportController extends Controller
             'reporter_contact' => $validated['reporter_contact'] ?? '',
 
             'status' => $validated['status'],
-            'rejection_reason' => $validated['status'] === 'rejected' ? $validated['rejection_reason'] : null,
+            'rejection_reason' => $validated['status'] == 'rejected' ? $validated['rejection_reason'] : null,
             'evidence_images' => $currentImages,
             'moderator_id' => auth()->id() ?? null,
         ]);

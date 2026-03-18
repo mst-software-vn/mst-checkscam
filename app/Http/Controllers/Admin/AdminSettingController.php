@@ -70,8 +70,8 @@ class AdminSettingController extends Controller
 
         foreach ($imageKeys as $fileInput => $settingKey) {
             if ($request->hasFile($fileInput)) {
-                $mimes = $fileInput === 'favicon' ? 'jpeg,png,jpg,gif,svg,ico' : 'jpeg,png,jpg,gif,svg';
-                $max = $fileInput === 'favicon' ? 1024 : 2048;
+                $mimes = $fileInput == 'favicon' ? 'jpeg,png,jpg,gif,svg,ico' : 'jpeg,png,jpg,gif,svg';
+                $max = $fileInput == 'favicon' ? 1024 : 2048;
 
                 $request->validate([$fileInput => "image|mimes:$mimes|max:$max"]);
                 $path = FileHelper::uploadImage($request->file($fileInput), 'settings');

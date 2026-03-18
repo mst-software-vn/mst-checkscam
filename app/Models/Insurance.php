@@ -44,7 +44,7 @@ class Insurance extends Model implements HasMedia
      */
     public function isActive(): bool
     {
-        return $this->status === 1;
+        return $this->status == 1;
     }
 
     public function isExpired(): bool

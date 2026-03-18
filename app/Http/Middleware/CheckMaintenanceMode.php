@@ -18,7 +18,7 @@ class CheckMaintenanceMode
     {
         $maintenanceMode = ConfigHelper::getConfig('maintenance_mode', '0');
 
-        if ($maintenanceMode === '1') {
+        if ($maintenanceMode == '1') {
             // Check if request is NOT for admin routes
             if (! $request->is('admin') && ! $request->is('admin/*')) {
                 return response()->view('maintenance', [], 503);

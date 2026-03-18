@@ -31,17 +31,17 @@ class User extends Authenticatable implements HasMedia
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role == 'admin';
     }
 
     public function isModerator(): bool
     {
-        return $this->role === 'moderator';
+        return $this->role == 'moderator';
     }
 
     public function isActive(): bool
     {
-        return $this->status === 1;
+        return $this->status == 1;
     }
 
     public function registerMediaConversions(?Media $media = null): void

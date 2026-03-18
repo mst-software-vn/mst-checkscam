@@ -42,7 +42,7 @@ class Comment extends Model
      */
     public function canModify(string $ip): bool
     {
-        return $this->ip_address === $ip
+        return $this->ip_address == $ip
             && $this->created_at->diffInMinutes(now()) <= 15;
     }
 
