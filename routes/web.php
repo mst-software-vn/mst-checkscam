@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/to-cao-lua-dao', function () {
     return view('reports.index');
-});
+})->name('reports');
 Route::post('/to-cao-lua-dao', [ReportController::class, 'store'])->name('report.store');
 
 Route::get('/bao-hiem-cs', [InsuranceController::class, 'index'])->name('insurances.frontend.index');

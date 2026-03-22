@@ -21,7 +21,7 @@
   <link href="/css/tailwind.css" rel="stylesheet" />
 
   @if (! empty($siteConfig['favicon']))
-    <link rel="icon" type="image/png" href="{{ asset('storage/' . $siteConfig['favicon']) }}" />
+    <link rel="icon" type="image/png" href="{{ asset('uploads/' . $siteConfig['favicon']) }}" />
   @else
     <link rel="icon" type="image/png" href="https://i.ibb.co/fV1xYHVS/favicon.png" />
   @endif

@@ -15,9 +15,10 @@
 /node_modules
 /public/build
 /public/hot
-public/storage/*
-!public/storage/settings/
-!public/storage/settings/.gitkeep
+/public/storage/*
+!/public/storage/.gitkeep
+/public/uploads/*
+!/public/uploads/.gitkeep
 /storage/*.key
 /storage/pail
 /vendor

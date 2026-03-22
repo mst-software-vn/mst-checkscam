@@ -4,13 +4,19 @@ namespace App\Helpers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
 class FileHelper
 {
     /**
-     * Upload một hình ảnh đơn lẻ
+     * Tên Disk mặc định để đẩy file vào thư mục public
+     */
+    const DISK = 'my_public';
+
+    /**
+     * Upload một hình ảnh đơn lẻ và chuyển đổi sang WebP
      */
     public static function uploadImage(UploadedFile $file, string $path = 'reports'): string
     {
@@ -19,19 +25,19 @@ class FileHelper
 
         if (in_array($extension, $imagesMimes)) {
             try {
-                // Ensure directory exists
-                Storage::disk('public')->makeDirectory($path);
+                // Đảm bảo thư mục tồn tại trên disk my_public
+                Storage::disk(self::DISK)->makeDirectory($path);
 
-                $filename = \Illuminate\Support\Str::random(40).'.webp';
+                $filename = Str::random(40).'.webp';
                 $storePath = $path.'/'.$filename;
-                $fullPath = Storage::disk('public')->path($storePath);
 
-                // Use Intervention Image Version 3 wrapper
+                // Lấy đường dẫn vật lý tuyệt đối trên hosting để Intervention Image ghi file
+                $fullPath = Storage::disk(self::DISK)->path($storePath);
+
                 $manager = new ImageManager(new Driver);
 
-                // Mute libpng warning for iCCP incorrect profiles temporarily via custom error handler
+                // Mute libpng warning
                 set_error_handler(function ($errno, $errstr) {
-                    // ignore image warnings
                     if (strpos($errstr, 'libpng warning') !== false) {
                         return true;
                     }
@@ -40,13 +46,10 @@ class FileHelper
                 });
 
                 $image = $manager->read($file->getRealPath());
-
                 restore_error_handler();
 
-                // Optimize size if it's too large, scale down proportionally
+                // Scale down và lưu thẳng vào thư mục public qua $fullPath
                 $image->scaleDown(width: 1200);
-
-                // Keep optimization of size and save as WebP 80 quality
                 $image->toWebp(80)->save($fullPath);
 
                 return $storePath;
@@ -54,12 +57,12 @@ class FileHelper
             } catch (\Throwable $th) {
                 restore_error_handler();
 
-                // Fallback to normal upload process if intervention fails (GD extension not enabled, bad formats, etc.)
-                return $file->store($path, 'public');
+                // Nếu Intervention lỗi, fallback về upload thường của Laravel vào disk my_public
+                return $file->store($path, self::DISK);
             }
         }
 
-        return $file->store($path, 'public');
+        return $file->store($path, self::DISK);
     }
 
     /**
@@ -70,7 +73,6 @@ class FileHelper
         $paths = [];
         foreach ($files as $file) {
             if ($file instanceof UploadedFile) {
-                // Gọi method static trong cùng class thông qua self::
                 $paths[] = self::uploadImage($file, $path);
             }
         }
@@ -79,9 +81,9 @@ class FileHelper
     }
 
     /**
-     * Xóa một hình ảnh khỏi Storage
+     * Xóa một hình ảnh khỏi Storage (Mặc định dùng disk my_public)
      */
-    public static function deleteImage(string $filePath, string $disk = 'public'): void
+    public static function deleteImage(string $filePath, string $disk = self::DISK): void
     {
         if (Storage::disk($disk)->exists($filePath)) {
             Storage::disk($disk)->delete($filePath);
@@ -91,10 +93,9 @@ class FileHelper
     /**
      * Xóa nhiều hình ảnh cùng lúc
      */
-    public static function deleteMultipleImages(array $filePaths, string $disk = 'public'): void
+    public static function deleteMultipleImages(array $filePaths, string $disk = self::DISK): void
     {
         foreach ($filePaths as $path) {
-            // Gọi method static trong cùng class thông qua self::
             self::deleteImage($path, $disk);
         }
     }

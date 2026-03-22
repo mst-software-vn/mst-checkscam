@@ -142,7 +142,7 @@
                 <td class="productimgname">
                   <a href="{{ route('admin.posts.edit', $post->id) }}" class="product-img">
                     <img
-                      src="{{ $post->thumbnail ? (Str::startsWith($post->thumbnail, ['http://', 'https://']) ? $post->thumbnail : asset('storage/' . $post->thumbnail)) : asset('assets/img/product/noimage.png') }}"
+                      src="{{ $post->thumbnail ? (Str::startsWith($post->thumbnail, ['http://', 'https://']) ? $post->thumbnail : asset('uploads/' . $post->thumbnail)) : asset('assets/img/product/noimage.png') }}"
                       alt="thumb"
                     />
                   </a>

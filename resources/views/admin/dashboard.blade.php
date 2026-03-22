@@ -27,6 +27,10 @@
           bạn!
         </em>
         <br />
+        <p class="text-danger font-font">
+          Video hướng dẫn & cấu hình upload file:
+          <a href="https://youtu.be/O2fLBDx1Z6Q" target="_blank">https://youtu.be/O2fLBDx1Z6Q</a>
+        </p>
         Phiên làm việc hiện tại: {{ date('d/m/Y H:i:s') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>

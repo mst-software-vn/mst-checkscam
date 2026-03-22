@@ -171,7 +171,7 @@
         @if ($banner->image_path)
           <div class="mb-3">
             <img
-              src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('storage/' . $banner->image_path) }}"
+              src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('uploads/' . $banner->image_path) }}"
               alt="{{ $banner->title }}"
               class="img-fluid rounded"
               style="max-height: 120px"

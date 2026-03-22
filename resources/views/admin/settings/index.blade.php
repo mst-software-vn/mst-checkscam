@@ -246,7 +246,7 @@
               @if (! empty($settings['logo_header_light']))
                 <div class="bg-gray-100 mt-2 rounded p-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo_header_light']) }}"
+                    src="{{ asset('uploads/' . $settings['logo_header_light']) }}"
                     alt="logo"
                     class="img-fluid"
                     style="max-height: 50px"
@@ -270,7 +270,7 @@
               @if (! empty($settings['logo_header_dark']))
                 <div class="mt-2 rounded bg-dark p-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo_header_dark']) }}"
+                    src="{{ asset('uploads/' . $settings['logo_header_dark']) }}"
                     alt="logo"
                     class="img-fluid"
                     style="max-height: 50px"
@@ -294,7 +294,7 @@
               @if (! empty($settings['logo_footer_light']))
                 <div class="bg-gray-100 mt-2 rounded p-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo_footer_light']) }}"
+                    src="{{ asset('uploads/' . $settings['logo_footer_light']) }}"
                     alt="logo"
                     class="img-fluid"
                     style="max-height: 50px"
@@ -318,7 +318,7 @@
               @if (! empty($settings['logo_footer_dark']))
                 <div class="mt-2 rounded bg-dark p-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo_footer_dark']) }}"
+                    src="{{ asset('uploads/' . $settings['logo_footer_dark']) }}"
                     alt="logo"
                     class="img-fluid"
                     style="max-height: 50px"
@@ -342,7 +342,7 @@
               @if (! empty($settings['favicon']))
                 <div class="mt-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['favicon']) }}"
+                    src="{{ asset('uploads/' . $settings['favicon']) }}"
                     alt="favicon"
                     class="img-fluid"
                     style="max-height: 40px"
@@ -365,7 +365,7 @@
               @if (! empty($settings['og_image']))
                 <div class="mt-2 text-center existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['og_image']) }}"
+                    src="{{ asset('uploads/' . $settings['og_image']) }}"
                     alt="og"
                     class="img-fluid"
                     style="max-height: 80px"
@@ -389,7 +389,7 @@
               @if (! empty($settings['logo']))
                 <div class="mt-2 text-center border p-2 rounded existing-image">
                   <img
-                    src="{{ asset('storage/' . $settings['logo']) }}"
+                    src="{{ asset('uploads/' . $settings['logo']) }}"
                     alt="logo"
                     class="img-fluid"
                     style="max-height: 60px"

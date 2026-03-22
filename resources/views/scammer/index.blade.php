@@ -3,7 +3,7 @@
 
 @php
   $siteTitle = $siteConfig['title'] ?? 'CheckScam';
-  $logoUrl = filter_var($siteConfig['logo'] ?? '', FILTER_VALIDATE_URL) ? $siteConfig['logo'] ?? '' : asset('storage/' . ($siteConfig['logo'] ?? ''));
+  $logoUrl = filter_var($siteConfig['logo'] ?? '', FILTER_VALIDATE_URL) ? $siteConfig['logo'] ?? '' : asset('uploads/' . ($siteConfig['logo'] ?? ''));
 @endphp
 
 @section('structured_data')
@@ -308,9 +308,9 @@
                     class="pointer-events-none absolute inset-0 bg-slate-900/20 transition-all duration-500 group-hover:bg-transparent"
                   ></div>
                   <img
-                    src="{{ asset('storage/' . $image) }}"
+                    src="{{ asset('uploads/' . $image) }}"
                     class="evidence-img h-full w-full object-cover transition-all duration-500"
-                    data-src="{{ asset('storage/' . $image) }}"
+                    data-src="{{ asset('uploads/' . $image) }}"
                     data-index="{{ $index }}"
                     alt="Proof"
                   />

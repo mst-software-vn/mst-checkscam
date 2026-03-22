@@ -199,7 +199,7 @@
                     <a href="javascript:void(0);" class="product-img">
                       @if ($user->avatar)
                         <img
-                          src="{{ asset('storage/' . $user->avatar) }}"
+                          src="{{ asset('uploads/' . $user->avatar) }}"
                           alt="avatar"
                           class="rounded-circle"
                           style="width: 40px; height: 40px"
