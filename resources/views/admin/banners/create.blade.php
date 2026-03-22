@@ -168,10 +168,12 @@
   </form>
 @endsection
 
-@section('scripts')
+@push('scripts')
   <script>
-    $(document).ready(function () {
-      initImagePreview('input_banner_image', 'preview_banner_image');
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof initImagePreview === 'function') {
+        initImagePreview('input_banner_image', 'preview_banner_image');
+      }
     });
   </script>
-@endsection
+@endpush
