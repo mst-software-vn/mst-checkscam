@@ -44,21 +44,22 @@ class AdminBannerController extends Controller
             'sort_order' => 'nullable|integer|min:0',
         ]);
 
+        $imagePath = '';
+        if ($request->hasFile('image')) {
+            $imagePath = FileHelper::uploadImage($request->file('image'), 'banners');
+        }
+
         $banner = Banner::create([
             'title' => $request->title,
+            'image_path' => $imagePath,
             'redirect_url' => $request->redirect_url,
             'position' => $request->position,
             'type' => $request->type,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'status' => $request->has('status'),
+            'status' => $request->boolean('status'),
             'sort_order' => $request->sort_order ?? 0,
         ]);
-
-        if ($request->hasFile('image')) {
-            $path = FileHelper::uploadImage($request->file('image'), 'banners');
-            $banner->update(['image_path' => $path]);
-        }
 
         return redirect()->route('admin.banners.index')->with('success', 'Đã tạo banner thành công.');
     }
@@ -92,7 +93,7 @@ class AdminBannerController extends Controller
             'type' => $request->type,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'status' => $request->has('status'),
+            'status' => $request->boolean('status'),
             'sort_order' => $request->sort_order ?? 0,
         ];
 

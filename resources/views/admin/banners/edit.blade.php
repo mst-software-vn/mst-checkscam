@@ -168,19 +168,21 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Hình ảnh banner</h5>
-        @if ($banner->image_path)
-          <div class="mb-3">
-            <img
-              src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('uploads/' . $banner->image_path) }}"
-              alt="{{ $banner->title }}"
-              class="img-fluid rounded"
-              style="max-height: 120px"
-            />
-          </div>
-        @endif
+        <div id="preview_banner_image">
+          @if ($banner->image_path)
+            <div class="mt-2 position-relative d-inline-block border rounded p-1 existing-image">
+              <img
+                src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('uploads/' . $banner->image_path) }}"
+                alt="{{ $banner->title }}"
+                class="rounded shadow-sm"
+                style="max-height: 120px; max-width: 100%; display: block"
+              />
+            </div>
+          @endif
+        </div>
 
         <div class="image-upload">
-          <input type="file" name="image" accept="image/*" />
+          <input type="file" name="image" id="input_banner_image" accept="image/*" />
           <div class="image-uploads">
             <img src="/assets/img/icons/upload.svg" alt="img" />
             <h4>Thay đổi hình ảnh</h4>
@@ -198,3 +200,13 @@
     </div>
   </form>
 @endsection
+
+@push('scripts')
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof initImagePreview === 'function') {
+        initImagePreview('input_banner_image', 'preview_banner_image');
+      }
+    });
+  </script>
+@endpush
