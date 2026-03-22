@@ -58,6 +58,19 @@
                   <button class="btn btn-login" type="submit">Sign In</button>
                 </div>
               </form>
+              <ul>
+                <li class="">TK: admin@mstsoftware.vn</li>
+                <li>MK: 123456</li>
+                <li>Lưu ý: Tạo tài khoản mới và xóa tài khoản này đi để bảo mật!</li>
+                <li>
+                  Video cách cài đặt từ A-Z, upload ảnh:
+                  <a href="https://youtu.be/O2fLBDx1Z6Q" target="_blank">https://youtu.be/O2fLBDx1Z6Q</a>
+                </li>
+                <li>
+                  Mã nguồn được phát triển:
+                  <a href="https://www.facebook.com/mstsoftware.vn" target="_blank">MST Software</a>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="login-img">

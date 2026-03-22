@@ -11,7 +11,7 @@
       <div class="space-y-6 md:col-span-4">
         <a href="/" class="inline-block transform transition-transform hover:scale-105">
           @php
-            $logoFooterLight = ! empty($siteConfig['logo_footer_light']) ? asset('uploads/' . $siteConfig['logo_footer_light']) : 'https://i.ibb.co/7xfz0v3K/black.png';
+            $logoFooterLight = ! empty($siteConfig['logo_footer_light']) ? asset('uploads/' . $siteConfig['logo_footer_light']) : 'https://i.ibb.co/wFZsnJBR/white.png';
             $logoFooterDark = ! empty($siteConfig['logo_footer_dark']) ? asset('uploads/' . $siteConfig['logo_footer_dark']) : 'https://i.ibb.co/wFZsnJBR/white.png';
           @endphp
 
