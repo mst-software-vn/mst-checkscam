@@ -169,22 +169,28 @@ class AdminUserController extends Controller
             ->with('success', 'Đã cập nhật thông tin tài khoản.');
     }
 
-    public function destroy(int $id, Request $request)
+    public function destroy(int $id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->id == auth()->id()) {
+        if ($user->id === auth()->id()) {
             return back()->with('error', 'Bạn không thể xóa chính mình.');
         }
 
-        if ($user->avatar) {
-            FileHelper::deleteImage($user->avatar);
+        try {
+            // Xóa ảnh trước
+            if ($user->avatar) {
+                FileHelper::deleteImage($user->avatar);
+            }
+
+            $user->delete();
+
+            return response()->json(['success' => true, 'message' => 'Đã xóa người dùng thành công.']);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+
         }
-
-        $user->delete();
-
-        return redirect()->route('admin.users.index')
-            ->with('success', 'Đã xóa người dùng thành công.');
     }
 
     public function bulkDestroy(Request $request)

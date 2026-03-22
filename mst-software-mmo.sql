@@ -719,7 +719,7 @@ INSERT INTO `settings` (`name`, `value`, `created_at`, `updated_at`) VALUES
 	('site_index', 'index, follow', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('site_notification_text', 'Hiện nay có rất nhiều tài khoản FB, TK ngân hàng, website, group và bot giả mạo <span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase italic">Admin/Gdv CS</span> nhằm lừa đảo người dùng.', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('site_title', 'Check Scam - Tra cứu lừa đảo', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
-	('support_email', 'inf@mstsoftware.vn', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
+	('support_email', 'info@mstsoftware.vn', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('telegram_link', 'https://t.me/checkscam', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('twitter_username', '@checkscam_vn', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('zalo_link', 'https://zalo.me/0812665001', '2026-03-17 19:57:57', '2026-03-17 19:57:57');

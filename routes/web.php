@@ -57,13 +57,13 @@ Route::get('/giai-quyet-khieu-nai', function () {
 });
 
 // --- Admin Panel ---
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::name('admin.')->prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         // Reports
         Route::post('/reports/bulk-delete', [AdminReportController::class, 'bulkDestroy'])->name('reports.bulk-delete');
-        Route::prefix('reports')->name('reports.')->group(function () {
+        Route::name('reports.')->prefix('reports')->group(function () {
             Route::get('/', [AdminReportController::class, 'index'])->name('index');
             Route::get('/{id}', [AdminReportController::class, 'show'])->name('detail');
             Route::post('/{id}/approve', [AdminReportController::class, 'approve'])->name('approve');
@@ -74,7 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Insurances
         Route::post('/insurances/bulk-delete', [AdminInsuranceController::class, 'bulkDestroy'])->name('insurances.bulk-delete');
-        Route::prefix('insurances')->name('insurances.')->group(function () {
+        Route::name('insurances.')->prefix('insurances')->group(function () {
             Route::get('/', [AdminInsuranceController::class, 'index'])->name('index');
             Route::get('/create', [AdminInsuranceController::class, 'create'])->name('create');
             Route::post('/', [AdminInsuranceController::class, 'store'])->name('store');
@@ -85,7 +85,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Posts
         Route::post('/posts/bulk-delete', [AdminPostController::class, 'bulkDestroy'])->name('posts.bulk-delete');
-        Route::prefix('posts')->name('posts.')->group(function () {
+        Route::name('posts.')->prefix('posts')->group(function () {
             Route::get('/', [AdminPostController::class, 'index'])->name('index');
             Route::get('/create', [AdminPostController::class, 'create'])->name('create');
             Route::post('/', [AdminPostController::class, 'store'])->name('store');
@@ -96,7 +96,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Comments
         Route::post('/comments/bulk-delete', [AdminCommentController::class, 'bulkDestroy'])->name('comments.bulk-delete');
-        Route::prefix('comments')->name('comments.')->group(function () {
+        Route::name('comments.')->prefix('comments')->group(function () {
             Route::get('/', [AdminCommentController::class, 'index'])->name('index');
             Route::delete('/{id}', [AdminCommentController::class, 'destroy'])->name('destroy');
         });
@@ -106,7 +106,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Users
         Route::post('/users/bulk-delete', [AdminUserController::class, 'bulkDestroy'])->name('users.bulk-delete');
-        Route::prefix('users')->name('users.')->group(function () {
+        Route::name('users.')->prefix('users')->group(function () {
             Route::get('/', [AdminUserController::class, 'index'])->name('index');
             Route::get('/create', [AdminUserController::class, 'create'])->name('create');
             Route::post('/', [AdminUserController::class, 'store'])->name('store');
@@ -116,14 +116,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // Settings
-        Route::prefix('settings')->name('settings.')->group(function () {
+        Route::name('settings.')->prefix('settings')->group(function () {
             Route::get('/', [AdminSettingController::class, 'index'])->name('index');
             Route::post('/', [AdminSettingController::class, 'update'])->name('update');
         });
 
         // Banners
         Route::post('/banners/bulk-delete', [AdminBannerController::class, 'bulkDestroy'])->name('banners.bulk-delete');
-        Route::prefix('banners')->name('banners.')->group(function () {
+        Route::name('banners.')->prefix('banners')->group(function () {
             Route::get('/', [AdminBannerController::class, 'index'])->name('index');
             Route::get('/create', [AdminBannerController::class, 'create'])->name('create');
             Route::post('/', [AdminBannerController::class, 'store'])->name('store');
