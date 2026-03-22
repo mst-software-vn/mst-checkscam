@@ -17,7 +17,7 @@ class SettingSeeder extends Seeder
 
             // Contact
             'hotline' => '0812.665.001',
-            'support_email' => 'inf@mstsoftware.vn',
+            'support_email' => 'info@mstsoftware.vn',
             'zalo_link' => 'https://zalo.me/0812665001',
             'facebook_link' => 'https://www.facebook.com/mstsoftware.vn',
             'telegram_link' => 'https://t.me/checkscam',
