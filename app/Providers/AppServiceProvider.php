@@ -110,7 +110,7 @@ class AppServiceProvider extends ServiceProvider
             if ($siteConfig['og_image']) {
                 $og_img = filter_var($siteConfig['og_image'], FILTER_VALIDATE_URL)
                             ? $siteConfig['og_image']
-                            : asset('storage/'.$siteConfig['og_image']);
+                            : asset('uploads/'.$siteConfig['og_image']);
 
                 // Add default image (this runs only once in head)
                 SEOTools::opengraph()->addImages([$og_img]);
@@ -141,7 +141,7 @@ class AppServiceProvider extends ServiceProvider
                         '@type' => 'Organization',
                         'name' => $orgName,
                         'url' => url('/'),
-                        'logo' => $orgLogo ? asset('storage/'.$orgLogo) : asset('assets/img/logo.png'),
+                        'logo' => $orgLogo ? asset('uploads/'.$orgLogo) : asset('assets/img/logo.png'),
                         'contactPoint' => [
                             '@type' => 'ContactPoint',
                             'telephone' => $siteConfig['hotline'],

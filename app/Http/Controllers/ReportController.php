@@ -149,7 +149,7 @@ class ReportController extends Controller
 
         if (! empty($report->evidence_images)) {
             $firstImg = $report->evidence_images[0];
-            $imgUrl = filter_var($firstImg, FILTER_VALIDATE_URL) ? $firstImg : asset('storage/'.$firstImg);
+            $imgUrl = filter_var($firstImg, FILTER_VALIDATE_URL) ? $firstImg : asset('uploads/'.$firstImg);
 
             // For OpenGraph, we use addImages to replace/set the list
             SEOTools::opengraph()->addImages([$imgUrl]);
@@ -169,7 +169,7 @@ class ReportController extends Controller
             'name' => 'CheckScam.vn',
             'logo' => [
                 '@type' => 'ImageObject',
-                'url' => filter_var(ConfigHelper::getConfig('logo'), FILTER_VALIDATE_URL) ? ConfigHelper::getConfig('logo') : asset('storage/'.ConfigHelper::getConfig('logo')),
+                'url' => filter_var(ConfigHelper::getConfig('logo'), FILTER_VALIDATE_URL) ? ConfigHelper::getConfig('logo') : asset('uploads/'.ConfigHelper::getConfig('logo')),
             ],
         ]);
         SEOTools::jsonLd()->addValue('datePublished', $report->created_at->toIso8601String());

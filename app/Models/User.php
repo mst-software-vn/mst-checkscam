@@ -69,6 +69,6 @@ class User extends Authenticatable implements HasMedia
             return $this->avatar;
         }
 
-        return asset('storage/'.$this->avatar);
+        return asset('uploads/'.$this->avatar);
     }
 }

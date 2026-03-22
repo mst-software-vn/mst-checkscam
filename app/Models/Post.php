@@ -93,6 +93,6 @@ class Post extends Model implements HasMedia
             return $this->thumbnail;
         }
 
-        return asset('storage/'.$this->thumbnail);
+        return asset('uploads/'.$this->thumbnail);
     }
 }
