@@ -66,7 +66,7 @@
                     placeholder="{{
                       isset($user)
                         ? "
-                                                                                                                                                                                                                                                                                                                                                                                                              Để trống nếu không đổi mật khẩu"
+                                                                                                                                                                                                                                                                                                                                                                                                                                    Để trống nếu không đổi mật khẩu"
                         : 'Nhập mật khẩu'
                     }}"
                   />
@@ -152,7 +152,7 @@
                     class="image-preview-item mt-2 position-relative d-inline-block border rounded p-1 existing-image"
                   >
                     <img
-                      src="{{ asset('storage/' . $user->avatar) }}"
+                      src="{{ asset('uploads/' . $user->avatar) }}"
                       alt="avatar"
                       style="max-height: 150px; max-width: 100%; display: block"
                       class="rounded shadow-sm"

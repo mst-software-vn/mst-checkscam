@@ -152,7 +152,7 @@
                 <td class="productimgname">
                   <a href="javascript:void(0);" class="product-img">
                     <img
-                      src="{{ $insurance->avatar ? (str_starts_with($insurance->avatar, 'http') ? $insurance->avatar : asset('storage/' . $insurance->avatar)) : '/assets/img/customer/customer1.jpg' }}"
+                      src="{{ $insurance->avatar ? (str_starts_with($insurance->avatar, 'http') ? $insurance->avatar : asset('uploads/' . $insurance->avatar)) : '/assets/img/customer/customer1.jpg' }}"
                       alt="product"
                       class="rounded-circle"
                     />

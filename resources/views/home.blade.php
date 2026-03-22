@@ -565,12 +565,13 @@
             <p class="mb-5 text-[13px] leading-relaxed text-gray-600 dark:text-gray-400">
               Chặn đứng kẻ gian bằng cách báo cáo ngay lên hệ thống. Đóng góp của bạn giúp cộng đồng MMO an toàn hơn.
             </p>
-            <button
-              class="bg-cs_red w-full cursor-pointer rounded-lg px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-red-700"
+            <a
+              href="{{ route('reports') }}"
+              class="bg-cs_red w-full block cursor-pointer rounded-lg px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-red-700"
             >
               <i class="fa-regular fa-paper-plane mr-1"></i>
               GỬI ĐƠN TỐ CÁO
-            </button>
+            </a>
           </div>
           <!-- Verification Log: Recent Searches (Professional & Neutral) -->
           <div

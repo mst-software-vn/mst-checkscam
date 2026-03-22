@@ -16,12 +16,12 @@
         <div class="relative mb-10 flex flex-col items-center">
           @if (! empty($siteConfig['logo_header_dark']))
             <img
-              src="{{ asset('storage/' . $siteConfig['logo_header_dark']) }}"
+              src="{{ asset('uploads/' . $siteConfig['logo_header_dark']) }}"
               alt="Logo"
               class="hidden h-12 w-auto dark:block"
             />
             <img
-              src="{{ asset('storage/' . ($siteConfig['logo_header_light'] ?? $siteConfig['logo_header_dark'])) }}"
+              src="{{ asset('uploads/' . ($siteConfig['logo_header_light'] ?? $siteConfig['logo_header_dark'])) }}"
               alt="Logo"
               class="block h-12 w-auto dark:hidden"
             />

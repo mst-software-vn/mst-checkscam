@@ -5,8 +5,8 @@
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2">
         @php
-          $logoHeaderLight = ! empty($siteConfig['logo_header_light']) ? asset('storage/' . $siteConfig['logo_header_light']) : 'https://i.ibb.co/7xfz0v3K/black.png';
-          $logoHeaderDark = ! empty($siteConfig['logo_header_dark']) ? asset('storage/' . $siteConfig['logo_header_dark']) : 'https://i.ibb.co/wFZsnJBR/white.png';
+          $logoHeaderLight = ! empty($siteConfig['logo_header_light']) ? asset('uploads/' . $siteConfig['logo_header_light']) : 'https://i.ibb.co/7xfz0v3K/black.png';
+          $logoHeaderDark = ! empty($siteConfig['logo_header_dark']) ? asset('uploads/' . $siteConfig['logo_header_dark']) : 'https://i.ibb.co/wFZsnJBR/white.png';
         @endphp
 
         <img

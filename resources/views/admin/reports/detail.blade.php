@@ -109,9 +109,9 @@
                     "
                   >
                     <img
-                      src="{{ asset('storage/' . $image) }}"
+                      src="{{ asset('uploads/' . $image) }}"
                       class="admin-evidence-img"
-                      data-src="{{ asset('storage/' . $image) }}"
+                      data-src="{{ asset('uploads/' . $image) }}"
                       data-index="{{ $index }}"
                       style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s"
                       onmouseover="this.style.opacity = '.85'"

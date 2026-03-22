@@ -8,7 +8,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-
 CREATE TABLE IF NOT EXISTS `banks` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -20,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `banks` (
   KEY `banks_name_index` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `banks`;
 
 CREATE TABLE IF NOT EXISTS `banners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `banners` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `banners`;
 INSERT INTO `banners` (`id`, `title`, `image_path`, `redirect_url`, `position`, `type`, `start_date`, `end_date`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
 	(1, 'Vietnix Optimizer Banner', 'https://image.vietnix.vn/wp-content/uploads/2025/10/banner-vnx-optimizer-2048x216.webp', '#', 'home_top', 'horizontal', NULL, NULL, 1, 0, '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	(2, 'Liên Quân Giá Rẻ', 'https://i.ibb.co/Z1kFjpWw/lienquangiaredt.gif', '#', 'home_between', 'horizontal', NULL, NULL, 1, 0, '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
@@ -54,6 +55,35 @@ CREATE TABLE IF NOT EXISTS `cache` (
   KEY `cache_expiration_index` (`expiration`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `cache`;
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+	('laravel-cache-config_bing_site_verification', 'N;', 1773796343),
+	('laravel-cache-config_facebook_link', 's:39:"https://www.facebook.com/mstsoftware.vn";', 1773796324),
+	('laravel-cache-config_favicon', 'N;', 1773796343),
+	('laravel-cache-config_google_site_verification', 'N;', 1773796343),
+	('laravel-cache-config_header_scripts', 'N;', 1773796343),
+	('laravel-cache-config_hotline', 's:12:"0812.665.001";', 1773796324),
+	('laravel-cache-config_logo', 'N;', 1773796343),
+	('laravel-cache-config_logo_footer_dark', 'N;', 1773796343),
+	('laravel-cache-config_logo_footer_light', 'N;', 1773796343),
+	('laravel-cache-config_logo_header_dark', 'N;', 1773796343),
+	('laravel-cache-config_logo_header_light', 'N;', 1773796343),
+	('laravel-cache-config_maintenance_mode', 's:1:"0";', 1773796322),
+	('laravel-cache-config_meta_extra', 'N;', 1773796343),
+	('laravel-cache-config_og_image', 'N;', 1773796343),
+	('laravel-cache-config_og_site_name', 's:12:"CheckScam.vn";', 1773796324),
+	('laravel-cache-config_schema_organization_logo', 's:35:"https://i.ibb.co/7xfz0v3K/black.png";', 1773796327),
+	('laravel-cache-config_schema_organization_name', 's:23:"MST CheckScam Ecosystem";', 1773796327),
+	('laravel-cache-config_seo_keywords', 's:123:"check scam, tố cáo lừa đảo, kiểm tra stk lừa đảo, kiểm tra sdt lừa đảo, quỹ bảo đảm, checkscam";', 1773796324),
+	('laravel-cache-config_site_author', 's:12:"MST SOFTWARE";', 1773796324),
+	('laravel-cache-config_site_description', 's:211:"CheckScam - Nền tảng kiểm tra độ tín nhiệm dữ liệu lớn nhất Việt Nam. Tra cứu số điện thoại, số tài khoản, link Facebook lừa đảo để bảo vệ túi tiền của bạn.";', 1773796324),
+	('laravel-cache-config_site_index', 's:13:"index, follow";', 1773796324),
+	('laravel-cache-config_site_notification_text', 's:235:"Hiện nay có rất nhiều tài khoản FB, TK ngân hàng, website, group và bot giả mạo <span class="bg-cs_blue/10 text-cs_blue rounded px-1.5 font-bold uppercase italic">Admin/Gdv CS</span> nhằm lừa đảo người dùng.";', 1773796324),
+	('laravel-cache-config_site_title', 's:35:"Check Scam - Tra cứu lừa đảo";', 1773796324),
+	('laravel-cache-config_support_email', 's:18:"inf@mstsoftware.vn";', 1773796324),
+	('laravel-cache-config_telegram_link', 's:22:"https://t.me/checkscam";', 1773796324),
+	('laravel-cache-config_twitter_username', 's:13:"@checkscam_vn";', 1773796324),
+	('laravel-cache-config_zalo_link', 's:26:"https://zalo.me/0812665001";', 1773796324);
 
 CREATE TABLE IF NOT EXISTS `cache_locks` (
   `key` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -63,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
   KEY `cache_locks_expiration_index` (`expiration`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `cache_locks`;
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -78,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   CONSTRAINT `comments_report_id_foreign` FOREIGN KEY (`report_id`) REFERENCES `reports` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `comments`;
 INSERT INTO `comments` (`id`, `report_id`, `full_name`, `content`, `ip_address`, `is_anonymous`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Nguyễn Minh Tuấn', 'Xác nhận đây là scammer, đã báo cáo lên công an phường nhưng chưa có phản hồi.', '192.253.5.147', 0, '2026-03-08 04:13:47', '2026-03-17 19:57:58'),
 	(2, 1, 'Lê Văn Hùng', 'Tôi cũng bị thằng này lừa rồi, mất gần 3 triệu. Mọi người cẩn thận nhé!', '146.102.84.221', 0, '2026-03-08 03:01:17', '2026-03-17 19:57:58'),
@@ -168,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `failed_jobs`;
 
 CREATE TABLE IF NOT EXISTS `insurances` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -189,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `insurances` (
   KEY `insurances_slug_index` (`slug`)
 ) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `insurances`;
 INSERT INTO `insurances` (`id`, `full_name`, `avatar`, `amount`, `insurance_date`, `expired_at`, `contact_info`, `payment_accounts`, `services`, `status`, `slug`, `created_at`, `updated_at`) VALUES
 	(1, 'Bùi Xuân Trường', 'https://i.pravatar.cc/300?u=50', 10000000.00, '2025-12-24', '2026-12-24', '[{"link": "https://facebook.com/bui-xuan-truong", "platform": "Facebook"}, {"link": "https://zalo.me/0923154192", "platform": "Zalo"}, {"link": "https://t.me/bui_xuan_truong", "platform": "Telegram"}]', '[{"bank": "TPBank", "name": "BÙI XUÂN TRƯỜNG", "number": "6284732775"}, {"bank": "VIB", "name": "BÙI XUÂN TRƯỜNG", "number": "2239115264"}]', '[{"title": "Mua bán tài khoản game (Liên Quân, Free Fire, PUBG)"}, {"title": "Dịch vụ tăng tương tác Facebook, TikTok, Instagram"}, {"title": "Thiết kế landing page chuẩn SEO"}, {"title": "Trung gian giao dịch an toàn 24/7"}, {"title": "Bán mã thẻ Garena, Zing, Vcoin chiết khấu cao"}]', 1, 'bui-xuan-truong-7819', '2025-12-24 02:38:34', '2026-03-17 19:57:58'),
 	(2, 'Lý Thái Tổ', 'https://i.pravatar.cc/300?u=36', 10000000.00, '2025-01-05', '2026-09-12', '[{"link": "https://facebook.com/ly-thai-to", "platform": "Facebook"}, {"link": "https://zalo.me/0983610642", "platform": "Zalo"}, {"link": "https://t.me/ly_thai_to", "platform": "Telegram"}]', '[{"bank": "BIDV", "name": "LÝ THÁI TỔ", "number": "8212666548"}, {"bank": "Agribank", "name": "LÝ THÁI TỔ", "number": "3940983061"}]', '[{"title": "Nạp tiền Alipay, WeChat, QQ giá tốt"}, {"title": "Hỗ trợ lấy lại tài khoản bị hack"}]', 1, 'ly-thai-to-1285', '2025-01-05 00:10:41', '2026-03-17 19:57:58'),
@@ -403,6 +437,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   KEY `jobs_queue_index` (`queue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `jobs`;
 
 CREATE TABLE IF NOT EXISTS `job_batches` (
   `id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -418,6 +453,7 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `job_batches`;
 
 CREATE TABLE IF NOT EXISTS `media` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -444,6 +480,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   KEY `media_order_column_index` (`order_column`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `media`;
 
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -452,6 +489,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `migrations`;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '0001_01_01_000000_create_users_table', 1),
 	(2, '0001_01_01_000001_create_cache_table', 1),
@@ -473,6 +511,7 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `password_reset_tokens`;
 
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -495,6 +534,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `posts`;
 INSERT INTO `posts` (`id`, `title`, `slug`, `description`, `content`, `thumbnail`, `is_featured`, `view_count`, `hashtags`, `author_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Cảnh báo chiêu trò lừa đảo qua tin nhắn iMessage và SMS', 'canh-bao-chieu-tro-lua-dao-qua-tin-nhan-imessage-va-sms-gGRdi', 'Gần đây, nhiều người dùng tại Việt Nam liên tục nhận được các tin nhắn lừa đảo qua iMessage và SMS với nội dung tuyển dụng việc làm nhẹ lương cao.', '<h3>Chiêu trò lừa đảo qua tin nhắn bùng phát</h3>\n                <p>Trong thời gian qua, Cục An toàn thông tin (Bộ Thông tin và Truyền thông) đã liên tục nhận được phản ánh của người dân về việc nhận được các tin nhắn rác, tin nhắn lừa đảo qua iMessage trên điện thoại iPhone và các tin nhắn SMS thông thường.</p>\n                <p>Nội dung các tin nhắn này thường đánh vào tâm lý muốn tìm kiếm việc làm thêm của người dân như: "Công ty chúng tôi đang tuyển nhân viên xử lý dữ liệu online, thu nhập từ 500k-1tr/ngày...", hoặc các nội dung về trúng thưởng, vay vốn ngân hàng với lãi suất cực thấp.</p>\n                <h4>Cách thức hoạt động của các đối tượng</h4>\n                <p>Để tăng sự tin tưởng, các đối tượng này thường đính kèm đường link dẫn đến các nhóm Zalo hoặc Telegram. Khi người dùng nhấn vào đường link và tham gia nhóm, chúng sẽ yêu cầu người dùng thực hiện các "nhiệm vụ" như like video YouTube, đánh giá sản phẩm Shopee... và trả một khoản tiền nhỏ ban đầu để mồi chài.</p>\n                <p>Đến khi người dùng nạp số tiền lớn để làm "nhiệm vụ cao cấp", chúng sẽ đưa ra nhiều lý do như sai cú pháp, lỗi hệ thống để yêu cầu người dùng nạp thêm tiền mới cho rút. Cuối cùng, khi nạn nhân không còn khả năng nạp tiền, chúng sẽ xóa nhóm và biến mất.</p>\n                <p><strong>Cơ quan chức năng khuyến cáo:</strong> Người dân tuyệt đối không nhấn vào các đường link lạ từ người gửi không xác định. Không cung cấp thông tin cá nhân hay mã OTP cho bất kỳ ai. Luôn kiểm chứng thông tin tuyển dụng qua các kênh chính thống.</p>', 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1000&q=80', 0, 3281, 'canh-bao, lua-dao, tin-nhan-rac, an-ninh-mang', 1, '2026-02-20 00:00:18', '2026-03-17 19:57:58'),
 	(2, '6 dấu hiệu nhận biết một trang web lừa đảo bạn cần biết', '6-dau-hieu-nhan-biet-mot-trang-web-lua-dao-ban-can-biet-YtXEF', 'Làm sao để không bị sập bẫy các trang web giả mạo ngân hàng hoặc sàn thương mại điện tử? Hãy xem ngay 6 dấu hiệu nhận biết dưới đây.', '<h3>An toàn khi truy cập Internet: Làm sao để nhận biết website giả mạo?</h3>\n                <p>Với sự phát triển của công nghệ, các website giả mạo ngày càng được thiết kế tinh vi, giống hệt trang thật khiến người dùng rất khó phân biệt. Tuy nhiên, nếu chú ý kỹ, bạn vẫn có thể nhận ra qua 6 dấu hiệu sau:</p>\n                <ol>\n                    <li><strong>Tên miền (Domain) sai lệch:</strong> Đây là dấu hiệu dễ nhận biết nhất. Các trang giả mạo thường dùng tên miền gần giống trang thật như vietcombank-home.vn thay vì vietcombank.com.vn, hoặc sh0pee.vn thay vì shopee.vn.</li>\n                    <li><strong>Không có chứng chỉ SSL (HTTPS):</strong> Các trang web uy tín luôn bắt đầu bằng https:// và có biểu tượng ổ khóa xanh trên thanh địa chỉ. Nếu thấy trang yêu cầu nhập thông tin nhạy cảm mà chỉ có http://, hãy rời đi ngay lập tức.</li>\n                    <li><strong>Yêu cầu cung cấp thông tin quá mức:</strong> Một trang web mua sắm thông thường sẽ không bao giờ yêu cầu bạn nhập mật khẩu email hay mã OTP ngân hàng.</li>\n                    <li><strong>Nội dung sơ sài, sai lỗi chính tả:</strong> Các website lừa đảo thường được làm vội vàng nên hay mắc lỗi chính tả, phông chữ không đồng nhất, hình ảnh mờ nhạt.</li>\n                    <li><strong>Ưu đãi "quá hớp":</strong> Nếu một trang web chào bán iPhone mới nhất với giá chỉ vài triệu đồng, 99% đó là lừa đảo.</li>\n                    <li><strong>Các đường link điều hướng bị lỗi:</strong> Khi bạn click vào các mục như "Giới thiệu", "Liên hệ" trên trang giả mạo, thường sẽ không dẫn đi đâu hoặc quay lại trang chủ.</li>\n                </ol>\n                <p>Hãy luôn luôn cẩn trọng trước khi nhập bất kỳ thông tin quan trọng nào lên mạng. Kiểm tra thật kỹ thanh địa chỉ web là thói mãnh mẽ giúp bạn bảo vệ tài sản của mình.</p>', 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1000&q=80', 0, 953, 'security, website, phishing, tips', 1, '2026-03-02 21:41:45', '2026-03-17 19:57:58'),
@@ -558,6 +598,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   CONSTRAINT `reports_moderator_id_foreign` FOREIGN KEY (`moderator_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `reports`;
 INSERT INTO `reports` (`id`, `type`, `reporter_name`, `reporter_contact`, `target_id`, `ip_address`, `target_name`, `target_bank`, `damage_amount`, `category`, `description`, `evidence_images`, `status`, `rejection_reason`, `view_count`, `search_count`, `moderator_id`, `slug`, `created_at`, `updated_at`) VALUES
 	(1, 'account', 'Mrs. Helga Torphy', '+1-743-389-7786', '0909456789', NULL, 'Công Ty Lừa Đảo TNHH', NULL, 8318000.00, 'Bán hàng giả mạo FB', 'Alice said; \'there\'s a large pigeon had flown into her head. \'If I eat one of the Lobster Quadrille?\' the Gryphon at the door opened inwards, and Alice\'s first thought was that you couldn\'t cut off.', '["https://techfest.vn/wp-content/uploads/2021/08/luong-canh-hinh-anh-768x402-1.jpg"]', 'approved', NULL, 4188, 509, NULL, '0909456789-crr0v', '2026-03-12 12:19:12', '2026-03-17 19:57:57'),
 	(2, 'account', 'Jamir Hayes', '1-931-797-3205', '1903456789', NULL, 'Trần Thị Thuỷ', 'Techcombank', 18893000.00, 'Bán hàng giả mạo FB', 'So Alice got up and straightening itself out again, and Alice was soon submitted to by all three to settle the question, and they all crowded together at one end to the confused clamour of the Nile.', '["https://techfest.vn/wp-content/uploads/2021/08/luong-canh-hinh-anh-768x402-1.jpg"]', 'approved', NULL, 2036, 515, NULL, '1903456789-qklnw', '2026-03-16 20:37:42', '2026-03-17 19:57:57'),
@@ -622,6 +663,7 @@ CREATE TABLE IF NOT EXISTS `search_logs` (
   KEY `search_logs_is_found_index` (`is_found`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `search_logs`;
 
 CREATE TABLE IF NOT EXISTS `sessions` (
   `id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -635,6 +677,10 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `sessions`;
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+	('5iNt5AUl7x2pHTMSqHiu93UTwkOnGnUAkImUO0wg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicFpTZER2OTRjd2xLcTljblF4TkhWWGVwalZTbzNzWjFKekI1ZzZUbSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbiI7czo1OiJyb3V0ZSI7czoxNToiYWRtaW4uZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1773792745),
+	('T3KvAnf9IY3L8pW4po1u4iivOcgrq0J71hZpXDDi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiczRhdmszaFZLaWh1QkZ3MnlCWW1xWGZBeXZ6Z1Z6bmNWdFRKdkFrTCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1773792728);
 
 CREATE TABLE IF NOT EXISTS `settings` (
   `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -644,6 +690,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `settings`;
 INSERT INTO `settings` (`name`, `value`, `created_at`, `updated_at`) VALUES
 	('bing_site_verification', NULL, '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	('enable_comments', '1', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
@@ -697,6 +744,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `users_status_index` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELETE FROM `users`;
 INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `avatar`, `full_name`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'admin', 'admin@mstsoftware.vn', '2026-03-17 19:57:57', '$2y$12$5RFURjj1l3iAG0HMMfMIu.kf2Vk10ejIDUWhB.oNEs.QKp01P2Rw.', NULL, 'Quản trị viên', 'admin', 1, 'gBXMcN9avx', '2026-03-17 19:57:57', '2026-03-17 19:57:57'),
 	(2, 'flittle', 'lance.morissette@example.org', '2026-03-17 19:57:58', '$2y$12$XJ257cbSFe3WhNAUVAmCeeFGW9BAxVMnUE2emWSU3w4inS1n0z.Ge', NULL, 'Luz White', 'admin', 0, 'cqp60nl25r', '2026-03-17 19:57:58', '2026-03-17 19:57:58'),

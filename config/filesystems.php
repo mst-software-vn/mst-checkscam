@@ -46,6 +46,13 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'my_public' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

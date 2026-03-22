@@ -299,7 +299,7 @@
                     class="image-preview-item mt-2 position-relative d-inline-block border rounded p-1 existing-image"
                   >
                     <img
-                      src="{{ asset('storage/' . $insurance->avatar) }}"
+                      src="{{ asset('uploads/' . $insurance->avatar) }}"
                       alt="avatar"
                       style="max-height: 150px; max-width: 100%; display: block"
                       class="rounded shadow-sm"

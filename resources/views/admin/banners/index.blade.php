@@ -141,7 +141,7 @@
                 <td class="productimgname">
                   <a href="{{ route('admin.banners.edit', $banner->id) }}" class="product-img">
                     <img
-                      src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('storage/' . $banner->image_path) }}"
+                      src="{{ Str::startsWith($banner->image_path, ['http://', 'https://']) ? $banner->image_path : asset('uploads/' . $banner->image_path) }}"
                       alt="{{ $banner->title }}"
                     />
                   </a>
