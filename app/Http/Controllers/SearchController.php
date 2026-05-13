@@ -29,6 +29,7 @@ class SearchController extends Controller
         }
 
         $results = collect();
+        $matchedInsurances = collect();
         $isFound = false;
         $type = null;
 
@@ -68,8 +69,34 @@ class SearchController extends Controller
                 Cache::put($searchCacheKey, true, now()->addHours(24));
             }
 
+            $matchedInsurances = \App\Models\Insurance::where('status', 1)
+                ->where(function ($q) use ($query, $formattedQuery, $normalizedQuery) {
+                    $q->where('full_name', 'LIKE', "%{$query}%")
+                        ->orWhereRaw("LOWER(TRIM(REGEXP_REPLACE(full_name, '\\\\s+', ' '))) LIKE ?", ["%{$normalizedQuery}%"])
+                        ->orWhere('contact_info', 'LIKE', "%{$formattedQuery}%")
+                        ->orWhere('payment_accounts', 'LIKE', "%{$formattedQuery}%")
+                        ->orWhere('slug', 'LIKE', "%{$formattedQuery}%");
+                })
+                ->get()
+                ->sortByDesc(function ($insurance) use ($normalizedQuery, $query, $formattedQuery) {
+                    $normalizedName = StringHelper::normalizeString($insurance->full_name);
+                    if ($normalizedName === $normalizedQuery || strcasecmp($insurance->full_name, $query) === 0) {
+                        return 3;
+                    }
+
+                    if (
+                        str_contains(json_encode($insurance->contact_info), '"'.$formattedQuery.'"') ||
+                        str_contains(json_encode($insurance->payment_accounts), '"'.$formattedQuery.'"')
+                    ) {
+                        return 2;
+                    }
+
+                    return 1;
+                })
+                ->values();
+
             $results = $dbQuery->paginate(10)->withQueryString();
-            $isFound = $results->total() > 0;
+            $isFound = $results->total() > 0 || $matchedInsurances->isNotEmpty();
 
             $alreadyLogged = SearchLog::where('search_query', $query)
                 ->where('ip_address', $ip)
@@ -128,6 +155,7 @@ class SearchController extends Controller
         return view('home', compact(
             'query',
             'results',
+            'matchedInsurances',
             'isFound',
             'type',
             'recentSearches',
@@ -148,7 +176,7 @@ class SearchController extends Controller
 
         [$type, $formattedQuery] = StringHelper::detectQueryType($query);
 
-        $suggestions = Report::where('status', 'approved')
+        $reportSuggestions = Report::where('status', 'approved')
             ->where(function ($q) use ($query, $formattedQuery) {
                 $q->where('target_id', 'LIKE', "%{$formattedQuery}%")
                     ->orWhere('target_name', 'LIKE', "%{$query}%");
@@ -166,6 +194,28 @@ class SearchController extends Controller
                 'target_name' => StringHelper::mask_name($r->target_name),
                 'slug' => $r->slug,
             ]);
+
+        $insuranceSuggestions = \App\Models\Insurance::where('status', 1)
+            ->where(function ($q) use ($query, $formattedQuery) {
+                $q->where('contact_info', 'LIKE', "%{$formattedQuery}%")
+                    ->orWhere('payment_accounts', 'LIKE', "%{$formattedQuery}%")
+                    ->orWhere('full_name', 'LIKE', "%{$query}%");
+            })
+            ->select('full_name', 'slug')
+            ->limit(30)
+            ->get()
+            ->unique('full_name')
+            ->take(4)
+            ->values()
+            ->map(fn ($i) => [
+                'label' => 'Uy tín: '.$i->full_name,
+                'value' => $i->full_name,
+                'type' => 'insurance',
+                'target_name' => $i->full_name,
+                'slug' => $i->slug,
+            ]);
+
+        $suggestions = $insuranceSuggestions->concat($reportSuggestions)->take(8)->values();
 
         return response()->json($suggestions);
     }
