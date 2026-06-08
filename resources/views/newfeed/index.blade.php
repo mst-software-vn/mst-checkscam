@@ -381,15 +381,24 @@
   @endauth
 
   @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.umd.js"></script>
     <script>
       Fancybox.bind('[data-fancybox]', {
-        animated: true,
-        showClass: 'f-fadeIn',
-        hideClass: 'f-fadeOut',
+        animated: false,
         Toolbar: { display: { left: [], middle: [], right: ['close'] } },
-        Images: { zoom: true },
       });
+
+      window.openCardGallery = function (images, startIndex) {
+        const items = images.map(function (src) {
+          return { src: src, type: 'image' };
+        });
+        Fancybox.show(items, {
+          startIndex: startIndex || 0,
+          animated: false,
+          Toolbar: { display: { left: [], middle: [], right: ['close'] } },
+        });
+      };
 
       $(function () {
         // ===== State =====
@@ -509,40 +518,37 @@
           const extra = total - show;
           const gridCols = show === 1 ? 'grid-cols-1' : 'grid-cols-2';
           let html = '<div class="mt-3 grid gap-1 ' + gridCols + '">';
+          const imagesJson = JSON.stringify(images);
           for (let i = 0; i < show; i++) {
             const url = images[i];
             const isLast = i === show - 1;
-            const spanClass = show === 3 && i === 0 ? ' col-span-2' : '';
-            const hClass = show === 1 ? ' max-h-72' : ' h-36';
+            const spanCls = show === 3 && i === 0 ? ' col-span-2' : '';
+            const hCls = show === 1 ? ' max-h-72' : ' h-36';
             html +=
-              '<a href="' +
-              url +
-              '" data-fancybox="gallery-' +
-              postId +
-              '" class="relative block overflow-hidden rounded-lg' +
-              spanClass +
-              hClass +
+              '<div onclick="event.stopPropagation();openCardGallery(' +
+              imagesJson.replace(/"/g, '&quot;') +
+              ',' +
+              i +
+              ')" class="relative cursor-pointer overflow-hidden rounded-lg' +
+              spanCls +
+              hCls +
               '">';
             html += '<img src="' + url + '" alt="" class="h-full w-full object-cover" loading="lazy">';
             if (isLast && extra > 0) {
               html +=
-                '<div class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50"><span class="text-2xl font-black text-white">+' +
+                '<div class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50 pointer-events-none"><span class="text-2xl font-black text-white">+' +
                 extra +
                 '</span></div>';
             }
-            html += '</a>';
+            html += '</div>';
           }
           html += '</div>';
-          // hidden anchors for remaining images
-          for (let i = show; i < total; i++) {
-            html += '<a href="' + images[i] + '" data-fancybox="gallery-' + postId + '" class="hidden"></a>';
-          }
           return html;
         }
 
-        // ===== Truncate content =====
+        // ===== Truncate content (no "Xem thêm" link — card click navigates) =====
         const CONTENT_LIMIT = 200;
-        function truncateContent(text, postId) {
+        function truncateContent(text) {
           const formatted = formatPostContent(text);
           if (text.length <= CONTENT_LIMIT)
             return '<div class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' + formatted + '</div>';
@@ -550,10 +556,7 @@
           return (
             '<div class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' +
             short +
-            '<span class="text-gray-400">...</span>' +
-            '<a href="/newfeed/' +
-            postId +
-            '" class="text-cs_blue ml-1 font-semibold hover:underline">Xem thêm</a></div>'
+            '<span class="text-gray-400">...</span></div>'
           );
         }
 
@@ -573,41 +576,42 @@
           const imageHtml = buildImageGrid(post.image_urls, post.id);
           const actionBtn = window._authUserId
             ? isOwner
-              ? '<button type="button" onclick="deletePost(' +
+              ? '<button type="button" data-no-nav onclick="deletePost(' +
                 post.id +
                 ',this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-red-50 text-xs text-cs_red transition hover:bg-red-100 dark:bg-red-900/30" title="Xóa bài"><i class="fa-solid fa-xmark"></i></button>'
               : reported
-                ? '<button type="button" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 dark:bg-orange-900/30" title="Đã báo cáo" disabled><i class="fa-solid fa-flag"></i></button>'
-                : '<button type="button" onclick="openReport(' +
+                ? '<button type="button" data-no-nav class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 dark:bg-orange-900/30" title="Đã báo cáo" disabled><i class="fa-solid fa-flag"></i></button>'
+                : '<button type="button" data-no-nav onclick="openReport(' +
                   post.id +
                   ',this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 transition hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700" title="Báo cáo"><i class="fa-regular fa-flag"></i></button>'
             : '';
 
-          const cardHtml =
-            '<div class="nf-card dark:bg-dark_card relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-xs dark:border-gray-800" data-id="' +
-            post.id +
-            '">' +
-            actionBtn +
-            '<div class="flex items-center gap-3 pr-8">' +
-            '<img src="' +
-            post.user.avatar_url +
-            '" alt="" class="h-9 w-9 rounded-full object-cover">' +
-            '<div class="min-w-0"><div class="flex items-center text-sm font-bold text-gray-800 dark:text-white"><span class="truncate">' +
-            escapeHtml(post.user.name) +
-            '</span>' +
-            tick +
-            '</div>' +
-            '<div class="text-[11px] text-gray-400">' +
-            post.created_at +
-            ' · ' +
-            escapeHtml(post.category) +
-            '</div></div></div>' +
-            truncateContent(post.content, post.id) +
-            priceHtml +
-            imageHtml +
-            '</div>';
-
-          return $(cardHtml);
+          return $(
+            '<div class="nf-card dark:bg-dark_card relative mb-4 break-inside-avoid cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-xs transition hover:shadow-md dark:border-gray-800" data-id="' +
+              post.id +
+              '" data-post-url="/newfeed/' +
+              post.id +
+              '">' +
+              actionBtn +
+              '<div class="flex items-center gap-3 pr-8">' +
+              '<img src="' +
+              post.user.avatar_url +
+              '" alt="" class="h-9 w-9 rounded-full object-cover">' +
+              '<div class="min-w-0"><div class="flex items-center text-sm font-bold text-gray-800 dark:text-white"><span class="truncate">' +
+              escapeHtml(post.user.name) +
+              '</span>' +
+              tick +
+              '</div>' +
+              '<div class="text-[11px] text-gray-400">' +
+              post.created_at +
+              ' · ' +
+              escapeHtml(post.category) +
+              '</div></div></div>' +
+              truncateContent(post.content) +
+              priceHtml +
+              imageHtml +
+              '</div>'
+          );
         }
 
         // ===== Infinite scroll =====
@@ -622,6 +626,12 @@
           );
           observer.observe($sentinel[0]);
         }
+
+        // ===== Card click → detail page =====
+        $feed.on('click', '.nf-card', function (e) {
+          if ($(e.target).closest('[data-fancybox], [data-no-nav], button').length) return;
+          window.location.href = $(this).data('post-url');
+        });
 
         // ===== Popup helpers =====
         window.openPopup = function (id) {
@@ -676,32 +686,71 @@
           $btnSubmit.prop('disabled', $nfContent.val().trim().length < 10 || $catInput.val().trim().length === 0);
         }
 
-        // ===== Multi-image upload =====
-        $('#nf-images').on('change', function () {
-          const files = Array.from(this.files || []);
-          if (files.length === 0) return;
+        // ===== Multi-image upload (drag reorder + per-image delete) =====
+        let selectedFiles = [];
+
+        const sortableGrid = Sortable.create(document.getElementById('nf-preview-grid'), {
+          animation: 150,
+          ghostClass: 'opacity-40',
+          onEnd: function (evt) {
+            const moved = selectedFiles.splice(evt.oldIndex, 1)[0];
+            selectedFiles.splice(evt.newIndex, 0, moved);
+          },
+        });
+
+        function renderPreviews() {
           const $grid = $('#nf-preview-grid').empty();
-          files.forEach(function (file) {
+          selectedFiles.forEach(function (file, idx) {
             const reader = new FileReader();
             reader.onload = function (e) {
-              $grid.append(
-                '<div class="relative">' +
-                  '<img src="' +
-                  e.target.result +
-                  '" class="h-20 w-full rounded-lg object-cover" />' +
-                  '</div>'
-              );
+              $grid
+                .find('[data-pending="' + idx + '"]')
+                .find('img')
+                .attr('src', e.target.result);
             };
+            const $item = $(
+              '<div data-pending="' +
+                idx +
+                '" class="relative cursor-grab rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">' +
+                '<img src="" class="h-20 w-full object-cover" />' +
+                '<button type="button" data-no-nav onclick="removeUploadFile(' +
+                idx +
+                ')" ' +
+                'class="absolute top-0.5 right-0.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-red-500 text-[10px] text-white hover:bg-red-600" title="Xóa ảnh">' +
+                '<i class="fa-solid fa-xmark"></i></button>' +
+                '<div class="absolute inset-x-0 bottom-0 flex justify-center bg-black/25 py-0.5 text-[9px] text-white/70">&#9776;</div>' +
+                '</div>'
+            );
+            $grid.append($item);
             reader.readAsDataURL(file);
           });
-          $('#nf-image-preview').removeClass('hidden');
-          $('#nf-image-drop').addClass('hidden');
+
+          if (selectedFiles.length > 0) {
+            $('#nf-image-preview').removeClass('hidden');
+            $('#nf-image-drop').addClass('hidden');
+          } else {
+            $('#nf-image-preview').addClass('hidden');
+            $('#nf-image-drop').removeClass('hidden');
+          }
+        }
+
+        $('#nf-images').on('change', function () {
+          const newFiles = Array.from(this.files || []);
+          newFiles.forEach(function (f) {
+            if (selectedFiles.length < 10) selectedFiles.push(f);
+          });
+          this.value = '';
+          renderPreviews();
         });
+
+        window.removeUploadFile = function (idx) {
+          selectedFiles.splice(idx, 1);
+          renderPreviews();
+        };
+
         window.clearImages = function () {
-          $('#nf-images').val('');
-          $('#nf-preview-grid').empty();
-          $('#nf-image-preview').addClass('hidden');
-          $('#nf-image-drop').removeClass('hidden');
+          selectedFiles = [];
+          renderPreviews();
         };
 
         // ===== Format text (wrap textarea selection with markdown markers) =====
@@ -728,12 +777,9 @@
           fd.append('category', $catInput.val().trim());
           const price = $('#nf-price').val();
           if (price) fd.append('price', price);
-          const imgFiles = $('#nf-images')[0].files;
-          if (imgFiles && imgFiles.length > 0) {
-            Array.from(imgFiles).forEach(function (f) {
-              fd.append('images[]', f);
-            });
-          }
+          selectedFiles.forEach(function (f) {
+            fd.append('images[]', f);
+          });
           fd.append('_token', window._csrfToken);
 
           $.ajax({ url: '/api/newfeed/posts', method: 'POST', data: fd, processData: false, contentType: false })
