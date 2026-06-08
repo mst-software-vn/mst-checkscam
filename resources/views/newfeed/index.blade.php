@@ -4,87 +4,101 @@
 @section('description', 'Mua bán tài khoản, dịch vụ MMO uy tín tại CheckScam. Cộng đồng MMO Việt Nam.')
 
 @section('content')
-  <main class="mx-auto w-full max-w-7xl grow px-4 py-6 sm:px-6 lg:px-8">
-    {{-- Page Header --}}
-    <div class="mb-6">
-      <h1 class="text-xl font-black text-gray-800 uppercase dark:text-white md:text-2xl">
-        <i class="fa-solid fa-store text-cs_blue mr-2"></i>
-        Khu Mua Bán
-      </h1>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Mua bán tài khoản, dịch vụ MMO uy tín trong cộng đồng</p>
-    </div>
+  <main class="pb-24">
+    <x-breadcrumb :links="[['name' => 'Khu Mua Bán', 'url' => '/newfeed']]" />
 
-    {{-- Search + Filter Bar --}}
-    <div class="mb-4 space-y-3">
-      <div class="relative">
-        <input
-          id="nf-search"
-          type="text"
-          placeholder="Tìm tài khoản, dịch vụ MMO..."
-          class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 pl-10 text-sm outline-none focus:border-cs_blue focus:ring-2 focus:ring-cs_blue/20 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-100"
-        />
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-      </div>
-
-      {{-- Category Filter --}}
-      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="nf-filter-bar">
-        <button
-          class="nf-chip nf-chip-active shrink-0 rounded-full border px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all"
-          data-category=""
-        >
-          Hoạt động mới
-          <span class="ml-1 text-[10px] opacity-70">({{ $posts->total() }})</span>
-        </button>
-        @foreach ($categories as $cat)
-          <button
-            class="nf-chip shrink-0 rounded-full border border-gray-200 px-3 py-1.5 text-xs font-bold whitespace-nowrap text-gray-600 transition-all hover:border-cs_blue hover:text-cs_blue dark:border-gray-700 dark:text-gray-300"
-            data-category="{{ $cat }}"
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      {{-- Page Header --}}
+      <header class="mb-8 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+        <div class="max-w-2xl">
+          <h1
+            class="text-2xl font-black tracking-tight text-gray-800 uppercase md:text-3xl lg:text-4xl dark:text-gray-300"
           >
-            {{ $cat }}
-            @if (isset($categoryCounts[$cat]))
-              <span class="ml-1 text-[10px] opacity-70">({{ $categoryCounts[$cat] }})</span>
-            @endif
-          </button>
-        @endforeach
-      </div>
-    </div>
-
-    {{-- Nút Đăng Bài --}}
-    <div class="mb-6">
-      <button
-        id="btn-open-post-form"
-        class="bg-cs_blue w-full rounded-xl py-3 text-sm font-black uppercase text-white shadow-sm transition hover:bg-blue-600 active:scale-95 md:w-auto md:px-8"
-      >
-        <i class="fa-solid fa-plus mr-2"></i>
-        Đăng bài
-      </button>
-    </div>
-
-    {{-- Feed --}}
-    <div id="nf-feed" class="columns-1 gap-4 md:columns-2">
-      @forelse ($posts as $post)
-        @include('newfeed.partials.card', ['post' => $post, 'userReportedIds' => $userReportedIds])
-      @empty
-        <div class="col-span-full py-16 text-center text-sm text-gray-400">
-          <i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>
-          Chưa có bài đăng nào.
+            Khu
+            <span class="text-cs_blue">Mua Bán</span>
+          </h1>
+          <p class="mt-2 text-sm leading-relaxed font-semibold text-gray-500 dark:text-gray-400">
+            Nơi cộng đồng đăng tin mua bán tài khoản, dịch vụ MMO. Đăng nhập bằng Google để đăng tin và báo cáo bài vi
+            phạm.
+          </p>
         </div>
-      @endforelse
-    </div>
 
-    {{-- Infinite Scroll Sentinel --}}
-    <div id="nf-sentinel" class="mt-8 flex justify-center py-4">
-      <span id="nf-loader" class="hidden text-sm text-gray-400">
-        <i class="fa-solid fa-circle-notch fa-spin mr-2"></i>
-        Đang tải...
-      </span>
+        <button
+          id="btn-open-post-form"
+          class="bg-cs_blue inline-flex shrink-0 items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/20 transition-all hover:bg-blue-600 active:scale-95 md:text-sm"
+        >
+          <i class="fa-solid fa-plus"></i>
+          Đăng bài
+        </button>
+      </header>
+
+      {{-- Search + Filter Bar --}}
+      <div class="mb-8 space-y-4">
+        <div class="group relative">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+            <i
+              class="fa-solid fa-magnifying-glass group-focus-within:text-cs_blue text-xs text-gray-300 transition-colors"
+            ></i>
+          </div>
+          <input
+            id="nf-search"
+            type="text"
+            placeholder="Tìm tài khoản, dịch vụ MMO..."
+            class="focus:border-cs_blue w-full rounded-xl border-2 border-gray-100 bg-white py-3.5 pr-4 pl-11 text-sm font-bold text-gray-700 shadow-sm transition-all outline-none dark:border-gray-800 dark:bg-slate-900 dark:text-gray-300"
+          />
+        </div>
+
+        {{-- Category Filter --}}
+        <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="nf-filter-bar">
+          <button
+            class="nf-chip nf-chip-active shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all"
+            data-category=""
+          >
+            Hoạt động mới
+            <span class="ml-1 text-[10px] opacity-70">({{ $posts->total() }})</span>
+          </button>
+          @foreach ($categories as $cat)
+            <button
+              class="nf-chip shrink-0 rounded-full border border-gray-200 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-gray-600 transition-all hover:border-cs_blue hover:text-cs_blue dark:border-gray-700 dark:text-gray-300"
+              data-category="{{ $cat }}"
+            >
+              {{ $cat }}
+              @if (isset($categoryCounts[$cat]))
+                <span class="ml-1 text-[10px] opacity-70">({{ $categoryCounts[$cat] }})</span>
+              @endif
+            </button>
+          @endforeach
+        </div>
+      </div>
+
+      {{-- Feed --}}
+      <div id="nf-feed" class="columns-1 gap-4 md:columns-2">
+        @forelse ($posts as $post)
+          @include('newfeed.partials.card', ['post' => $post, 'userReportedIds' => $userReportedIds])
+        @empty
+          <div
+            class="col-span-full rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 dark:border-gray-800"
+          >
+            <i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>
+            Chưa có bài đăng nào.
+          </div>
+        @endforelse
+      </div>
+
+      {{-- Infinite Scroll Sentinel --}}
+      <div id="nf-sentinel" class="mt-8 flex justify-center py-4">
+        <span id="nf-loader" class="hidden text-sm text-gray-400">
+          <i class="fa-solid fa-circle-notch fa-spin mr-2"></i>
+          Đang tải...
+        </span>
+      </div>
     </div>
   </main>
 
   {{-- FAB Mobile --}}
   <button
     id="btn-fab"
-    class="bg-cs_blue fixed right-5 bottom-24 z-40 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition hover:bg-blue-600 active:scale-95 md:hidden"
+    class="bg-cs_blue fixed right-5 bottom-24 z-40 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-600 active:scale-95 md:hidden"
   >
     <i class="fa-solid fa-plus text-xl"></i>
   </button>
@@ -418,7 +432,7 @@
           if (replace) feed.innerHTML = '';
 
           if (data.data.length === 0 && replace) {
-            feed.innerHTML = `<div class="col-span-full py-16 text-center text-sm text-gray-400">
+            feed.innerHTML = `<div class="col-span-full rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 dark:border-gray-800">
               <i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>
               Không tìm thấy bài đăng nào.
             </div>`;
