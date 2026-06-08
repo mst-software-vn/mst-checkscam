@@ -25,7 +25,7 @@
 
         <button
           id="btn-open-post-form"
-          class="bg-cs_blue inline-flex shrink-0 items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/20 transition-all hover:bg-blue-600 active:scale-95 md:text-sm"
+          class="bg-cs_blue inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/20 transition-all hover:bg-blue-600 active:scale-95 md:text-sm"
         >
           <i class="fa-solid fa-plus"></i>
           Đăng bài
@@ -51,7 +51,7 @@
         {{-- Category Filter --}}
         <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="nf-filter-bar">
           <button
-            class="nf-chip nf-chip-active shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all"
+            class="nf-chip nf-chip-active shrink-0 cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all"
             data-category=""
           >
             Hoạt động mới
@@ -59,7 +59,7 @@
           </button>
           @foreach ($categories as $cat)
             <button
-              class="nf-chip shrink-0 rounded-full border border-gray-200 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-gray-600 transition-all hover:border-cs_blue hover:text-cs_blue dark:border-gray-700 dark:text-gray-300"
+              class="nf-chip shrink-0 cursor-pointer rounded-full border border-gray-200 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-gray-600 transition-all hover:border-cs_blue hover:text-cs_blue dark:border-gray-700 dark:text-gray-300"
               data-category="{{ $cat }}"
             >
               {{ $cat }}
@@ -77,7 +77,7 @@
           @include('newfeed.partials.card', ['post' => $post, 'userReportedIds' => $userReportedIds])
         @empty
           <div
-            class="col-span-full rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 dark:border-gray-800"
+            class="nf-empty-state flex w-full flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 [column-span:all] dark:border-gray-800"
           >
             <i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>
             Chưa có bài đăng nào.
@@ -98,7 +98,7 @@
   {{-- FAB Mobile --}}
   <button
     id="btn-fab"
-    class="bg-cs_blue fixed right-5 bottom-24 z-40 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-600 active:scale-95 md:hidden"
+    class="bg-cs_blue fixed right-5 bottom-24 z-40 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-600 active:scale-95 md:hidden"
   >
     <i class="fa-solid fa-plus text-xl"></i>
   </button>
@@ -106,7 +106,10 @@
   {{-- ===== POPUP: Yêu cầu đăng nhập ===== --}}
   <div id="popup-login" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
     <div class="dark:bg-dark_card relative mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
-      <button onclick="closePopup('popup-login')" class="absolute right-4 top-4 text-gray-400 hover:text-gray-600">
+      <button
+        onclick="closePopup('popup-login')"
+        class="absolute right-4 top-4 cursor-pointer text-gray-400 hover:text-gray-600"
+      >
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
       <div class="mb-4 text-center">
@@ -120,7 +123,7 @@
       </div>
       <a
         href="{{ route('auth.google') }}"
-        class="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-200"
+        class="flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-bold text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-200"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path
@@ -144,7 +147,7 @@
       </a>
       <button
         onclick="closePopup('popup-login')"
-        class="mt-3 w-full rounded-xl border border-gray-200 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-50 dark:border-gray-700"
+        class="mt-3 w-full cursor-pointer rounded-xl border border-gray-200 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-50 dark:border-gray-700"
       >
         Hủy
       </button>
@@ -164,7 +167,7 @@
           Công khai
         </span>
         <h3 class="text-sm font-black text-gray-800 dark:text-white">Đăng bài mới</h3>
-        <button onclick="closePopup('popup-post-form')" class="text-gray-400 hover:text-gray-600">
+        <button onclick="closePopup('popup-post-form')" class="cursor-pointer text-gray-400 hover:text-gray-600">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
@@ -177,24 +180,24 @@
             <button
               type="button"
               onclick="formatText('bold')"
-              class="rounded px-2 py-1 text-xs font-black hover:bg-gray-100 dark:hover:bg-slate-700"
-              title="Bold"
+              class="cursor-pointer rounded px-2 py-1 text-xs font-black hover:bg-gray-100 dark:hover:bg-slate-700"
+              title="In đậm đoạn đang chọn"
             >
               <b>B</b>
             </button>
             <button
               type="button"
               onclick="formatText('italic')"
-              class="rounded px-2 py-1 text-xs italic hover:bg-gray-100 dark:hover:bg-slate-700"
-              title="Italic"
+              class="cursor-pointer rounded px-2 py-1 text-xs italic hover:bg-gray-100 dark:hover:bg-slate-700"
+              title="In nghiêng đoạn đang chọn"
             >
               <i>I</i>
             </button>
             <button
               type="button"
               onclick="formatText('underline')"
-              class="rounded px-2 py-1 text-xs underline hover:bg-gray-100 dark:hover:bg-slate-700"
-              title="Underline"
+              class="cursor-pointer rounded px-2 py-1 text-xs underline hover:bg-gray-100 dark:hover:bg-slate-700"
+              title="Gạch chân đoạn đang chọn"
             >
               U
             </button>
@@ -276,7 +279,7 @@
             <button
               type="button"
               onclick="clearImage()"
-              class="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs text-white hover:bg-black/80"
+              class="absolute right-2 top-2 cursor-pointer rounded-full bg-black/60 px-2 py-1 text-xs text-white hover:bg-black/80"
             >
               <i class="fa-solid fa-xmark"></i>
               Xóa
@@ -314,7 +317,7 @@
           type="button"
           onclick="submitPost()"
           disabled
-          class="bg-cs_blue w-full rounded-xl py-3 text-sm font-black text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-blue-600"
+          class="bg-cs_blue w-full cursor-pointer rounded-xl py-3 text-sm font-black text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-40"
         >
           Đăng bài
         </button>
@@ -325,28 +328,51 @@
   {{-- ===== POPUP: Report ===== --}}
   <div id="popup-report" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
     <div class="dark:bg-dark_card relative mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
-      <button onclick="closePopup('popup-report')" class="absolute right-4 top-4 text-gray-400 hover:text-gray-600">
+      <button
+        onclick="closePopup('popup-report')"
+        class="absolute right-4 top-4 cursor-pointer text-gray-400 hover:text-gray-600"
+      >
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
-      <h3 class="mb-4 text-base font-black text-gray-800 dark:text-white">Báo cáo bài đăng</h3>
+      <h3 class="mb-1 text-base font-black text-gray-800 dark:text-white">Báo cáo bài đăng</h3>
+      <p class="mb-4 text-xs font-semibold text-gray-400">Vui lòng chọn lý do báo cáo để tiếp tục.</p>
       <input type="hidden" id="report-post-id" value="" />
       <div class="space-y-2">
         @foreach (['Spam', 'Lừa đảo', 'Nội dung không phù hợp', 'Khác'] as $reason)
           <label
             class="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-3 py-2.5 transition hover:border-cs_blue dark:border-gray-700"
           >
-            <input type="radio" name="report-reason" value="{{ $reason }}" class="accent-cs_blue" />
+            <input type="radio" name="report-reason" value="{{ $reason }}" class="accent-cs_blue cursor-pointer" />
             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $reason }}</span>
           </label>
         @endforeach
       </div>
       <button
+        id="btn-submit-report"
         onclick="submitReport()"
-        class="bg-cs_red mt-4 w-full rounded-xl py-3 text-sm font-black text-white transition hover:bg-red-700"
+        disabled
+        class="bg-cs_red mt-4 w-full cursor-pointer rounded-xl py-3 text-sm font-black text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-40"
       >
         Xác nhận báo cáo
       </button>
     </div>
+  </div>
+
+  {{-- ===== POPUP: Xem ảnh ===== --}}
+  <div id="popup-image" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4">
+    <button
+      onclick="closePopup('popup-image')"
+      class="absolute right-4 top-4 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
+    >
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    <img
+      id="popup-image-img"
+      src=""
+      alt=""
+      onclick="closePopup('popup-image')"
+      class="max-h-[85vh] w-auto max-w-full cursor-zoom-out rounded-xl object-contain"
+    />
   </div>
 
   @auth
@@ -363,361 +389,379 @@
 
   @push('scripts')
     <script>
-      // ===== State =====
-      let currentPage = {{ $posts->currentPage() }};
-      const lastPage = {{ $posts->lastPage() }};
-      let loading = false;
-      let currentCategory = '';
-      let currentQ = '';
-      let searchTimer = null;
-      const userReportedIds = @json($userReportedIds);
+      $(function () {
+        // ===== State =====
+        let currentPage = {{ $posts->currentPage() }};
+        const lastPage = {{ $posts->lastPage() }};
+        let loading = false;
+        let currentCategory = '';
+        let currentQ = '';
+        let searchTimer = null;
+        const userReportedIds = @json($userReportedIds);
 
-      // ===== Chip active styles =====
-      function setActiveChip(el) {
-        document.querySelectorAll('.nf-chip').forEach((c) => {
-          c.classList.remove('nf-chip-active', 'bg-cs_blue', 'text-white', 'border-cs_blue');
-          c.classList.add('border-gray-200', 'text-gray-600', 'dark:border-gray-700', 'dark:text-gray-300');
-        });
-        el.classList.add('nf-chip-active', 'bg-cs_blue', 'text-white', 'border-cs_blue');
-        el.classList.remove('border-gray-200', 'text-gray-600', 'dark:border-gray-700', 'dark:text-gray-300');
-      }
+        const $feed = $('#nf-feed');
+        const $sentinel = $('#nf-sentinel');
+        const $loader = $('#nf-loader');
+        const $nfContent = $('#nf-content');
+        const $catInput = $('#nf-category');
+        const $catDropdown = $('#nf-cat-dropdown');
+        const $btnSubmit = $('#btn-submit-post');
 
-      // Init active chip styles
-      document.querySelectorAll('.nf-chip').forEach((chip) => {
-        if (chip.classList.contains('nf-chip-active')) {
-          chip.classList.add('bg-cs_blue', 'text-white', 'border-cs_blue');
+        // ===== Chip active styles =====
+        function setActiveChip($el) {
+          $('.nf-chip')
+            .removeClass('nf-chip-active bg-cs_blue text-white border-cs_blue')
+            .addClass('border-gray-200 text-gray-600');
+          $el
+            .addClass('nf-chip-active bg-cs_blue text-white border-cs_blue')
+            .removeClass('border-gray-200 text-gray-600');
         }
-      });
+        $('.nf-chip.nf-chip-active').addClass('bg-cs_blue text-white border-cs_blue');
 
-      // ===== Category filter =====
-      document.querySelectorAll('.nf-chip').forEach((chip) => {
-        chip.addEventListener('click', function () {
-          currentCategory = this.dataset.category || '';
+        // ===== Category filter chips =====
+        $('.nf-chip').on('click', function () {
+          currentCategory = $(this).data('category') || '';
           currentPage = 1;
-          setActiveChip(this);
+          setActiveChip($(this));
           reloadFeed(true);
         });
-      });
 
-      // ===== Search =====
-      document.getElementById('nf-search').addEventListener('input', function () {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => {
-          currentQ = this.value.trim();
-          currentPage = 1;
-          reloadFeed(true);
-        }, 400);
-      });
-
-      // ===== Load posts from API =====
-      async function loadPosts(page, replace = false) {
-        if (loading) return;
-        loading = true;
-        document.getElementById('nf-loader').classList.remove('hidden');
-
-        const params = new URLSearchParams({
-          page: page,
-          per_page: 12,
+        // ===== Search =====
+        $('#nf-search').on('input', function () {
+          clearTimeout(searchTimer);
+          const val = $(this).val().trim();
+          searchTimer = setTimeout(function () {
+            currentQ = val;
+            currentPage = 1;
+            reloadFeed(true);
+          }, 400);
         });
-        if (currentCategory) params.set('category', currentCategory);
-        if (currentQ) params.set('q', currentQ);
 
-        try {
-          const res = await fetch(`/api/newfeed/posts?${params}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
-          });
-          const data = await res.json();
-
-          const feed = document.getElementById('nf-feed');
-          if (replace) feed.innerHTML = '';
-
-          if (data.data.length === 0 && replace) {
-            feed.innerHTML = `<div class="col-span-full rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 dark:border-gray-800">
-              <i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>
-              Không tìm thấy bài đăng nào.
-            </div>`;
-          } else {
-            data.data.forEach((post) => feed.insertAdjacentHTML('beforeend', renderCard(post)));
-          }
-
-          currentPage = data.current_page;
-          if (!data.has_more) {
-            document.getElementById('nf-sentinel').innerHTML = '<p class="text-xs text-gray-400">Đã xem hết bài</p>';
-          }
-        } catch (e) {
-          console.error('Load posts error:', e);
-        } finally {
-          loading = false;
-          document.getElementById('nf-loader').classList.add('hidden');
+        // ===== Empty state helper =====
+        function emptyStateHtml(text) {
+          return (
+            '<div class="nf-empty-state flex w-full flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400 [column-span:all] dark:border-gray-800"><i class="fa-regular fa-folder-open mb-3 block text-3xl"></i>' +
+            text +
+            '</div>'
+          );
         }
-      }
 
-      function reloadFeed(replace = true) {
-        loadPosts(1, replace);
-      }
+        // ===== Load posts from API =====
+        function loadPosts(page, replace) {
+          if (loading) return;
+          loading = true;
+          $loader.removeClass('hidden');
 
-      // ===== Render card from JSON =====
-      function renderCard(post) {
-        const isOwner = window._authUserId && window._authUserId === post.user.id;
-        const reported = userReportedIds.includes(post.id) || post.is_reported;
-        const tick = post.user.is_verified
-          ? `<i class="fa-solid fa-circle-check text-cs_blue ml-1 text-xs" title="Tài khoản đã được CheckScam xác minh uy tín"></i>`
-          : '';
-        const priceHtml =
-          post.price && post.price > 0
-            ? `<div class="mt-2 text-sm font-black text-cs_red">${Number(post.price).toLocaleString('vi-VN')} VNĐ</div>`
+          const params = { page: page, per_page: 12 };
+          if (currentCategory) params.category = currentCategory;
+          if (currentQ) params.q = currentQ;
+
+          $.get('/api/newfeed/posts', params)
+            .done(function (data) {
+              if (replace) $feed.empty();
+              if (data.data.length === 0 && replace) {
+                $feed.html(emptyStateHtml('Không tìm thấy bài đăng nào.'));
+              } else {
+                $.each(data.data, function (i, post) {
+                  $feed.append(renderCard(post));
+                });
+              }
+              currentPage = data.current_page;
+              if (!data.has_more) {
+                $sentinel.html('<p class="text-xs text-gray-400">Đã xem hết bài</p>');
+              }
+            })
+            .fail(function (e) {
+              console.error('Load posts error:', e);
+            })
+            .always(function () {
+              loading = false;
+              $loader.addClass('hidden');
+            });
+        }
+
+        function reloadFeed(replace) {
+          loadPosts(1, replace !== false);
+        }
+        window.reloadFeed = reloadFeed;
+
+        // ===== HTML escape + inline markdown renderer =====
+        function escapeHtml(s) {
+          return $('<div>').text(s).html();
+        }
+
+        function formatPostContent(text) {
+          let s = escapeHtml(text);
+          s = s.replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
+          s = s.replace(/__(.+?)__/gs, '<u>$1</u>');
+          s = s.replace(/\*(.+?)\*/gs, '<em>$1</em>');
+          return s.replace(/\n/g, '<br>');
+        }
+
+        // ===== Render card from API JSON =====
+        function renderCard(post) {
+          const isOwner = window._authUserId && window._authUserId === post.user.id;
+          const reported = userReportedIds.includes(post.id) || post.is_reported;
+          const tick = post.user.is_verified
+            ? '<i class="fa-solid fa-circle-check text-cs_blue ml-1 text-xs" title="Tài khoản đã được CheckScam xác minh uy tín"></i>'
             : '';
-        const imageHtml = post.image_url
-          ? `<img src="${post.image_url}" alt="" class="mt-3 w-full rounded-xl object-cover" loading="lazy" />`
-          : '';
-        const actionBtn = window._authUserId
-          ? isOwner
-            ? `<button onclick="deletePost(${post.id}, this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-red-50 text-xs text-cs_red hover:bg-red-100 dark:bg-red-900/30" title="Xóa bài"><i class="fa-solid fa-xmark"></i></button>`
-            : reported
-              ? `<button class="absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 cursor-not-allowed dark:bg-orange-900/30" title="Đã báo cáo" disabled><i class="fa-solid fa-flag"></i></button>`
-              : `<button onclick="openReport(${post.id}, this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700" title="Báo cáo"><i class="fa-regular fa-flag"></i></button>`
-          : '';
+          const priceHtml =
+            post.price && post.price > 0
+              ? '<div class="mt-2 text-sm font-black text-cs_red">' +
+                Number(post.price).toLocaleString('vi-VN') +
+                ' VNĐ</div>'
+              : '';
+          const imageHtml = post.image_url
+            ? '<img src="' +
+              post.image_url +
+              '" alt="" onclick="openImageViewer(this.src)" class="nf-card-image mt-3 w-full cursor-zoom-in rounded-xl object-cover transition hover:opacity-90" loading="lazy">'
+            : '';
+          const actionBtn = window._authUserId
+            ? isOwner
+              ? '<button type="button" onclick="deletePost(' +
+                post.id +
+                ',this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-red-50 text-xs text-cs_red transition hover:bg-red-100 dark:bg-red-900/30" title="Xóa bài"><i class="fa-solid fa-xmark"></i></button>'
+              : reported
+                ? '<button type="button" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 dark:bg-orange-900/30" title="Đã báo cáo" disabled><i class="fa-solid fa-flag"></i></button>'
+                : '<button type="button" onclick="openReport(' +
+                  post.id +
+                  ',this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 transition hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700" title="Báo cáo"><i class="fa-regular fa-flag"></i></button>'
+            : '';
 
-        return `
-          <div class="nf-card dark:bg-dark_card relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-xs dark:border-gray-800" data-id="${post.id}">
-            ${actionBtn}
-            <div class="flex items-center gap-3 pr-8">
-              <img src="${post.user.avatar_url}" alt="" class="h-9 w-9 rounded-full object-cover" />
-              <div class="min-w-0">
-                <div class="flex items-center text-sm font-bold text-gray-800 dark:text-white">
-                  <span class="truncate">${post.user.name}</span>${tick}
-                </div>
-                <div class="text-[11px] text-gray-400">${post.created_at} · ${post.category}</div>
-              </div>
-            </div>
-            <p class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300 whitespace-pre-wrap">${escapeHtml(post.content)}</p>
-            ${priceHtml}
-            ${imageHtml}
-          </div>`;
-      }
+          return (
+            '<div class="nf-card dark:bg-dark_card relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-xs dark:border-gray-800" data-id="' +
+            post.id +
+            '">' +
+            actionBtn +
+            '<div class="flex items-center gap-3 pr-8">' +
+            '<img src="' +
+            post.user.avatar_url +
+            '" alt="" class="h-9 w-9 rounded-full object-cover">' +
+            '<div class="min-w-0"><div class="flex items-center text-sm font-bold text-gray-800 dark:text-white"><span class="truncate">' +
+            escapeHtml(post.user.name) +
+            '</span>' +
+            tick +
+            '</div>' +
+            '<div class="text-[11px] text-gray-400">' +
+            post.created_at +
+            ' · ' +
+            escapeHtml(post.category) +
+            '</div></div></div>' +
+            '<p class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' +
+            formatPostContent(post.content) +
+            '</p>' +
+            priceHtml +
+            imageHtml +
+            '</div>'
+          );
+        }
 
-      function escapeHtml(s) {
-        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
+        // ===== Infinite scroll =====
+        if (lastPage > 1) {
+          const observer = new IntersectionObserver(
+            function (entries) {
+              if (entries[0].isIntersecting && currentPage < lastPage) {
+                loadPosts(currentPage + 1, false);
+              }
+            },
+            { threshold: 0.1 }
+          );
+          observer.observe($sentinel[0]);
+        }
 
-      // ===== Infinite scroll =====
-      if ({{ $posts->lastPage() }} > 1) {
-        const sentinel = document.getElementById('nf-sentinel');
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting && currentPage < lastPage) {
-              loadPosts(currentPage + 1, false);
-            }
-          },
-          { threshold: 0.1 }
-        );
-        observer.observe(sentinel);
-      }
-
-      // ===== Popup helpers =====
-      function openPopup(id) {
-        const el = document.getElementById(id);
-        el.classList.remove('hidden');
-        el.classList.add('flex');
-      }
-      function closePopup(id) {
-        const el = document.getElementById(id);
-        el.classList.remove('flex');
-        el.classList.add('hidden');
-      }
-      document.querySelectorAll('[id^="popup-"]').forEach((popup) => {
-        popup.addEventListener('click', function (e) {
+        // ===== Popup helpers =====
+        window.openPopup = function (id) {
+          $('#' + id)
+            .removeClass('hidden')
+            .addClass('flex');
+        };
+        window.closePopup = function (id) {
+          $('#' + id)
+            .removeClass('flex')
+            .addClass('hidden');
+        };
+        $('[id^="popup-"]').on('click', function (e) {
           if (e.target === this) closePopup(this.id);
         });
-      });
 
-      // ===== Open post form (auth check) =====
-      function openPostForm() {
-        if (!window._authUserId) {
-          openPopup('popup-login');
-        } else {
-          openPopup('popup-post-form');
+        // ===== Image viewer lightbox =====
+        window.openImageViewer = function (src) {
+          $('#popup-image-img').attr('src', src);
+          openPopup('popup-image');
+        };
+
+        // ===== Open post form (auth check) =====
+        function openPostForm() {
+          window._authUserId ? openPopup('popup-post-form') : openPopup('popup-login');
         }
-      }
-      document.getElementById('btn-open-post-form').addEventListener('click', openPostForm);
-      document.getElementById('btn-fab').addEventListener('click', openPostForm);
+        $('#btn-open-post-form, #btn-fab').on('click', openPostForm);
 
-      // ===== Category combobox =====
-      const catInput = document.getElementById('nf-category');
-      const catDropdown = document.getElementById('nf-cat-dropdown');
-
-      catInput.addEventListener('focus', () => catDropdown.classList.remove('hidden'));
-      catInput.addEventListener('blur', () => setTimeout(() => catDropdown.classList.add('hidden'), 200));
-      catInput.addEventListener('input', function () {
-        const q = this.value.toLowerCase();
-        document.querySelectorAll('.nf-cat-option').forEach((opt) => {
-          opt.style.display = opt.dataset.value.toLowerCase().includes(q) ? '' : 'none';
+        // ===== Category combobox =====
+        $catInput.on('focus', function () {
+          $catDropdown.removeClass('hidden');
         });
-        catDropdown.classList.remove('hidden');
-        validateForm();
-      });
-      document.querySelectorAll('.nf-cat-option').forEach((opt) => {
-        opt.addEventListener('mousedown', function () {
-          catInput.value = this.dataset.value;
-          catDropdown.classList.add('hidden');
+        $catInput.on('blur', function () {
+          setTimeout(function () {
+            $catDropdown.addClass('hidden');
+          }, 200);
+        });
+        $catInput.on('input', function () {
+          const q = $(this).val().toLowerCase();
+          $('.nf-cat-option').each(function () {
+            $(this).toggle($(this).data('value').toLowerCase().includes(q));
+          });
+          $catDropdown.removeClass('hidden');
           validateForm();
         });
-      });
+        $('.nf-cat-option').on('mousedown', function () {
+          $catInput.val($(this).data('value'));
+          $catDropdown.addClass('hidden');
+          validateForm();
+        });
 
-      // ===== Content counter + form validation =====
-      const nfContent = document.getElementById('nf-content');
-      nfContent.addEventListener('input', function () {
-        document.getElementById('nf-content-count').textContent = this.value.length;
-        validateForm();
-      });
+        // ===== Content counter + form validation =====
+        $nfContent.on('input', function () {
+          $('#nf-content-count').text(this.value.length);
+          validateForm();
+        });
+        function validateForm() {
+          $btnSubmit.prop('disabled', $nfContent.val().trim().length < 10 || $catInput.val().trim().length === 0);
+        }
 
-      function validateForm() {
-        const ok = nfContent.value.trim().length >= 10 && catInput.value.trim().length > 0;
-        document.getElementById('btn-submit-post').disabled = !ok;
-      }
-
-      // ===== Image upload =====
-      document.getElementById('nf-image').addEventListener('change', function () {
-        if (this.files && this.files[0]) {
+        // ===== Image upload =====
+        $('#nf-image').on('change', function () {
+          const file = this.files && this.files[0];
+          if (!file) return;
           const reader = new FileReader();
-          reader.onload = (e) => {
-            document.getElementById('nf-preview-img').src = e.target.result;
-            document.getElementById('nf-image-preview').classList.remove('hidden');
-            document.getElementById('nf-image-drop').classList.add('hidden');
+          reader.onload = function (e) {
+            $('#nf-preview-img').attr('src', e.target.result);
+            $('#nf-image-preview').removeClass('hidden');
+            $('#nf-image-drop').addClass('hidden');
           };
-          reader.readAsDataURL(this.files[0]);
+          reader.readAsDataURL(file);
+        });
+        window.clearImage = function () {
+          $('#nf-image').val('');
+          $('#nf-image-preview').addClass('hidden');
+          $('#nf-image-drop').removeClass('hidden');
+        };
+
+        // ===== Format text (wrap textarea selection with markdown markers) =====
+        window.formatText = function (type) {
+          const markers = { bold: '**', italic: '*', underline: '__' };
+          const marker = markers[type];
+          const ta = $nfContent[0];
+          const start = ta.selectionStart;
+          const end = ta.selectionEnd;
+          const val = ta.value;
+          const selected = val.slice(start, end) || 'văn bản';
+          ta.value = val.slice(0, start) + marker + selected + marker + val.slice(end);
+          const cursor = start + marker.length + selected.length + marker.length;
+          ta.focus();
+          ta.setSelectionRange(cursor, cursor);
+          $nfContent.trigger('input');
+        };
+
+        // ===== Submit new post =====
+        window.submitPost = function () {
+          $btnSubmit.prop('disabled', true).text('Đang đăng...');
+          const fd = new FormData();
+          fd.append('content', $nfContent.val().trim());
+          fd.append('category', $catInput.val().trim());
+          const price = $('#nf-price').val();
+          if (price) fd.append('price', price);
+          const imgFile = $('#nf-image')[0].files[0];
+          if (imgFile) fd.append('image', imgFile);
+          fd.append('_token', window._csrfToken);
+
+          $.ajax({ url: '/api/newfeed/posts', method: 'POST', data: fd, processData: false, contentType: false })
+            .done(function (data) {
+              $feed.find('.nf-empty-state').remove();
+              $feed.prepend(renderCard(data.post));
+              closePopup('popup-post-form');
+              resetPostForm();
+            })
+            .fail(function (xhr) {
+              alert((xhr.responseJSON && xhr.responseJSON.message) || 'Có lỗi xảy ra khi đăng bài.');
+            })
+            .always(function () {
+              validateForm();
+              $btnSubmit.text('Đăng bài');
+            });
+        };
+
+        function resetPostForm() {
+          $nfContent.val('');
+          $('#nf-content-count').text('0');
+          $('#nf-price').val('');
+          $catInput.val('');
+          clearImage();
+          validateForm();
         }
-      });
-      function clearImage() {
-        document.getElementById('nf-image').value = '';
-        document.getElementById('nf-image-preview').classList.add('hidden');
-        document.getElementById('nf-image-drop').classList.remove('hidden');
-      }
 
-      // ===== Format text --
-      function formatText(cmd) {
-        document.execCommand(cmd);
-      }
-
-      // ===== Submit new post =====
-      async function submitPost() {
-        const btn = document.getElementById('btn-submit-post');
-        btn.disabled = true;
-        btn.textContent = 'Đang đăng...';
-
-        const fd = new FormData();
-        fd.append('content', nfContent.value.trim());
-        fd.append('category', catInput.value.trim());
-        const price = document.getElementById('nf-price').value;
-        if (price) fd.append('price', price);
-        const imgFile = document.getElementById('nf-image').files[0];
-        if (imgFile) fd.append('image', imgFile);
-        fd.append('_token', window._csrfToken);
-
-        try {
-          const res = await fetch('/api/newfeed/posts', { method: 'POST', body: fd });
-          const data = await res.json();
-
-          if (res.ok) {
-            const feed = document.getElementById('nf-feed');
-            // Remove empty state if present
-            const empty = feed.querySelector('.col-span-full');
-            if (empty) empty.remove();
-
-            feed.insertAdjacentHTML('afterbegin', renderCard(data.post));
-            closePopup('popup-post-form');
-            resetPostForm();
-          } else {
-            alert(data.message || 'Có lỗi xảy ra khi đăng bài.');
-          }
-        } catch (e) {
-          alert('Kết nối thất bại. Vui lòng thử lại.');
-        } finally {
-          btn.disabled = false;
-          btn.textContent = 'Đăng bài';
-        }
-      }
-
-      function resetPostForm() {
-        nfContent.value = '';
-        document.getElementById('nf-content-count').textContent = '0';
-        document.getElementById('nf-price').value = '';
-        catInput.value = '';
-        clearImage();
-        validateForm();
-      }
-
-      // ===== Delete post =====
-      async function deletePost(postId, btn) {
-        if (!confirm('Bạn có chắc muốn xóa bài đăng này?')) return;
-
-        try {
-          const res = await fetch(`/api/newfeed/posts/${postId}`, {
+        // ===== Delete post =====
+        window.deletePost = function (postId, btn) {
+          if (!confirm('Bạn có chắc muốn xóa bài đăng này?')) return;
+          $.ajax({
+            url: '/api/newfeed/posts/' + postId,
             method: 'DELETE',
             headers: { 'X-CSRF-TOKEN': window._csrfToken, Accept: 'application/json' },
-          });
+          })
+            .done(function () {
+              const $card = $(btn).closest('.nf-card');
+              $card.css({ opacity: 0, transform: 'scale(0.95)', transition: 'all 0.2s ease' });
+              setTimeout(function () {
+                $card.remove();
+              }, 200);
+            })
+            .fail(function () {
+              alert('Không thể xóa bài này.');
+            });
+        };
 
-          if (res.ok) {
-            const card = btn.closest('.nf-card');
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.95)';
-            card.style.transition = 'all 0.2s ease';
-            setTimeout(() => card.remove(), 200);
-          } else {
-            alert('Không thể xóa bài này.');
+        // ===== Report =====
+        window.openReport = function (postId) {
+          $('#report-post-id').val(postId);
+          $('input[name="report-reason"]').prop('checked', false);
+          $('#btn-submit-report').prop('disabled', true);
+          openPopup('popup-report');
+        };
+        $(document).on('change', 'input[name="report-reason"]', function () {
+          $('#btn-submit-report').prop('disabled', false);
+        });
+        window.submitReport = function () {
+          const postId = $('#report-post-id').val();
+          const reason = $('input[name="report-reason"]:checked').val();
+          if (!reason) {
+            alert('Vui lòng chọn lý do báo cáo.');
+            return;
           }
-        } catch (e) {
-          alert('Kết nối thất bại.');
-        }
-      }
 
-      // ===== Report =====
-      function openReport(postId, btn) {
-        document.getElementById('report-post-id').value = postId;
-        document.querySelectorAll('input[name="report-reason"]').forEach((r) => (r.checked = false));
-        openPopup('popup-report');
-      }
-
-      async function submitReport() {
-        const postId = document.getElementById('report-post-id').value;
-        const reason = document.querySelector('input[name="report-reason"]:checked')?.value || '';
-
-        try {
-          const res = await fetch(`/api/newfeed/posts/${postId}/report`, {
+          $.ajax({
+            url: '/api/newfeed/posts/' + postId + '/report',
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': window._csrfToken,
-              Accept: 'application/json',
-            },
-            body: JSON.stringify({ reason }),
-          });
-          const data = await res.json();
-
-          if (res.ok) {
-            closePopup('popup-report');
-            userReportedIds.push(parseInt(postId));
-            // Update icon
-            const card = document.querySelector(`.nf-card[data-id="${postId}"]`);
-            if (card) {
-              const flagBtn = card.querySelector('[title="Báo cáo"]');
-              if (flagBtn) {
-                flagBtn.setAttribute('title', 'Đã báo cáo');
-                flagBtn.disabled = true;
-                flagBtn.innerHTML = '<i class="fa-solid fa-flag"></i>';
-                flagBtn.className = flagBtn.className
-                  .replace('text-gray-400', 'text-orange-500')
-                  .replace('hover:bg-orange-50', '')
-                  .replace('hover:text-orange-500', '');
+            contentType: 'application/json',
+            headers: { 'X-CSRF-TOKEN': window._csrfToken, Accept: 'application/json' },
+            data: JSON.stringify({ reason: reason }),
+          })
+            .done(function () {
+              closePopup('popup-report');
+              userReportedIds.push(parseInt(postId));
+              const $flagBtn = $('.nf-card[data-id="' + postId + '"]').find('[title="Báo cáo"]');
+              if ($flagBtn.length) {
+                $flagBtn
+                  .attr('title', 'Đã báo cáo')
+                  .prop('disabled', true)
+                  .removeClass('cursor-pointer hover:bg-orange-50 hover:text-orange-500 text-gray-400 transition')
+                  .addClass('cursor-not-allowed text-orange-500')
+                  .html('<i class="fa-solid fa-flag"></i>');
               }
-            }
-          } else {
-            alert(data.error || 'Không thể gửi báo cáo.');
-          }
-        } catch (e) {
-          alert('Kết nối thất bại.');
-        }
-      }
+            })
+            .fail(function (xhr) {
+              alert((xhr.responseJSON && xhr.responseJSON.error) || 'Không thể gửi báo cáo.');
+            });
+        };
+      });
     </script>
   @endpush
 @endsection

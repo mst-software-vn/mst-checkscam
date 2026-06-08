@@ -23,7 +23,7 @@ class NewfeedPostReportController extends Controller
         }
 
         $request->validate([
-            'reason' => 'nullable|string|max:255',
+            'reason' => 'required|string|max:255',
         ]);
 
         $alreadyReported = NewfeedPostReport::where('post_id', $post->id)

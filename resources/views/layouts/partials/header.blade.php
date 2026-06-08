@@ -23,25 +23,25 @@
       <nav class="hidden gap-x-6 md:flex lg:gap-x-8">
         <a
           href="/"
-          class="{{ request()->is('/') ? 'text-cs_red border-cs_red border-b-2 font-bold' : 'hover:text-cs_red dark:hover:text-cs_red font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
+          class="{{ request()->is('/') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
           Trang Chủ
         </a>
         <a
           href="/to-cao-lua-dao"
-          class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_red border-cs_red border-b-2 font-bold' : 'hover:text-cs_red dark:hover:text-cs_red font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
+          class="{{ request()->is('to-cao-lua-dao*') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
           Tố Cáo Scam
         </a>
         <a
           href="/bao-hiem-cs"
-          class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_red border-cs_red border-b-2 font-bold' : 'hover:text-cs_red dark:hover:text-cs_red font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
+          class="{{ request()->is('bao-hiem-cs*') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
           Quỹ Bảo Hiểm
         </a>
         <a
           href="/bai-viet"
-          class="{{ request()->is('bai-viet*') ? 'text-cs_red border-cs_red border-b-2 font-bold' : 'hover:text-cs_red dark:hover:text-cs_red font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
+          class="{{ request()->is('bai-viet*') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
           Bài viết
         </a>
@@ -49,7 +49,6 @@
           href="/newfeed"
           class="{{ request()->is('newfeed*') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
-          <i class="fa-solid fa-store mr-1 text-xs"></i>
           Mua Bán
         </a>
       </nav>

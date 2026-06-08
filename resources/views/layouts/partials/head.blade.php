@@ -35,7 +35,7 @@
   />
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-
+  <script src="/js/jquery-4.0.0.min.js"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @hasSection('structured_data')
     @yield('structured_data')

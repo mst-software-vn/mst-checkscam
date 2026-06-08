@@ -5,33 +5,27 @@
   {{-- Action button --}}
   @auth
     @if (auth()->id() === $post->user_id ||auth()->user()->isAdmin())
-      <form
-        action="/api/newfeed/posts/{{ $post->id }}"
-        method="POST"
-        class="nf-delete-form absolute top-2 right-2 z-10"
+      <button
+        type="button"
+        onclick="deletePost({{ $post->id }}, this)"
+        class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-red-50 text-xs text-cs_red transition hover:bg-red-100 dark:bg-red-900/30"
+        title="Xóa bài"
       >
-        @csrf
-        @method('DELETE')
-        <button
-          type="button"
-          onclick="deletePostSSR({{ $post->id }}, this)"
-          class="flex h-7 w-7 items-center justify-center rounded-full bg-red-50 text-xs text-cs_red hover:bg-red-100 dark:bg-red-900/30"
-          title="Xóa bài"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </form>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     @elseif (! in_array($post->id, $userReportedIds))
       <button
+        type="button"
         onclick="openReport({{ $post->id }}, this)"
-        class="absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700"
+        class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 transition hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700"
         title="Báo cáo"
       >
         <i class="fa-regular fa-flag"></i>
       </button>
     @else
       <button
-        class="absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 cursor-not-allowed dark:bg-orange-900/30"
+        type="button"
+        class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-full bg-orange-100 text-xs text-orange-500 dark:bg-orange-900/30"
         title="Đã báo cáo"
         disabled
       >
@@ -62,7 +56,9 @@
   </div>
 
   {{-- Content --}}
-  <p class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{{ $post->content }}</p>
+  <p class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+    {!! \App\Helpers\StringHelper::formatPostContent($post->content) !!}
+  </p>
 
   {{-- Price --}}
   @if ($post->price && $post->price > 0)
@@ -74,7 +70,8 @@
     <img
       src="{{ asset('storage/' . $post->image_path) }}"
       alt=""
-      class="mt-3 w-full rounded-xl object-cover"
+      onclick="openImageViewer(this.src)"
+      class="nf-card-image mt-3 w-full cursor-zoom-in rounded-xl object-cover transition hover:opacity-90"
       loading="lazy"
     />
   @endif
