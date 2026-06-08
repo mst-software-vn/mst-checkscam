@@ -31,6 +31,24 @@
 
         <li class="submenu">
           <a href="javascript:void(0);">
+            <i data-feather="shopping-bag"></i>
+            <span>Khu Mua Bán</span>
+            <span class="menu-arrow"></span>
+          </a>
+          <ul>
+            <li>
+              <a
+                href="{{ route('admin.newfeed.hidden') }}"
+                class="{{ request()->routeIs('admin.newfeed.hidden') ? 'active' : '' }}"
+              >
+                Bài đăng bị ẩn
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="submenu">
+          <a href="javascript:void(0);">
             <i data-feather="shield"></i>
             <span>Bảo hiểm</span>
             <span class="menu-arrow"></span>
