@@ -221,4 +221,11 @@ class AdminUserController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Không thể xóa các tài khoản đã chọn (có thể là admin).']);
     }
+
+    public function toggleVerify(User $user)
+    {
+        $user->update(['is_verified' => ! $user->is_verified]);
+
+        return response()->json(['is_verified' => (bool) $user->is_verified]);
+    }
 }
