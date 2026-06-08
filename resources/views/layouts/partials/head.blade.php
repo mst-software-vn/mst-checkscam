@@ -35,18 +35,8 @@
   />
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <script>
-    // Check theme initially
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      $('html').addClass('dark');
-    } else {
-      $('html').removeClass('dark');
-    }
-  </script>
 
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
   @hasSection('structured_data')
     @yield('structured_data')
   @endif
@@ -58,93 +48,5 @@
     {!! $siteConfig['header_scripts'] !!}
   @endif
 
-  <style>
-    * {
-      transition:
-        background-color 0.3s ease,
-        border-color 0.3s ease,
-        color 0.1s ease;
-    }
-
-    :root {
-      --text-color: #ff0000;
-      --light-color: #f3eded;
-      --speed: 3s;
-    }
-
-    body {
-      color: #333;
-      overflow-x: hidden;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #999;
-    }
-
-    /* Mobile fixes */
-    @media (max-width: 640px) {
-      .hero-title {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-    }
-
-    .scanner-title {
-      position: relative;
-      display: inline-block;
-      background: linear-gradient(to bottom, #ff0000 0%, #cc0000 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      padding: 15px 0;
-      margin: -15px 0;
-      overflow: hidden;
-    }
-
-    /* Thanh Laser quét kiểu QR */
-    .scanner-title::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #ff0000;
-      box-shadow: 0 0 15px 2px rgba(255, 0, 0, 0.7);
-      z-index: 10;
-      animation: qr-scan 2.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes qr-scan {
-      0% {
-        top: 5%;
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 1;
-      }
-
-      80% {
-        opacity: 1;
-      }
-
-      100% {
-        top: 90%;
-        opacity: 0;
-      }
-    }
-  </style>
+  <style></style>
 </head>
