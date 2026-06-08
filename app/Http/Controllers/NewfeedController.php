@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NewfeedPost;
 use App\Models\NewfeedPostReport;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,8 @@ class NewfeedController extends Controller
 
     public function index(Request $request)
     {
+        SEOTools::setTitle('Khu Mua Bán');
+        SEOTools::setDescription('Mua bán tài khoản, dịch vụ MMO uy tín. Cộng đồng MMO Việt Nam.');
         $categories = config('newfeed.categories', []);
 
         $query = NewfeedPost::with('user')->visible()->latest();
