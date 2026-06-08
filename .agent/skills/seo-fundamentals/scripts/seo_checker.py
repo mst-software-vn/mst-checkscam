@@ -34,7 +34,9 @@ except:
 SKIP_DIRS = {
     'node_modules', '.next', 'dist', 'build', '.git', '.github',
     '__pycache__', '.vscode', '.idea', 'coverage', 'test', 'tests',
-    '__tests__', 'spec', 'docs', 'documentation', 'examples'
+    '__tests__', 'spec', 'docs', 'documentation', 'examples',
+    'template', 'templates', 'vendor', 'public', 'assets', 'plugins',
+    'ckeditor', 'css', '.agent'
 }
 
 # Files to skip (not pages)
