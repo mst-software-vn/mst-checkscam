@@ -19,6 +19,7 @@ class NewfeedPost extends Model
         'content',
         'price',
         'image_path',
+        'image_paths',
         'is_hidden',
         'hidden_by_admin',
         'report_count',
@@ -26,6 +27,7 @@ class NewfeedPost extends Model
 
     protected $casts = [
         'price' => 'decimal:0',
+        'image_paths' => 'array',
         'is_hidden' => 'boolean',
         'hidden_by_admin' => 'boolean',
         'report_count' => 'integer',

@@ -263,26 +263,32 @@
         <div>
           <label class="mb-1 block text-xs font-bold text-gray-600 dark:text-gray-300">
             Ảnh
-            <span class="font-normal text-gray-400">— tùy chọn, 1 ảnh max 5MB</span>
+            <span class="font-normal text-gray-400">— tùy chọn, tối đa 10 ảnh, mỗi ảnh max 5MB</span>
           </label>
-          <input id="nf-image" type="file" accept="image/jpg,image/jpeg,image/png,image/webp" class="hidden" />
+          <input
+            id="nf-images"
+            type="file"
+            accept="image/jpg,image/jpeg,image/png,image/webp"
+            multiple
+            class="hidden"
+          />
           <div
             id="nf-image-drop"
-            onclick="document.getElementById('nf-image').click()"
+            onclick="document.getElementById('nf-images').click()"
             class="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 py-6 text-sm text-gray-400 transition hover:border-cs_blue hover:text-cs_blue dark:border-gray-700"
           >
-            <i class="fa-solid fa-image mb-2 text-2xl"></i>
-            <span>Bấm để chọn ảnh</span>
+            <i class="fa-solid fa-images mb-2 text-2xl"></i>
+            <span>Bấm để chọn ảnh (tối đa 10)</span>
           </div>
-          <div id="nf-image-preview" class="mt-2 hidden relative">
-            <img id="nf-preview-img" src="" alt="" class="max-h-48 w-full rounded-xl object-cover" />
+          <div id="nf-image-preview" class="mt-2 hidden">
+            <div id="nf-preview-grid" class="grid grid-cols-3 gap-2"></div>
             <button
               type="button"
-              onclick="clearImage()"
-              class="absolute right-2 top-2 cursor-pointer rounded-full bg-black/60 px-2 py-1 text-xs text-white hover:bg-black/80"
+              onclick="clearImages()"
+              class="mt-2 cursor-pointer rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-500 transition hover:border-red-300 hover:text-red-500 dark:border-gray-700"
             >
-              <i class="fa-solid fa-xmark"></i>
-              Xóa
+              <i class="fa-solid fa-trash mr-1"></i>
+              Xóa tất cả ảnh
             </button>
           </div>
         </div>
@@ -358,22 +364,9 @@
     </div>
   </div>
 
-  {{-- ===== POPUP: Xem ảnh ===== --}}
-  <div id="popup-image" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4">
-    <button
-      onclick="closePopup('popup-image')"
-      class="absolute right-4 top-4 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
-    >
-      <i class="fa-solid fa-xmark text-lg"></i>
-    </button>
-    <img
-      id="popup-image-img"
-      src=""
-      alt=""
-      onclick="closePopup('popup-image')"
-      class="max-h-[85vh] w-auto max-w-full cursor-zoom-out rounded-xl object-contain"
-    />
-  </div>
+  @push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.css" />
+  @endpush
 
   @auth
     <script>
@@ -388,7 +381,16 @@
   @endauth
 
   @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.umd.js"></script>
     <script>
+      Fancybox.bind('[data-fancybox]', {
+        animated: true,
+        showClass: 'f-fadeIn',
+        hideClass: 'f-fadeOut',
+        Toolbar: { display: { left: [], middle: [], right: ['close'] } },
+        Images: { zoom: true },
+      });
+
       $(function () {
         // ===== State =====
         let currentPage = {{ $posts->currentPage() }};
@@ -498,6 +500,63 @@
           return s.replace(/\n/g, '<br>');
         }
 
+        // ===== Image grid builder =====
+        const SHOW_MAX = 4;
+        function buildImageGrid(images, postId) {
+          if (!images || images.length === 0) return '';
+          const total = images.length;
+          const show = Math.min(total, SHOW_MAX);
+          const extra = total - show;
+          const gridCols = show === 1 ? 'grid-cols-1' : 'grid-cols-2';
+          let html = '<div class="mt-3 grid gap-1 ' + gridCols + '">';
+          for (let i = 0; i < show; i++) {
+            const url = images[i];
+            const isLast = i === show - 1;
+            const spanClass = show === 3 && i === 0 ? ' col-span-2' : '';
+            const hClass = show === 1 ? ' max-h-72' : ' h-36';
+            html +=
+              '<a href="' +
+              url +
+              '" data-fancybox="gallery-' +
+              postId +
+              '" class="relative block overflow-hidden rounded-lg' +
+              spanClass +
+              hClass +
+              '">';
+            html += '<img src="' + url + '" alt="" class="h-full w-full object-cover" loading="lazy">';
+            if (isLast && extra > 0) {
+              html +=
+                '<div class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50"><span class="text-2xl font-black text-white">+' +
+                extra +
+                '</span></div>';
+            }
+            html += '</a>';
+          }
+          html += '</div>';
+          // hidden anchors for remaining images
+          for (let i = show; i < total; i++) {
+            html += '<a href="' + images[i] + '" data-fancybox="gallery-' + postId + '" class="hidden"></a>';
+          }
+          return html;
+        }
+
+        // ===== Truncate content =====
+        const CONTENT_LIMIT = 200;
+        function truncateContent(text, postId) {
+          const formatted = formatPostContent(text);
+          if (text.length <= CONTENT_LIMIT)
+            return '<div class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' + formatted + '</div>';
+          const short = formatPostContent(text.substring(0, CONTENT_LIMIT));
+          return (
+            '<div class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' +
+            short +
+            '<span class="text-gray-400">...</span>' +
+            '<a href="/newfeed/' +
+            postId +
+            '" class="text-cs_blue ml-1 font-semibold hover:underline">Xem thêm</a></div>'
+          );
+        }
+
         // ===== Render card from API JSON =====
         function renderCard(post) {
           const isOwner = window._authUserId && window._authUserId === post.user.id;
@@ -511,11 +570,7 @@
                 Number(post.price).toLocaleString('vi-VN') +
                 ' VNĐ</div>'
               : '';
-          const imageHtml = post.image_url
-            ? '<img src="' +
-              post.image_url +
-              '" alt="" onclick="openImageViewer(this.src)" class="nf-card-image mt-3 w-full cursor-zoom-in rounded-xl object-cover transition hover:opacity-90" loading="lazy">'
-            : '';
+          const imageHtml = buildImageGrid(post.image_urls, post.id);
           const actionBtn = window._authUserId
             ? isOwner
               ? '<button type="button" onclick="deletePost(' +
@@ -528,7 +583,7 @@
                   ',this)" class="absolute top-2 right-2 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-100 text-xs text-gray-400 transition hover:bg-orange-50 hover:text-orange-500 dark:bg-slate-700" title="Báo cáo"><i class="fa-regular fa-flag"></i></button>'
             : '';
 
-          return (
+          const cardHtml =
             '<div class="nf-card dark:bg-dark_card relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-xs dark:border-gray-800" data-id="' +
             post.id +
             '">' +
@@ -547,13 +602,12 @@
             ' · ' +
             escapeHtml(post.category) +
             '</div></div></div>' +
-            '<p class="mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">' +
-            formatPostContent(post.content) +
-            '</p>' +
+            truncateContent(post.content, post.id) +
             priceHtml +
             imageHtml +
-            '</div>'
-          );
+            '</div>';
+
+          return $(cardHtml);
         }
 
         // ===== Infinite scroll =====
@@ -583,12 +637,6 @@
         $('[id^="popup-"]').on('click', function (e) {
           if (e.target === this) closePopup(this.id);
         });
-
-        // ===== Image viewer lightbox =====
-        window.openImageViewer = function (src) {
-          $('#popup-image-img').attr('src', src);
-          openPopup('popup-image');
-        };
 
         // ===== Open post form (auth check) =====
         function openPostForm() {
@@ -628,20 +676,30 @@
           $btnSubmit.prop('disabled', $nfContent.val().trim().length < 10 || $catInput.val().trim().length === 0);
         }
 
-        // ===== Image upload =====
-        $('#nf-image').on('change', function () {
-          const file = this.files && this.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            $('#nf-preview-img').attr('src', e.target.result);
-            $('#nf-image-preview').removeClass('hidden');
-            $('#nf-image-drop').addClass('hidden');
-          };
-          reader.readAsDataURL(file);
+        // ===== Multi-image upload =====
+        $('#nf-images').on('change', function () {
+          const files = Array.from(this.files || []);
+          if (files.length === 0) return;
+          const $grid = $('#nf-preview-grid').empty();
+          files.forEach(function (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              $grid.append(
+                '<div class="relative">' +
+                  '<img src="' +
+                  e.target.result +
+                  '" class="h-20 w-full rounded-lg object-cover" />' +
+                  '</div>'
+              );
+            };
+            reader.readAsDataURL(file);
+          });
+          $('#nf-image-preview').removeClass('hidden');
+          $('#nf-image-drop').addClass('hidden');
         });
-        window.clearImage = function () {
-          $('#nf-image').val('');
+        window.clearImages = function () {
+          $('#nf-images').val('');
+          $('#nf-preview-grid').empty();
           $('#nf-image-preview').addClass('hidden');
           $('#nf-image-drop').removeClass('hidden');
         };
@@ -670,8 +728,12 @@
           fd.append('category', $catInput.val().trim());
           const price = $('#nf-price').val();
           if (price) fd.append('price', price);
-          const imgFile = $('#nf-image')[0].files[0];
-          if (imgFile) fd.append('image', imgFile);
+          const imgFiles = $('#nf-images')[0].files;
+          if (imgFiles && imgFiles.length > 0) {
+            Array.from(imgFiles).forEach(function (f) {
+              fd.append('images[]', f);
+            });
+          }
           fd.append('_token', window._csrfToken);
 
           $.ajax({ url: '/api/newfeed/posts', method: 'POST', data: fd, processData: false, contentType: false })
@@ -695,7 +757,7 @@
           $('#nf-content-count').text('0');
           $('#nf-price').val('');
           $catInput.val('');
-          clearImage();
+          clearImages();
           validateForm();
         }
 

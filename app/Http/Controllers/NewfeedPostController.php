@@ -66,12 +66,15 @@ class NewfeedPostController extends Controller
             'content' => 'required|string|min:10|max:5000',
             'price' => 'nullable|numeric|min:0|max:999999999',
             'category' => 'required|string|max:100',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'images' => 'nullable|array|max:10',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('posts', 'public');
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePaths[] = $file->store('posts', 'public');
+            }
         }
 
         $post = NewfeedPost::create([
@@ -79,7 +82,7 @@ class NewfeedPostController extends Controller
             'content' => $validated['content'],
             'price' => $validated['price'] ?? null,
             'category' => $validated['category'],
-            'image_path' => $imagePath,
+            'image_paths' => count($imagePaths) > 0 ? $imagePaths : null,
         ]);
 
         $post->load('user');
@@ -99,7 +102,11 @@ class NewfeedPostController extends Controller
             return response()->json(['error' => 'Forbidden'], 403);
         }
 
-        if ($post->image_path) {
+        if ($post->image_paths) {
+            foreach ($post->image_paths as $path) {
+                Storage::disk('public')->delete($path);
+            }
+        } elseif ($post->image_path) {
             Storage::disk('public')->delete($post->image_path);
         }
 
@@ -115,7 +122,7 @@ class NewfeedPostController extends Controller
             'content' => $post->content,
             'price' => $post->price,
             'category' => $post->category,
-            'image_url' => $post->image_path ? asset('storage/'.$post->image_path) : null,
+            'image_urls' => $this->getImageUrls($post),
             'report_count' => $post->report_count,
             'is_hidden' => $post->is_hidden,
             'created_at' => $post->created_at->diffForHumans(),
@@ -128,5 +135,17 @@ class NewfeedPostController extends Controller
                 'is_verified' => (bool) $post->user->is_verified,
             ],
         ];
+    }
+
+    private function getImageUrls(NewfeedPost $post): array
+    {
+        if (! empty($post->image_paths)) {
+            return array_map(fn ($p) => asset('storage/'.$p), $post->image_paths);
+        }
+        if ($post->image_path) {
+            return [asset('storage/'.$post->image_path)];
+        }
+
+        return [];
     }
 }

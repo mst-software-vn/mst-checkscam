@@ -39,6 +39,7 @@ Route::get('/bai-viet/{slug}', [PostController::class, 'show'])->name('posts.fro
 
 // --- Khu Mua Bán ---
 Route::get('/newfeed', [NewfeedController::class, 'index'])->name('newfeed.index');
+Route::get('/newfeed/{post}', [NewfeedController::class, 'show'])->name('newfeed.show');
 Route::get('/api/newfeed/posts', [NewfeedPostController::class, 'index'])->name('api.newfeed.posts.index');
 Route::post('/api/newfeed/posts', [NewfeedPostController::class, 'store'])->name('api.newfeed.posts.store');
 Route::delete('/api/newfeed/posts/{post}', [NewfeedPostController::class, 'destroy'])->name('api.newfeed.posts.destroy');
