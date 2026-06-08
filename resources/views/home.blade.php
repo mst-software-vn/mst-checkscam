@@ -672,6 +672,28 @@
               GỬI ĐƠN TỐ CÁO
             </a>
           </div>
+
+          <!-- Khu Mua Bán Widget -->
+          <div
+            class="rounded-xl border border-blue-200 bg-blue-50 p-5 text-center shadow-sm dark:border-blue-900/30 dark:bg-slate-900/50"
+          >
+            <div
+              class="text-cs_blue mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30"
+            >
+              <i class="fa-solid fa-store text-2xl"></i>
+            </div>
+            <h3 class="text-md mb-2 font-bold text-gray-800 dark:text-gray-100">KHU MUA BÁN</h3>
+            <p class="mb-4 text-[13px] leading-relaxed text-gray-600 dark:text-gray-400">
+              Mua bán tài khoản, dịch vụ MMO uy tín. Người bán được xác minh tick xanh bởi CheckScam.
+            </p>
+            <a
+              href="{{ route('newfeed.index') }}"
+              class="bg-cs_blue w-full block cursor-pointer rounded-lg px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+            >
+              <i class="fa-solid fa-arrow-right mr-1"></i>
+              VÀO KHU MUA BÁN
+            </a>
+          </div>
           <!-- Verification Log: Recent Searches (Professional & Neutral) -->
           <div
             class="dark:bg-dark_card overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xs dark:border-gray-800"

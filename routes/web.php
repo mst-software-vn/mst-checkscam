@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBannerController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminInsuranceController;
+use App\Http\Controllers\Admin\AdminNewfeedController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminReportController;
 use App\Http\Controllers\Admin\AdminSearchAnalyticsController;
@@ -13,10 +14,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\NewfeedController;
+use App\Http\Controllers\NewfeedPostController;
+use App\Http\Controllers\NewfeedPostReportController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 // --- Frontend Pages ---
@@ -31,6 +36,19 @@ Route::get('/bao-hiem-cs/{slug}', [InsuranceController::class, 'show'])->name('i
 
 Route::get('/bai-viet', [PostController::class, 'index'])->name('posts.frontend.index');
 Route::get('/bai-viet/{slug}', [PostController::class, 'show'])->name('posts.frontend.show');
+
+// --- Khu Mua Bán ---
+Route::get('/newfeed', [NewfeedController::class, 'index'])->name('newfeed.index');
+Route::get('/newfeed/{post}', [NewfeedController::class, 'show'])->name('newfeed.show');
+Route::get('/api/newfeed/posts', [NewfeedPostController::class, 'index'])->name('api.newfeed.posts.index');
+Route::post('/api/newfeed/posts', [NewfeedPostController::class, 'store'])->name('api.newfeed.posts.store');
+Route::delete('/api/newfeed/posts/{post}', [NewfeedPostController::class, 'destroy'])->name('api.newfeed.posts.destroy');
+Route::post('/api/newfeed/posts/{post}/report', [NewfeedPostReportController::class, 'store'])->name('api.newfeed.posts.report');
+
+// --- Google OAuth ---
+Route::get('/auth/google', [SocialiteController::class, 'redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback'])->name('auth.google.callback');
+Route::post('/auth/logout', [SocialiteController::class, 'logout'])->name('auth.logout');
 
 // --- System Pages ---
 Route::get('/api-checkscam', function () {
@@ -106,6 +124,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 
         // Users
         Route::post('/users/bulk-delete', [AdminUserController::class, 'bulkDestroy'])->name('users.bulk-delete');
+        Route::patch('/users/{user}/verify', [AdminUserController::class, 'toggleVerify'])->name('users.verify');
         Route::name('users.')->prefix('users')->group(function () {
             Route::get('/', [AdminUserController::class, 'index'])->name('index');
             Route::get('/create', [AdminUserController::class, 'create'])->name('create');
@@ -136,6 +155,10 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/upgrade', function () {
             return view('admin.system.upgrade');
         })->name('upgrade');
+
+        // Khu Mua Bán (Newfeed Admin)
+        Route::get('/newfeed/hidden', [AdminNewfeedController::class, 'hidden'])->name('newfeed.hidden');
+        Route::patch('/newfeed/posts/{post}/unhide', [AdminNewfeedController::class, 'unhide'])->name('newfeed.unhide');
     });
 
     // Auth

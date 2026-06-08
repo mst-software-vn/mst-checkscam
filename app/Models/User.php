@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -22,6 +23,8 @@ class User extends Authenticatable implements HasMedia
         'full_name',
         'role',
         'status',
+        'google_id',
+        'is_verified',
     ];
 
     protected $hidden = [
@@ -42,6 +45,11 @@ class User extends Authenticatable implements HasMedia
     public function isActive(): bool
     {
         return $this->status == 1;
+    }
+
+    public function newfeedPosts(): HasMany
+    {
+        return $this->hasMany(NewfeedPost::class);
     }
 
     public function registerMediaConversions(?Media $media = null): void

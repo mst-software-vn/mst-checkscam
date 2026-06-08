@@ -260,6 +260,14 @@
     <i class="fa-solid fa-envelope text-lg"></i>
     <span class="text-[9px] font-black tracking-tighter uppercase">Liên hệ</span>
   </a>
+
+  <a
+    href="/newfeed"
+    class="{{ request()->is('newfeed*') ? 'text-cs_blue' : 'text-gray-400' }} flex flex-col items-center gap-1"
+  >
+    <i class="fa-solid fa-store text-lg"></i>
+    <span class="text-[9px] font-black tracking-tighter uppercase">Mua Bán</span>
+  </a>
 </nav>
 
 <script>

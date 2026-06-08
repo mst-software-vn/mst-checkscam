@@ -6,11 +6,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: [
-                'resources/views/**/*.blade.php',
-                'app/Http/Controllers/**', // Reload khi đổi logic Controller luôn
-                'routes/**',               // Reload khi đổi Route
-            ],
+            refresh: true,
         }),
         tailwindcss(),
     ],

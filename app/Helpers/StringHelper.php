@@ -196,4 +196,23 @@ class StringHelper
 
         return substr($phone, 0, -4).'****';
     }
+
+    /**
+     * Chuyển nội dung bài đăng (Newfeed) sang HTML an toàn, hỗ trợ in đậm/in nghiêng/gạch chân
+     * theo cú pháp **bold**, *italic*, __underline__ — escape trước khi áp dụng để chặn XSS.
+     */
+    public static function formatPostContent(?string $content): string
+    {
+        if (! $content) {
+            return '';
+        }
+
+        $escaped = e($content);
+
+        $escaped = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $escaped);
+        $escaped = preg_replace('/__(.+?)__/s', '<u>$1</u>', $escaped);
+        $escaped = preg_replace('/\*(.+?)\*/s', '<em>$1</em>', $escaped);
+
+        return nl2br($escaped);
+    }
 }
