@@ -86,7 +86,13 @@
             sub="Insurance"
             color="blue"
           />
-          <x-hero.action-card href="#" icon="fa-store" label="Chợ Buôn Bán" sub="Trading" color="green" />
+          <x-hero.action-card
+            href="{{ route('newfeed.index') }}"
+            icon="fa-store"
+            label="Chợ Buôn Bán"
+            sub="Trading"
+            color="green"
+          />
           <x-hero.action-card href="#" icon="fa-brands fa-telegram" label="Bot Check" sub="Automation" color="blue" />
         </div>
       @endif

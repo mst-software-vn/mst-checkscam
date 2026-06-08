@@ -18,8 +18,6 @@
     crossorigin="anonymous"
   ></script>
 
-  <link href="/css/tailwind.css" rel="stylesheet" />
-
   @if (! empty($siteConfig['favicon']))
     <link rel="icon" type="image/png" href="{{ asset('uploads/' . $siteConfig['favicon']) }}" />
   @else

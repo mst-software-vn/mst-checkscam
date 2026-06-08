@@ -46,7 +46,7 @@
           Bài viết
         </a>
         <a
-          href="/newfeed"
+          href="{{ route('newfeed.index') }}"
           class="{{ request()->is('newfeed*') ? 'text-cs_blue border-cs_blue border-b-2 font-bold' : 'hover:text-cs_blue dark:hover:text-cs_blue font-medium text-gray-600 dark:text-gray-400' }} py-5 text-sm transition-colors"
         >
           Mua Bán
